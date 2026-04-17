@@ -1,0 +1,126 @@
+import PageBanner from '@/components/PageBanner';
+import Image from 'next/image';
+
+export default function GHOCPage() {
+  const steps = [
+    {
+      title: "Sign up to participate",
+      description: "Join the #GHOC movement and register your commitment.",
+      icon: "📋"
+    },
+    {
+      title: "Pre-register facilities",
+      description: "Select the hospitals or health facilities you plan to visit.",
+      icon: "🏥"
+    },
+    {
+      title: "Get your Toolkit Ready",
+      description: "Prepare your #GHOC Toolkit and Gift Packs for the outreach.",
+      icon: "🎒"
+    },
+    {
+      title: "Upload your Report",
+      description: "Submit your outreach report and share your impact.",
+      icon: "📤"
+    }
+  ];
+
+  return (
+    <div className="w-full bg-white">
+      <PageBanner title="GLOBAL HOSPITAL OUTREACH" parent={{ label: "Campaigns", href: "#" }} />
+      
+      {/* Hero Section */}
+      <section className="py-24 bg-gradient-to-br from-[#002866] to-[#0040a6] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <div className="inline-block bg-[#FFEE00] text-[#002866] px-4 py-1 font-bold uppercase tracking-widest text-sm">
+                Active Campaign 2024
+              </div>
+              <h2 className="text-4xl md:text-6xl font-poppins font-bold leading-tight">
+                Global Hospital Outreach Campaign (#GHOC)
+              </h2>
+              <p className="text-2xl text-[#FFEE00] font-roboto font-light italic">
+                Reaching 2 Million People in 196 Countries
+              </p>
+              <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
+                The Global Hospital Outreach Campaign is a strategic initiative to bring hope, healing, and the Gospel to patients and healthcare workers in hospitals worldwide.
+              </p>
+              <div className="pt-4">
+                <button className="bg-[#FFEE00] text-[#002866] px-12 py-4 font-black uppercase tracking-[0.2em] hover:bg-white transition-all shadow-2xl">
+                  Join the Campaign
+                </button>
+              </div>
+            </div>
+            <div className="relative h-[500px] rounded-sm overflow-hidden shadow-2xl border-b-8 border-r-8 border-[#FFEE00]">
+              <Image 
+                src="/sw-post-1-min-768x512.jpg" 
+                alt="GHOC Outreach" 
+                fill 
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Steps Section */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h6 className="text-[#FFEE00] font-bold tracking-widest uppercase mb-4">How to Join</h6>
+            <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">4 Steps to Participate</h2>
+            <div className="w-24 h-1 bg-[#FFEE00] mx-auto mt-6"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {steps.map((step, index) => (
+              <div key={index} className="flex flex-col items-center text-center group">
+                <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center text-4xl mb-8 group-hover:bg-[#FFEE00] group-hover:scale-110 transition-all duration-300 shadow-inner">
+                  {step.icon}
+                </div>
+                <h3 className="text-xl font-bold text-[#002866] mb-4 uppercase tracking-tight">{step.title}</h3>
+                <p className="text-gray-500 leading-relaxed">{step.description}</p>
+                {index < 3 && (
+                  <div className="hidden lg:block absolute translate-x-44 translate-y-12 text-[#FFEE00] opacity-20 text-5xl">
+                    →
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Resources Section */}
+      <section className="py-24 bg-[#FFEE00]/10 border-y border-[#FFEE00]/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative h-[400px]">
+              <Image 
+                src="/pmr-bg-mission.jpg" 
+                alt="Resources" 
+                fill 
+                className="object-cover rounded-sm shadow-xl"
+              />
+            </div>
+            <div className="space-y-6">
+              <h2 className="text-3xl font-poppins font-bold text-[#002866]">Campaign Resources</h2>
+              <p className="text-gray-600 text-lg leading-relaxed">
+                Download everything you need to execute a successful outreach, including T-shirt designs, logos, and presentation materials.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button className="bg-white border-2 border-[#002866] text-[#002866] p-4 font-bold flex items-center justify-center gap-2 hover:bg-[#002866] hover:text-white transition-all">
+                  <span>📥</span> Download T-shirt Design
+                </button>
+                <button className="bg-white border-2 border-[#002866] text-[#002866] p-4 font-bold flex items-center justify-center gap-2 hover:bg-[#002866] hover:text-white transition-all">
+                  <span>📥</span> Download #GHOC Logo
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

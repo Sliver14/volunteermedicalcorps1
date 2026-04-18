@@ -32,7 +32,7 @@ export default function AboutLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-poppins font-bold text-[#002866] uppercase">Who We Are</h2>
-            <div className="w-24 h-1 bg-[#FFEE00] mx-auto mt-6 mb-8"></div>
+            <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6 mb-8"></div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               The Volunteer Medical Corps is a global network of Christian health workers, para-medics, and volunteers committed to providing medical care and sustainable health solutions in regions of crisis.
             </p>
@@ -54,7 +54,7 @@ export default function AboutLandingPage() {
                   <p className="text-gray-600 mb-8 flex-grow">{section.description}</p>
                   <Link 
                     href={section.href}
-                    className="inline-block bg-[#002866] text-white px-8 py-3 font-bold uppercase tracking-widest text-sm hover:bg-[#FFEE00] hover:text-[#002866] transition-all text-center"
+                    className="inline-block bg-[#002866] text-white px-8 py-3 font-bold uppercase tracking-widest text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all text-center"
                   >
                     Learn More
                   </Link>

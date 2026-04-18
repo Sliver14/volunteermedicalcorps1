@@ -34,25 +34,25 @@ export default function GHOCPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <div className="inline-block bg-[#FFEE00] text-[#002866] px-4 py-1 font-bold uppercase tracking-widest text-sm">
+              <div className="inline-block bg-[#ff9f22] text-[#002866] px-4 py-1 font-bold uppercase tracking-widest text-sm">
                 Active Campaign 2024
               </div>
               <h2 className="text-4xl md:text-6xl font-poppins font-bold leading-tight">
                 Global Hospital Outreach Campaign (#GHOC)
               </h2>
-              <p className="text-2xl text-[#FFEE00] font-roboto font-light italic">
+              <p className="text-2xl text-[#ff9f22] font-roboto font-light italic">
                 Reaching 2 Million People in 196 Countries
               </p>
               <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
                 The Global Hospital Outreach Campaign is a strategic initiative to bring hope, healing, and the Gospel to patients and healthcare workers in hospitals worldwide.
               </p>
               <div className="pt-4">
-                <button className="bg-[#FFEE00] text-[#002866] px-12 py-4 font-black uppercase tracking-[0.2em] hover:bg-white transition-all shadow-2xl">
+                <button className="bg-[#ff9f22] text-[#002866] px-12 py-4 font-black uppercase tracking-[0.2em] hover:bg-white transition-all shadow-2xl">
                   Join the Campaign
                 </button>
               </div>
             </div>
-            <div className="relative h-[500px] rounded-sm overflow-hidden shadow-2xl border-b-8 border-r-8 border-[#FFEE00]">
+            <div className="relative h-[500px] rounded-sm overflow-hidden shadow-2xl border-b-8 border-r-8 border-[#ff9f22]">
               <Image 
                 src="/sw-post-1-min-768x512.jpg" 
                 alt="GHOC Outreach" 
@@ -68,21 +68,21 @@ export default function GHOCPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h6 className="text-[#FFEE00] font-bold tracking-widest uppercase mb-4">How to Join</h6>
+            <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">How to Join</h6>
             <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">4 Steps to Participate</h2>
-            <div className="w-24 h-1 bg-[#FFEE00] mx-auto mt-6"></div>
+            <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {steps.map((step, index) => (
               <div key={index} className="flex flex-col items-center text-center group">
-                <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center text-4xl mb-8 group-hover:bg-[#FFEE00] group-hover:scale-110 transition-all duration-300 shadow-inner">
+                <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center text-4xl mb-8 group-hover:bg-[#ff9f22] group-hover:scale-110 transition-all duration-300 shadow-inner">
                   {step.icon}
                 </div>
                 <h3 className="text-xl font-bold text-[#002866] mb-4 uppercase tracking-tight">{step.title}</h3>
                 <p className="text-gray-500 leading-relaxed">{step.description}</p>
                 {index < 3 && (
-                  <div className="hidden lg:block absolute translate-x-44 translate-y-12 text-[#FFEE00] opacity-20 text-5xl">
+                  <div className="hidden lg:block absolute translate-x-44 translate-y-12 text-[#ff9f22] opacity-20 text-5xl">
                     →
                   </div>
                 )}
@@ -93,7 +93,7 @@ export default function GHOCPage() {
       </section>
 
       {/* Resources Section */}
-      <section className="py-24 bg-[#FFEE00]/10 border-y border-[#FFEE00]/20">
+      <section className="py-24 bg-[#ff9f22]/10 border-y border-[#ff9f22]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative h-[400px]">

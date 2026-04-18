@@ -11,7 +11,7 @@ export default function PageBanner({ title, parent }: PageBannerProps) {
       {/* Background patterns */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full -mr-32 -mt-32"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FFEE00] rounded-full -ml-48 -mb-48"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#ff9f22] rounded-full -ml-48 -mb-48"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,15 +19,15 @@ export default function PageBanner({ title, parent }: PageBannerProps) {
           {title}
         </h1>
         <div className="flex items-center space-x-2 text-sm font-medium">
-          <Link href="/" className="text-gray-300 hover:text-[#FFEE00] transition-colors">Home</Link>
+          <Link href="/" className="text-gray-300 hover:text-[#ff9f22] transition-colors">Home</Link>
           <span className="text-gray-500">/</span>
           {parent && (
             <>
-              <Link href={parent.href} className="text-gray-300 hover:text-[#FFEE00] transition-colors">{parent.label}</Link>
+              <Link href={parent.href} className="text-gray-300 hover:text-[#ff9f22] transition-colors">{parent.label}</Link>
               <span className="text-gray-500">/</span>
             </>
           )}
-          <span className="text-[#FFEE00]">{title}</span>
+          <span className="text-[#ff9f22]">{title}</span>
         </div>
       </div>
     </section>

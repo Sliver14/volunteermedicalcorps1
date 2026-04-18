@@ -84,14 +84,14 @@ export default function Header() {
                     <Link 
                       href={item.href} 
                       className={`flex items-center px-5 h-full text-[#002866] font-semibold text-[15px] tracking-wider transition-all
-                        ${isActive ? 'bg-[#FFEE00]' : 'hover:bg-[#FFEE00]'}`}
+                        ${isActive ? 'bg-[#ff9f22]' : 'hover:bg-[#ff9f22]'}`}
                     >
                       {item.label}
                       {item.subItems && <svg className="ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>}
                     </Link>
 
                     {item.subItems && activeDropdown === item.label && (
-                      <div className="absolute top-full left-0 w-64 bg-white shadow-2xl border-t-4 border-[#FFEE00] py-2">
+                      <div className="absolute top-full left-0 w-64 bg-white shadow-2xl border-t-4 border-[#ff9f22] py-2">
                         {item.subItems.map((sub) => (
                           <Link key={sub.label} href={sub.href} className="block px-6 py-3 text-[14px] font-semibold text-[#002866] hover:bg-gray-50 hover:pl-8 transition-all">
                             {sub.label}
@@ -106,7 +106,7 @@ export default function Header() {
 
             {/* Donate Now Button (Desktop) */}
             <div className="hidden lg:block h-18">
-              <Link href="/donate" className="bg-[#002866] text-white uppercase h-full px-10 flex items-center font-semibold text-[15px] tracking-widest hover:bg-[#FFEE00] hover:text-[#002866] transition-all">
+              <Link href="/donate" className="bg-[#002866] text-white uppercase h-full px-10 flex items-center font-semibold text-[15px] tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all">
                 Donate Now
               </Link>
             </div>

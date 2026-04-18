@@ -46,8 +46,8 @@ export default function DonatePage() {
                     onClick={() => handleCauseSelect(cause)}
                     className={`flex items-center justify-center lg:justify-start p-4 border-l-4 transition-all cursor-pointer group
                       ${selectedCause === cause 
-                        ? 'bg-[#FFEE00] border-[#002866] translate-x-2' 
-                        : 'bg-gray-50 border-[#FFEE00] hover:bg-gray-100'}`}
+                        ? 'bg-[#ff9f22] border-[#002866] translate-x-2' 
+                        : 'bg-gray-50 border-[#ff9f22] hover:bg-gray-100'}`}
                   >
                     <span className={`font-semibold transition-transform ${selectedCause === cause ? 'text-[#002866]' : 'text-[#002866] group-hover:translate-x-2'}`}>
                       {cause}
@@ -59,17 +59,17 @@ export default function DonatePage() {
 
             {/* Right: Donation Form */}
             <div id="donation-form" className="bg-[#002866] p-10 text-white rounded-sm shadow-2xl h-fit sticky top-32 text-center md:text-left transition-all">
-              <h3 className="text-2xl font-poppins font-bold mb-8 uppercase text-[#FFEE00]">
+              <h3 className="text-2xl font-poppins font-bold mb-8 uppercase text-[#ff9f22]">
                 {selectedCause ? `Supporting: ${selectedCause}` : 'Make a Donation'}
               </h3>
               <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert("Redirecting to secure payment gateway..."); }}>
                 <div>
                   <label className="block text-sm font-bold uppercase mb-2">Full Name</label>
-                  <input required type="text" className="w-full bg-white/10 border border-white/20 p-4 rounded-sm focus:outline-none focus:border-[#FFEE00] text-white" placeholder="John Doe" />
+                  <input required type="text" className="w-full bg-white/10 border border-white/20 p-4 rounded-sm focus:outline-none focus:border-[#ff9f22] text-white" placeholder="John Doe" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold uppercase mb-2">Email Address</label>
-                  <input required type="email" className="w-full bg-white/10 border border-white/20 p-4 rounded-sm focus:outline-none focus:border-[#FFEE00] text-white" placeholder="john@example.com" />
+                  <input required type="email" className="w-full bg-white/10 border border-white/20 p-4 rounded-sm focus:outline-none focus:border-[#ff9f22] text-white" placeholder="john@example.com" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold uppercase mb-2">Donation Amount ($)</label>
@@ -81,8 +81,8 @@ export default function DonatePage() {
                         onClick={() => setAmount(val)}
                         className={`py-3 border font-bold transition-all
                           ${amount === val 
-                            ? 'bg-[#FFEE00] text-[#002866] border-[#FFEE00]' 
-                            : 'border-white/20 hover:bg-[#FFEE00] hover:text-[#002866]'}`}
+                            ? 'bg-[#ff9f22] text-[#002866] border-[#ff9f22]' 
+                            : 'border-white/20 hover:bg-[#ff9f22] hover:text-[#002866]'}`}
                       >
                         $ {val}
                       </button>
@@ -92,11 +92,11 @@ export default function DonatePage() {
                     type="number" 
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full bg-white/10 border border-white/20 p-4 rounded-sm focus:outline-none focus:border-[#FFEE00] text-white" 
+                    className="w-full bg-white/10 border border-white/20 p-4 rounded-sm focus:outline-none focus:border-[#ff9f22] text-white" 
                     placeholder="Other Amount" 
                   />
                 </div>
-                <button type="submit" className="w-full bg-[#FFEE00] text-[#002866] py-5 font-bold uppercase tracking-widest hover:bg-white transition-all shadow-xl active:scale-95">
+                <button type="submit" className="w-full bg-[#ff9f22] text-[#002866] py-5 font-bold uppercase tracking-widest hover:bg-white transition-all shadow-xl active:scale-95">
                   Process Donation
                 </button>
                 <p className="text-center text-xs text-white/50 italic">All donations are secured and tax-deductible.</p>

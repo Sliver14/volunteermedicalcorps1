@@ -12,7 +12,7 @@ export default function VolunteerLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h6 className="text-[#FFEE00] font-bold tracking-[0.3em] uppercase mb-4 text-center lg:text-left">Join the Corps</h6>
+              <h6 className="text-[#ff9f22] font-bold tracking-[0.3em] uppercase mb-4 text-center lg:text-left">Join the Corps</h6>
               <h2 className="text-4xl md:text-5xl font-poppins font-bold text-[#002866] mb-8 leading-tight text-center lg:text-left">
                 Your Skills Can Change Lives
               </h2>
@@ -26,7 +26,7 @@ export default function VolunteerLandingPage() {
                 <div className="pt-8">
                   <Link 
                     href="/register" 
-                    className="inline-block bg-[#FFEE00] text-[#002866] px-12 py-5 font-black uppercase tracking-[0.2em] shadow-xl hover:bg-[#002866] hover:text-white transition-all"
+                    className="inline-block bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase tracking-[0.2em] shadow-xl hover:bg-[#002866] hover:text-white transition-all"
                   >
                     Register Now
                   </Link>
@@ -52,17 +52,17 @@ export default function VolunteerLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-poppins font-bold text-[#002866] mb-16 uppercase">Why Volunteer with VMC?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="bg-white p-10 shadow-md rounded-sm border-t-4 border-[#FFEE00]">
+            <div className="bg-white p-10 shadow-md rounded-sm border-t-4 border-[#ff9f22]">
               <div className="text-4xl mb-6">🌍</div>
               <h4 className="text-xl font-bold text-[#002866] mb-4">Global Network</h4>
               <p className="text-gray-500">Connect with thousands of Christian health professionals and volunteers worldwide.</p>
             </div>
-            <div className="bg-white p-10 shadow-md rounded-sm border-t-4 border-[#FFEE00]">
+            <div className="bg-white p-10 shadow-md rounded-sm border-t-4 border-[#ff9f22]">
               <div className="text-4xl mb-6">🏆</div>
               <h4 className="text-xl font-bold text-[#002866] mb-4">Earn Rewards</h4>
               <p className="text-gray-500">Gain volunteer credits and earn verified hours and certificates for your participation.</p>
             </div>
-            <div className="bg-white p-10 shadow-md rounded-sm border-t-4 border-[#FFEE00]">
+            <div className="bg-white p-10 shadow-md rounded-sm border-t-4 border-[#ff9f22]">
               <div className="text-4xl mb-6">✨</div>
               <h4 className="text-xl font-bold text-[#002866] mb-4">Spiritual Impact</h4>
               <p className="text-gray-500">Be part of a movement that combines medical excellence with the Gospel of Jesus Christ.</p>

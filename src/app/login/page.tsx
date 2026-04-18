@@ -40,7 +40,7 @@ export default function LoginPage() {
                 <Link href="#" className="text-sm text-[#002866] font-bold hover:underline">Forgot Password?</Link>
               </div>
 
-              <button type="button" className="w-full bg-[#002866] text-white py-5 font-bold uppercase tracking-widest hover:bg-[#FFEE00] hover:text-[#002866] transition-all rounded-sm">
+              <button type="button" className="w-full bg-[#002866] text-white py-5 font-bold uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm">
                 Login Now
               </button>
             </form>

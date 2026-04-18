@@ -35,7 +35,7 @@ export default function CampaignsLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-poppins font-bold text-[#002866] uppercase">Active Campaigns</h2>
-            <div className="w-24 h-1 bg-[#FFEE00] mx-auto mt-6 mb-8"></div>
+            <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6 mb-8"></div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Join our global initiatives designed to bring hope, healing, and the Gospel to people and communities worldwide.
             </p>
@@ -51,7 +51,7 @@ export default function CampaignsLandingPage() {
                     fill 
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute top-4 left-4 bg-[#FFEE00] text-[#002866] px-4 py-1 font-black text-xs uppercase tracking-widest">
+                  <div className="absolute top-4 left-4 bg-[#ff9f22] text-[#002866] px-4 py-1 font-black text-xs uppercase tracking-widest">
                     {item.tag}
                   </div>
                 </div>
@@ -60,7 +60,7 @@ export default function CampaignsLandingPage() {
                   <p className="text-gray-600 mb-8 leading-relaxed">{item.description}</p>
                   <Link 
                     href={item.href}
-                    className="inline-block bg-[#002866] text-white px-10 py-4 font-black uppercase tracking-[0.2em] text-[13px] hover:bg-[#FFEE00] hover:text-[#002866] transition-all shadow-md"
+                    className="inline-block bg-[#002866] text-white px-10 py-4 font-black uppercase tracking-[0.2em] text-[13px] hover:bg-[#ff9f22] hover:text-[#002866] transition-all shadow-md"
                   >
                     View Campaign
                   </Link>

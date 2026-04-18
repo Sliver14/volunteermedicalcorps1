@@ -22,7 +22,7 @@ export default function AnnualReportsPage() {
               <p className="text-gray-600 text-lg leading-relaxed">
                 Our annual reports provide a comprehensive overview of our activities, financial performance, and the global impact of our medical and humanitarian missions.
               </p>
-              <div className="bg-[#FFEE00]/10 p-8 border-l-4 border-[#FFEE00]">
+              <div className="bg-[#ff9f22]/10 p-8 border-l-4 border-[#ff9f22]">
                 <h4 className="font-bold text-[#002866] mb-2 uppercase">Looking for something specific?</h4>
                 <p className="text-sm text-gray-500">Contact our administrative office for archived reports prior to 2020.</p>
               </div>
@@ -33,17 +33,17 @@ export default function AnnualReportsPage() {
                 {reports.map((report, index) => (
                   <div key={index} className="flex flex-col md:flex-row items-center justify-between p-8 bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all group rounded-sm shadow-sm hover:shadow-md">
                     <div className="flex items-center gap-6 mb-4 md:mb-0">
-                      <div className="w-16 h-16 bg-[#002866] text-[#FFEE00] flex items-center justify-center text-xl font-black rounded-sm group-hover:scale-110 transition-transform">
+                      <div className="w-16 h-16 bg-[#002866] text-[#ff9f22] flex items-center justify-center text-xl font-black rounded-sm group-hover:scale-110 transition-transform">
                         {report.year}
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-[#002866] group-hover:text-[#FFEE00] transition-colors">{report.title}</h3>
+                        <h3 className="text-xl font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors">{report.title}</h3>
                         <p className="text-sm text-gray-400 uppercase tracking-widest mt-1">Released: {report.date}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-6">
                       <span className="text-sm font-bold text-gray-400">{report.size}</span>
-                      <button className="bg-[#002866] text-white px-8 py-3 font-bold uppercase tracking-widest text-sm hover:bg-[#FFEE00] hover:text-[#002866] transition-all">
+                      <button className="bg-[#002866] text-white px-8 py-3 font-bold uppercase tracking-widest text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all">
                         Download PDF
                       </button>
                     </div>

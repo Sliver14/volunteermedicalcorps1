@@ -57,7 +57,7 @@ export default function NewsPage() {
                   fill 
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-6 left-6 bg-[#FFEE00] text-[#002866] px-4 py-1 font-bold uppercase text-xs tracking-widest">
+                <div className="absolute top-6 left-6 bg-[#ff9f22] text-[#002866] px-4 py-1 font-bold uppercase text-xs tracking-widest">
                   Featured
                 </div>
               </div>
@@ -67,13 +67,13 @@ export default function NewsPage() {
                   <span>•</span>
                   <span>April 17, 2026</span>
                 </div>
-                <h2 className="text-3xl font-poppins font-bold text-[#002866] group-hover:text-[#FFEE00] transition-colors leading-tight">
+                <h2 className="text-3xl font-poppins font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors leading-tight">
                   Volunteer Medical Corps Launches Global Relief Initiative for 2026
                 </h2>
                 <p className="text-gray-600 text-lg leading-relaxed">
                   A comprehensive overview of our upcoming missions and campaigns aimed at providing medical care to over 100 communities in need.
                 </p>
-                <button className="text-[#002866] font-black uppercase tracking-widest border-b-2 border-[#FFEE00] pb-1 group-hover:border-[#002866] transition-colors">
+                <button className="text-[#002866] font-black uppercase tracking-widest border-b-2 border-[#ff9f22] pb-1 group-hover:border-[#002866] transition-colors">
                   Read Full Story
                 </button>
               </div>
@@ -92,8 +92,8 @@ export default function NewsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <div className="text-[#FFEE00] text-xs font-bold uppercase tracking-widest">{item.date}</div>
-                    <h3 className="text-xl font-bold text-[#002866] group-hover:text-[#FFEE00] transition-colors leading-snug line-clamp-2">
+                    <div className="text-[#ff9f22] text-xs font-bold uppercase tracking-widest">{item.date}</div>
+                    <h3 className="text-xl font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors leading-snug line-clamp-2">
                       {item.title}
                     </h3>
                     <p className="text-sm text-gray-500 line-clamp-2">{item.excerpt}</p>
@@ -115,8 +115,8 @@ export default function NewsPage() {
                   />
                 </div>
                 <div className="space-y-3">
-                  <div className="text-[#FFEE00] text-xs font-bold uppercase tracking-widest">{item.date}</div>
-                  <h3 className="text-xl font-bold text-[#002866] group-hover:text-[#FFEE00] transition-colors leading-snug">
+                  <div className="text-[#ff9f22] text-xs font-bold uppercase tracking-widest">{item.date}</div>
+                  <h3 className="text-xl font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors leading-snug">
                     {item.title}
                   </h3>
                   <p className="text-gray-500 line-clamp-3">{item.excerpt}</p>
@@ -126,7 +126,7 @@ export default function NewsPage() {
           </div>
 
           <div className="mt-20 text-center">
-            <button className="bg-[#002866] text-white px-12 py-4 font-black uppercase tracking-widest hover:bg-[#FFEE00] hover:text-[#002866] transition-all shadow-xl">
+            <button className="bg-[#002866] text-white px-12 py-4 font-black uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all shadow-xl">
               Load More News
             </button>
           </div>

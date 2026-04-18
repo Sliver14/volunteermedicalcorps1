@@ -15,7 +15,7 @@ export default function Footer() {
           
           {/* Column 1: Quick Links */}
           <div className="md:col-span-3">
-            <h3 className="text-[#FFEE00] text-xl font-black uppercase mb-8">Quick Links</h3>
+            <h3 className="text-[#ff9f22] text-xl font-black uppercase mb-8">Quick Links</h3>
             <ul className="space-y-4">
               {[
                 { name: "About Us", href: "/about" },
@@ -25,7 +25,7 @@ export default function Footer() {
                 { name: "Become a Volunteer", href: "/volunteer" }
               ].map((link) => (
                 <li key={link.name} className="flex items-center group">
-                  <span className="text-[#FFEE00] mr-2 transition-transform group-hover:translate-x-1">›</span>
+                  <span className="text-[#ff9f22] mr-2 transition-transform group-hover:translate-x-1">›</span>
                   <Link href={link.href} className="text-gray-200 hover:text-white transition-colors font-medium">
                     {link.name}
                   </Link>
@@ -40,7 +40,7 @@ export default function Footer() {
               The Volunteer Medical Corps is the fastest growing global Christian medical outreach, committed to making a positive impact across communities and countries.
             </p>
             
-            <h4 className="text-[#FFEE00] text-sm font-black uppercase tracking-widest mb-6">Connect With Us:</h4>
+            <h4 className="text-[#ff9f22] text-sm font-black uppercase tracking-widest mb-6">Connect With Us:</h4>
             
             {/* Restored Social Media Icons with Image-style background blocks */}
             <div className="flex flex-wrap gap-3">
@@ -79,14 +79,14 @@ export default function Footer() {
 
           {/* Column 3: Newsletter */}
           <div className="md:col-span-4">
-            <h3 className="text-[#FFEE00] text-xl font-black uppercase mb-8">Join The Newsletter</h3>
+            <h3 className="text-[#ff9f22] text-xl font-black uppercase mb-8">Join The Newsletter</h3>
             <div className="flex flex-col space-y-4">
               <input 
                 type="email" 
                 placeholder="Your email here..." 
                 className="w-full px-6 py-4 bg-white text-[#002866] outline-none"
               />
-              <button className="w-full bg-[#FFEE00] text-[#002866] font-black uppercase py-4 tracking-widest hover:bg-white transition-colors">
+              <button className="w-full bg-[#ff9f22] text-[#002866] font-black uppercase py-4 tracking-widest hover:bg-white transition-colors">
                 Subscribe Now
               </button>
             </div>

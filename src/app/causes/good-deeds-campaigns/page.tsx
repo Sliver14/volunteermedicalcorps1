@@ -41,14 +41,14 @@ export default function GoodDeedsCampaignsPage() {
                 fill 
                 className="object-cover rounded-sm shadow-2xl"
               />
-              <div className="absolute -bottom-6 -right-6 bg-[#FFEE00] p-8 hidden md:block">
+              <div className="absolute -bottom-6 -right-6 bg-[#ff9f22] p-8 hidden md:block">
                 <span className="text-[#002866] font-black text-2xl">#vmcgooddeeds</span>
               </div>
             </div>
             
             <div className="space-y-8">
               <div>
-                <h6 className="text-[#FFEE00] font-bold tracking-widest uppercase mb-4">VMC Campaigns</h6>
+                <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">VMC Campaigns</h6>
                 <h2 className="text-4xl md:text-5xl font-poppins font-bold text-[#002866] leading-tight">
                   We Save Lives Through Good Deeds
                 </h2>
@@ -68,7 +68,7 @@ export default function GoodDeedsCampaignsPage() {
                 <ul className="space-y-4">
                   {activities.map((activity, index) => (
                     <li key={index} className="flex items-center text-gray-700 font-semibold">
-                      <span className="w-2 h-2 bg-[#FFEE00] rounded-full mr-3"></span>
+                      <span className="w-2 h-2 bg-[#ff9f22] rounded-full mr-3"></span>
                       {activity}
                     </li>
                   ))}
@@ -83,9 +83,9 @@ export default function GoodDeedsCampaignsPage() {
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h6 className="text-[#FFEE00] font-bold tracking-widest uppercase mb-4">Get Involved</h6>
+            <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">Get Involved</h6>
             <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">Good Deeds Campaigns</h2>
-            <div className="w-24 h-1 bg-[#FFEE00] mx-auto mt-6"></div>
+            <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -104,7 +104,7 @@ export default function GoodDeedsCampaignsPage() {
                 </div>
                 <div className="p-8">
                   <span className="text-sm font-roboto text-gray-400 uppercase tracking-widest mb-2 block">Good Deeds Campaigns</span>
-                  <h3 className="text-xl font-bold text-[#002866] group-hover:text-[#FFEE00] transition-colors line-clamp-2">
+                  <h3 className="text-xl font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors line-clamp-2">
                     {campaign.title}
                   </h3>
                 </div>

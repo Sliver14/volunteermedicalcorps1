@@ -37,7 +37,7 @@ export default function GlobalPrayerPage() {
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white text-center">
-          <h6 className="text-[#FFEE00] font-bold tracking-[0.4em] uppercase mb-6">Global Day of Prayer</h6>
+          <h6 className="text-[#ff9f22] font-bold tracking-[0.4em] uppercase mb-6">Global Day of Prayer</h6>
           <h2 className="text-5xl md:text-7xl font-poppins font-black mb-8 leading-tight">
             VMC Praying Medics
           </h2>
@@ -45,7 +45,7 @@ export default function GlobalPrayerPage() {
             Join our global network of medical professionals dedicated to the ministry of prayer, interceding for the sick and the healthcare systems of the world.
           </p>
           <div className="mt-12">
-            <button className="bg-[#FFEE00] text-[#002866] px-12 py-5 font-black uppercase tracking-widest hover:bg-white transition-all shadow-2xl">
+            <button className="bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase tracking-widest hover:bg-white transition-all shadow-2xl">
               Join the Prayer Network
             </button>
           </div>
@@ -71,12 +71,12 @@ export default function GlobalPrayerPage() {
       <section className="py-24 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white p-12 md:p-20 rounded-sm shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#FFEE00]/10 rounded-full translate-x-32 -translate-y-32"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff9f22]/10 rounded-full translate-x-32 -translate-y-32"></div>
             <div className="relative z-10">
               <h2 className="text-3xl font-poppins font-bold text-[#002866] mb-12 uppercase tracking-wide">Prayer Hotlines & Support</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div className="space-y-6">
-                  <h4 className="text-[#FFEE00] font-black uppercase tracking-widest text-sm">Call Us</h4>
+                  <h4 className="text-[#ff9f22] font-black uppercase tracking-widest text-sm">Call Us</h4>
                   <ul className="space-y-4 text-xl font-bold text-[#002866]">
                     <li>UK: +44 203 176 9724</li>
                     <li>SA: +27 79 967 5852</li>
@@ -84,7 +84,7 @@ export default function GlobalPrayerPage() {
                   </ul>
                 </div>
                 <div className="space-y-6">
-                  <h4 className="text-[#FFEE00] font-black uppercase tracking-widest text-sm">Send Prayer Requests</h4>
+                  <h4 className="text-[#ff9f22] font-black uppercase tracking-widest text-sm">Send Prayer Requests</h4>
                   <p className="text-2xl font-bold text-[#002866] break-all">
                     contact@volunteermedicalcorps.org
                   </p>

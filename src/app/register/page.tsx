@@ -19,21 +19,21 @@ export default function RegisterPage() {
               
               <div className="space-y-6">
                 <div className="flex flex-col md:flex-row items-center md:items-start">
-                  <div className="bg-[#FFEE00] text-[#002866] p-3 rounded-full md:mr-4 mb-4 md:mb-0">✓</div>
+                  <div className="bg-[#ff9f22] text-[#002866] p-3 rounded-full md:mr-4 mb-4 md:mb-0">✓</div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-1">Make a Global Impact</h4>
                     <p className="text-gray-600 text-sm">Contribute to medical outreaches and humanitarian projects worldwide.</p>
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row items-center md:items-start">
-                  <div className="bg-[#FFEE00] text-[#002866] p-3 rounded-full md:mr-4 mb-4 md:mb-0">✓</div>
+                  <div className="bg-[#ff9f22] text-[#002866] p-3 rounded-full md:mr-4 mb-4 md:mb-0">✓</div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-1">Earn VMC Rewards</h4>
                     <p className="text-gray-600 text-sm">Gain volunteer credits and be recognized for your active participation.</p>
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row items-center md:items-start">
-                  <div className="bg-[#FFEE00] text-[#002866] p-3 rounded-full md:mr-4 mb-4 md:mb-0">✓</div>
+                  <div className="bg-[#ff9f22] text-[#002866] p-3 rounded-full md:mr-4 mb-4 md:mb-0">✓</div>
                   <div>
                     <h4 className="font-bold text-gray-900 mb-1">Join a Network</h4>
                     <p className="text-gray-600 text-sm">Connect with thousands of Christian health professionals globally.</p>
@@ -92,7 +92,7 @@ export default function RegisterPage() {
                   </label>
                 </div>
 
-                <button type="button" className="w-full bg-[#002866] text-white py-5 font-bold uppercase tracking-widest hover:bg-[#FFEE00] hover:text-[#002866] transition-all rounded-sm">
+                <button type="button" className="w-full bg-[#002866] text-white py-5 font-bold uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm">
                   Complete Registration
                 </button>
               </form>

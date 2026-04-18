@@ -37,7 +37,7 @@ export default function VideoGalleryPage() {
       <PageBanner title="VIDEO GALLERY" parent={{ label: "Media", href: "#" }} />
       
       {/* Featured Video */}
-      <section className="py-24 bg-[#002866]">
+      <section className="py-16 md:py-24 bg-[#002866]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div 
@@ -67,7 +67,7 @@ export default function VideoGalleryPage() {
               className="text-white space-y-6 relative"
             >
               <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase">Featured Video</h6>
-              <h2 className="text-4xl font-poppins font-bold leading-tight">WE ARE LOVEWORLD VOLUNTEER MEDICAL CORPS</h2>
+              <h2 className="text-3xl md:text-4xl font-poppins font-bold leading-tight">WE ARE LOVEWORLD VOLUNTEER MEDICAL CORPS</h2>
               <p className="text-gray-300 text-lg">Learn more about our mission, our people, and the global impact we are making in regions of crisis and communities in need.</p>
               
               <div className="flex gap-4">
@@ -84,7 +84,7 @@ export default function VideoGalleryPage() {
 
               {/* Featured Video Share Menu */}
               {activeShareMenu === -1 && (
-                <div className="absolute bottom-[-60px] left-[200px] z-50 bg-white shadow-xl rounded-sm p-2 flex gap-2 animate-fadeIn border border-gray-100">
+                <div className="absolute top-full left-0 mt-4 md:left-[200px] md:bottom-[-60px] md:top-auto z-50 bg-white shadow-xl rounded-sm p-2 flex gap-2 animate-fadeIn border border-gray-100">
                   <button onClick={() => window.open(`https://facebook.com/sharer/sharer.php?u=vmc.org`, '_blank')} className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"><FaFacebookF /></button>
                   <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=Watch this!`, '_blank')} className="w-10 h-10 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors"><FaTwitter /></button>
                   <button onClick={() => window.open(`https://api.whatsapp.com/send?text=Watch this!`, '_blank')} className="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"><FaWhatsapp /></button>
@@ -174,8 +174,8 @@ export default function VideoGalleryPage() {
             ))}
           </motion.div>
 
-          <div className="mt-20 text-center">
-            <button className="border-2 border-[#002866] text-[#002866] px-12 py-4 font-black uppercase tracking-widest hover:bg-[#002866] hover:text-white transition-all">
+          <div className="mt-12 md:mt-20 text-center">
+            <button className="w-full sm:w-auto border-2 border-[#002866] text-[#002866] px-12 py-4 font-black uppercase tracking-widest hover:bg-[#002866] hover:text-white transition-all">
               Browse More Videos
             </button>
           </div>

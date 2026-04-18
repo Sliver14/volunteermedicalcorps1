@@ -20,7 +20,7 @@ export default function GalleryPage() {
     <div className="w-full bg-white">
       <PageBanner title="PHOTO GALLERY" parent={{ label: "Media", href: "#" }} />
       
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -30,7 +30,7 @@ export default function GalleryPage() {
             className="text-center mb-16"
           >
             <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">Our Memories</h6>
-            <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">Capturing the Impact</h2>
+            <h2 className="text-3xl md:text-4xl font-poppins font-bold text-[#002866] uppercase">Capturing the Impact</h2>
             <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
           </motion.div>
 
@@ -71,8 +71,8 @@ export default function GalleryPage() {
             ))}
           </motion.div>
 
-          <div className="mt-20 text-center">
-            <button className="border-2 border-[#002866] text-[#002866] px-12 py-4 font-black uppercase tracking-widest hover:bg-[#002866] hover:text-white transition-all">
+          <div className="mt-12 md:mt-20 text-center">
+            <button className="w-full sm:w-auto border-2 border-[#002866] text-[#002866] px-12 py-4 font-black uppercase tracking-widest hover:bg-[#002866] hover:text-white transition-all">
               Load More Albums
             </button>
           </div>

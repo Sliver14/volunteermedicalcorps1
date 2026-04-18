@@ -21,7 +21,7 @@ export default function BlogPage() {
     <div className="w-full bg-white">
       <PageBanner title="OUR BLOG" parent={{ label: "Media", href: "#" }} />
       
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -31,7 +31,7 @@ export default function BlogPage() {
             className="text-center mb-16"
           >
             <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">Insights & Wellness</h6>
-            <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">VMC Health Blog</h2>
+            <h2 className="text-3xl md:text-4xl font-poppins font-bold text-[#002866] uppercase">VMC Health Blog</h2>
             <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
           </motion.div>
 
@@ -82,8 +82,8 @@ export default function BlogPage() {
             ))}
           </motion.div>
 
-          <div className="mt-20 text-center">
-            <button className="bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase tracking-widest hover:bg-[#002866] hover:text-white transition-all shadow-lg">
+          <div className="mt-12 md:mt-20 text-center">
+            <button className="w-full sm:w-auto bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase tracking-widest hover:bg-[#002866] hover:text-white transition-all shadow-lg">
               View All Blog Posts
             </button>
           </div>

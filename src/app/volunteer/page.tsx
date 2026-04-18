@@ -11,7 +11,7 @@ export default function VolunteerLandingPage() {
       <PageBanner title="Become A Volunteer" />
       
       {/* Hero Section */}
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -21,7 +21,7 @@ export default function VolunteerLandingPage() {
               transition={{ duration: 0.6 }}
             >
               <h6 className="text-[#ff9f22] font-bold tracking-[0.3em] uppercase mb-4 text-center lg:text-left">Join the Corps</h6>
-              <h2 className="text-4xl md:text-5xl font-poppins font-bold text-[#002866] mb-8 leading-tight text-center lg:text-left">
+              <h2 className="text-3xl md:text-5xl font-poppins font-bold text-[#002866] mb-8 leading-tight text-center lg:text-left">
                 Your Skills Can Change Lives
               </h2>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed font-roboto text-center lg:text-left">
@@ -34,7 +34,7 @@ export default function VolunteerLandingPage() {
                 <div className="pt-8">
                   <Link 
                     href="/register" 
-                    className="inline-block bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase tracking-[0.2em] shadow-xl hover:bg-[#002866] hover:text-white transition-all"
+                    className="block sm:inline-block w-full sm:w-auto text-center bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase tracking-[0.2em] shadow-xl hover:bg-[#002866] hover:text-white transition-all"
                   >
                     Register Now
                   </Link>
@@ -62,14 +62,14 @@ export default function VolunteerLandingPage() {
       </section>
 
       {/* Why Volunteer Section */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="text-3xl font-poppins font-bold text-[#002866] mb-16 uppercase"
+            className="text-2xl md:text-3xl font-poppins font-bold text-[#002866] mb-16 uppercase"
           >
             Why Volunteer with VMC?
           </motion.h2>

@@ -48,9 +48,9 @@ export default function NewsPage() {
     <div className="w-full bg-white">
       <PageBanner title="LATEST NEWS" parent={{ label: "Media", href: "#" }} />
       
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 md:mb-20">
             {/* Featured Post */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
@@ -59,7 +59,7 @@ export default function NewsPage() {
               transition={{ duration: 0.6 }}
               className="group cursor-pointer"
             >
-              <div className="relative h-[400px] overflow-hidden rounded-sm mb-8 shadow-xl">
+              <div className="relative h-[300px] md:h-[400px] overflow-hidden rounded-sm mb-8 shadow-xl">
                 <Image 
                   src="/pmr-bg-slide.jpg" 
                   alt="Featured News" 
@@ -76,7 +76,7 @@ export default function NewsPage() {
                   <span>•</span>
                   <span>April 17, 2026</span>
                 </div>
-                <h2 className="text-3xl font-poppins font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors leading-tight">
+                <h2 className="text-2xl md:text-3xl font-poppins font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors leading-tight">
                   Volunteer Medical Corps Launches Global Relief Initiative for 2026
                 </h2>
                 <p className="text-gray-600 text-lg leading-relaxed">
@@ -106,9 +106,9 @@ export default function NewsPage() {
                     hidden: { opacity: 0, x: 30 },
                     visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
                   }}
-                  className="flex gap-6 group cursor-pointer"
+                  className="flex gap-4 sm:gap-6 group cursor-pointer"
                 >
-                  <div className="relative w-32 h-32 flex-shrink-0 overflow-hidden rounded-sm shadow-md">
+                  <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 overflow-hidden rounded-sm shadow-md">
                     <Image 
                       src={item.image} 
                       alt={item.title} 
@@ -166,8 +166,8 @@ export default function NewsPage() {
             ))}
           </motion.div>
 
-          <div className="mt-20 text-center">
-            <button className="bg-[#002866] text-white px-12 py-4 font-black uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all shadow-xl">
+          <div className="mt-12 md:mt-20 text-center">
+            <button className="w-full sm:w-auto bg-[#002866] text-white px-12 py-4 font-black uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all shadow-xl">
               Load More News
             </button>
           </div>

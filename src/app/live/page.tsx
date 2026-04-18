@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import PageBanner from "@/components/PageBanner";
 import { FaUserCircle, FaPaperPlane } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function LiveStreamPage() {
   const [messages, setMessages] = useState([
@@ -50,7 +51,13 @@ export default function LiveStreamPage() {
           <div className="flex flex-col lg:flex-row gap-8">
 
             {/* Left Column: Video Player */}
-            <div className="lg:w-2/3 flex flex-col">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="lg:w-2/3 flex flex-col"
+            >
               <div className="bg-[#002866] p-4 text-center rounded-t-sm shadow-md">
                 <span className="inline-block w-3 h-3 bg-red-500 rounded-full mr-2 animate-pulse"></span>
                 <span className="text-white font-bold uppercase tracking-widest text-sm">Live Broadcast</span>
@@ -93,10 +100,16 @@ export default function LiveStreamPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Column: Live Chat */}
-            <div className="lg:w-1/3 flex flex-col h-[500px] lg:h-auto bg-white border border-gray-200 shadow-sm rounded-sm overflow-hidden">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="lg:w-1/3 flex flex-col h-[500px] lg:h-auto bg-white border border-gray-200 shadow-sm rounded-sm overflow-hidden"
+            >
               <div className="bg-gray-100 p-4 border-b border-gray-200 text-[#002866] font-bold flex justify-between items-center">
                 <span>Live Chat</span>
                 <span className="text-xs bg-[#ff9f22] text-[#002866] px-2 py-1 rounded-full uppercase tracking-wider">{messages.length}</span>
@@ -143,7 +156,7 @@ export default function LiveStreamPage() {
                   Please be respectful in the chat.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>

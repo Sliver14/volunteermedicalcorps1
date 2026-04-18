@@ -253,7 +253,7 @@ export default function Home() {
 
       {/* Sponsor / Map Section */}
       <section className="py-12 bg-white">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto md:px-4">
         {/* Main Yellow Container */}
         <div className="bg-[#ff9f22] relative rounded-sm overflow-hidden flex flex-col md:flex-row items-center min-h-[400px]">
           
@@ -451,25 +451,25 @@ export default function Home() {
       </section>
 
       {/* Mission Section */}
-      <section className="relative py-16 bg-[#002866] text-white flex items-center bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('/pmr-bg-mission.jpg')" }}>
+      <section className="relative py-20 md:py-16 bg-[#002866] text-white flex items-center bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('/pmr-bg-mission.jpg')" }}>
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#002866]/80 to-blue-900/60"></div>
+        <div className="absolute inset-0 bg-[#002866]/90 md:bg-gradient-to-r md:from-[#002866]/90 md:to-blue-900/60"></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center text-center md:text-left">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center text-center md:text-left">
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <h3 className="text-[#ff9f22] font-poppins font-medium text-xl mb-2">
+              <h3 className="text-[#ff9f22] font-poppins font-medium text-lg md:text-xl mb-3">
                 Volunteer Medical Corps
               </h3>
-              <h2 className="text-4xl md:text-5xl font-poppins font-bold mb-6 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-poppins font-bold mb-6 leading-tight">
                 To provide the best and most suitable medical aid to communities in need.
               </h2>
-              <p className="text-gray-200 text-lg font-roboto mx-auto md:mx-0 max-w-lg">
+              <p className="text-gray-200 text-base md:text-lg font-roboto mx-auto md:mx-0 max-w-lg leading-relaxed">
                 Our Core Values: Faith, Innovation, Integrity, Effectiveness, and Compassion.
               </p>
             </motion.div>
@@ -478,11 +478,11 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="flex justify-center md:justify-end"
+              className="flex justify-center md:justify-end mt-4 md:mt-0"
             >
               <Link 
                 href="/about" 
-                className="inline-block bg-[#ff9f22] text-[#002866] px-8 py-4 font-semibold uppercase tracking-wider hover:bg-white transition-colors rounded-sm"
+                className="inline-block bg-[#ff9f22] text-[#002866] px-10 py-4 text-[13px] md:text-sm font-black uppercase tracking-wider hover:bg-white transition-colors rounded-sm"
               >
                 Learn Our Vision
               </Link>

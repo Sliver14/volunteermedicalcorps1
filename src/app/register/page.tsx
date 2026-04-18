@@ -9,7 +9,7 @@ export default function RegisterPage() {
     <div className="w-full bg-gray-50 font-roboto">
       <PageBanner title="Join Volunteer Medical Corps" />
       
-      <section className="py-24">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 text-center lg:text-left">
             
@@ -57,7 +57,7 @@ export default function RegisterPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:col-span-3 bg-white p-8 md:p-12 shadow-xl border-t-4 border-[#002866] rounded-sm text-left"
+              className="lg:col-span-3 bg-white p-6 md:p-12 shadow-xl border-t-4 border-[#002866] rounded-sm text-left"
             >
               <h3 className="text-2xl font-poppins font-bold mb-8 uppercase text-[#002866] text-center md:text-left">Registration Form</h3>
               

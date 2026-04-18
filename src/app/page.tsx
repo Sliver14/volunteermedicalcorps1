@@ -118,7 +118,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-white/90 md:bg-white/20 sm:bg-gradient-to-r sm:from-white/95 sm:via-white/70 sm:to-transparent"></div>
         </div>
         
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 w-full">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 w-full mb-0 md:mb-16">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -164,92 +164,92 @@ export default function Home() {
       </div>
 
       {/* Decorative vertical text seen in Screenshot 024543 */}
-      <div className="hidden xl:flex absolute left-10 top-1/2 -translate-y-1/2 -rotate-90 origin-left items-center gap-4">
+      {/* <div className="hidden xl:flex absolute left-8 top-2/3 -rotate-90 origin-left items-center gap-4 z-20 whitespace-nowrap">
         <span className="w-12 h-[1px] bg-[#002866]/20"></span>
-        <span className="text-[10px] font-black uppercase tracking-[0.8em] text-[#002866]/30">
+        <span className="text-[10px] font-black uppercase tracking-[0.8em] text-[#002866]/40">
           Volunteer Medical Corps
         </span>
-      </div>
+      </div> */}
     </section>
 
 
-{/* Intro & Counters Section */}
-<section className="py-24 bg-white relative overflow-hidden">
-  <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-stretch">
-      
-      {/* Left: Reduced size counters */}
-      <motion.div 
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="lg:col-span-3 flex flex-col justify-between gap-4"
-      >
-        
-        {/* Item 1 */}
-        <div className="text-center lg:text-right border-b border-gray-100 pb-4">
-          <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
-            <Counter value={10} suffix="+" />
+      {/* Intro & Counters Section */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-stretch">
+            
+            {/* Left: Reduced size counters */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-3 flex flex-col justify-between gap-4"
+            >
+              
+              {/* Item 1 */}
+              <div className="text-center lg:text-right border-b border-gray-100 pb-4">
+                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+                  <Counter value={10} suffix="+" />
+                </div>
+                <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Years of Existence</p>
+              </div>
+
+              {/* Item 2 */}
+              <div className="text-center lg:text-right border-b border-gray-100 pb-4">
+                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+                  <Counter value={210} suffix="+" />
+                </div>
+                <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Countries</p>
+              </div>
+
+              {/* Item 3 (Highlighted) */}
+              <div className="text-center lg:text-right border-b border-gray-100 pb-4">
+                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+                  <Counter value={6} suffix="M+" />
+                </div>
+                <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em]">Volunteers</p>
+              </div>
+
+              {/* Item 4 */}
+              <div className="text-center lg:text-right pb-2">
+                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+                  <Counter value={4.4} suffix="M+" decimal={true} />
+                </div>
+                <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Good deeds</p>
+              </div>
+            </motion.div>
+
+            {/* Right: Info */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-9 flex flex-col justify-center text-center lg:text-left items-center lg:items-start"
+            >
+              <h3 className="text-[#ff9f22] font-bold text-sm uppercase tracking-[0.2em] mb-4">Why VMC</h3>
+              <h2 className="text-[#002866] text-3xl md:text-5xl font-black uppercase leading-[1.1] mb-8">
+                Join the Volunteer <br className="hidden md:block" />
+                Medical Corps
+              </h2>
+              <p className="text-gray-500 text-lg leading-relaxed mb-10 max-w-2xl">
+                We are an ever-expanding global network of Christian health care workers, 
+                non-medical volunteers and students committed to providing medical care 
+                through outreaches, humanitarian assistance and sustainable health care solutions 
+                in regions of crisis and to communities in dire need.
+              </p>
+              <Link 
+                href="/about" 
+                className="inline-block bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all hover:bg-[#002866] hover:text-white shadow-md"
+              >
+                About Us
+              </Link>
+            </motion.div>
+
           </div>
-          <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Years of Existence</p>
         </div>
-
-        {/* Item 2 */}
-        <div className="text-center lg:text-right border-b border-gray-100 pb-4">
-          <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
-            <Counter value={210} suffix="+" />
-          </div>
-          <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Countries</p>
-        </div>
-
-        {/* Item 3 (Highlighted) */}
-        <div className="text-center lg:text-right border-b border-gray-100 pb-4">
-          <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
-            <Counter value={6} suffix="M+" />
-          </div>
-          <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em]">Volunteers</p>
-        </div>
-
-        {/* Item 4 */}
-        <div className="text-center lg:text-right pb-2">
-          <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
-            <Counter value={4.4} suffix="M+" decimal={true} />
-          </div>
-          <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Good deeds</p>
-        </div>
-      </motion.div>
-
-      {/* Right: Info */}
-      <motion.div 
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="lg:col-span-9 flex flex-col justify-center text-center lg:text-left items-center lg:items-start"
-      >
-        <h3 className="text-[#ff9f22] font-bold text-sm uppercase tracking-[0.2em] mb-4">Why VMC</h3>
-        <h2 className="text-[#002866] text-3xl md:text-5xl font-black uppercase leading-[1.1] mb-8">
-          Join the Volunteer <br className="hidden md:block" />
-          Medical Corps
-        </h2>
-        <p className="text-gray-500 text-lg leading-relaxed mb-10 max-w-2xl">
-          We are an ever-expanding global network of Christian health care workers, 
-          non-medical volunteers and students committed to providing medical care 
-          through outreaches, humanitarian assistance and sustainable health care solutions 
-          in regions of crisis and to communities in dire need.
-        </p>
-        <Link 
-          href="/about" 
-          className="inline-block bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all hover:bg-[#002866] hover:text-white shadow-md"
-        >
-          About Us
-        </Link>
-      </motion.div>
-
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Sponsor / Map Section */}
       <section className="py-12 bg-white">

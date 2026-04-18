@@ -141,7 +141,7 @@ export default function Header() {
                   <Link 
                     href={item.href} 
                     className="block flex-1 px-6 py-5 text-[#002866] font-semibold text-lg tracking-wide"
-                    onClick={() => !item.subItems && setIsMobileOpen(false)}
+                    onClick={() => setIsMobileOpen(false)}
                   >
                     {item.label}
                   </Link>
@@ -194,7 +194,7 @@ export default function Header() {
             </svg>
           )}
         </button>
-        <Link href="/donate" className="text-white font-black tracking-[0.2em] text-[13px] flex-1 text-center pr-6">
+        <Link href="/donate" className="text-white font-black tracking-[0.2em] text-[13px] flex-1 text-center pr-6" onClick={() => setIsMobileOpen(false)}>
             Donate Now
         </Link>
       </div>

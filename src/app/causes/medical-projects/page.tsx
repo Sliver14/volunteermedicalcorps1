@@ -1,5 +1,8 @@
+"use client";
+
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
+import { motion } from "framer-motion";
 
 export default function MedicalProjectsPage() {
   const activities = [
@@ -26,7 +29,13 @@ export default function MedicalProjectsPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative h-[400px] md:h-[500px]">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="relative h-[400px] md:h-[500px]"
+            >
               <Image 
                 src="/give-20-768x512.jpg" 
                 alt="Medical Projects" 
@@ -36,9 +45,15 @@ export default function MedicalProjectsPage() {
               <div className="absolute -bottom-6 -right-6 bg-[#ff9f22] p-8 hidden md:block">
                 <span className="text-[#002866] font-black text-2xl">#vmcgooddeeds</span>
               </div>
-            </div>
+            </motion.div>
             
-            <div className="space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-8"
+            >
               <div>
                 <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">VMC Campaigns</h6>
                 <h2 className="text-4xl md:text-5xl font-poppins font-bold text-[#002866] leading-tight">
@@ -66,7 +81,7 @@ export default function MedicalProjectsPage() {
                   ))}
                 </ul>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -74,15 +89,37 @@ export default function MedicalProjectsPage() {
       {/* Campaigns Grid */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">Get Involved</h6>
             <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">Medical Projects</h2>
             <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.1 } },
+              hidden: {}
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {campaigns.map((campaign, index) => (
-              <div key={index} className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+              <motion.div 
+                key={index} 
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              >
                 <div className="relative h-64 overflow-hidden">
                   <Image 
                     src={campaign.image} 
@@ -100,9 +137,9 @@ export default function MedicalProjectsPage() {
                     {campaign.title}
                   </h3>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

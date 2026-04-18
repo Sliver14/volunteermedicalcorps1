@@ -2,6 +2,7 @@
 
 import PageBanner from "@/components/PageBanner";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function DonatePage() {
   const [selectedCause, setSelectedCause] = useState("");
@@ -33,17 +34,35 @@ export default function DonatePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 text-center lg:text-left">
             
             {/* Left: Content */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+            >
               <h2 className="text-4xl font-poppins font-bold text-[#002866] mb-6 uppercase">Partner with VMC</h2>
               <p className="text-gray-600 text-lg mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 Your partnership enables us to provide sustainable health care solutions in regions of crisis and to communities in dire need. Choose a cause below to make an impact today.
               </p>
 
-              <div className="grid grid-cols-1 gap-4">
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={{
+                  visible: { transition: { staggerChildren: 0.1 } },
+                  hidden: {}
+                }}
+                className="grid grid-cols-1 gap-4"
+              >
                 {causes.map((cause) => (
-                  <div 
+                  <motion.div 
                     key={cause} 
                     onClick={() => handleCauseSelect(cause)}
+                    variants={{
+                      hidden: { opacity: 0, x: -20 },
+                      visible: { opacity: 1, x: 0, transition: { duration: 0.4 } }
+                    }}
                     className={`flex items-center justify-center lg:justify-start p-4 border-l-4 transition-all cursor-pointer group
                       ${selectedCause === cause 
                         ? 'bg-[#ff9f22] border-[#002866] translate-x-2' 
@@ -52,13 +71,20 @@ export default function DonatePage() {
                     <span className={`font-semibold transition-transform ${selectedCause === cause ? 'text-[#002866]' : 'text-[#002866] group-hover:translate-x-2'}`}>
                       {cause}
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Right: Donation Form */}
-            <div id="donation-form" className="bg-[#002866] p-10 text-white rounded-sm shadow-2xl h-fit sticky top-32 text-center md:text-left transition-all">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              id="donation-form" 
+              className="bg-[#002866] p-10 text-white rounded-sm shadow-2xl h-fit sticky top-32 text-center md:text-left transition-all"
+            >
               <h3 className="text-2xl font-poppins font-bold mb-8 uppercase text-[#ff9f22]">
                 {selectedCause ? `Supporting: ${selectedCause}` : 'Make a Donation'}
               </h3>
@@ -101,7 +127,7 @@ export default function DonatePage() {
                 </button>
                 <p className="text-center text-xs text-white/50 italic">All donations are secured and tax-deductible.</p>
               </form>
-            </div>
+            </motion.div>
 
           </div>
         </div>

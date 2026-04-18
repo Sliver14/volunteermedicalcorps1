@@ -1,5 +1,8 @@
+"use client";
+
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
+import { motion } from "framer-motion";
 
 export default function BlogPage() {
   const blogPosts = [
@@ -20,15 +23,37 @@ export default function BlogPage() {
       
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">Insights & Wellness</h6>
             <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">VMC Health Blog</h2>
             <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.1 } },
+              hidden: {}
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+          >
             {blogPosts.map((post, index) => (
-              <div key={index} className="group cursor-pointer bg-white border border-gray-100 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+              <motion.div 
+                key={index} 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
+                className="group cursor-pointer bg-white border border-gray-100 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              >
                 <div className="relative h-64 overflow-hidden">
                   <Image 
                     src={post.image} 
@@ -53,9 +78,9 @@ export default function BlogPage() {
                     Read Post <span>→</span>
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="mt-20 text-center">
             <button className="bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase tracking-widest hover:bg-[#002866] hover:text-white transition-all shadow-lg">

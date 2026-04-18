@@ -1,5 +1,8 @@
+"use client";
+
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
+import { motion } from "framer-motion";
 
 export default function NewsPage() {
   const newsItems = [
@@ -49,7 +52,13 @@ export default function NewsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
             {/* Featured Post */}
-            <div className="group cursor-pointer">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="group cursor-pointer"
+            >
               <div className="relative h-[400px] overflow-hidden rounded-sm mb-8 shadow-xl">
                 <Image 
                   src="/pmr-bg-slide.jpg" 
@@ -77,12 +86,28 @@ export default function NewsPage() {
                   Read Full Story
                 </button>
               </div>
-            </div>
+            </motion.div>
 
             {/* News List */}
-            <div className="space-y-12">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={{
+                visible: { transition: { staggerChildren: 0.2 } },
+                hidden: {}
+              }}
+              className="space-y-12"
+            >
               {newsItems.slice(0, 3).map((item, index) => (
-                <div key={index} className="flex gap-6 group cursor-pointer">
+                <motion.div 
+                  key={index} 
+                  variants={{
+                    hidden: { opacity: 0, x: 30 },
+                    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+                  }}
+                  className="flex gap-6 group cursor-pointer"
+                >
                   <div className="relative w-32 h-32 flex-shrink-0 overflow-hidden rounded-sm shadow-md">
                     <Image 
                       src={item.image} 
@@ -98,14 +123,30 @@ export default function NewsPage() {
                     </h3>
                     <p className="text-sm text-gray-500 line-clamp-2">{item.excerpt}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.15 } },
+              hidden: {}
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+          >
             {newsItems.slice(3).map((item, index) => (
-              <div key={index} className="group cursor-pointer">
+              <motion.div 
+                key={index} 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
+                className="group cursor-pointer"
+              >
                 <div className="relative h-64 overflow-hidden rounded-sm mb-6 shadow-lg">
                   <Image 
                     src={item.image} 
@@ -121,9 +162,9 @@ export default function NewsPage() {
                   </h3>
                   <p className="text-gray-500 line-clamp-3">{item.excerpt}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="mt-20 text-center">
             <button className="bg-[#002866] text-white px-12 py-4 font-black uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all shadow-xl">

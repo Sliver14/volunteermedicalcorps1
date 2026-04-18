@@ -1,5 +1,8 @@
+"use client";
+
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
+import { motion } from "framer-motion";
 
 export default function GalleryPage() {
   const albums = [
@@ -19,15 +22,37 @@ export default function GalleryPage() {
       
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">Our Memories</h6>
             <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">Capturing the Impact</h2>
             <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.1 } },
+              hidden: {}
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {albums.map((album, index) => (
-              <div key={index} className="group cursor-pointer">
+              <motion.div 
+                key={index} 
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9 },
+                  visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } }
+                }}
+                className="group cursor-pointer"
+              >
                 <div className="relative h-64 overflow-hidden rounded-sm mb-4 shadow-md">
                   <Image 
                     src={album.image} 
@@ -42,9 +67,9 @@ export default function GalleryPage() {
                 <h3 className="text-sm font-bold text-[#002866] uppercase tracking-wider text-center group-hover:text-[#ff9f22] transition-colors line-clamp-2">
                   {album.title}
                 </h3>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="mt-20 text-center">
             <button className="border-2 border-[#002866] text-[#002866] px-12 py-4 font-black uppercase tracking-widest hover:bg-[#002866] hover:text-white transition-all">

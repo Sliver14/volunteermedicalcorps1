@@ -1,4 +1,7 @@
+"use client";
+
 import PageBanner from "@/components/PageBanner";
+import { motion } from "framer-motion";
 
 export default function AnnualReportsPage() {
   const reports = [
@@ -15,7 +18,13 @@ export default function AnnualReportsPage() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            <div className="lg:col-span-1 space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-1 space-y-8"
+            >
               <h2 className="text-4xl font-poppins font-bold text-[#002866] leading-tight uppercase">
                 Transparency & Impact
               </h2>
@@ -26,12 +35,28 @@ export default function AnnualReportsPage() {
                 <h4 className="font-bold text-[#002866] mb-2 uppercase">Looking for something specific?</h4>
                 <p className="text-sm text-gray-500">Contact our administrative office for archived reports prior to 2020.</p>
               </div>
-            </div>
+            </motion.div>
             
             <div className="lg:col-span-2">
-              <div className="space-y-6">
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={{
+                  visible: { transition: { staggerChildren: 0.15 } },
+                  hidden: {}
+                }}
+                className="space-y-6"
+              >
                 {reports.map((report, index) => (
-                  <div key={index} className="flex flex-col md:flex-row items-center justify-between p-8 bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all group rounded-sm shadow-sm hover:shadow-md">
+                  <motion.div 
+                    key={index} 
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                    }}
+                    className="flex flex-col md:flex-row items-center justify-between p-8 bg-gray-50 hover:bg-white border border-transparent hover:border-gray-200 transition-all group rounded-sm shadow-sm hover:shadow-md"
+                  >
                     <div className="flex items-center gap-6 mb-4 md:mb-0">
                       <div className="w-16 h-16 bg-[#002866] text-[#ff9f22] flex items-center justify-center text-xl font-black rounded-sm group-hover:scale-110 transition-transform">
                         {report.year}
@@ -47,9 +72,9 @@ export default function AnnualReportsPage() {
                         Download PDF
                       </button>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

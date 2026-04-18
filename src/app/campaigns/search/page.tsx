@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, useMemo } from "react";
 import PageBanner from "@/components/PageBanner";
+import { motion } from "framer-motion";
 
 // Mock data generation for pagination demonstration
 const allCampaigns = [
@@ -83,14 +84,20 @@ function CampaignSearchContent() {
       <main className="flex-grow py-20">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           
-          <div className="mb-12 flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-sm shadow-sm border border-gray-100">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.4 }}
+            className="mb-12 flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-sm shadow-sm border border-gray-100"
+          >
             <h2 className="text-[#002866] text-2xl font-black uppercase mb-4 md:mb-0">
               {countryQuery ? `Results for "${countryQuery}"` : "Please select a country"}
             </h2>
             <p className="text-gray-500 font-medium">
               Found {filteredCampaigns.length} campaigns
             </p>
-          </div>
+          </motion.div>
 
           {filteredCampaigns.length === 0 ? (
             <div className="text-center py-24 bg-white rounded-sm shadow-sm border border-gray-100">
@@ -105,9 +112,25 @@ function CampaignSearchContent() {
           ) : (
             <>
               {/* Campaign Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
+                variants={{
+                  visible: { transition: { staggerChildren: 0.1 } },
+                  hidden: {}
+                }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+              >
                 {paginatedCampaigns.map((camp) => (
-                  <div key={camp.id} className="bg-white rounded-sm overflow-hidden shadow-md group border border-gray-100 flex flex-col">
+                  <motion.div 
+                    key={camp.id} 
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                    }}
+                    className="bg-white rounded-sm overflow-hidden shadow-md group border border-gray-100 flex flex-col"
+                  >
                     <div className="relative h-60 w-full overflow-hidden">
                       <Image 
                         src={camp.image} 
@@ -133,9 +156,9 @@ function CampaignSearchContent() {
                         </Link>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
 
               {/* Pagination Controls */}
               {totalPages > 1 && (

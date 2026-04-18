@@ -1,5 +1,8 @@
+"use client";
+
 import PageBanner from "@/components/PageBanner";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function LoginPage() {
   return (
@@ -8,7 +11,13 @@ export default function LoginPage() {
       
       <section className="py-24">
         <div className="max-w-md mx-auto px-4 sm:px-6">
-          <div className="bg-white p-8 md:p-12 shadow-xl border-t-4 border-[#002866] rounded-sm">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="bg-white p-8 md:p-12 shadow-xl border-t-4 border-[#002866] rounded-sm"
+          >
             <h3 className="text-2xl font-poppins font-bold mb-8 uppercase text-[#002866] text-center">Member Login</h3>
             
             <form className="space-y-6">
@@ -48,7 +57,7 @@ export default function LoginPage() {
             <div className="mt-8 text-center text-sm text-gray-600">
               Don&apos;t have an account yet? <Link href="/register" className="text-[#002866] font-bold hover:underline">Sign up for free</Link>.
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

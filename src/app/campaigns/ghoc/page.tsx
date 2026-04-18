@@ -1,5 +1,8 @@
+"use client";
+
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
+import { motion } from "framer-motion";
 
 export default function GHOCPage() {
   const steps = [
@@ -33,7 +36,13 @@ export default function GHOCPage() {
       <section className="py-24 bg-gradient-to-br from-[#002866] to-[#0040a6] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="space-y-8"
+            >
               <div className="inline-block bg-[#ff9f22] text-[#002866] px-4 py-1 font-bold uppercase tracking-widest text-sm">
                 Active Campaign 2024
               </div>
@@ -51,15 +60,21 @@ export default function GHOCPage() {
                   Join the Campaign
                 </button>
               </div>
-            </div>
-            <div className="relative h-[500px] rounded-sm overflow-hidden shadow-2xl border-b-8 border-r-8 border-[#ff9f22]">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative h-[500px] rounded-sm overflow-hidden shadow-2xl border-b-8 border-r-8 border-[#ff9f22]"
+            >
               <Image 
                 src="/sw-post-1-min-768x512.jpg" 
                 alt="GHOC Outreach" 
                 fill 
                 className="object-cover"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -67,15 +82,37 @@ export default function GHOCPage() {
       {/* Steps Section */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-20"
+          >
             <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase mb-4">How to Join</h6>
             <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">4 Steps to Participate</h2>
             <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.2 } },
+              hidden: {}
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
+          >
             {steps.map((step, index) => (
-              <div key={index} className="flex flex-col items-center text-center group">
+              <motion.div 
+                key={index} 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
+                className="flex flex-col items-center text-center group"
+              >
                 <div className="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center text-4xl mb-8 group-hover:bg-[#ff9f22] group-hover:scale-110 transition-all duration-300 shadow-inner">
                   {step.icon}
                 </div>
@@ -86,9 +123,9 @@ export default function GHOCPage() {
                     →
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -96,15 +133,27 @@ export default function GHOCPage() {
       <section className="py-24 bg-[#ff9f22]/10 border-y border-[#ff9f22]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative h-[400px]">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="relative h-[400px]"
+            >
               <Image 
                 src="/pmr-bg-mission.jpg" 
                 alt="Resources" 
                 fill 
                 className="object-cover rounded-sm shadow-xl"
               />
-            </div>
-            <div className="space-y-6">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-6"
+            >
               <h2 className="text-3xl font-poppins font-bold text-[#002866]">Campaign Resources</h2>
               <p className="text-gray-600 text-lg leading-relaxed">
                 Download everything you need to execute a successful outreach, including T-shirt designs, logos, and presentation materials.
@@ -117,7 +166,7 @@ export default function GHOCPage() {
                   <span>📥</span> Download #GHOC Logo
                 </button>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

@@ -2,9 +2,41 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { FaCalendarAlt, FaUser, FaComment } from "react-icons/fa"; // Ensure react-icons is installed
+import { motion, animate } from "framer-motion";
+import { FaCalendarAlt, FaUser, FaComment, FaQuoteLeft, FaStar } from "react-icons/fa"; // Ensure react-icons is installed
+
+function Counter({ value, suffix = "", prefix = "", decimal = false }: { value: number; suffix?: string, prefix?: string, decimal?: boolean }) {
+  const [displayValue, setDisplayValue] = useState(0);
+  const ref = useRef(null);
+  const isAnimated = useRef(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isAnimated.current) {
+          isAnimated.current = true;
+          animate(0, value, {
+            duration: 2,
+            ease: "easeOut",
+            onUpdate: (latest) => setDisplayValue(decimal ? Number(latest.toFixed(1)) : Math.floor(latest)),
+          });
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [value, decimal]);
+
+  return (
+    <span ref={ref}>
+      {prefix}{displayValue.toLocaleString()}{suffix}
+    </span>
+  );
+}
 
 export default function Home() {
   const router = useRouter();
@@ -67,21 +99,32 @@ export default function Home() {
       
       {/* Hero Section */}
       <section 
-      className="relative min-h-[85vh] md:min-h-screen flex items-center bg-white overflow-hidden"
-    >
-      {/* Background Image - Optimized for mobile face visibility */}
-      <div 
-        className="absolute inset-0 z-0 bg-no-repeat bg-[length:cover] bg-[75%_center] md:bg-right-top transition-all duration-700"
-        style={{ 
-          backgroundImage: "url('/pmr-bg-slide.jpg')",
-        }}
+        className="relative min-h-[85vh] md:min-h-screen flex items-center bg-white overflow-hidden"
       >
-        {/* Mobile Gradient Overlay for readability */}
-        <div className="absolute inset-0 bg-white/70 sm:bg-gradient-to-r sm:from-white/95 sm:via-white/60 sm:to-transparent md:bg-transparent"></div>
-      </div>
-      
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 w-full">
-        <div className="max-w-[750px] text-center md:text-left pt-12 md:pt-0">
+        {/* Background Video */}
+        <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto object-cover -translate-x-1/2 -translate-y-1/2 opacity-80"
+          >
+            <source src="/slider1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          
+          {/* Gradient Overlay for text readability */}
+          <div className="absolute inset-0 bg-white/90 md:bg-white/20 sm:bg-gradient-to-r sm:from-white/95 sm:via-white/70 sm:to-transparent"></div>
+        </div>
+        
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 w-full">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-[750px] text-center md:text-left pt-12 md:pt-0"
+        >
           
           {/* Top Small Heading - Kept your text */}
           <h2 className="text-[#002866] text-[12px] md:text-sm font-black tracking-[0.4em] uppercase mb-5">
@@ -117,7 +160,7 @@ export default function Home() {
             </Link>
           </div>
 
-        </div>
+        </motion.div>
       </div>
 
       {/* Decorative vertical text seen in Screenshot 024543 */}
@@ -136,41 +179,61 @@ export default function Home() {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-stretch">
       
       {/* Left: Reduced size counters */}
-      <div className="lg:col-span-3 flex flex-col justify-between gap-4">
+      <motion.div 
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="lg:col-span-3 flex flex-col justify-between gap-4"
+      >
         
         {/* Item 1 */}
         <div className="text-center lg:text-right border-b border-gray-100 pb-4">
-          <div className="text-[32px] font-black text-[#002866] leading-none mb-1">10+</div>
+          <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+            <Counter value={10} suffix="+" />
+          </div>
           <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Years of Existence</p>
         </div>
 
         {/* Item 2 */}
         <div className="text-center lg:text-right border-b border-gray-100 pb-4">
-          <div className="text-[32px] font-black text-[#002866] leading-none mb-1">210+</div>
+          <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+            <Counter value={210} suffix="+" />
+          </div>
           <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Countries</p>
         </div>
 
         {/* Item 3 (Highlighted) */}
         <div className="text-center lg:text-right border-b border-gray-100 pb-4">
-          <div className="text-[32px] font-black text-[#002866] leading-none mb-1">6M+</div>
+          <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+            <Counter value={6} suffix="M+" />
+          </div>
           <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em]">Volunteers</p>
         </div>
 
         {/* Item 4 */}
         <div className="text-center lg:text-right pb-2">
-          <div className="text-[32px] font-black text-[#002866] leading-none mb-1">4.4M+</div>
+          <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+            <Counter value={4.4} suffix="M+" decimal={true} />
+          </div>
           <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Good deeds</p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Right: Info */}
-      <div className="lg:col-span-9 flex flex-col justify-center">
+      <motion.div 
+        initial={{ opacity: 0, x: 50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="lg:col-span-9 flex flex-col justify-center text-center lg:text-left items-center lg:items-start"
+      >
         <h3 className="text-[#ff9f22] font-bold text-sm uppercase tracking-[0.2em] mb-4">Why VMC</h3>
         <h2 className="text-[#002866] text-3xl md:text-5xl font-black uppercase leading-[1.1] mb-8">
           Join the Volunteer <br className="hidden md:block" />
           Medical Corps
         </h2>
-        <p className="text-gray-500 text-lg leading-relaxed mb-10 max-w-2xl mx-auto lg:mx-0">
+        <p className="text-gray-500 text-lg leading-relaxed mb-10 max-w-2xl">
           We are an ever-expanding global network of Christian health care workers, 
           non-medical volunteers and students committed to providing medical care 
           through outreaches, humanitarian assistance and sustainable health care solutions 
@@ -178,11 +241,11 @@ export default function Home() {
         </p>
         <Link 
           href="/about" 
-          className="inline-block bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all hover:bg-[#002866] hover:text-white shadow-md self-start"
+          className="inline-block bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all hover:bg-[#002866] hover:text-white shadow-md"
         >
           About Us
         </Link>
-      </div>
+      </motion.div>
 
     </div>
   </div>
@@ -191,12 +254,18 @@ export default function Home() {
       {/* Sponsor / Map Section */}
       <section className="py-12 bg-white">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Main Yellow Container (Matches Screenshot 025725) */}
+        {/* Main Yellow Container */}
         <div className="bg-[#ff9f22] relative rounded-sm overflow-hidden flex flex-col md:flex-row items-center min-h-[400px]">
           
           {/* Left: Content Block */}
-          <div className="relative z-20 w-full md:w-1/2 p-6 md:p-12 text-center md:text-left">
-            {/* Dark Blue Sub-heading Tag (Matches Screenshot 025725) */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative z-20 w-full md:w-1/2 p-6 md:p-12 text-center md:text-left"
+          >
+            {/* Dark Blue Sub-heading Tag */}
             <div className="inline-block bg-[#002866] text-white px-5 py-1.5 text-[10px] font-bold uppercase tracking-widest mb-4 rounded-sm">
               Earn VMC Rewards
             </div>
@@ -209,7 +278,7 @@ export default function Home() {
               Provide medical kits, hygiene packs, and mother & baby care kits to communities in dire need.
             </p>
 
-            {/* Outlined CTA Button (Matches "OUR CAMPAIGNS" style in Screenshot 025725) */}
+            {/* Outlined CTA Button & Dropdown */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <Link
                 href="/donate"
@@ -235,10 +304,16 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right: Map Overlay (Matches Screenshot 030448) */}
-          <div className="relative w-full md:w-1/2 h-[250px] md:h-full min-h-[300px]">
+          {/* Right: Map Overlay */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative w-full md:w-1/2 h-[250px] md:h-full min-h-[300px]"
+          >
             <Image 
               src="/prm-world-map.png" 
               alt="World Map" 
@@ -246,31 +321,43 @@ export default function Home() {
               className="object-contain p-4 md:p-8 opacity-80 mix-blend-multiply"
             />
             
-            {/* Pulsing Hotspots (Matches Screenshot 030448 pins) */}
+            {/* Pulsing Hotspots */}
             <div className="absolute top-[51%] left-[45%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
             <div className="absolute top-[28%] left-[75%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
             <div className="absolute top-[40%] left-[20%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
             <div className="absolute top-[75%] left-[30%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
-          </div>
+          </motion.div>
           
         </div>
       </div>
     </section>
 
       {/* Causes / Campaigns Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl font-poppins font-bold text-[#002866] mb-4">Good Deeds Campaigns</h2>
             <p className="text-xl text-gray-600 font-poppins max-w-3xl mx-auto">Find volunteer opportunities that fit your time and skill, earn volunteer credits and make impact with us.</p>
-          </div>
+          </motion.div>
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Card 1 */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 group">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 group"
+            >
               <div className="relative h-64 overflow-hidden">
                 <Image 
                   src="/give-15-768x512.jpg" 
@@ -293,10 +380,16 @@ export default function Home() {
                   Volunteer Now
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 group">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 group"
+            >
               <div className="relative h-64 overflow-hidden">
                 <Image 
                   src="/give-15-768x512.jpg" 
@@ -319,10 +412,16 @@ export default function Home() {
                   Volunteer Now
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 group">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+              className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 group"
+            >
               <div className="relative h-64 overflow-hidden">
                 <Image 
                   src="/give-15-768x512.jpg" 
@@ -345,20 +444,25 @@ export default function Home() {
                   Start Campaign
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
       </section>
 
       {/* Mission Section */}
-      <section className="relative py-16 bg-[#002866] text-white flex items-center bg-cover bg-center" style={{ backgroundImage: "url('/pmr-bg-mission.jpg')" }}>
+      <section className="relative py-16 bg-[#002866] text-white flex items-center bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('/pmr-bg-mission.jpg')" }}>
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#002866]/80 to-blue-900/60"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center text-center md:text-left">
-            <div>
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
               <h3 className="text-[#ff9f22] font-poppins font-medium text-xl mb-2">
                 Volunteer Medical Corps
               </h3>
@@ -368,27 +472,39 @@ export default function Home() {
               <p className="text-gray-200 text-lg font-roboto mx-auto md:mx-0 max-w-lg">
                 Our Core Values: Faith, Innovation, Integrity, Effectiveness, and Compassion.
               </p>
-            </div>
-            <div className="flex justify-center md:justify-end">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="flex justify-center md:justify-end"
+            >
               <Link 
                 href="/about" 
                 className="inline-block bg-[#ff9f22] text-[#002866] px-8 py-4 font-semibold uppercase tracking-wider hover:bg-white transition-colors rounded-sm"
               >
                 Learn Our Vision
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
 {/* 1. TOP YELLOW SECTION */}
       {/* Increased pb-48 to create enough space for the overlapping box */}
-      <section className="pt-24 pb-48 bg-[#ff9f22] relative z-10">
+      <section className="pt-24 pb-48 bg-[#ff9f22] relative z-10 overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             
             {/* Left: Events Intro */}
-            <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left"
+            >
               <h2 className="text-[#002866] text-4xl md:text-5xl font-black uppercase leading-[1.1] mb-8">
                 Medical Projects & <br /> Relief Missions
               </h2>
@@ -401,10 +517,17 @@ export default function Home() {
                 className="inline-block bg-[#002866] text-[#ff9f22] px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all hover:bg-white hover:text-[#002866] shadow-xl"
               >
                 View All Projects
-              </Link>            </div>
+              </Link>
+            </motion.div>
 
             {/* Right: Events List */}
-            <div className="lg:col-span-8 space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-8 space-y-6"
+            >
               {/* Card 1 */}
               <div className="flex flex-col md:flex-row items-center bg-white rounded-sm overflow-hidden shadow-sm group text-center md:text-left">
                 <div className="relative w-full md:w-1/4 h-48 md:h-32 shrink-0">
@@ -434,7 +557,7 @@ export default function Home() {
                   <p className="text-[#002866] text-sm font-bold">Various Communities</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -446,7 +569,13 @@ export default function Home() {
           
           {/* THE OVERLAPPING BOX */}
           {/* -translate-y-1/2 centers the box exactly on the border between yellow and white */}
-          <div className="relative -top-32 lg:-top-40 mb-[-128px] lg:mb-[-160px] flex flex-col lg:flex-row bg-white rounded-sm overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative -top-32 lg:-top-40 mb-[-128px] lg:mb-[-160px] flex flex-col lg:flex-row bg-white rounded-sm overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)]"
+          >
             
             {/* Left Column: Progress */}
             <div className="lg:w-2/5 bg-[#002866] p-10 md:p-16 text-white text-center lg:text-left flex flex-col">
@@ -522,89 +651,152 @@ export default function Home() {
               </div>
             </div>
             
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-gray-50 mt-12 lg:mt-24">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+      <section className="py-24 bg-[#002866] mt-12 lg:mt-24 relative overflow-hidden">
+        {/* Background Decorative Pattern */}
+        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "url('/pmr-world-map.png')", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+        
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
           
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-center mb-20"
+          >
             <h3 className="text-[#ff9f22] font-bold text-[11px] uppercase tracking-[0.2em] mb-4">
               Impact Stories
             </h3>
-            <h2 className="text-4xl md:text-5xl font-black text-[#002866] mb-8 leading-tight uppercase">
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-8 leading-tight uppercase">
               What Our Volunteers Say
             </h2>
             <div className="w-24 h-1.5 bg-[#ff9f22] mx-auto mb-6"></div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             
             {/* Testimonial 1 */}
-            <div className="bg-white p-10 shadow-sm border border-gray-100 rounded-sm flex flex-col items-center text-center relative mt-10">
-              <div className="absolute -top-10 w-20 h-20 rounded-full border-4 border-white overflow-hidden shadow-md">
-                <Image src="/sw-post-1-min-768x512.jpg" alt="Dr. Sarah" fill className="object-cover" />
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              className="bg-white p-10 shadow-lg border border-transparent rounded-sm flex flex-col items-center text-center relative mt-12 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group"
+            >
+              <div className="absolute -top-12 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg group-hover:border-[#ff9f22] transition-colors duration-300">
+                <Image src="/sw-post-1-min-768x512.jpg" alt="Dr. Sarah Jenkins" fill className="object-cover" />
               </div>
-              <div className="text-[#ff9f22] text-4xl leading-none mb-4 mt-6">"</div>
-              <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed">
-                "Volunteering with VMC in Nairobi changed my life. Seeing the direct impact our medical kits had on mothers and their newborns was incredibly fulfilling."
+              <div className="text-[#ff9f22] opacity-20 absolute top-12 left-8">
+                <FaQuoteLeft size={48} />
+              </div>
+              
+              <div className="flex gap-1 text-[#ff9f22] mb-6 mt-12">
+                <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+              </div>
+              
+              <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed font-medium z-10 relative">
+                "Volunteering with VMC in Nairobi changed my life. Seeing the direct impact our medical kits had on mothers and their newborns was incredibly fulfilling. The entire team is so dedicated to making a real difference."
               </p>
-              <div>
-                <h4 className="text-[#002866] font-bold text-sm uppercase tracking-widest">Dr. Sarah Jenkins</h4>
-                <p className="text-gray-400 text-xs font-medium mt-1">Pediatrician, UK</p>
+              
+              <div className="w-full pt-6 border-t border-gray-100">
+                <h4 className="text-[#002866] font-black text-sm uppercase tracking-widest">Dr. Sarah Jenkins</h4>
+                <p className="text-[#ff9f22] text-xs font-bold mt-1 uppercase tracking-wider">Pediatrician, UK</p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Testimonial 2 */}
-            <div className="bg-white p-10 shadow-sm border border-gray-100 rounded-sm flex flex-col items-center text-center relative mt-10 md:mt-0">
-              <div className="absolute -top-10 md:-top-16 w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-[#ff9f22] overflow-hidden shadow-lg">
-                <Image src="/give-17-300x200.jpg" alt="Dr. Kwame" fill className="object-cover" />
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="bg-white p-10 shadow-lg border border-transparent rounded-sm flex flex-col items-center text-center relative mt-12 md:mt-0 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group transform md:-translate-y-6"
+            >
+              <div className="absolute -top-12 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg group-hover:border-[#ff9f22] transition-colors duration-300">
+                <Image src="/give-17-300x200.jpg" alt="Dr. Kwame Osei" fill className="object-cover" />
               </div>
-              <div className="text-[#ff9f22] text-4xl leading-none mb-4 mt-6 md:mt-10">"</div>
-              <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed font-medium">
-                "The Accra Hygiene Drive wasn't just about handing out supplies; it was about empowering the community with knowledge. The organization and support from VMC were phenomenal."
+              <div className="text-[#ff9f22] opacity-20 absolute top-12 left-8">
+                <FaQuoteLeft size={48} />
+              </div>
+              
+              <div className="flex gap-1 text-[#ff9f22] mb-6 mt-12">
+                <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+              </div>
+              
+              <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed font-medium z-10 relative">
+                "The Accra Hygiene Drive wasn't just about handing out supplies; it was about empowering the community with knowledge. The organization and support from VMC were phenomenal, providing a framework for sustainable health."
               </p>
-              <div>
-                <h4 className="text-[#002866] font-bold text-sm uppercase tracking-widest">Dr. Kwame Osei</h4>
-                <p className="text-gray-400 text-xs font-medium mt-1">Public Health Expert, Ghana</p>
+              
+              <div className="w-full pt-6 border-t border-gray-100">
+                <h4 className="text-[#002866] font-black text-sm uppercase tracking-widest">Dr. Kwame Osei</h4>
+                <p className="text-[#ff9f22] text-xs font-bold mt-1 uppercase tracking-wider">Public Health, Ghana</p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Testimonial 3 */}
-            <div className="bg-white p-10 shadow-sm border border-gray-100 rounded-sm flex flex-col items-center text-center relative mt-10">
-              <div className="absolute -top-10 w-20 h-20 rounded-full border-4 border-white overflow-hidden shadow-md">
-                <Image src="/vcn-post-7-min-768x512.jpg" alt="Maria" fill className="object-cover" />
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+              className="bg-white p-10 shadow-lg border border-transparent rounded-sm flex flex-col items-center text-center relative mt-12 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group"
+            >
+              <div className="absolute -top-12 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg group-hover:border-[#ff9f22] transition-colors duration-300">
+                <Image src="/vcn-post-7-min-768x512.jpg" alt="Maria Silva" fill className="object-cover" />
               </div>
-              <div className="text-[#ff9f22] text-4xl leading-none mb-4 mt-6">"</div>
-              <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed">
-                "As a non-medical volunteer, I wasn't sure how I could help. But coordinating the relief efforts during the Abuja disaster showed me that everyone has a role to play in saving lives."
+              <div className="text-[#ff9f22] opacity-20 absolute top-12 left-8">
+                <FaQuoteLeft size={48} />
+              </div>
+              
+              <div className="flex gap-1 text-[#ff9f22] mb-6 mt-12">
+                <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+              </div>
+              
+              <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed font-medium z-10 relative">
+                "As a non-medical volunteer, I wasn't sure how I could help. But coordinating the relief efforts during the Abuja disaster showed me that everyone has a role to play in saving lives. It's an honor to serve with VMC."
               </p>
-              <div>
-                <h4 className="text-[#002866] font-bold text-sm uppercase tracking-widest">Maria Silva</h4>
-                <p className="text-gray-400 text-xs font-medium mt-1">Logistics Coordinator, Brazil</p>
+              
+              <div className="w-full pt-6 border-t border-gray-100">
+                <h4 className="text-[#002866] font-black text-sm uppercase tracking-widest">Maria Silva</h4>
+                <p className="text-[#ff9f22] text-xs font-bold mt-1 uppercase tracking-wider">Logistics, Brazil</p>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
       </section>
 
       {/* Donation & Partnership Causes Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl md:text-5xl font-black text-[#002866] mb-4 uppercase leading-tight">Donation & Partnership Causes</h2>
             <div className="w-24 h-1.5 bg-[#ff9f22] mx-auto mb-6"></div>
             <p className="text-xl text-gray-600 font-medium">Adopt a clinic, sponsor free surgeries, or provide medical kits.</p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             
             {/* Cause 1 */}
-            <div className="bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-sm overflow-hidden group border-b-4 border-[#ff9f22] flex flex-col text-center md:text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              className="bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-sm overflow-hidden group border-b-4 border-[#ff9f22] flex flex-col text-center md:text-left"
+            >
               <div className="relative h-64 overflow-hidden">
                 <Image 
                   src="/give-15-768x512.jpg" 
@@ -629,10 +821,16 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Cause 2 */}
-            <div className="bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-sm overflow-hidden group border-b-4 border-[#ff9f22] flex flex-col text-center md:text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-sm overflow-hidden group border-b-4 border-[#ff9f22] flex flex-col text-center md:text-left"
+            >
               <div className="relative h-64 overflow-hidden">
                 <Image 
                   src="/give-15-768x512.jpg" 
@@ -657,10 +855,16 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Cause 3 */}
-            <div className="bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-sm overflow-hidden group border-b-4 border-[#ff9f22] flex flex-col text-center md:text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+              className="bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-sm overflow-hidden group border-b-4 border-[#ff9f22] flex flex-col text-center md:text-left"
+            >
               <div className="relative h-64 overflow-hidden">
                 <Image 
                   src="/give-15-768x512.jpg" 
@@ -685,30 +889,43 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>
       </section>
 
       {/* Recent News & Updates Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-4">
         
         {/* Header Section */}
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mb-16"
+        >
           <h2 className="text-[42px] font-black text-[#002866] uppercase mb-2 leading-tight">
             Recent News & Updates
           </h2>
           <p className="text-[#002866] text-lg opacity-80">
             Protect and enhance poverty.
           </p>
-        </div>
+        </motion.div>
 
         {/* Grid Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {newsPosts.map((post) => (
-            <div key={post.id} className="flex flex-col bg-white shadow-lg overflow-hidden group text-center md:text-left">
+          {newsPosts.map((post, idx) => (
+            <motion.div 
+              key={post.id} 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: idx * 0.2, ease: "easeOut" }}
+              className="flex flex-col bg-white shadow-lg overflow-hidden group text-center md:text-left"
+            >
               
               {/* Image Container */}
               <div className="relative h-[250px] w-full overflow-hidden">
@@ -750,26 +967,38 @@ export default function Home() {
                   {post.comments}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* View All Button */}
-        <div className="text-center mt-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mt-16"
+        >
           <Link
             href="/media/news"
             className="inline-block bg-[#002866] text-[#ff9f22] px-12 py-5 text-[14px] font-black uppercase tracking-[0.2em] transition-all hover:bg-black hover:text-white"
           >
             View All News
           </Link>
-        </div>
+        </motion.div>
 
       </div>
     </section>
 
       {/* Partner Logos Section */}
-      <section className="py-16 border-t border-gray-200 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 border-t border-gray-200 bg-white overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        >
           <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-between items-center gap-8 opacity-70 hover:opacity-100 transition-opacity duration-300 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
             <div className="flex-shrink-0">
               <Image src="/pmr-logo-1.png" alt="Partner 1" width={150} height={60} className="object-contain grayscale hover:grayscale-0 transition-all cursor-pointer" />
@@ -787,7 +1016,7 @@ export default function Home() {
               <Image src="/pmr-logo-5.png" alt="Partner 5" width={150} height={60} className="object-contain grayscale hover:grayscale-0 transition-all cursor-pointer" />
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
     </div>

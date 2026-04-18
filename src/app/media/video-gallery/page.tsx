@@ -4,6 +4,7 @@ import { useState } from 'react';
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
 import { FaShareAlt, FaFacebookF, FaTwitter, FaWhatsapp, FaLink } from 'react-icons/fa';
+import { motion } from "framer-motion";
 
 export default function VideoGalleryPage() {
   const [activeShareMenu, setActiveShareMenu] = useState<number | null>(null);
@@ -39,7 +40,13 @@ export default function VideoGalleryPage() {
       <section className="py-24 bg-[#002866]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative aspect-video bg-black rounded-sm overflow-hidden shadow-2xl group cursor-pointer">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="relative aspect-video bg-black rounded-sm overflow-hidden shadow-2xl group cursor-pointer"
+            >
               <Image 
                 src="/pmr-bg-slide.jpg" 
                 alt="Featured Video" 
@@ -51,8 +58,14 @@ export default function VideoGalleryPage() {
                   <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-[#002866] border-b-[12px] border-b-transparent ml-1"></div>
                 </div>
               </div>
-            </div>
-            <div className="text-white space-y-6 relative">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-white space-y-6 relative"
+            >
               <h6 className="text-[#ff9f22] font-bold tracking-widest uppercase">Featured Video</h6>
               <h2 className="text-4xl font-poppins font-bold leading-tight">WE ARE LOVEWORLD VOLUNTEER MEDICAL CORPS</h2>
               <p className="text-gray-300 text-lg">Learn more about our mission, our people, and the global impact we are making in regions of crisis and communities in need.</p>
@@ -78,7 +91,7 @@ export default function VideoGalleryPage() {
                   <button onClick={() => copyToClipboard('WE ARE LOVEWORLD VOLUNTEER MEDICAL CORPS')} className="w-10 h-10 bg-gray-600 text-white rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors"><FaLink /></button>
                 </div>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -86,14 +99,36 @@ export default function VideoGalleryPage() {
       {/* Video Grid */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">Latest Videos</h2>
             <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.1 } },
+              hidden: {}
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+          >
             {videos.map((video, index) => (
-              <div key={index} className="group flex flex-col relative">
+              <motion.div 
+                key={index} 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
+                className="group flex flex-col relative"
+              >
                 <div className="relative h-56 overflow-hidden rounded-sm mb-4 shadow-lg cursor-pointer">
                   <Image 
                     src={video.image} 
@@ -135,9 +170,9 @@ export default function VideoGalleryPage() {
                     )}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="mt-20 text-center">
             <button className="border-2 border-[#002866] text-[#002866] px-12 py-4 font-black uppercase tracking-widest hover:bg-[#002866] hover:text-white transition-all">

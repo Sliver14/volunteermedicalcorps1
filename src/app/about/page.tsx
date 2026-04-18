@@ -1,6 +1,9 @@
+"use client";
+
 import PageBanner from "@/components/PageBanner";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function AboutLandingPage() {
   const sections = [
@@ -30,17 +33,39 @@ export default function AboutLandingPage() {
       
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl md:text-5xl font-poppins font-bold text-[#002866] uppercase">Who We Are</h2>
             <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6 mb-8"></div>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               The Volunteer Medical Corps is a global network of Christian health workers, para-medics, and volunteers committed to providing medical care and sustainable health solutions in regions of crisis.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.2 } },
+              hidden: {}
+            }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-10"
+          >
             {sections.map((section) => (
-              <div key={section.title} className="group bg-gray-50 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+              <motion.div 
+                key={section.title} 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
+                className="group bg-gray-50 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+              >
                 <div className="relative h-64 overflow-hidden">
                   <Image 
                     src={section.image} 
@@ -59,9 +84,9 @@ export default function AboutLandingPage() {
                     Learn More
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

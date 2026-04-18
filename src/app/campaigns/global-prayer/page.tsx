@@ -1,5 +1,8 @@
+"use client";
+
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
+import { motion } from "framer-motion";
 
 export default function GlobalPrayerPage() {
   const features = [
@@ -36,7 +39,13 @@ export default function GlobalPrayerPage() {
           />
         </div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white text-center"
+        >
           <h6 className="text-[#ff9f22] font-bold tracking-[0.4em] uppercase mb-6">Global Day of Prayer</h6>
           <h2 className="text-5xl md:text-7xl font-poppins font-black mb-8 leading-tight">
             VMC Praying Medics
@@ -49,28 +58,50 @@ export default function GlobalPrayerPage() {
               Join the Prayer Network
             </button>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Features Section */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.2 } },
+              hidden: {}
+            }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-12"
+          >
             {features.map((feature, index) => (
-              <div key={index} className="text-center group p-8 hover:bg-gray-50 transition-colors rounded-sm border border-transparent hover:border-gray-100">
+              <motion.div 
+                key={index} 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                }}
+                className="text-center group p-8 hover:bg-gray-50 transition-colors rounded-sm border border-transparent hover:border-gray-100"
+              >
                 <div className="text-6xl mb-6 group-hover:scale-110 transition-transform block">{feature.icon}</div>
                 <h3 className="text-2xl font-bold text-[#002866] mb-4 uppercase tracking-tight">{feature.title}</h3>
                 <p className="text-gray-500 leading-relaxed">{feature.description}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Contact Section */}
       <section className="py-24 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white p-12 md:p-20 rounded-sm shadow-xl relative overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="bg-white p-12 md:p-20 rounded-sm shadow-xl relative overflow-hidden"
+          >
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff9f22]/10 rounded-full translate-x-32 -translate-y-32"></div>
             <div className="relative z-10">
               <h2 className="text-3xl font-poppins font-bold text-[#002866] mb-12 uppercase tracking-wide">Prayer Hotlines & Support</h2>
@@ -94,7 +125,7 @@ export default function GlobalPrayerPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

@@ -104,9 +104,15 @@ export default function Header() {
               })}
             </nav>
 
-            {/* Donate Now Button (Desktop) */}
-            <div className="hidden lg:block h-18">
-              <Link href="/donate" className="bg-[#002866] text-white uppercase h-full px-10 flex items-center font-semibold text-[15px] tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all">
+            {/* Desktop Actions */}
+            <div className="hidden lg:flex h-18 items-center gap-4">
+              <Link href="/login" className="text-[#002866] font-bold text-[14px] uppercase tracking-wider hover:text-[#ff9f22] transition-colors flex items-center gap-2">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Member Portal
+              </Link>
+              <Link href="/donate" className="bg-[#002866] text-white uppercase h-full px-8 py-3 flex items-center font-semibold text-[15px] tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all">
                 Donate Now
               </Link>
             </div>
@@ -135,6 +141,25 @@ export default function Header() {
         {/* Improved Mobile Menu Drawer */}
         <div className={`lg:hidden fixed inset-0 top-20 bg-white z-40 transform transition-transform duration-300 ease-in-out ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <nav className="flex flex-col h-full overflow-y-auto pb-32">
+            
+            {/* Mobile Auth Links */}
+            <div className="bg-gray-50 border-b border-gray-100 p-6 flex flex-col gap-3">
+              <Link 
+                href="/login" 
+                className="w-full bg-[#002866] text-white py-3 rounded-md font-bold uppercase tracking-widest text-center text-sm shadow-md"
+                onClick={() => setIsMobileOpen(false)}
+              >
+                Member Login
+              </Link>
+              <Link 
+                href="/register" 
+                className="w-full bg-white border-2 border-[#002866] text-[#002866] py-3 rounded-md font-bold uppercase tracking-widest text-center text-sm"
+                onClick={() => setIsMobileOpen(false)}
+              >
+                Become a Volunteer
+              </Link>
+            </div>
+
             {navigation.map((item) => (
               <div key={item.label} className="border-b border-gray-100">
                 <div className="flex justify-between items-center pr-4">

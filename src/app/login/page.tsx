@@ -49,9 +49,9 @@ export default function LoginPage() {
                 <Link href="#" className="text-sm text-[#002866] font-bold hover:underline">Forgot Password?</Link>
               </div>
 
-              <button type="button" className="w-full bg-[#002866] text-white py-5 font-bold uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm">
+              <Link href="/portal" className="block w-full bg-[#002866] text-white py-5 font-bold uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm text-center">
                 Login Now
-              </button>
+              </Link>
             </form>
             
             <div className="mt-8 text-center text-sm text-gray-600">

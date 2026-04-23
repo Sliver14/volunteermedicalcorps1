@@ -12,21 +12,21 @@ export default function CampaignsLandingPage() {
       tag: "World Humanitarian Day",
       description: "Creating smiles through 1 million good deeds across the world.",
       href: "/campaigns/1-million-smiles",
-      image: "/give-15-768x512.jpg"
+      image: "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg"
     },
     {
       title: "Global Hospital Outreach",
       tag: "#GHOC",
       description: "Reaching patients and healthcare workers in hospitals across 196 countries.",
       href: "/campaigns/ghoc",
-      image: "/sw-post-1-min-768x512.jpg"
+      image: "https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg"
     },
     {
       title: "Praying Medics",
       tag: "Global Network",
       description: "Join a global network of medical professionals dedicated to the ministry of prayer.",
       href: "/campaigns/global-prayer",
-      image: "/pmr-bg-mission.jpg"
+      image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg"
     }
   ];
 
@@ -73,7 +73,7 @@ export default function CampaignsLandingPage() {
                   <Image 
                     src={item.image} 
                     alt={item.title} 
-                    fill 
+                    fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute top-4 left-4 bg-[#ff9f22] text-[#002866] px-3 md:px-4 py-1 font-black text-[10px] md:text-xs uppercase tracking-widest">

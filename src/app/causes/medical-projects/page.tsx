@@ -12,13 +12,13 @@ export default function MedicalProjectsPage() {
   ];
 
   const campaigns = [
-    { title: "Light of Hope Cancer Prevention Campaign", image: "/give-15-768x512.jpg" },
-    { title: "Eye Screening Outreaches", image: "/give-17-300x200.jpg" },
-    { title: "Dental Screening Outreaches", image: "/give-20-768x512.jpg" },
-    { title: "Free Surgeries", image: "/sw-post-1-min-768x512.jpg" },
-    { title: "Paediatric Care Program", image: "/sw-post-3-min-300x200.jpg" },
-    { title: "Global Hospital Outreach Campaign", image: "/vcn-post-7-min-768x512.jpg" },
-    { title: "Medical Outreaches", image: "/give-15-768x512.jpg" }
+    { title: "Light of Hope Cancer Prevention Campaign", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg" },
+    { title: "Eye Screening Outreaches", image: "https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg" },
+    { title: "Dental Screening Outreaches", image: "https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg" },
+    { title: "Free Surgeries", image: "https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg" },
+    { title: "Paediatric Care Program", image: "https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg" },
+    { title: "Global Hospital Outreach Campaign", image: "https://volunteermedicalcorps.org/admin/images/media/onrZbfR8N463291785.jpg" },
+    { title: "Medical Outreaches", image: "https://volunteermedicalcorps.org/admin/images/media/onrZbfR8N463291785.jpg" }
   ];
 
   return (
@@ -37,11 +37,11 @@ export default function MedicalProjectsPage() {
               className="relative h-[300px] md:h-[500px]"
             >
               <Image 
-                src="/give-20-768x512.jpg" 
+                src="https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg" 
                 alt="Medical Projects" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                 className="object-cover rounded-sm shadow-2xl"
-              />
+              unoptimized />
               <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-[#ff9f22] p-4 md:p-8 hidden sm:block">
                 <span className="text-[#002866] font-black text-xl md:text-2xl">#vmcgooddeeds</span>
               </div>
@@ -124,7 +124,7 @@ export default function MedicalProjectsPage() {
                   <Image 
                     src={campaign.image} 
                     alt={campaign.title} 
-                    fill 
+                    fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-[#002866]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

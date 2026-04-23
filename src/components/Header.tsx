@@ -47,6 +47,7 @@ export default function Header() {
       subItems: [
         { label: "News", href: "/media/news" },
         { label: "Blog", href: "/media/blog" },
+        { label: "Events", href: "/media/events" },
         { label: "Gallery", href: "/media/gallery" },
         { label: "Video Gallery", href: "/media/video-gallery" },
       ]

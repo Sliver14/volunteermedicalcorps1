@@ -32,11 +32,11 @@ export default function GlobalPrayerPage() {
         <div className="absolute inset-0 bg-[#002866] opacity-95"></div>
         <div className="absolute inset-0">
           <Image 
-            src="/pmr-bg-mission.jpg" 
+            src="https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg" 
             alt="Prayer Background" 
-            fill 
+            fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
             className="object-cover"
-          />
+          unoptimized />
         </div>
         
         <motion.div 

@@ -23,7 +23,7 @@ export default function AcademyCatalog() {
       id: 1,
       title: "VMC Induction Course",
       description: "A comprehensive introduction to the Volunteer Medical Corps mission and values.",
-      thumbnail: "/give-15-768x512.jpg",
+      thumbnail: "https://volunteermedicalcorps.org/admin/images/media/onrZbfR8N463291785.jpg",
       duration: "2h 30m",
       level: "Beginner",
       credits: 0,
@@ -34,7 +34,7 @@ export default function AcademyCatalog() {
       id: 2,
       title: "Basic First Aid & Life Support",
       description: "Essential skills for emergency medical response in various humanitarian settings.",
-      thumbnail: "/give-17-300x200.jpg",
+      thumbnail: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg",
       duration: "5h 45m",
       level: "Intermediate",
       credits: 0,
@@ -45,7 +45,7 @@ export default function AcademyCatalog() {
       id: 3,
       title: "Advanced Disaster Response Management",
       description: "Strategic planning and execution of medical aid during large-scale disasters.",
-      thumbnail: "/give-20-768x512.jpg",
+      thumbnail: "https://volunteermedicalcorps.org/admin/images/gallery/591783-2.jpg",
       duration: "12h 20m",
       level: "Advanced",
       credits: 500,
@@ -56,7 +56,7 @@ export default function AcademyCatalog() {
       id: 4,
       title: "Humanitarian Ethics & Fieldwork",
       description: "Understanding the ethical frameworks and protocols for international relief work.",
-      thumbnail: "/vcn-post-7-min-768x512.jpg",
+      thumbnail: "https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg",
       duration: "4h 15m",
       level: "Intermediate",
       credits: 200,
@@ -95,7 +95,7 @@ export default function AcademyCatalog() {
 
       {/* Featured Banner */}
       <div className="relative h-64 md:h-80 rounded-3xl overflow-hidden shadow-xl shadow-blue-900/10">
-        <Image src="/pmr-bg-mission.jpg" alt="Featured Course" fill className="object-cover" />
+        <Image src="https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg" alt="Featured Course" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" unoptimized />
         <div className="absolute inset-0 bg-gradient-to-r from-[#002866]/90 via-[#002866]/60 to-transparent flex items-center">
           <div className="px-8 md:px-12 max-w-lg">
             <span className="bg-[#ff9f22] text-[#002866] text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest mb-4 inline-block">Featured track</span>
@@ -136,7 +136,7 @@ export default function AcademyCatalog() {
             className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all flex flex-col"
           >
             <div className="relative h-48">
-              <Image src={course.thumbnail} alt={course.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <Image src={course.thumbnail} alt={course.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
               
               <div className="absolute top-4 left-4 flex gap-2">

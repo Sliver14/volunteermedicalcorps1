@@ -50,11 +50,11 @@ export default function OurStoryPage() {
               className="relative h-[300px] sm:h-[400px] md:h-[600px] mt-8 lg:mt-0"
             >
               <Image 
-                src="/pmr-bg-mission.jpg" 
+                src="https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg" 
                 alt="VMC Mission" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                 className="object-cover rounded-sm shadow-2xl"
-              />
+              unoptimized />
               <div className="absolute -bottom-6 -left-6 md:-bottom-8 md:-left-8 bg-[#ff9f22] p-6 md:p-12 hidden sm:block shadow-xl">
                 <div className="text-[#002866] font-black text-4xl md:text-6xl">2M+</div>
                 <div className="text-[#002866] font-bold uppercase tracking-widest text-xs md:text-sm mt-1 md:mt-2">Lives Impacted</div>

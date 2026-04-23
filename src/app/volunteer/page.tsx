@@ -50,11 +50,11 @@ export default function VolunteerLandingPage() {
               className="relative h-[500px] rounded-sm overflow-hidden shadow-2xl"
             >
               <Image 
-                src="/give-17-300x200.jpg" 
+                src="https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg" 
                 alt="Volunteer with VMC" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                 className="object-cover"
-              />
+              unoptimized />
               <div className="absolute inset-0 bg-[#002866]/20"></div>
             </motion.div>
           </div>

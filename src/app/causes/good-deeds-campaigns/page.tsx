@@ -12,21 +12,21 @@ export default function GoodDeedsCampaignsPage() {
   ];
 
   const campaigns = [
-    { title: "Administer First Aid at public events", image: "/give-15-768x512.jpg" },
-    { title: "Praying for the Sick.", image: "/give-17-300x200.jpg" },
-    { title: "Teach a First Aid Course", image: "/give-20-768x512.jpg" },
-    { title: "Health Education Trainings", image: "/sw-post-1-min-768x512.jpg" },
-    { title: "Recruiting New VMC Volunteers", image: "/sw-post-3-min-300x200.jpg" },
-    { title: "Preach the Gospel", image: "/vcn-post-7-min-768x512.jpg" },
-    { title: "Healthcare Support for Female Teenagers", image: "/give-15-768x512.jpg" },
-    { title: "Organize a VMC Fundraising Campaign", image: "/give-17-300x200.jpg" },
-    { title: "Volunteer as a Kitchen Help", image: "/give-20-768x512.jpg" },
-    { title: "Volunteer Health Worker", image: "/sw-post-1-min-768x512.jpg" },
-    { title: "Eye Healthcare Campaign", image: "/sw-post-3-min-300x200.jpg" },
-    { title: "Provision of Support Kits", image: "/vcn-post-7-min-768x512.jpg" },
-    { title: "Fund Raise for VMC", image: "/give-15-768x512.jpg" },
-    { title: "Community Blood Drive Campaign", image: "/give-17-300x200.jpg" },
-    { title: "Support for the poor", image: "/give-20-768x512.jpg" }
+    { title: "Administer First Aid at public events", image: "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg" },
+    { title: "Praying for the Sick.", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg" },
+    { title: "Teach a First Aid Course", image: "https://volunteermedicalcorps.org/admin/images/gallery/591783-2.jpg" },
+    { title: "Health Education Trainings", image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg" },
+    { title: "Recruiting New VMC Volunteers", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg" },
+    { title: "Preach the Gospel", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg" },
+    { title: "Healthcare Support for Female Teenagers", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg" },
+    { title: "Organize a VMC Fundraising Campaign", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg" },
+    { title: "Volunteer as a Kitchen Help", image: "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg" },
+    { title: "Volunteer Health Worker", image: "https://volunteermedicalcorps.org/admin/images/media/onrZbfR8N463291785.jpg" },
+    { title: "Eye Healthcare Campaign", image: "https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg" },
+    { title: "Provision of Support Kits", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg" },
+    { title: "Fund Raise for VMC", image: "https://volunteermedicalcorps.org/admin/images/media/2NpZxEGQD245813967.jpg" },
+    { title: "Community Blood Drive Campaign", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg" },
+    { title: "Support for the poor", image: "https://volunteermedicalcorps.org/admin/images/gallery/591783-2.jpg" }
   ];
 
   return (
@@ -45,11 +45,11 @@ export default function GoodDeedsCampaignsPage() {
               className="relative h-[300px] md:h-[500px]"
             >
               <Image 
-                src="/give-17-300x200.jpg" 
+                src="https://volunteermedicalcorps.org/admin/images/gallery/591783-2.jpg" 
                 alt="Good Deeds Campaigns" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                 className="object-cover rounded-sm shadow-2xl"
-              />
+              unoptimized />
               <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-[#ff9f22] p-4 md:p-8 hidden sm:block">
                 <span className="text-[#002866] font-black text-xl md:text-2xl">#vmcgooddeeds</span>
               </div>
@@ -132,7 +132,7 @@ export default function GoodDeedsCampaignsPage() {
                   <Image 
                     src={campaign.image} 
                     alt={campaign.title} 
-                    fill 
+                    fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-[#002866]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

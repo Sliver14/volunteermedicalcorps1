@@ -24,7 +24,7 @@ export default function MyLearningPage() {
       totalLessons: 12,
       completedLessons: 8,
       lastAccessed: "2 days ago",
-      image: "/give-15-768x512.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg",
       category: "Basic Training",
       nextLesson: "Module 9: Field Triage Protocols"
     },
@@ -35,7 +35,7 @@ export default function MyLearningPage() {
       totalLessons: 10,
       completedLessons: 3,
       lastAccessed: "1 week ago",
-      image: "/give-17-300x200.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg",
       category: "Ethics",
       nextLesson: "Module 4: Cultural Sensitivity"
     }
@@ -47,7 +47,7 @@ export default function MyLearningPage() {
       title: "VMC Induction Course",
       completionDate: "Oct 24, 2026",
       score: "95%",
-      image: "/give-20-768x512.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg",
       category: "Foundational"
     },
     {
@@ -55,7 +55,7 @@ export default function MyLearningPage() {
       title: "Basic First Aid & Life Support",
       completionDate: "Sep 12, 2026",
       score: "100%",
-      image: "/vcn-post-7-min-768x512.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg",
       category: "Medical"
     }
   ];
@@ -134,7 +134,7 @@ export default function MyLearningPage() {
             className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col md:flex-row group hover:shadow-xl transition-shadow"
           >
             <div className="relative w-full md:w-64 h-48 md:h-auto shrink-0">
-              <Image src={course.image} alt={course.title} fill className="object-cover" />
+              <Image src={course.image} alt={course.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
               <div className="absolute top-3 left-3 bg-white/90 backdrop-blur text-[#002866] text-[10px] font-bold px-2 py-1 rounded uppercase">
                 {course.category}
               </div>
@@ -191,7 +191,7 @@ export default function MyLearningPage() {
             className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col md:flex-row group hover:shadow-xl transition-shadow"
           >
              <div className="relative w-full md:w-64 h-48 md:h-auto shrink-0">
-              <Image src={course.image} alt={course.title} fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+              <Image src={course.image} alt={course.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
               <div className="absolute inset-0 bg-[#002866]/10 mix-blend-multiply"></div>
               <div className="absolute top-3 left-3 bg-white/90 backdrop-blur text-[#002866] text-[10px] font-bold px-2 py-1 rounded uppercase">
                 {course.category}

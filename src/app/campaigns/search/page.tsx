@@ -10,31 +10,31 @@ import { motion } from "framer-motion";
 // Mock data generation for pagination demonstration
 const allCampaigns = [
   // Nigeria (Lots of entries for pagination)
-  { id: 1, title: "Lagos Medical Outreach", country: "Nigeria", date: "Oct 2023", image: "/sw-post-3-min-300x200.jpg", category: "Medical Projects" },
-  { id: 5, title: "Abuja Disaster Relief", country: "Nigeria", date: "Feb 2024", image: "/vcn-post-7-min-768x512.jpg", category: "Relief Missions" },
-  { id: 10, title: "Kano Vaccination Drive", country: "Nigeria", date: "Apr 2024", image: "/give-15-768x512.jpg", category: "Medical Projects" },
-  { id: 11, title: "Port Harcourt Eye Clinic", country: "Nigeria", date: "May 2024", image: "/give-17-300x200.jpg", category: "Medical Projects" },
-  { id: 12, title: "Ibadan Blood Donation", country: "Nigeria", date: "Jun 2024", image: "/sw-post-1-min-768x512.jpg", category: "Good Deeds" },
-  { id: 13, title: "Enugu Hygiene Workshop", country: "Nigeria", date: "Jul 2024", image: "/give-20-768x512.jpg", category: "VMC Academy" },
-  { id: 14, title: "Jos Emergency Response", country: "Nigeria", date: "Aug 2024", image: "/sw-post-3-min-300x200.jpg", category: "Relief Missions" },
-  { id: 15, title: "Kaduna Maternal Health", country: "Nigeria", date: "Sep 2024", image: "/give-15-768x512.jpg", category: "Medical Projects" },
-  { id: 16, title: "Benin Malaria Awareness", country: "Nigeria", date: "Oct 2024", image: "/vcn-post-7-min-768x512.jpg", category: "Good Deeds" },
+  { id: 1, title: "Lagos Medical Outreach", country: "Nigeria", date: "Oct 2023", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg", category: "Medical Projects" },
+  { id: 5, title: "Abuja Disaster Relief", country: "Nigeria", date: "Feb 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg", category: "Relief Missions" },
+  { id: 10, title: "Kano Vaccination Drive", country: "Nigeria", date: "Apr 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg", category: "Medical Projects" },
+  { id: 11, title: "Port Harcourt Eye Clinic", country: "Nigeria", date: "May 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/591783-2.jpg", category: "Medical Projects" },
+  { id: 12, title: "Ibadan Blood Donation", country: "Nigeria", date: "Jun 2024", image: "https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg", category: "Good Deeds" },
+  { id: 13, title: "Enugu Hygiene Workshop", country: "Nigeria", date: "Jul 2024", image: "https://volunteermedicalcorps.org/admin/images/media/onrZbfR8N463291785.jpg", category: "VMC Academy" },
+  { id: 14, title: "Jos Emergency Response", country: "Nigeria", date: "Aug 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg", category: "Relief Missions" },
+  { id: 15, title: "Kaduna Maternal Health", country: "Nigeria", date: "Sep 2024", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg", category: "Medical Projects" },
+  { id: 16, title: "Benin Malaria Awareness", country: "Nigeria", date: "Oct 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg", category: "Good Deeds" },
   
   // Ghana
-  { id: 2, title: "Accra Hygiene Drive", country: "Ghana", date: "Nov 2023", image: "/give-17-300x200.jpg", category: "Good Deeds" },
-  { id: 17, title: "Kumasi Dental Care", country: "Ghana", date: "Dec 2023", image: "/sw-post-1-min-768x512.jpg", category: "Medical Projects" },
+  { id: 2, title: "Accra Hygiene Drive", country: "Ghana", date: "Nov 2023", image: "https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg", category: "Good Deeds" },
+  { id: 17, title: "Kumasi Dental Care", country: "Ghana", date: "Dec 2023", image: "https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg", category: "Medical Projects" },
   
   // South Africa
-  { id: 3, title: "Johannesburg Free Surgery", country: "South Africa", date: "Dec 2023", image: "/give-15-768x512.jpg", category: "Medical Projects" },
-  { id: 18, title: "Cape Town Youth Wellness", country: "South Africa", date: "Jan 2024", image: "/give-20-768x512.jpg", category: "Good Deeds" },
-  { id: 19, title: "Durban Health Screening", country: "South Africa", date: "Feb 2024", image: "/sw-post-3-min-300x200.jpg", category: "Medical Projects" },
+  { id: 3, title: "Johannesburg Free Surgery", country: "South Africa", date: "Dec 2023", image: "https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg", category: "Medical Projects" },
+  { id: 18, title: "Cape Town Youth Wellness", country: "South Africa", date: "Jan 2024", image: "https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg", category: "Good Deeds" },
+  { id: 19, title: "Durban Health Screening", country: "South Africa", date: "Feb 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/591783-2.jpg", category: "Medical Projects" },
 
   // Kenya
-  { id: 4, title: "Nairobi Mother & Baby Kit", country: "Kenya", date: "Jan 2024", image: "/sw-post-1-min-768x512.jpg", category: "Relief Missions" },
-  { id: 20, title: "Mombasa Clean Water Initiative", country: "Kenya", date: "Mar 2024", image: "/give-17-300x200.jpg", category: "Good Deeds" },
+  { id: 4, title: "Nairobi Mother & Baby Kit", country: "Kenya", date: "Jan 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg", category: "Relief Missions" },
+  { id: 20, title: "Mombasa Clean Water Initiative", country: "Kenya", date: "Mar 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg", category: "Good Deeds" },
 
   // United Kingdom
-  { id: 6, title: "London Fundraising Gala", country: "United Kingdom", date: "Mar 2024", image: "/give-20-768x512.jpg", category: "Global Prayer" },
+  { id: 6, title: "London Fundraising Gala", country: "United Kingdom", date: "Mar 2024", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg", category: "Global Prayer" },
 ];
 
 const ITEMS_PER_PAGE = 6;
@@ -135,7 +135,7 @@ function CampaignSearchContent() {
                       <Image 
                         src={camp.image} 
                         alt={camp.title} 
-                        fill 
+                        fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                         className="object-cover group-hover:scale-105 transition-transform duration-700" 
                       />
                       <div className="absolute top-4 left-4 bg-[#ff9f22] text-[#002866] text-[10px] font-black uppercase px-3 py-1 shadow-sm">

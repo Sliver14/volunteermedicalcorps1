@@ -69,11 +69,11 @@ export default function GHOCPage() {
               className="relative h-[300px] sm:h-[400px] md:h-[500px] mt-8 lg:mt-0 rounded-sm overflow-hidden shadow-2xl border-b-4 md:border-b-8 border-r-4 md:border-r-8 border-[#ff9f22]"
             >
               <Image 
-                src="/sw-post-1-min-768x512.jpg" 
+                src="https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg" 
                 alt="GHOC Outreach" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                 className="object-cover"
-              />
+              unoptimized />
             </motion.div>
           </div>
         </div>
@@ -141,11 +141,11 @@ export default function GHOCPage() {
               className="relative h-[250px] sm:h-[300px] md:h-[400px]"
             >
               <Image 
-                src="/pmr-bg-mission.jpg" 
+                src="https://volunteermedicalcorps.org/admin/images/media/2NpZxEGQD245813967.jpg" 
                 alt="Resources" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                 className="object-cover rounded-sm shadow-xl"
-              />
+              unoptimized />
             </motion.div>
             <motion.div 
               initial={{ opacity: 0, x: 30 }}

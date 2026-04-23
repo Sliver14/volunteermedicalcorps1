@@ -67,11 +67,11 @@ export default function OneMillionSmilesPage() {
               className="relative h-[300px] sm:h-[400px] lg:h-[600px] w-full mt-8 lg:mt-0"
             >
               <Image 
-                src="/give-15-768x512.jpg" 
+                src="https://volunteermedicalcorps.org/admin/images/media/onrZbfR8N463291785.jpg" 
                 alt="1 Million Smiles" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                 className="object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-700"
-              />
+              unoptimized />
               <div className="absolute inset-0 border-[10px] md:border-[20px] border-[#ff9f22]/20 -m-3 md:-m-6 pointer-events-none"></div>
             </motion.div>
           </div>
@@ -134,11 +134,11 @@ export default function OneMillionSmilesPage() {
             className="relative aspect-video bg-gray-900 rounded-sm overflow-hidden shadow-2xl mb-8 md:mb-12 group cursor-pointer"
           >
             <Image 
-              src="/pmr-bg-slide.jpg" 
+              src="https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg" 
               alt="Campaign Video" 
-              fill 
+              fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
               className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
-            />
+            unoptimized />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-16 h-16 md:w-24 md:h-24 bg-[#ff9f22] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                 <div className="w-0 h-0 border-t-[10px] md:border-t-[15px] border-t-transparent border-l-[15px] md:border-l-[25px] border-l-[#002866] border-b-[10px] md:border-b-[15px] border-b-transparent ml-2"></div>

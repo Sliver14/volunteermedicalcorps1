@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { motion, animate } from "framer-motion";
-import { FaCalendarAlt, FaUser, FaComment, FaQuoteLeft, FaStar } from "react-icons/fa"; // Ensure react-icons is installed
+import { motion, animate, AnimatePresence } from "framer-motion";
+import { FaCalendarAlt, FaUser, FaComment, FaQuoteLeft, FaStar, FaHeart, FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Ensure react-icons is installed
 
 function Counter({ value, suffix = "", prefix = "", decimal = false }: { value: number; suffix?: string, prefix?: string, decimal?: boolean }) {
   const [displayValue, setDisplayValue] = useState(0);
@@ -45,12 +45,12 @@ export default function Home() {
 
   // Keep campaignData just to generate the list of available countries
   const campaignData = [
-    { id: 1, title: "Lagos Medical Outreach", country: "Nigeria", date: "Oct 2023", image: "/sw-post-3-min-300x200.jpg", description: "Providing essential medical screenings and treatments to underserved communities in Lagos." },
-    { id: 2, title: "Accra Hygiene Drive", country: "Ghana", date: "Nov 2023", image: "/give-17-300x200.jpg", description: "Distributing hygiene kits and conducting health education workshops in Accra." },
-    { id: 3, title: "Johannesburg Free Surgery", country: "South Africa", date: "Dec 2023", image: "/give-15-768x512.jpg", description: "Funding and performing life-changing surgeries for those in need in Johannesburg." },
-    { id: 4, title: "Nairobi Mother & Baby Kit", country: "Kenya", date: "Jan 2024", image: "/sw-post-1-min-768x512.jpg", description: "Supporting maternal health by providing essential care kits for mothers and newborns." },
-    { id: 5, title: "Abuja Disaster Relief", country: "Nigeria", date: "Feb 2024", image: "/vcn-post-7-min-768x512.jpg", description: "Delivering rapid emergency aid and relief supplies to disaster-affected areas." },
-    { id: 6, title: "London Fundraising Gala", country: "United Kingdom", date: "Mar 2024", image: "/give-20-768x512.jpg", description: "A global gathering to raise funds and awareness for VMC's international projects." },
+    { id: 1, title: "Lagos Medical Outreach", country: "Nigeria", date: "Oct 2023", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg", description: "Providing essential medical screenings and treatments to underserved communities in Lagos." },
+    { id: 2, title: "Accra Hygiene Drive", country: "Ghana", date: "Nov 2023", image: "https://volunteermedicalcorps.org/admin/images/media/2NpZxEGQD245813967.jpg", description: "Distributing hygiene kits and conducting health education workshops in Accra." },
+    { id: 3, title: "Johannesburg Free Surgery", country: "South Africa", date: "Dec 2023", image: "https://volunteermedicalcorps.org/admin/images/media/2NpZxEGQD245813967.jpg", description: "Funding and performing life-changing surgeries for those in need in Johannesburg." },
+    { id: 4, title: "Nairobi Mother & Baby Kit", country: "Kenya", date: "Jan 2024", image: "https://volunteermedicalcorps.org/admin/images/media/onrZbfR8N463291785.jpg", description: "Supporting maternal health by providing essential care kits for mothers and newborns." },
+    { id: 5, title: "Abuja Disaster Relief", country: "Nigeria", date: "Feb 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg", description: "Delivering rapid emergency aid and relief supplies to disaster-affected areas." },
+    { id: 6, title: "London Fundraising Gala", country: "United Kingdom", date: "Mar 2024", image: "https://volunteermedicalcorps.org/admin/images/media/2NpZxEGQD245813967.jpg", description: "A global gathering to raise funds and awareness for VMC's international projects." },
   ];
 
   const selectedCampaign = useMemo(() => 
@@ -67,12 +67,55 @@ export default function Home() {
     }
   };
 
+  // Hero Slider Logic
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const heroSlides = useMemo(() => [
+    { 
+      bg: "https://volunteermedicalcorps.org/images/sliders/8ZQ9Vj6Az791283465.jpeg", 
+      sub: "", 
+      title: "Welcome to Volunteer Medical Corps", 
+      btnText: "Click Here", 
+      link: "https://loveworldlifesavers.org/" 
+    },
+    { 
+      bg: "https://volunteermedicalcorps.org/images/sliders/9q3WoyGbz829456713.jpg", 
+      sub: "", 
+      title: "Saving Lives Through Good Deeds", 
+      btnText: "Click Here", 
+      link: "https://volunteermedicalcorps.org/causes/good-deeds-campaigns/GDS102933" 
+    },
+    { 
+      bg: "https://volunteermedicalcorps.org/images/sliders/yn4Y1uGUV794815623.jpg", 
+      sub: "Start your volunteering journey", 
+      title: "Become a Volunteer and provide medical care for people in need!", 
+      btnText: "Click Here", 
+      link: "/register" 
+    },
+    { 
+      bg: "https://volunteermedicalcorps.org/images/sliders/Kq7xQUD5R792516384.jpg", 
+      sub: "Join the VMC", 
+      title: "Become a Volunteer and provide medical care for people in need!", 
+      btnText: "Click Here", 
+      link: "/register" 
+    }
+  ], []);
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
+  const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [heroSlides.length]);
+
   const newsPosts = [
     {
       id: 1,
       date: "MAY 14, 2025",
       title: "Sees boom in younger volunteers following pandemic",
-      image: "/vcn-post-7-min-768x512.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg",
       author: "BEARSTHEMES",
       comments: "0 COMMENT",
     },
@@ -80,7 +123,7 @@ export default function Home() {
       id: 2,
       date: "MAY 11, 2025",
       title: "Breaking Barriers: Empowering Women in Sports",
-      image: "/sw-post-1-min-768x512.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg",
       author: "BEARSTHEMES",
       comments: "0 COMMENT",
     },
@@ -88,7 +131,7 @@ export default function Home() {
       id: 3,
       date: "MAY 3, 2025",
       title: "Summit to focus on responsible use of AI in fundraising",
-      image: "/give-20-768x512.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/media/2NpZxEGQD245813967.jpg",
       author: "BEARSTHEMES",
       comments: "0 COMMENT",
     },
@@ -98,70 +141,91 @@ export default function Home() {
     <div className="w-full font-roboto text-gray-700">
       
       {/* Hero Section */}
-      <section 
-        className="relative min-h-[85vh] md:min-h-screen flex items-center bg-white overflow-hidden"
-      >
-        {/* Background Video */}
-        <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto object-cover -translate-x-1/2 -translate-y-1/2 opacity-80"
+      <section className="relative min-h-[85vh] md:min-h-screen flex items-center bg-black overflow-hidden group">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="absolute inset-0 z-0"
           >
-            <source src="/slider1.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          
-          {/* Gradient Overlay for text readability */}
-          <div className="absolute inset-0 bg-white/90 md:bg-white/20 sm:bg-gradient-to-r sm:from-white/95 sm:via-white/70 sm:to-transparent"></div>
-        </div>
+            <Image 
+              src={heroSlides[currentSlide].bg} 
+              alt="Slide Background" 
+              fill 
+              className="object-cover opacity-70" 
+              unoptimized 
+              priority 
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+          </motion.div>
+        </AnimatePresence>
         
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 w-full mb-0 md:mb-16">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-[750px] text-center md:text-left pt-12 md:pt-0"
-        >
-          
-          {/* Top Small Heading - Kept your text */}
-          <h2 className="text-[#002866] text-[12px] md:text-sm font-black tracking-[0.4em] uppercase mb-5">
-            Saving Lives Through Good Deeds
-          </h2>
-          
-          {/* Main Large Heading - Kept your text, updated style */}
-          <h1 className="text-[#002866] text-[42px] md:text-5xl lg:text-[58px] font-black uppercase leading-[0.95] mb-8">
-            Start your <br className="hidden md:block" />
-            volunteering <br className="md:hidden" /> journey
-          </h1>
-          
-          {/* Description Text - Kept your text */}
-          <p className="text-[#002866] text-base md:text-xl font-medium leading-relaxed mb-12 max-w-[550px] mx-auto md:mx-0 opacity-90">
-            Become a Volunteer and provide medical care for people in need! 
-            Join the VMC today to make a global impact.
-          </p>
-          
-          {/* Call to Action Buttons - Matches UI Hierarchy */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 lg:justify-start">
-            <Link 
-              href="/campaigns" 
-              className="w-full sm:w-auto bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase text-[13px] tracking-[0.15em] transition-all hover:bg-black hover:text-white shadow-[0_10px_30px_rgba(255,238,0,0.3)] text-center"
-            >
-              Good Deeds Campaigns
-            </Link>
-            
-            <Link 
-              href="/register" 
-              className="w-full sm:w-auto bg-white/80 backdrop-blur-sm sm:bg-transparent border-2 border-[#002866] text-[#002866] px-12 py-[18px] font-black uppercase text-[13px] tracking-[0.15em] transition-all hover:bg-[#002866] hover:text-white text-center"
-            >
-              Login / Register
-            </Link>
+        <div className="relative z-10 max-w-[1400px] mx-auto px-10 md:px-12 lg:px-20 w-full mb-0 md:mb-16">
+          <div className="max-w-[750px] text-center md:text-left pt-8 md:pt-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`content-${currentSlide}`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {heroSlides[currentSlide].sub && (
+                  <h2 className="text-[#ff9f22] text-[10px] md:text-sm font-black tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 md:mb-5">
+                    {heroSlides[currentSlide].sub}
+                  </h2>
+                )}
+                {heroSlides[currentSlide].title && (
+                  <h1 className="text-white text-[28px] sm:text-[32px] md:text-5xl lg:text-[58px] font-black uppercase leading-[1.2] md:leading-[1.1] mb-8 md:mb-12">
+                    {heroSlides[currentSlide].title}
+                  </h1>
+                )}
+                <div className="flex flex-col sm:flex-row items-center gap-4 lg:justify-start justify-center">
+                  <Link 
+                    href={heroSlides[currentSlide].link} 
+                    className="w-full sm:w-auto bg-[#ff9f22] text-[#002866] px-8 md:px-12 py-4 md:py-5 font-black uppercase text-[12px] md:text-[13px] tracking-[0.15em] transition-all hover:bg-white shadow-[0_10px_30px_rgba(255,159,34,0.3)] text-center flex items-center justify-center gap-2"
+                  >
+                    {heroSlides[currentSlide].btnText} <span><FaHeart className="text-[#002866]" /></span>
+                  </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
+        </div>
 
-        </motion.div>
-      </div>
+        {/* Slider Navigation Arrows */}
+        <div className="absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-2 sm:px-6 pointer-events-none opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+          <button 
+            onClick={prevSlide}
+            className="pointer-events-auto w-10 h-10 sm:w-14 sm:h-14 bg-black/20 hover:bg-black/50 lg:bg-transparent border border-white/30 rounded-full flex items-center justify-center text-white hover:border-[#ff9f22] hover:text-[#ff9f22] transition-all"
+            aria-label="Previous slide"
+          >
+            <FaChevronLeft className="text-sm sm:text-base pr-0.5 sm:pr-1" />
+          </button>
+          <button 
+            onClick={nextSlide}
+            className="pointer-events-auto w-10 h-10 sm:w-14 sm:h-14 bg-black/20 hover:bg-black/50 lg:bg-transparent border border-white/30 rounded-full flex items-center justify-center text-white hover:border-[#ff9f22] hover:text-[#ff9f22] transition-all"
+            aria-label="Next slide"
+          >
+            <FaChevronRight className="text-sm sm:text-base pl-0.5 sm:pl-1" />
+          </button>
+        </div>
+
+        {/* Slider Pagination Dots */}
+        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentSlide(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`h-2.5 rounded-full transition-all duration-300 ${i === currentSlide ? "bg-[#ff9f22] w-8" : "bg-white/50 hover:bg-white w-2.5"}`}
+            />
+          ))}
+        </div>
+      </section>
 
       {/* Decorative vertical text seen in Screenshot 024543 */}
       {/* <div className="hidden xl:flex absolute left-8 top-2/3 -rotate-90 origin-left items-center gap-4 z-20 whitespace-nowrap">
@@ -170,8 +234,6 @@ export default function Home() {
           Volunteer Medical Corps
         </span>
       </div> */}
-    </section>
-
 
       {/* Intro & Counters Section */}
       <section className="py-24 bg-white relative overflow-hidden">
@@ -317,7 +379,7 @@ export default function Home() {
             <Image 
               src="/prm-world-map.png" 
               alt="World Map" 
-              fill
+              fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain p-4 md:p-8 opacity-80 mix-blend-multiply"
             />
             
@@ -360,11 +422,11 @@ export default function Home() {
             >
               <div className="relative h-64 overflow-hidden">
                 <Image 
-                  src="/give-15-768x512.jpg" 
+                  src="https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg" 
                   alt="Eye Healthcare Campaign" 
-                  fill
+                  fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                unoptimized />
                 <div className="absolute top-4 left-4 bg-[#ff9f22] text-[#002866] text-xs font-bold uppercase px-3 py-1 rounded-sm">
                   Healthcare
                 </div>
@@ -392,11 +454,11 @@ export default function Home() {
             >
               <div className="relative h-64 overflow-hidden">
                 <Image 
-                  src="/give-15-768x512.jpg" 
+                  src="https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg" 
                   alt="Praying for the Sick" 
-                  fill
+                  fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                unoptimized />
                 <div className="absolute top-4 left-4 bg-[#ff9f22] text-[#002866] text-xs font-bold uppercase px-3 py-1 rounded-sm">
                   Spiritual Care
                 </div>
@@ -424,11 +486,11 @@ export default function Home() {
             >
               <div className="relative h-64 overflow-hidden">
                 <Image 
-                  src="/give-15-768x512.jpg" 
+                  src="https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg" 
                   alt="Fund Raise for VMC" 
-                  fill
+                  fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+                unoptimized />
                 <div className="absolute top-4 left-4 bg-[#ff9f22] text-[#002866] text-xs font-bold uppercase px-3 py-1 rounded-sm">
                   Fundraising
                 </div>
@@ -451,7 +513,7 @@ export default function Home() {
       </section>
 
       {/* Mission Section */}
-      <section className="relative py-20 md:py-16 bg-[#002866] text-white flex items-center bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('/pmr-bg-mission.jpg')" }}>
+      <section className="relative py-20 md:py-16 bg-[#002866] text-white flex items-center bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg')" }}>
         {/* Overlay */}
         <div className="absolute inset-0 bg-[#002866]/90 md:bg-gradient-to-r md:from-[#002866]/90 md:to-blue-900/60"></div>
         
@@ -531,7 +593,7 @@ export default function Home() {
               {/* Card 1 */}
               <div className="flex flex-col md:flex-row items-center bg-white rounded-sm overflow-hidden shadow-sm group text-center md:text-left">
                 <div className="relative w-full md:w-1/4 h-48 md:h-32 shrink-0">
-                  <Image src="/sw-post-3-min-300x200.jpg" alt="Light of Hope" fill className="object-cover" />
+                  <Image src="https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg" alt="Light of Hope" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" unoptimized />
                 </div>
                 <div className="p-6 flex-grow">
                   <h3 className="text-[#002866] text-xl font-bold font-poppins mb-2">Light of Hope Cancer Prevention Campaign</h3>
@@ -546,7 +608,7 @@ export default function Home() {
               {/* Card 2 */}
               <div className="flex flex-col md:flex-row items-center bg-white rounded-sm overflow-hidden shadow-sm group text-center md:text-left">
                 <div className="relative w-full md:w-1/4 h-48 md:h-32 shrink-0">
-                  <Image src="/give-17-300x200.jpg" alt="Hospital Outreach" fill className="object-cover" />
+                  <Image src="https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg" alt="Hospital Outreach" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" unoptimized />
                 </div>
                 <div className="p-6 flex-grow">
                   <h3 className="text-[#002866] text-xl font-bold font-poppins mb-2">Global Hospital Outreach Campaign</h3>
@@ -622,7 +684,7 @@ export default function Home() {
                 <Image 
                   src={selectedCampaign.image} 
                   alt={selectedCampaign.title} 
-                  fill 
+                  fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                   className="object-cover animate-fadeIn" 
                   key={selectedCampaign.id}
                 />
@@ -655,9 +717,141 @@ export default function Home() {
         </div>
       </section>
 
+      {/* About VMC Section */}
+      <section className="py-24 bg-gray-50 relative overflow-hidden">
+        <div className="absolute top-0 right-0 opacity-10">
+          <Image src="https://volunteermedicalcorps.org/assets/img/shape/01.png" alt="Shape" width={300} height={300} unoptimized />
+        </div>
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            
+            {/* Left: Video */}
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:w-1/2 w-full"
+            >
+              <div className="relative rounded-sm overflow-hidden shadow-2xl bg-black aspect-video mb-6 border-4 border-white">
+                <video 
+                  width="100%" 
+                  height="100%" 
+                  controls 
+                  poster="https://cdnvideos.ceflix.org/thumb/155112-1750685155579932439402.jpg"
+                  className="w-full h-full object-cover"
+                >
+                  <source src="https://cdnvideos.ceflix.org/processed/155112-1750685155579932439402.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <Link href="/media/video-gallery" className="inline-flex items-center bg-[#002866] text-white px-8 py-3.5 font-bold uppercase tracking-widest text-xs hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm shadow-md">
+                Watch More Videos
+              </Link>
+            </motion.div>
+
+            {/* Right: Content */}
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="lg:w-1/2"
+            >
+              <h6 className="text-[#ff9f22] font-black uppercase tracking-widest text-sm mb-3">#VMCORPS</h6>
+              <h2 className="text-[#002866] text-3xl md:text-[40px] font-poppins font-bold leading-tight mb-6">
+                About Volunteer Medical Corps
+              </h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-10 text-justify">
+                We are an ever-expanding global network of Christian health care workers, non-medical volunteers and students committed to providing medical care through outreaches, humanitarian assistance and sustainable health care solutions in regions of crisis and to communities in dire need.
+              </p>
+              <Link href="/about" className="inline-flex items-center bg-[#002866] text-white px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm shadow-xl">
+                Learn More
+              </Link>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* VMC Campaigns CTA Banner */}
+      <section className="py-16 bg-[#ff9f22] relative overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="lg:w-3/4">
+            <h3 className="text-white text-3xl md:text-[42px] font-poppins font-light leading-tight mb-2">
+              Sign Up for these <Link href="/campaigns" className="font-bold border-b-2 border-white hover:text-[#002866] hover:border-[#002866] transition-colors">VMC Campaigns</Link> and Earn Verified Volunteer Hours (and a Signed Certificate!)
+            </h3>
+            <h3 className="text-[#002866] text-2xl md:text-3xl font-poppins font-light leading-tight mt-4">
+              Over 60 million volunteering hours recorded and still counting
+            </h3>
+          </div>
+          <div className="lg:w-1/4 shrink-0">
+            <Link href="/register" className="inline-flex items-center justify-center w-full lg:w-auto bg-[#002866] text-white px-12 py-5 font-black uppercase tracking-widest text-sm hover:bg-white hover:text-[#002866] transition-all rounded-sm shadow-2xl">
+              Start Today! <FaHeart className="ml-3" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Good Deeds Campaigns Section */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <h6 className="text-[#ff9f22] text-[13px] font-black tracking-[0.2em] uppercase mb-3">
+              Get Involved
+            </h6>
+            <h2 className="text-[#002866] text-4xl md:text-5xl font-black uppercase tracking-tight mb-6">
+              VMC Good Deeds Campaigns
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9f22] mx-auto"></div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { title: "Preach the Gospel", image: "https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg" },
+              { title: "Eye Healthcare Campaign", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg" },
+              { title: "Recruiting New VMC Volunteers", image: "https://volunteermedicalcorps.org/admin/images/campaigns/5uPVm6dZM985341726.jpg" },
+              { title: "Healthcare Support for Female Teenagers", image: "https://volunteermedicalcorps.org/admin/images/campaigns/51HBTXjzk641732598.jpg" },
+              { title: "Praying for the Sick.", image: "https://volunteermedicalcorps.org/admin/images/campaigns/gjLyeXPCa163572948.jpg" },
+              { title: "Provision of Support Kits", image: "https://volunteermedicalcorps.org/admin/images/campaigns/turGZomwp561743289.jpg" }
+            ].map((campaign, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative h-72 rounded-sm overflow-hidden shadow-lg group cursor-pointer"
+              >
+                <Image src={campaign.image} alt={campaign.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-110 transition-transform duration-700" unoptimized />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#002866]/90 via-[#002866]/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity"></div>
+                
+                <div className="absolute bottom-0 left-0 p-8 w-full">
+                  <div className="flex items-center text-[#ff9f22] text-[10px] font-black uppercase tracking-widest mb-3">
+                    <FaCalendarAlt className="mr-2" /> GoodDeeds Campaigns
+                  </div>
+                  <h3 className="text-white text-xl font-bold font-poppins leading-snug mb-4 group-hover:text-[#ff9f22] transition-colors">
+                    {campaign.title}
+                  </h3>
+                  <Link href="#" className="text-white text-xs font-black uppercase tracking-widest flex items-center group-hover:translate-x-2 transition-transform">
+                    View Campaign <span className="ml-2">→</span>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="py-24 bg-[#002866] mt-12 lg:mt-24 relative overflow-hidden">
-        {/* Background Decorative Pattern */}
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "url('/pmr-world-map.png')", backgroundSize: "cover", backgroundPosition: "center" }}></div>
         
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
@@ -669,111 +863,84 @@ export default function Home() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-center mb-20"
           >
-            <h3 className="text-[#ff9f22] font-bold text-[11px] uppercase tracking-[0.2em] mb-4">
-              Impact Stories
+            <h3 className="text-[#ff9f22] font-bold text-[11px] uppercase tracking-[0.2em] mb-4 flex justify-center items-center gap-2">
+              <FaHeart /> #volunteerdiaries
             </h3>
             <h2 className="text-4xl md:text-5xl font-black text-white mb-8 leading-tight uppercase">
-              What Our Volunteers Say
+              Testimonials
             </h2>
-            <div className="w-24 h-1.5 bg-[#ff9f22] mx-auto mb-6"></div>
+            <p className="text-white/80 text-lg">Real life stories of impact and inspiration.</p>
+            <div className="w-24 h-1.5 bg-[#ff9f22] mx-auto mt-6 mb-6"></div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            
-            {/* Testimonial 1 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="bg-white p-10 shadow-lg border border-transparent rounded-sm flex flex-col items-center text-center relative mt-12 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group"
-            >
-              <div className="absolute -top-12 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg group-hover:border-[#ff9f22] transition-colors duration-300">
-                <Image src="/sw-post-1-min-768x512.jpg" alt="Dr. Sarah Jenkins" fill className="object-cover" />
-              </div>
-              <div className="text-[#ff9f22] opacity-20 absolute top-12 left-8">
-                <FaQuoteLeft size={48} />
-              </div>
-              
-              <div className="flex gap-1 text-[#ff9f22] mb-6 mt-12">
-                <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-              </div>
-              
-              <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed font-medium z-10 relative">
-                "Volunteering with VMC in Nairobi changed my life. Seeing the direct impact our medical kits had on mothers and their newborns was incredibly fulfilling. The entire team is so dedicated to making a real difference."
-              </p>
-              
-              <div className="w-full pt-6 border-t border-gray-100">
-                <h4 className="text-[#002866] font-black text-sm uppercase tracking-widest">Dr. Sarah Jenkins</h4>
-                <p className="text-[#ff9f22] text-xs font-bold mt-1 uppercase tracking-wider">Pediatrician, UK</p>
-              </div>
-            </motion.div>
-
-            {/* Testimonial 2 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              className="bg-white p-10 shadow-lg border border-transparent rounded-sm flex flex-col items-center text-center relative mt-12 md:mt-0 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group transform md:-translate-y-6"
-            >
-              <div className="absolute -top-12 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg group-hover:border-[#ff9f22] transition-colors duration-300">
-                <Image src="/give-17-300x200.jpg" alt="Dr. Kwame Osei" fill className="object-cover" />
-              </div>
-              <div className="text-[#ff9f22] opacity-20 absolute top-12 left-8">
-                <FaQuoteLeft size={48} />
-              </div>
-              
-              <div className="flex gap-1 text-[#ff9f22] mb-6 mt-12">
-                <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-              </div>
-              
-              <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed font-medium z-10 relative">
-                "The Accra Hygiene Drive wasn't just about handing out supplies; it was about empowering the community with knowledge. The organization and support from VMC were phenomenal, providing a framework for sustainable health."
-              </p>
-              
-              <div className="w-full pt-6 border-t border-gray-100">
-                <h4 className="text-[#002866] font-black text-sm uppercase tracking-widest">Dr. Kwame Osei</h4>
-                <p className="text-[#ff9f22] text-xs font-bold mt-1 uppercase tracking-wider">Public Health, Ghana</p>
-              </div>
-            </motion.div>
-
-            {/* Testimonial 3 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-              className="bg-white p-10 shadow-lg border border-transparent rounded-sm flex flex-col items-center text-center relative mt-12 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group"
-            >
-              <div className="absolute -top-12 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg group-hover:border-[#ff9f22] transition-colors duration-300">
-                <Image src="/vcn-post-7-min-768x512.jpg" alt="Maria Silva" fill className="object-cover" />
-              </div>
-              <div className="text-[#ff9f22] opacity-20 absolute top-12 left-8">
-                <FaQuoteLeft size={48} />
-              </div>
-              
-              <div className="flex gap-1 text-[#ff9f22] mb-6 mt-12">
-                <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
-              </div>
-              
-              <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed font-medium z-10 relative">
-                "As a non-medical volunteer, I wasn't sure how I could help. But coordinating the relief efforts during the Abuja disaster showed me that everyone has a role to play in saving lives. It's an honor to serve with VMC."
-              </p>
-              
-              <div className="w-full pt-6 border-t border-gray-100">
-                <h4 className="text-[#002866] font-black text-sm uppercase tracking-widest">Maria Silva</h4>
-                <p className="text-[#ff9f22] text-xs font-bold mt-1 uppercase tracking-wider">Logistics, Brazil</p>
-              </div>
-            </motion.div>
-
+            {[
+              {
+                name: "Patricia Pokhabela",
+                title: "Radiographer",
+                location: "Pietermaritzburg, South Africa",
+                image: "https://volunteermedicalcorps.org/images/testimonies/patricia.jpg",
+                quote: "I joined the VMC in 2019. I've always had a heart for community service work but I didn't know how or where to start. VMC gave me the platform to make an impact in my community and beyond."
+              },
+              {
+                name: "Jeanne Louise Ridge",
+                title: "Volunteer",
+                location: "Capetown, South Africa",
+                image: "https://volunteermedicalcorps.org/images/testimonies/jeanne.jpg",
+                quote: "I enjoy working with people and spreading the love of Jesus Christ, and this is one of the reasons why I chose to join the VMC."
+              },
+              {
+                name: "Jerilee Pinheiro",
+                title: "HR professional",
+                location: "Bangalore India",
+                image: "https://volunteermedicalcorps.org/images/testimonies/Jerilee.jpg",
+                quote: "Our President Pastor Chris said we must find human needs and meet them. VMC is a platform where we can do just that. Whenever I go to an orphanage or an old age home, and then they see the love of Jesus in my eyes that experience is very rewarding and encouraging."
+              }
+            ].map((testimonial, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
+                className={`bg-white p-10 shadow-lg border border-transparent rounded-sm flex flex-col items-center text-center relative mt-12 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group ${index === 1 ? 'md:-translate-y-6 md:mt-0' : ''}`}
+              >
+                <div className="absolute -top-12 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg group-hover:border-[#ff9f22] transition-colors duration-300">
+                  <Image src={testimonial.image} alt={testimonial.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" unoptimized />
+                </div>
+                <div className="text-[#ff9f22] opacity-20 absolute top-12 left-8">
+                  <FaQuoteLeft size={48} />
+                </div>
+                
+                <div className="flex gap-1 text-[#ff9f22] mb-6 mt-12">
+                  <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                </div>
+                
+                <p className="text-gray-600 italic mb-8 flex-grow leading-relaxed font-medium z-10 relative h-[140px] overflow-y-auto custom-scrollbar pr-2">
+                  "{testimonial.quote}"
+                </p>
+                
+                <div className="w-full pt-6 border-t border-gray-100">
+                  <h4 className="text-[#002866] font-black text-sm uppercase tracking-widest">{testimonial.name}</h4>
+                  <p className="text-gray-500 text-[10px] font-bold mt-1 uppercase tracking-wider">{testimonial.location}</p>
+                  <p className="text-[#ff9f22] text-xs font-bold mt-2 uppercase tracking-wider">{testimonial.title}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
+          
+          <div className="text-center mt-16 md:mt-20">
+            <Link href="https://volunteermedicalcorps.org/testimonials" target="_blank" className="inline-flex items-center bg-[#ff9f22] text-[#002866] px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-white transition-all rounded-sm shadow-xl">
+              View More <FaHeart className="ml-3" />
+            </Link>
+          </div>
+          
         </div>
       </section>
 
       {/* Donation & Partnership Causes Section */}
       <section className="py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
           
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -782,115 +949,153 @@ export default function Home() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-black text-[#002866] mb-4 uppercase leading-tight">Donation & Partnership Causes</h2>
-            <div className="w-24 h-1.5 bg-[#ff9f22] mx-auto mb-6"></div>
-            <p className="text-xl text-gray-600 font-medium">Adopt a clinic, sponsor free surgeries, or provide medical kits.</p>
+            <h6 className="text-[#ff9f22] text-[13px] font-black tracking-[0.2em] uppercase mb-3">
+              Partner with Us
+            </h6>
+            <h2 className="text-[#002866] text-4xl md:text-5xl font-black uppercase tracking-tight">
+              Champion our Causes
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9f22] mx-auto mt-6"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            
-            {/* Cause 1 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-sm overflow-hidden group border-b-4 border-[#ff9f22] flex flex-col text-center md:text-left"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <Image 
-                  src="/give-15-768x512.jpg" 
-                  alt="Free Surgeries" 
-                  fill 
-                  className="object-cover group-hover:scale-105 transition-transform duration-700" 
-                />
-                <div className="absolute top-5 left-5 bg-[#ff9f22] text-[#002866] text-[10px] font-black uppercase px-4 py-1.5 tracking-[0.2em] shadow-md z-10">
-                  Sponsorship
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                tag: "#vmcorps",
+                title: "Sponsor VMC Free Surgeries",
+                image: "https://volunteermedicalcorps.org/give/images/projects/surgical-outreaches.jpg",
+                desc: "Join us to provide free surgeries to the needy by adopting a bene..."
+              },
+              {
+                tag: "",
+                title: "1 Million Smiles",
+                image: "https://volunteermedicalcorps.org/give/images/projects/1msmiles.jpg",
+                desc: "Make 1 million smiles possible through your support of this campa..."
+              },
+              {
+                tag: "#ghoc",
+                title: "Adopt a Hospital/Community Clinic",
+                image: "https://volunteermedicalcorps.org/give/images/projects/WucF1X6hY.jpeg",
+                desc: "Sponsor the Global Hospital Outreach Campaign..."
+              }
+            ].map((cause, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-gray-50 border border-gray-100 rounded-sm overflow-hidden group shadow-sm hover:shadow-xl transition-shadow flex flex-col"
+              >
+                <div className="relative h-[245px] overflow-hidden shrink-0">
+                  <Image src={cause.image} alt={cause.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700" unoptimized />
+                  
+                  {/* Floating Action Bar */}
+                  <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur shadow-lg flex items-center justify-between p-2 pl-4 rounded-sm">
+                    <span className="text-[#002866] font-black text-[11px] uppercase tracking-wider">{cause.tag}</span>
+                    <Link href="#" className="bg-[#002866] text-white px-5 py-2 text-[11px] font-black uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-colors rounded-sm">
+                      Donate
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <div className="p-8 flex-grow flex flex-col">
-                <h3 className="text-2xl font-bold font-poppins text-[#002866] mb-6 leading-tight group-hover:text-blue-900 transition-colors">
-                  Sponsor VMC Free Surgeries
-                </h3>
-                <div className="mt-auto">
-                  <Link 
-                    href="/donate" 
-                    className="inline-block w-full text-center border-2 border-[#002866] text-[#002866] py-4 text-[12px] font-black uppercase tracking-[0.2em] hover:bg-[#002866] hover:text-white transition-all duration-300"
-                  >
-                    Donate Now
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
+                
+                <div className="p-8 flex flex-col flex-grow">
+                  {/* Progress Bar */}
+                  <div className="mb-6">
+                    <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "25%" }} // Placeholder value as HTML had no actual width set
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.5 }}
+                        className="bg-[#002866] h-full"
+                      />
+                    </div>
+                  </div>
 
-            {/* Cause 2 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              className="bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-sm overflow-hidden group border-b-4 border-[#ff9f22] flex flex-col text-center md:text-left"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <Image 
-                  src="/give-15-768x512.jpg" 
-                  alt="Mother and Baby Kits" 
-                  fill 
-                  className="object-cover group-hover:scale-105 transition-transform duration-700" 
-                />
-                <div className="absolute top-5 left-5 bg-[#ff9f22] text-[#002866] text-[10px] font-black uppercase px-4 py-1.5 tracking-[0.2em] shadow-md z-10">
-                  Relief Supply
+                  <h3 className="text-xl font-bold font-poppins text-[#002866] mb-4 leading-snug group-hover:text-[#ff9f22] transition-colors">
+                    {cause.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm leading-relaxed flex-grow">
+                    {cause.desc}
+                  </p>
                 </div>
-              </div>
-              <div className="p-8 flex-grow flex flex-col">
-                <h3 className="text-2xl font-bold font-poppins text-[#002866] mb-6 leading-tight group-hover:text-blue-900 transition-colors">
-                  Mother & Baby Care Kits
-                </h3>
-                <div className="mt-auto">
-                  <Link 
-                    href="/donate" 
-                    className="inline-block w-full text-center border-2 border-[#002866] text-[#002866] py-4 text-[12px] font-black uppercase tracking-[0.2em] hover:bg-[#002866] hover:text-white transition-all duration-300"
-                  >
-                    Donate Now
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* View Blog Posts Section */}
+      <section className="py-24 bg-gray-50 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-center mb-16"
+          >
+            <h6 className="text-[#ff9f22] text-[13px] font-black tracking-[0.2em] uppercase mb-3">
+              What's New
+            </h6>
+            <h2 className="text-[#002866] text-4xl md:text-5xl font-black uppercase tracking-tight">
+              View Blog Posts
+            </h2>
+            <div className="w-24 h-1.5 bg-[#ff9f22] mx-auto mt-6"></div>
+          </motion.div>
 
-            {/* Cause 3 */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-              className="bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] rounded-sm overflow-hidden group border-b-4 border-[#ff9f22] flex flex-col text-center md:text-left"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <Image 
-                  src="/give-15-768x512.jpg" 
-                  alt="Clinic Adoption" 
-                  fill 
-                  className="object-cover group-hover:scale-105 transition-transform duration-700" 
-                />
-                <div className="absolute top-5 left-5 bg-[#ff9f22] text-[#002866] text-[10px] font-black uppercase px-4 py-1.5 tracking-[0.2em] shadow-md z-10">
-                  Capacity Building
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Just Move",
+                date: "March 18, 2026",
+                image: "https://volunteermedicalcorps.org/admin/images/media/en9p2Ej1Q341529768.jpg",
+                link: "https://volunteermedicalcorps.org/view-media/just-move/UZRen9p2Ej1Q"
+              },
+              {
+                title: "Drink More Water, Stay Hydrated",
+                date: "January 30, 2026",
+                image: "https://volunteermedicalcorps.org/admin/images/media/nLFm9kAhE159426873.jpg",
+                link: "https://volunteermedicalcorps.org/view-media/drink-more-water-stay-hydrated/UAKnLFm9kAhE"
+              },
+              {
+                title: "Love Your Fruits And Vegetables",
+                date: "January 30, 2026",
+                image: "https://volunteermedicalcorps.org/admin/images/media/kj2dtoES6694283517.jpg",
+                link: "https://volunteermedicalcorps.org/view-media/love-your-fruits-and-vegetables/DSMkj2dtoES6"
+              }
+            ].map((post, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                className="bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group"
+              >
+                <div className="relative h-[245px] overflow-hidden">
+                  <Image src={post.image} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700" unoptimized />
                 </div>
-              </div>
-              <div className="p-8 flex-grow flex flex-col">
-                <h3 className="text-2xl font-bold font-poppins text-[#002866] mb-6 leading-tight group-hover:text-blue-900 transition-colors">
-                  Adopt a Hospital or Community Clinic
-                </h3>
-                <div className="mt-auto">
-                  <Link 
-                    href="/donate" 
-                    className="inline-block w-full text-center border-2 border-[#002866] text-[#002866] py-4 text-[12px] font-black uppercase tracking-[0.2em] hover:bg-[#002866] hover:text-white transition-all duration-300"
-                  >
-                    Donate Now
-                  </Link>
+                <div className="p-8">
+                  <span className="inline-block bg-blue-50 text-[#002866] text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm mb-4 border border-blue-100">
+                    Blog
+                  </span>
+                  <h3 className="text-xl font-bold font-poppins text-[#002866] mb-4 leading-snug group-hover:text-[#ff9f22] transition-colors line-clamp-2">
+                    <Link href={post.link}>{post.title}</Link>
+                  </h3>
+                  <ul className="flex items-center gap-6 pt-4 border-t border-gray-100 text-xs font-bold text-gray-500">
+                    <li className="flex items-center gap-3">
+                      <Image src="https://volunteermedicalcorps.org/images/default-avatar.jpg" alt="Admin" width={30} height={30} className="rounded-full" unoptimized />
+                      <span className="text-[#002866]">Admin</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <FaCalendarAlt className="text-[#ff9f22]" /> {post.date}
+                    </li>
+                  </ul>
                 </div>
-              </div>
-            </motion.div>
-
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -932,7 +1137,7 @@ export default function Home() {
                 <Image
                   src={post.image}
                   alt={post.title}
-                  fill
+                  fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
               </div>

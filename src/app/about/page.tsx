@@ -11,19 +11,19 @@ export default function AboutLandingPage() {
       title: "Our Story",
       description: "Learn about the origins, mission, and vision of the Volunteer Medical Corps.",
       href: "/about/our-story",
-      image: "/pmr-bg-mission.jpg"
+      image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg"
     },
     {
       title: "Board of Trustees",
       description: "Meet the distinguished professionals guiding our global initiatives.",
       href: "/about/board-of-trustees",
-      image: "/give-15-768x512.jpg"
+      image: "https://volunteermedicalcorps.org/admin/images/gallery/591783-2.jpg"
     },
     {
       title: "Annual Reports",
       description: "Transparency and impact: review our yearly performance and outreach summaries.",
       href: "/about/annual-reports",
-      image: "/give-20-768x512.jpg"
+      image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg"
     }
   ];
 
@@ -70,7 +70,7 @@ export default function AboutLandingPage() {
                   <Image 
                     src={section.image} 
                     alt={section.title} 
-                    fill 
+                    fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                 </div>

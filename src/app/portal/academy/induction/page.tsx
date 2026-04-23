@@ -56,7 +56,7 @@ export default function CoursePlayerPage() {
               src="/slider1.mp4" 
               className="w-full h-full object-cover"
               controls
-              poster="/pmr-bg-slide.jpg"
+              poster="https://volunteermedicalcorps.org/admin/images/media/2NpZxEGQD245813967.jpg"
             ></video>
             {/* Custom Overlay (Optional) */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:bg-black/20 transition-all">

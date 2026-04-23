@@ -6,10 +6,10 @@ import { motion } from "framer-motion";
 
 export default function BoardOfTrustees() {
   const members = [
-    { name: "Pastor Dr. Deola Phillips", role: "Chairperson Volunteer Medical Corps", image: "/give-15-768x512.jpg" },
-    { name: "Dr. Emeka Eze", role: "DIM; MBBS; FWCP; MNCP", image: "/give-17-300x200.jpg" },
-    { name: "Pastor Ifeoma Chiemeka", role: "B.Sc PHARM, MBA", image: "/give-20-768x512.jpg" },
-    { name: "Dr. Gbenga Olusanya", role: "Medical Director (FMCPATH, Ph.D.)", image: "/sw-post-1-min-768x512.jpg" },
+    { name: "Pastor Dr. Deola Phillips", role: "Chairperson Volunteer Medical Corps", image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg" },
+    { name: "Dr. Emeka Eze", role: "DIM; MBBS; FWCP; MNCP", image: "https://volunteermedicalcorps.org/admin/images/gallery/591783-2.jpg" },
+    { name: "Pastor Ifeoma Chiemeka", role: "B.Sc PHARM, MBA", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg" },
+    { name: "Dr. Gbenga Olusanya", role: "Medical Director (FMCPATH, Ph.D.)", image: "https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg" },
   ];
 
   return (
@@ -56,7 +56,7 @@ export default function BoardOfTrustees() {
                   <Image 
                     src={member.image} 
                     alt={member.name} 
-                    fill 
+                    fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                     className="object-cover group-hover:scale-105 transition-transform duration-700 grayscale hover:grayscale-0"
                   />
                 </div>

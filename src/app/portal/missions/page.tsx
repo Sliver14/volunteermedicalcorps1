@@ -22,7 +22,7 @@ export default function MissionsPage() {
       title: "Global Hospital Outreach Campaign",
       location: "Lagos, Nigeria (Multiple Locations)",
       date: "May 15 - May 20, 2026",
-      image: "/give-15-768x512.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/media/2NpZxEGQD245813967.jpg",
       status: "upcoming",
       rolesNeeded: ["Doctors", "Nurses", "Logistics"],
       creditsOffered: 500,
@@ -34,7 +34,7 @@ export default function MissionsPage() {
       title: "1 Million Smiles Pediatric Care",
       location: "Nairobi, Kenya",
       date: "June 10 - June 14, 2026",
-      image: "/vcn-post-7-min-768x512.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg",
       status: "upcoming",
       rolesNeeded: ["Pediatricians", "Child Psychologists", "General Volunteers"],
       creditsOffered: 450,
@@ -46,7 +46,7 @@ export default function MissionsPage() {
       title: "Disaster Relief: Flood Victims Support",
       location: "Jakarta, Indonesia",
       date: "July 01 - July 15, 2026",
-      image: "/give-20-768x512.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg",
       status: "upcoming",
       rolesNeeded: ["Paramedics", "Emergency Response", "Trauma Surgeons"],
       creditsOffered: 800,
@@ -59,7 +59,7 @@ export default function MissionsPage() {
       title: "Good Deeds Fiesta",
       location: "London, UK",
       date: "March 05, 2026",
-      image: "/give-17-300x200.jpg",
+      image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg",
       status: "past",
       rolesNeeded: ["All Categories"],
       creditsOffered: 150,
@@ -127,7 +127,7 @@ export default function MissionsPage() {
           >
             {/* Image Section */}
             <div className="relative w-full sm:w-2/5 h-48 sm:h-auto shrink-0">
-              <Image src={mission.image} alt={mission.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <Image src={mission.image} alt={mission.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#002866]/80 via-transparent to-transparent sm:bg-gradient-to-r"></div>
               
               <div className="absolute top-3 left-3 flex flex-col gap-2">

@@ -21,8 +21,8 @@ export default function PortalDashboard() {
   ];
 
   const ongoingCourses = [
-    { title: "Introduction to Disaster Response", progress: 65, category: "Basic Training", image: "/give-15-768x512.jpg" },
-    { title: "Advanced Medical Outreach Ethics", progress: 30, category: "Ethics", image: "/give-17-300x200.jpg" },
+    { title: "Introduction to Disaster Response", progress: 65, category: "Basic Training", image: "https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg" },
+    { title: "Advanced Medical Outreach Ethics", progress: 30, category: "Ethics", image: "https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg" },
   ];
 
   return (
@@ -69,7 +69,7 @@ export default function PortalDashboard() {
             {ongoingCourses.map((course, index) => (
               <div key={index} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden group">
                 <div className="relative h-32">
-                  <Image src={course.image} alt={course.title} fill className="object-cover" />
+                  <Image src={course.image} alt={course.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <span className="absolute bottom-3 left-3 bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded uppercase">
                     {course.category}

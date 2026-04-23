@@ -10,37 +10,38 @@ interface PageBannerProps {
 
 export default function PageBanner({ title, parent }: PageBannerProps) {
   return (
-    <section className="relative bg-[#002866] py-20 text-white overflow-hidden">
+    <section className="relative bg-[#002866] py-4 md:py-5 text-white overflow-hidden border-b border-[#001f52]">
       {/* Background patterns */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full -mr-32 -mt-32"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#ff9f22] rounded-full -ml-48 -mb-48"></div>
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute -top-10 -right-10 w-32 h-32 border-[10px] border-white rounded-full"></div>
+        <div className="absolute -bottom-16 -left-16 w-48 h-48 border-[15px] border-[#ff9f22] rounded-full"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-between gap-4">
         <motion.h1 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-4xl md:text-5xl font-poppins font-bold uppercase mb-4 tracking-tight"
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="text-lg md:text-xl font-poppins font-black uppercase tracking-tight leading-none"
         >
           {title}
         </motion.h1>
+        
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="flex items-center space-x-2 text-sm font-medium"
+          initial={{ opacity: 0, x: 10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
+          className="flex items-center space-x-2 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 whitespace-nowrap"
         >
-          <Link href="/" className="text-gray-300 hover:text-[#ff9f22] transition-colors">Home</Link>
-          <span className="text-gray-500">/</span>
+          <Link href="/" className="hover:text-[#ff9f22] transition-colors">Home</Link>
+          <span className="text-gray-600">/</span>
           {parent && (
             <>
-              <Link href={parent.href} className="text-gray-300 hover:text-[#ff9f22] transition-colors">{parent.label}</Link>
-              <span className="text-gray-500">/</span>
+              <Link href={parent.href} className="hover:text-[#ff9f22] transition-colors hidden sm:inline">{parent.label}</Link>
+              <span className="text-gray-600 hidden sm:inline">/</span>
             </>
           )}
-          <span className="text-[#ff9f22]">{title}</span>
+          <span className="text-[#ff9f22] truncate max-w-[150px] sm:max-w-none">{title}</span>
         </motion.div>
       </div>
     </section>

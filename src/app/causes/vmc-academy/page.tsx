@@ -12,9 +12,9 @@ export default function VMCAcademyPage() {
   ];
 
   const campaigns = [
-    { title: "VMC Summit", image: "/give-15-768x512.jpg" },
-    { title: "VMC Conference", image: "/give-17-300x200.jpg" },
-    { title: "VMC Learning Portal", image: "/give-20-768x512.jpg" }
+    { title: "VMC Summit", image: "https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg" },
+    { title: "VMC Conference", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg" },
+    { title: "VMC Learning Portal", image: "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg" }
   ];
 
   return (
@@ -33,11 +33,11 @@ export default function VMCAcademyPage() {
               className="relative h-[300px] md:h-[500px]"
             >
               <Image 
-                src="/vcn-post-7-min-768x512.jpg" 
+                src="https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg" 
                 alt="VMC Academy" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                 className="object-cover rounded-sm shadow-2xl"
-              />
+              unoptimized />
               <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-[#ff9f22] p-4 md:p-8 hidden sm:block">
                 <span className="text-[#002866] font-black text-xl md:text-2xl">#vmcgooddeeds</span>
               </div>
@@ -120,7 +120,7 @@ export default function VMCAcademyPage() {
                   <Image 
                     src={campaign.image} 
                     alt={campaign.title} 
-                    fill 
+                    fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-[#002866]/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

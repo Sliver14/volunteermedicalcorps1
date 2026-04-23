@@ -131,7 +131,7 @@ export default function NewsPage() {
                       </p>
                       
                       <Link href={post.link} className="inline-flex items-center bg-[#002866] text-white px-8 py-3.5 font-bold uppercase tracking-widest text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm shadow-md">
-                        Read More <span className="ml-3 border-l border-white/20 pl-3"><FaHeart /></span>
+                        Read More
                       </Link>
                     </div>
                   </motion.div>
@@ -237,7 +237,7 @@ export default function NewsPage() {
                   <h5 className="text-[#ff9f22] font-black uppercase tracking-widest text-xs mb-3">Give Now</h5>
                   <h2 className="text-2xl font-poppins font-bold mb-6 leading-tight">Sponsor a Good Deeds Project Today!</h2>
                   <Link href="#" className="inline-flex items-center bg-white text-[#002866] px-8 py-3.5 font-bold uppercase tracking-widest text-sm hover:bg-[#ff9f22] transition-all shadow-lg rounded-sm">
-                    Give Now <span className="ml-3 border-l border-gray-200 pl-3"><FaHeart className="text-[#ff9f22]" /></span>
+                    Give Now
                   </Link>
                 </div>
               </div>

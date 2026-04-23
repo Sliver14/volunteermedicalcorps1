@@ -188,7 +188,7 @@ export default function Home() {
                     href={heroSlides[currentSlide].link} 
                     className="w-full sm:w-auto bg-[#ff9f22] text-[#002866] px-8 md:px-12 py-4 md:py-5 font-black uppercase text-[12px] md:text-[13px] tracking-[0.15em] transition-all hover:bg-white shadow-[0_10px_30px_rgba(255,159,34,0.3)] text-center flex items-center justify-center gap-2"
                   >
-                    {heroSlides[currentSlide].btnText} <span><FaHeart className="text-[#002866]" /></span>
+                    {heroSlides[currentSlide].btnText}
                   </Link>
                 </div>
               </motion.div>
@@ -787,7 +787,7 @@ export default function Home() {
           </div>
           <div className="lg:w-1/4 shrink-0">
             <Link href="/register" className="inline-flex items-center justify-center w-full lg:w-auto bg-[#002866] text-white px-12 py-5 font-black uppercase tracking-widest text-sm hover:bg-white hover:text-[#002866] transition-all rounded-sm shadow-2xl">
-              Start Today! <FaHeart className="ml-3" />
+              Start Today!
             </Link>
           </div>
         </div>
@@ -931,7 +931,7 @@ export default function Home() {
           
           <div className="text-center mt-16 md:mt-20">
             <Link href="https://volunteermedicalcorps.org/testimonials" target="_blank" className="inline-flex items-center bg-[#ff9f22] text-[#002866] px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-white transition-all rounded-sm shadow-xl">
-              View More <FaHeart className="ml-3" />
+              View More
             </Link>
           </div>
           

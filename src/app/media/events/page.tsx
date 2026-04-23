@@ -79,7 +79,7 @@ export default function EventsPage() {
                   {/* Action Button */}
                   <div className="md:ml-6 shrink-0 mt-4 md:mt-0">
                     <Link href={event.link} className="inline-flex items-center bg-[#002866] text-white px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm shadow-md whitespace-nowrap">
-                      View Event <span className="ml-3 border-l border-white/20 pl-3"><FaHeart /></span>
+                      View Event
                     </Link>
                   </div>
                   

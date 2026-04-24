@@ -1195,35 +1195,67 @@ export default function Home() {
       </div>
     </section>
 
-      {/* Partner Logos Section */}
-      <section className="py-16 border-t border-gray-200 bg-white overflow-hidden">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-        >
-          <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-between items-center gap-8 opacity-70 hover:opacity-100 transition-opacity duration-300 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
-            <div className="flex-shrink-0">
-              <Image src="/pmr-logo-1.png" alt="Partner 1" width={150} height={60} className="object-contain grayscale hover:grayscale-0 transition-all cursor-pointer" />
-            </div>
-            <div className="flex-shrink-0">
-              <Image src="/pmr-logo-2.png" alt="Partner 2" width={150} height={60} className="object-contain grayscale hover:grayscale-0 transition-all cursor-pointer" />
-            </div>
-            <div className="flex-shrink-0">
-              <Image src="/pmr-logo-3.png" alt="Partner 3" width={150} height={60} className="object-contain grayscale hover:grayscale-0 transition-all cursor-pointer" />
-            </div>
-            <div className="flex-shrink-0">
-              <Image src="/pmr-logo-4.png" alt="Partner 4" width={150} height={60} className="object-contain grayscale hover:grayscale-0 transition-all cursor-pointer" />
-            </div>
-            <div className="flex-shrink-0">
-              <Image src="/pmr-logo-5.png" alt="Partner 5" width={150} height={60} className="object-contain grayscale hover:grayscale-0 transition-all cursor-pointer" />
-            </div>
-          </div>
-        </motion.div>
-      </section>
+      {/* Global Partnerships Section */}
+      <section className="py-16 md:py-20 bg-gray-50 border-t border-gray-100 overflow-hidden">
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes slide {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+          .marquee-container {
+            display: flex;
+            width: max-content;
+            animation: slide 40s linear infinite;
+          }
+          .marquee-wrapper:hover .marquee-container {
+            animation-play-state: paused;
+          }
+        `}} />
+        
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 mb-10 text-center">
+          <h6 className="text-[#ff9f22] text-[13px] font-black tracking-[0.2em] uppercase mb-2">Our Network</h6>
+          <h2 className="text-[#002866] text-3xl md:text-4xl font-black uppercase tracking-tight">Global Initiatives</h2>
+        </div>
 
+        {/* Infinite Scrolling Marquee */}
+        <div className="relative flex overflow-x-hidden marquee-wrapper w-full">
+          <div className="marquee-container">
+            {/* Array is duplicated twice inside to ensure no visual break. 
+                The animation moves -50% (exactly one full set) before resetting to 0% */}
+            {[...Array(2)].map((_, arrayIndex) => (
+              <div key={arrayIndex} className="flex items-center whitespace-nowrap">
+                {[
+                  "/VMC LOGOS/1MILLION SMILE.png",
+                  "/VMC LOGOS/cvp copy.png",
+                  "/VMC LOGOS/free surgery copy.png",
+                  "/VMC LOGOS/geraitric_care_campaign.png",
+                  "/VMC LOGOS/gift_a_chaplain.png",
+                  "/VMC LOGOS/global_hospital_outreach_campaign.png",
+                  "/VMC LOGOS/good_deeds_campaign.png",
+                  "/VMC LOGOS/good_deeds_fiesta.png",
+                  "/VMC LOGOS/Layer 3.png",
+                  "/VMC LOGOS/light_of_hope.png",
+                  "/VMC LOGOS/medical_outreach.png",
+                  "/VMC LOGOS/pediatric_care_program.png",
+                  "/VMC LOGOS/praying_medics.png",
+                  "/VMC LOGOS/relief mission copy 4.png"
+                ].map((logo, index) => (
+                  <div key={`${arrayIndex}-${index}`} className="flex-shrink-0 mx-6 sm:mx-10 flex items-center justify-center h-24 w-[180px]">
+                    <Image 
+                      src={logo} 
+                      alt="VMC Initiative Logo" 
+                      width={180} 
+                      height={90} 
+                      className="object-contain h-16 sm:h-20 w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300" 
+                      unoptimized
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

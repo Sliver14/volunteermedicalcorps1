@@ -155,13 +155,13 @@ export default function Home() {
               src={heroSlides[currentSlide].bg} 
               alt="Slide Background" 
               fill 
-              className="object-cover opacity-80 md:opacity-50" 
+              className="object-cover opacity-80 md:opacity-70" 
               unoptimized 
               priority 
             />
-            {/* Reduced solid overlay on mobile to increase visibility */}
-            <div className="absolute inset-0 bg-black/20 md:bg-black/20"></div>
-            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/90 via-black/60 md:via-black/40 to-transparent"></div>
+            {/* Reduced solid overlay on mobile and desktop to increase visibility */}
+            <div className="absolute inset-0 bg-black/20 md:bg-black/10"></div>
+            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/90 via-black/60 md:via-black/30 to-transparent"></div>
           </motion.div>
         </AnimatePresence>
         

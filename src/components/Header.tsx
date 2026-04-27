@@ -51,6 +51,7 @@ export default function Header() {
         { label: "Events", href: "/media/events" },
         { label: "Gallery", href: "/media/gallery" },
         { label: "Video Gallery", href: "/media/video-gallery" },
+        { label: "Testimonials", href: "/media/testimonials" },
       ]
     },
     { label: "Live", href: "/live" },

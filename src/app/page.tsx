@@ -854,7 +854,9 @@ export default function Home() {
 
       {/* Testimonials Section */}
       <section className="py-24 bg-[#002866] mt-12 lg:mt-24 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "url('/pmr-world-map.png')", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url('/pmr-world-map.png')", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+        {/* Added Texture Overlay */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "radial-gradient(#ffffff 1px, transparent 1px)", backgroundSize: "20px 20px" }}></div>
         
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
           
@@ -932,7 +934,7 @@ export default function Home() {
           </div>
           
           <div className="text-center mt-16 md:mt-20">
-            <Link href="https://volunteermedicalcorps.org/testimonials" target="_blank" className="inline-flex items-center bg-[#ff9f22] text-[#002866] px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-white transition-all rounded-sm shadow-xl">
+            <Link href="/media/testimonials" className="inline-flex items-center bg-[#ff9f22] text-[#002866] px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-white transition-all rounded-sm shadow-xl">
               View More
             </Link>
           </div>

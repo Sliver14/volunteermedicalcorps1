@@ -1248,7 +1248,7 @@ export default function Home() {
                       alt="VMC Initiative Logo" 
                       width={180} 
                       height={90} 
-                      className="object-contain h-16 sm:h-20 w-full grayscale hover:grayscale-0 hover:scale-110 transition-all duration-300" 
+                      className="object-contain h-16 sm:h-20 w-full hover:grayscale hover:scale-110 transition-all duration-300" 
                       unoptimized
                     />
                   </div>

@@ -191,7 +191,7 @@ export default function MyLearningPage() {
             className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col md:flex-row group hover:shadow-xl transition-shadow"
           >
              <div className="relative w-full md:w-64 h-48 md:h-auto shrink-0">
-              <Image src={course.image} alt={course.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+              <Image src={course.image} alt={course.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:grayscale transition-all duration-500" />
               <div className="absolute inset-0 bg-[#002866]/10 mix-blend-multiply"></div>
               <div className="absolute top-3 left-3 bg-white/90 backdrop-blur text-[#002866] text-[10px] font-bold px-2 py-1 rounded uppercase">
                 {course.category}

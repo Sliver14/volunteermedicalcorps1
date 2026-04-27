@@ -70,7 +70,7 @@ export default function OneMillionSmilesPage() {
                 src="https://volunteermedicalcorps.org/admin/images/media/onrZbfR8N463291785.jpg" 
                 alt="1 Million Smiles" 
                 fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
-                className="object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-700"
+                className="object-cover rounded-sm hover:grayscale transition-all duration-700"
               unoptimized />
               <div className="absolute inset-0 border-[10px] md:border-[20px] border-[#ff9f22]/20 -m-3 md:-m-6 pointer-events-none"></div>
             </motion.div>

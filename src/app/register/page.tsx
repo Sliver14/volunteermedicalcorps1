@@ -79,32 +79,99 @@ export default function RegisterPage() {
                     <input type="email" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Phone Number</label>
-                    <input type="tel" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" />
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Phone Number *</label>
+                    <input type="tel" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Volunteer Category *</label>
-                  <select className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required>
-                    <option value="">Select Category</option>
-                    <option value="medical">Medical Professional (Doctor, Nurse, etc.)</option>
-                    <option value="paramedic">Paramedic / EMT</option>
-                    <option value="student">Medical/Nursing Student</option>
-                    <option value="non-medical">Non-Medical / Humanitarian Support</option>
-                  </select>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Password *</label>
+                    <input type="password" placeholder="••••••••" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Date of Birth *</label>
+                    <input type="date" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Country of Residence *</label>
-                  <input type="text" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Gender *</label>
+                    <select className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required>
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Blood Group</label>
+                    <select className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]">
+                      <option value="">Select Blood Group</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                    </select>
+                  </div>
                 </div>
 
-                <div className="flex items-start">
-                  <input type="checkbox" className="mt-1 mr-3 h-4 w-4 text-[#002866] focus:ring-[#002866] border-gray-300 rounded" required />
-                  <label className="text-sm text-gray-600">
-                    I agree to the <Link href="/terms" className="text-[#002866] hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-[#002866] hover:underline">Privacy Policy</Link>, and consent to the Volunteer Medical Corps processing my data.
-                  </label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Profession *</label>
+                    <input type="text" placeholder="e.g. Medical Doctor, Nurse" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Qualification *</label>
+                    <input type="text" placeholder="e.g. MBBS, BSc" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Preferred Role *</label>
+                    <select className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required>
+                      <option value="">Select Preferred Role</option>
+                      <option value="Medical Outreach">Medical Outreach</option>
+                      <option value="Humanitarian Support">Humanitarian Support</option>
+                      <option value="Disaster Relief">Disaster Relief</option>
+                      <option value="Administrative">Administrative</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Church / Ministry *</label>
+                    <input type="text" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">City / Location *</label>
+                    <input type="text" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Country of Residence *</label>
+                    <input type="text" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" required />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-start">
+                    <input type="checkbox" className="mt-1 mr-3 h-4 w-4 text-[#002866] focus:ring-[#002866] border-gray-300 rounded" />
+                    <label className="text-sm text-gray-600">
+                      Subscribe to VMC Newsletter for updates and opportunities.
+                    </label>
+                  </div>
+                  <div className="flex items-start">
+                    <input type="checkbox" className="mt-1 mr-3 h-4 w-4 text-[#002866] focus:ring-[#002866] border-gray-300 rounded" required />
+                    <label className="text-sm text-gray-600">
+                      I agree to the <Link href="/terms" className="text-[#002866] hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-[#002866] hover:underline">Privacy Policy</Link>, and consent to the Volunteer Medical Corps processing my data.
+                    </label>
+                  </div>
                 </div>
 
                 <button type="button" className="w-full bg-[#002866] text-white py-5 font-bold uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm">

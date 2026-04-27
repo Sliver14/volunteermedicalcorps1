@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
@@ -91,14 +92,24 @@ export default function Header() {
                       {item.subItems && <svg className="ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>}
                     </Link>
 
-                    {item.subItems && activeDropdown === item.label && (
-                      <div className="absolute top-full left-0 w-64 bg-white shadow-2xl border-t-4 border-[#ff9f22] py-2">
-                        {item.subItems.map((sub) => (
-                          <Link key={sub.label} href={sub.href} className="block px-6 py-3 text-[14px] font-semibold text-[#002866] hover:bg-gray-50 hover:pl-8 transition-all">
-                            {sub.label}
-                          </Link>
-                        ))}
-                      </div>
+                    {item.subItems && (
+                      <AnimatePresence>
+                        {activeDropdown === item.label && (
+                          <motion.div 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute top-full left-0 w-64 bg-white shadow-2xl border-t-4 border-[#ff9f22] py-2"
+                          >
+                            {item.subItems.map((sub) => (
+                              <Link key={sub.label} href={sub.href} className="block px-6 py-3 text-[14px] font-semibold text-[#002866] hover:bg-gray-50 hover:pl-8 transition-all">
+                                {sub.label}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     )}
                   </div>
                 );
@@ -185,18 +196,28 @@ export default function Header() {
                 
                 {/* Collapsible Sub-menu */}
                 {item.subItems && (
-                  <div className={`bg-gray-50 overflow-hidden transition-all duration-300 ${openSubMenu === item.label ? 'max-h-96' : 'max-h-0'}`}>
-                    {item.subItems.map((sub) => (
-                      <Link 
-                        key={sub.label} 
-                        href={sub.href}
-                        className="block px-10 py-4 text-base font-semibold text-gray-600 hover:text-[#002866] border-b border-gray-200 last:border-0"
-                        onClick={() => setIsMobileOpen(false)}
+                  <AnimatePresence>
+                    {openSubMenu === item.label && (
+                      <motion.div 
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="bg-gray-50 overflow-hidden"
                       >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </div>
+                        {item.subItems.map((sub) => (
+                          <Link 
+                            key={sub.label} 
+                            href={sub.href}
+                            className="block px-10 py-4 text-base font-semibold text-gray-600 hover:text-[#002866] border-b border-gray-200 last:border-0"
+                            onClick={() => setIsMobileOpen(false)}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 )}
               </div>
             ))}

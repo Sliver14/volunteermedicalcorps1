@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function BoardOfTrustees() {
   const members = [
-    { name: "Pastor Dr. Deola Phillips", role: "Chairperson Volunteer Medical Corps", image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg" },
+    { name: "Pastor Dr. Deola Phillips", role: "Chairperson Volunteer Medical Corps", image: "public/trustees/pst-d.jpeg" },
     { name: "Dr. Emeka Eze", role: "DIM; MBBS; FWCP; MNCP", image: "https://volunteermedicalcorps.org/admin/images/gallery/591783-2.jpg" },
     { name: "Pastor Ifeoma Chiemeka", role: "B.Sc PHARM, MBA", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg" },
     { name: "Dr. Gbenga Olusanya", role: "Medical Director (FMCPATH, Ph.D.)", image: "https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg" },

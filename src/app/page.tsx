@@ -74,28 +74,28 @@ export default function Home() {
       bg: "https://volunteermedicalcorps.org/images/sliders/8ZQ9Vj6Az791283465.jpeg", 
       sub: "", 
       title: "Welcome to Volunteer Medical Corps", 
-      btnText: "Click Here", 
+      btnText: "Visit Life Savers", 
       link: "https://loveworldlifesavers.org/" 
     },
     { 
       bg: "https://volunteermedicalcorps.org/images/sliders/9q3WoyGbz829456713.jpg", 
       sub: "", 
       title: "Saving Lives Through Good Deeds", 
-      btnText: "Click Here", 
+      btnText: "Support the Cause", 
       link: "https://volunteermedicalcorps.org/causes/good-deeds-campaigns/GDS102933" 
     },
     { 
       bg: "https://volunteermedicalcorps.org/images/sliders/yn4Y1uGUV794815623.jpg", 
       sub: "Start your volunteering journey", 
       title: "Become a Volunteer and provide medical care for people in need!", 
-      btnText: "Click Here", 
+      btnText: "Join Us Today", 
       link: "/register" 
     },
     { 
       bg: "https://volunteermedicalcorps.org/images/sliders/Kq7xQUD5R792516384.jpg", 
       sub: "Join the VMC", 
       title: "Become a Volunteer and provide medical care for people in need!", 
-      btnText: "Click Here", 
+      btnText: "Sign Up Now", 
       link: "/register" 
     }
   ], []);
@@ -141,7 +141,7 @@ export default function Home() {
     <div className="w-full font-roboto text-gray-700">
       
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] md:min-h-screen flex items-center bg-black overflow-hidden group">
+      <section className="relative min-h-[85vh] md:min-h-screen flex items-end bg-black overflow-hidden group pb-16 md:pb-24">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -155,16 +155,18 @@ export default function Home() {
               src={heroSlides[currentSlide].bg} 
               alt="Slide Background" 
               fill 
-              className="object-cover opacity-70" 
+              className="object-cover opacity-80 md:opacity-50" 
               unoptimized 
               priority 
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+            {/* Reduced solid overlay on mobile to increase visibility */}
+            <div className="absolute inset-0 bg-black/20 md:bg-black/20"></div>
+            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/90 via-black/60 md:via-black/40 to-transparent"></div>
           </motion.div>
         </AnimatePresence>
         
-        <div className="relative z-10 max-w-[1400px] mx-auto px-10 md:px-12 lg:px-20 w-full mb-0 md:mb-16">
-          <div className="max-w-[750px] text-center md:text-left pt-8 md:pt-0">
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 w-full mb-0 md:mb-16">
+          <div className="max-w-[750px] text-left pt-8 md:pt-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`content-${currentSlide}`}
@@ -183,7 +185,7 @@ export default function Home() {
                     {heroSlides[currentSlide].title}
                   </h1>
                 )}
-                <div className="flex flex-col sm:flex-row items-center gap-4 lg:justify-start justify-center">
+                <div className="flex flex-col sm:flex-row items-start gap-4 justify-start">
                   <Link 
                     href={heroSlides[currentSlide].link} 
                     className="w-full sm:w-auto bg-[#ff9f22] text-[#002866] px-8 md:px-12 py-4 md:py-5 font-black uppercase text-[12px] md:text-[13px] tracking-[0.15em] transition-all hover:bg-white shadow-[0_10px_30px_rgba(255,159,34,0.3)] text-center flex items-center justify-center gap-2"
@@ -215,7 +217,7 @@ export default function Home() {
         </div>
 
         {/* Slider Pagination Dots */}
-        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 hidden sm:flex gap-2">
           {heroSlides.map((_, i) => (
             <button
               key={i}

@@ -1,139 +1,120 @@
 "use client";
 
-import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import Image from "next/image";
 import { 
-  FaTachometerAlt, 
-  FaNewspaper, 
-  FaBlog, 
-  FaComment,
-  FaImages, 
-  FaHandsHelping, 
-  FaUsers, 
-  FaSignOutAlt, 
-  FaBars,
-  FaTimes
-} from "react-icons/fa";
+  LayoutDashboard, 
+  Image as ImageIcon, 
+  Megaphone, 
+  Heart, 
+  Users, 
+  LogOut, 
+  MessageSquare, 
+  FolderKanban, 
+  Newspaper 
+} from "lucide-react";
+import { useEffect } from "react";
+import { signOut } from "next-auth/react";
+
+const sidebarLinks = [
+  { href: "/admin/dashboard", label: "Overview", icon: LayoutDashboard },
+  { href: "/admin/dashboard/hero", label: "Hero Slides", icon: ImageIcon },
+  { href: "/admin/dashboard/confessions", label: "Confessions", icon: MessageSquare },
+  { href: "/admin/dashboard/marquee", label: "Marquee", icon: Megaphone },
+  { href: "/admin/dashboard/campaigns", label: "Campaigns", icon: FolderKanban },
+  { href: "/admin/dashboard/volunteers", label: "Volunteers", icon: Users },
+  { href: "/admin/dashboard/news", label: "News", icon: Newspaper },
+];
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+  const { data: session, status } = useSession();
   const router = useRouter();
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const pathname = usePathname();
 
-  const navigation = [
-    { name: "Overview", href: "/admin/dashboard", icon: FaTachometerAlt },
-    { name: "News Management", href: "/admin/dashboard/news", icon: FaNewspaper },
-    { name: "Blog Management", href: "/admin/dashboard/blog", icon: FaBlog },
-    { name: "Comments", href: "/admin/dashboard/comments", icon: FaComment },
-    { name: "Photo Gallery", href: "/admin/dashboard/gallery", icon: FaImages },
-    { name: "Campaigns", href: "/admin/dashboard/campaigns", icon: FaHandsHelping },
-    { name: "Volunteers", href: "/admin/dashboard/volunteers", icon: FaUsers },
-  ];
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login?callbackUrl=" + encodeURIComponent(pathname));
+    } else if (status === "authenticated" && session?.user?.role !== "ADMIN") {
+      router.push("/");
+    }
+  }, [status, session, router, pathname]);
 
-  const handleLogout = () => {
-    // Perform logout logic here
-    router.push("/admin");
-  };
+  if (status === "loading" || !session || session.user.role !== "ADMIN") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-[#002866] font-bold animate-pulse">Verifying Admin Session...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden font-roboto text-gray-800">
-      
-      {/* Mobile Sidebar Overlay */}
-      {isSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-[#002866]/50 z-20 lg:hidden backdrop-blur-sm"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
+    <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
-      <div 
-        className={`fixed inset-y-0 left-0 z-30 w-72 bg-[#002866] text-white transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto flex flex-col shadow-2xl 
-        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
-      >
-        {/* Sidebar Header */}
-        <div className="flex items-center justify-between h-20 px-6 bg-[#001f52] border-b border-white/10 shrink-0">
-          <Link href="/admin/dashboard" className="flex items-center">
-            <Image src="/logo.png" alt="Logo" width={140} height={40} className="object-contain filter brightness-0 invert" />
+      <aside className="w-64 bg-[#002866] text-white flex flex-col fixed inset-y-0 shadow-2xl z-50">
+        <div className="p-6 border-b border-white/10">
+          <Link href="/" className="flex flex-col">
+            <span className="text-xl font-black tracking-tighter uppercase leading-none">VMC</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">Admin Portal</span>
           </Link>
-          <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/70 hover:text-white p-2">
-            <FaTimes size={24} />
-          </button>
         </div>
 
-        {/* Sidebar Navigation */}
-        <nav className="flex-1 overflow-y-auto py-8 px-4 space-y-2 custom-scrollbar">
-          {navigation.map((item) => {
-            const isActive = pathname === item.href;
-            const Icon = item.icon;
+        <nav className="flex-grow p-4 space-y-2 mt-4">
+          {sidebarLinks.map((link) => {
+            const Icon = link.icon;
+            const isActive = pathname === link.href;
             return (
               <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setSidebarOpen(false)}
-                className={`flex items-center px-4 py-3.5 rounded-sm transition-all duration-200 group
-                  ${isActive 
-                    ? "bg-[#ff9f22] text-[#002866] font-bold shadow-md" 
-                    : "text-gray-300 hover:bg-white/10 hover:text-white font-medium"
-                  }`}
+                key={link.href}
+                href={link.href}
+                className={`flex items-center gap-3 px-4 py-3 rounded-sm transition-all font-bold text-sm uppercase tracking-wider ${
+                  isActive 
+                    ? "bg-[#ff9f22] text-[#002866] shadow-lg" 
+                    : "hover:bg-white/10 text-white/70 hover:text-white"
+                }`}
               >
-                <Icon className={`mr-4 text-lg ${isActive ? "text-[#002866]" : "text-[#ff9f22] group-hover:text-white"}`} />
-                <span className="tracking-wide">{item.name}</span>
+                <Icon size={18} />
+                {link.label}
               </Link>
             );
           })}
         </nav>
 
-        {/* Sidebar Footer (Logout) */}
-        <div className="p-4 border-t border-white/10 bg-[#001f52] shrink-0">
-          <button 
-            onClick={handleLogout}
-            className="flex items-center w-full px-4 py-3 text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors rounded-sm font-bold tracking-wider uppercase text-xs"
+        <div className="p-4 border-t border-white/10">
+          <button
+            onClick={() => signOut({ callbackUrl: "/" })}
+            className="flex items-center gap-3 w-full px-4 py-3 text-white/70 hover:text-red-400 hover:bg-red-400/10 rounded-sm transition-all font-bold text-sm uppercase tracking-wider"
           >
-            <FaSignOutAlt className="mr-4 text-lg" />
-            Secure Logout
+            <LogOut size={18} />
+            Sign Out
           </button>
         </div>
-      </div>
+      </aside>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative">
-        
-        {/* Top Header */}
-        <header className="h-20 bg-white border-b border-gray-200 shadow-sm flex items-center justify-between px-6 z-10 shrink-0">
-          <div className="flex items-center">
-            <button 
-              onClick={() => setSidebarOpen(true)}
-              className="lg:hidden text-[#002866] hover:text-[#ff9f22] transition-colors p-2 mr-4"
-            >
-              <FaBars size={24} />
-            </button>
-            <h1 className="text-xl md:text-2xl font-poppins font-black text-[#002866] uppercase tracking-wide">
-              Control Panel
+      {/* Main Content */}
+      <main className="flex-grow ml-64 p-8">
+        <header className="flex justify-between items-center mb-10 bg-white p-6 rounded-sm shadow-sm border border-gray-100">
+          <div>
+            <h1 className="text-2xl font-black text-[#002866] uppercase tracking-tight">
+              {sidebarLinks.find(l => l.href === pathname)?.label || "Dashboard"}
             </h1>
+            <p className="text-gray-400 text-xs font-bold uppercase mt-1">Welcome back, {session.user.name}</p>
           </div>
-          
           <div className="flex items-center gap-4">
-            <div className="hidden md:block text-right">
-              <p className="text-sm font-bold text-[#002866] leading-none uppercase tracking-wider">Admin User</p>
-              <p className="text-xs text-green-500 font-bold mt-1">● Online</p>
+            <div className="text-right hidden sm:block">
+              <p className="text-sm font-bold text-[#002866] leading-none">{session.user.name}</p>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">{session.user.role}</p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-[#002866] border-2 border-[#ff9f22] flex items-center justify-center text-white font-black shadow-md">
-              A
+            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-[#002866] font-black border-2 border-white shadow-sm">
+              {session.user.name?.[0]?.toUpperCase() || "A"}
             </div>
           </div>
         </header>
 
-        {/* Page Content */}
-        <main className="flex-1 overflow-y-auto p-6 md:p-10 custom-scrollbar bg-gray-50/50">
-          <div className="max-w-7xl mx-auto">
-            {children}
-          </div>
-        </main>
-
-      </div>
+        <div className="animate-in fade-in duration-500">
+          {children}
+        </div>
+      </main>
     </div>
   );
 }

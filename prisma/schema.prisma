@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  profile       Profile?
+}
+
+model Profile {
+  id        String  @id @default(cuid())
+  bio       String?
+  avatar    String?
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+  VOLUNTEER
+}
+
+model HeroSlide {
+  id          String   @id @default(cuid())
+  title       String
+  subTitle    String?
+  description String?
+  image       String
+  link        String?
+  btnText     String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model DailyConfession {
+  id        String   @id @default(cuid())
+  date      DateTime @default(now())
+  title     String
+  text      String
+  audioUrl  String?
+  link      String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model MarqueeItem {
+  id        String   @id @default(cuid())
+  content   String
+  link      String?
+  color     String?  @default("red")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Campaign {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  image       String
+  region      String
+  country     String
+  category    String
+  date        String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}

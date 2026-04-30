@@ -1,85 +1,98 @@
-"use client";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import prisma from "@/lib/prisma";
+import { 
+  Users, 
+  Image as ImageIcon, 
+  MessageSquare, 
+  Heart, 
+  Megaphone, 
+  CheckCircle2, 
+  Clock 
+} from "lucide-react";
 
-import { motion } from "framer-motion";
-import { FaUsers, FaHandsHelping, FaDonate, FaGlobe } from "react-icons/fa";
+export default async function AdminDashboard() {
+  const session = await getServerSession(authOptions);
 
-export default function DashboardOverview() {
+  // Fetch some stats
+  const [userCount, slideCount, confessionCount, campaignCount] = await Promise.all([
+    prisma.user.count(),
+    prisma.heroSlide.count(),
+    prisma.dailyConfession.count(),
+    prisma.campaign.count(),
+  ]);
+
   const stats = [
-    { title: "Total Volunteers", value: "6,478", icon: FaUsers, color: "text-blue-500", bg: "bg-blue-50" },
-    { title: "Active Campaigns", value: "24", icon: FaHandsHelping, color: "text-orange-500", bg: "bg-orange-50" },
-    { title: "Total Donations", value: "$16M+", icon: FaDonate, color: "text-green-500", bg: "bg-green-50" },
-    { title: "Countries Reached", value: "210+", icon: FaGlobe, color: "text-purple-500", bg: "bg-purple-50" },
+    { label: "Total Users", value: userCount, icon: Users, color: "text-blue-600", bg: "bg-blue-50" },
+    { label: "Hero Slides", value: slideCount, icon: ImageIcon, color: "text-purple-600", bg: "bg-purple-50" },
+    { label: "Confessions", value: confessionCount, icon: MessageSquare, color: "text-green-600", bg: "bg-green-50" },
+    { label: "Campaigns", value: campaignCount, icon: Heart, color: "text-red-600", bg: "bg-red-50" },
   ];
 
   return (
     <div className="space-y-8">
-      <div>
-        <h2 className="text-3xl font-poppins font-bold text-[#002866]">Dashboard Overview</h2>
-        <p className="text-gray-500 mt-2">Welcome back, Admin. Here is what is happening today.</p>
-      </div>
-
+      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white p-6 rounded-sm shadow-sm border border-gray-100 flex items-center"
-            >
-              <div className={`w-14 h-14 rounded-full flex items-center justify-center mr-4 ${stat.bg}`}>
-                <Icon className={`text-2xl ${stat.color}`} />
-              </div>
-              <div>
-                <p className="text-gray-500 text-sm font-bold uppercase tracking-wider mb-1">{stat.title}</p>
-                <p className="text-2xl font-black text-[#002866] leading-none">{stat.value}</p>
-              </div>
-            </motion.div>
-          );
-        })}
+        {stats.map((stat, i) => (
+          <div key={i} className="bg-white p-6 rounded-sm shadow-sm border border-gray-100 flex items-center justify-between">
+            <div>
+              <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-1">{stat.label}</p>
+              <p className="text-2xl font-black text-[#002866]">{stat.value}</p>
+            </div>
+            <div className={`${stat.bg} ${stat.color} p-3 rounded-sm`}>
+              <stat.icon size={24} />
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Mock Chart Area */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="bg-white p-8 rounded-sm shadow-sm border border-gray-100"
-        >
-          <h3 className="text-lg font-bold text-[#002866] mb-6 uppercase tracking-widest border-b border-gray-100 pb-4">Registration Analytics</h3>
-          <div className="h-64 flex items-center justify-center bg-gray-50 border border-dashed border-gray-200 rounded-sm">
-            <p className="text-gray-400 font-medium">[ User Registration Chart Placeholder ]</p>
-          </div>
-        </motion.div>
-
-        {/* Recent Activity */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.5 }}
-          className="bg-white p-8 rounded-sm shadow-sm border border-gray-100"
-        >
-          <h3 className="text-lg font-bold text-[#002866] mb-6 uppercase tracking-widest border-b border-gray-100 pb-4">Recent Activity</h3>
-          <div className="space-y-6">
-            {[
-              { text: "New volunteer registered from Nigeria", time: "10 mins ago" },
-              { text: "New donation received for Global Hospital Outreach", time: "1 hour ago" },
-              { text: "Blog post 'Healthy Snacking' was published", time: "3 hours ago" },
-              { text: "Campaign '1 Million Smiles' goal updated", time: "5 hours ago" },
-            ].map((activity, i) => (
-              <div key={i} className="flex items-start">
-                <div className="w-2 h-2 rounded-full bg-[#ff9f22] mt-1.5 mr-3"></div>
+        {/* Recent Activity Placeholder */}
+        <div className="bg-white p-8 rounded-sm shadow-sm border border-gray-100">
+          <h3 className="text-lg font-black text-[#002866] uppercase tracking-tight mb-6 flex items-center gap-2">
+            <Clock size={20} className="text-[#ff9f22]" />
+            Recent Activity
+          </h3>
+          <div className="space-y-4">
+            {[1, 2, 3, 4].map((_, i) => (
+              <div key={i} className="flex items-start gap-4 p-4 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0">
+                <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                  <CheckCircle2 size={16} />
+                </div>
                 <div>
-                  <p className="text-gray-700 font-medium">{activity.text}</p>
-                  <p className="text-xs text-gray-400 mt-1">{activity.time}</p>
+                  <p className="text-sm font-bold text-[#002866]">New volunteer registration</p>
+                  <p className="text-xs text-gray-400 mt-1">2 hours ago • System Log</p>
                 </div>
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
+
+        {/* System Health / Quick Links */}
+        <div className="bg-[#002866] p-8 rounded-sm shadow-xl text-white">
+          <h3 className="text-lg font-black uppercase tracking-tight mb-6 flex items-center gap-2">
+            <Megaphone size={20} className="text-[#ff9f22]" />
+            Quick Management
+          </h3>
+          <div className="grid grid-cols-2 gap-4">
+            <button className="bg-white/10 hover:bg-white/20 p-6 rounded-sm text-left transition-all group">
+              <p className="text-[#ff9f22] font-black text-xs uppercase mb-2">Slider</p>
+              <p className="font-bold text-sm">Add New Slide</p>
+            </button>
+            <button className="bg-white/10 hover:bg-white/20 p-6 rounded-sm text-left transition-all group">
+              <p className="text-[#ff9f22] font-black text-xs uppercase mb-2">Campaign</p>
+              <p className="font-bold text-sm">Create Campaign</p>
+            </button>
+            <button className="bg-white/10 hover:bg-white/20 p-6 rounded-sm text-left transition-all group">
+              <p className="text-[#ff9f22] font-black text-xs uppercase mb-2">Confession</p>
+              <p className="font-bold text-sm">Daily Update</p>
+            </button>
+            <button className="bg-white/10 hover:bg-white/20 p-6 rounded-sm text-left transition-all group">
+              <p className="text-[#ff9f22] font-black text-xs uppercase mb-2">Marquee</p>
+              <p className="font-bold text-sm">Edit Marquee</p>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, animate, AnimatePresence } from "framer-motion";
-import { FaCalendarAlt, FaUser, FaComment, FaQuoteLeft, FaStar, FaHeart, FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Ensure react-icons is installed
+import { FaCalendarAlt, FaUser, FaComment, FaQuoteLeft, FaStar, FaHeart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 function Counter({ value, suffix = "", prefix = "", decimal = false }: { value: number; suffix?: string, prefix?: string, decimal?: boolean }) {
   const [displayValue, setDisplayValue] = useState(0);
@@ -40,10 +40,9 @@ function Counter({ value, suffix = "", prefix = "", decimal = false }: { value: 
 
 export default function Home() {
   const router = useRouter();
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCampaignId, setSelectedCampaignId] = useState(1);
 
-  // Keep campaignData just to generate the list of available countries
   const campaignData = [
     { id: 1, title: "Lagos Medical Outreach", country: "Nigeria", date: "Oct 2023", image: "https://volunteermedicalcorps.org/admin/images/gallery/491276-2.jpg", description: "Providing essential medical screenings and treatments to underserved communities in Lagos." },
     { id: 2, title: "Accra Hygiene Drive", country: "Ghana", date: "Nov 2023", image: "https://volunteermedicalcorps.org/admin/images/media/2NpZxEGQD245813967.jpg", description: "Distributing hygiene kits and conducting health education workshops in Accra." },
@@ -57,13 +56,13 @@ export default function Home() {
     campaignData.find(c => c.id === selectedCampaignId) || campaignData[0], 
   [selectedCampaignId]);
 
-  const countries = useMemo(() => Array.from(new Set(campaignData.map(c => c.country))).sort(), []);
+  const regions = ["Africa", "Middle East/Asia", "America/Caribbean", "Nigeria", "Europe", "Australia"];
 
-  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleRegionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
-    setSelectedCountry(val);
+    setSelectedRegion(val);
     if (val) {
-      router.push(`/campaigns/search?country=${encodeURIComponent(val)}`);
+      router.push(`/campaigns/search?region=${encodeURIComponent(val)}`);
     }
   };
 
@@ -72,30 +71,23 @@ export default function Home() {
   const heroSlides = useMemo(() => [
     { 
       bg: "https://volunteermedicalcorps.org/images/sliders/8ZQ9Vj6Az791283465.jpeg", 
-      sub: "", 
-      title: "Welcome to Volunteer Medical Corps", 
-      btnText: "Visit Life Savers", 
-      link: "https://loveworldlifesavers.org/" 
+      sub: "Multiply your global impact", 
+      title: "Healing Everywhere Lead Partnership Extender", 
+      btnText: "Get Started", 
+      link: "https://healingstreams.tv/helper" 
     },
     { 
       bg: "https://volunteermedicalcorps.org/images/sliders/9q3WoyGbz829456713.jpg", 
-      sub: "", 
-      title: "Saving Lives Through Good Deeds", 
-      btnText: "Support the Cause", 
-      link: "https://volunteermedicalcorps.org/causes/good-deeds-campaigns/GDS102933" 
+      sub: "Saving Lives Through Good Deeds", 
+      title: "Support the Cause - Sponsor a project today!", 
+      btnText: "Give Now", 
+      link: "/donate" 
     },
     { 
       bg: "https://volunteermedicalcorps.org/images/sliders/yn4Y1uGUV794815623.jpg", 
       sub: "Start your volunteering journey", 
-      title: "Become a Volunteer and provide medical care for people in need!", 
+      title: "Become a Volunteer and provide medical care!", 
       btnText: "Join Us Today", 
-      link: "/register" 
-    },
-    { 
-      bg: "https://volunteermedicalcorps.org/images/sliders/Kq7xQUD5R792516384.jpg", 
-      sub: "Join the VMC", 
-      title: "Become a Volunteer and provide medical care for people in need!", 
-      btnText: "Sign Up Now", 
       link: "/register" 
     }
   ], []);
@@ -137,105 +129,184 @@ export default function Home() {
     },
   ];
 
+  const events = [
+    {
+      id: 1,
+      title: "Global Day of Prayer",
+      date: "March 27, 2026",
+      location: "Global",
+      image: "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg",
+    },
+    {
+      id: 2,
+      title: "GOOD DEEDS FIESTA",
+      date: "August 01, 2025",
+      location: "Worldwide",
+      image: "https://volunteermedicalcorps.org/admin/images/events/1755274146Ms1V7Yu5D.jpg",
+    },
+    {
+      id: 3,
+      title: "GLOBAL HOSPITAL OUTREACH CAMPAIGN",
+      date: "June 23, 2025",
+      location: "Various Communities",
+      image: "https://volunteermedicalcorps.org/admin/images/events/1750698188Quha4opTR.jpg",
+    },
+    {
+      id: 4,
+      title: "YOUNG MEDICS CONFERENCE CAPE TOWN",
+      date: "May 17, 2025",
+      location: "Cape Town, South Africa",
+      image: "https://volunteermedicalcorps.org/admin/images/events/1749249547wheUCSbgX.jpg",
+    },
+  ];
+
   return (
     <div className="w-full font-roboto text-gray-700">
       
-      {/* Hero Section */}
-      <section className="relative min-h-[85vh] md:min-h-screen flex items-end bg-black overflow-hidden group pb-16 md:pb-24">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="absolute inset-0 z-0"
-          >
-            <Image 
-              src={heroSlides[currentSlide].bg} 
-              alt="Slide Background" 
-              fill 
-              className="object-cover opacity-80 md:opacity-70" 
-              unoptimized 
-              priority 
-            />
-            {/* Reduced solid overlay on mobile and desktop to increase visibility */}
-            <div className="absolute inset-0 bg-black/20 md:bg-black/10"></div>
-            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/90 via-black/60 md:via-black/30 to-transparent"></div>
-          </motion.div>
-        </AnimatePresence>
-        
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 w-full mb-0 md:mb-16">
-          <div className="max-w-[750px] text-left pt-8 md:pt-0">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`content-${currentSlide}`}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                {heroSlides[currentSlide].sub && (
-                  <h2 className="text-[#ff9f22] text-[10px] md:text-sm font-black tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 md:mb-5">
-                    {heroSlides[currentSlide].sub}
-                  </h2>
-                )}
-                {heroSlides[currentSlide].title && (
-                  <h1 className="text-white text-[28px] sm:text-[32px] md:text-5xl lg:text-[58px] font-black uppercase leading-[1.2] md:leading-[1.1] mb-8 md:mb-12">
-                    {heroSlides[currentSlide].title}
-                  </h1>
-                )}
-                <div className="flex flex-col sm:flex-row items-start gap-4 justify-start">
-                  <Link 
-                    href={heroSlides[currentSlide].link} 
-                    className="w-full sm:w-auto bg-[#ff9f22] text-[#002866] px-8 md:px-12 py-4 md:py-5 font-black uppercase text-[12px] md:text-[13px] tracking-[0.15em] transition-all hover:bg-white shadow-[0_10px_30px_rgba(255,159,34,0.3)] text-center flex items-center justify-center gap-2"
-                  >
-                    {heroSlides[currentSlide].btnText}
-                  </Link>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
+{/* Hero Section - Optimized Responsive */}
+<section className="bg-white py-4 md:py-8 overflow-hidden">
+  <div className="max-w-[1300px] mx-auto px-4 md:px-6 lg:px-8">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+      
+      {/* Left: Slider */}
+      <div className="lg:col-span-7 relative">
+        <div className="relative w-full h-[260px] sm:h-[320px] md:h-[400px] lg:h-[420px] xl:h-[460px] rounded-xl overflow-hidden group shadow-lg">
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6 }}
+              className="absolute inset-0"
+            >
+              <Link href={heroSlides[currentSlide].link} className="block h-full">
+                <div className="relative w-full h-full">
+                  <Image 
+                    src={heroSlides[currentSlide].bg} 
+                    alt="Slide Background" 
+                    fill 
+                    className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]" 
+                    priority 
+                  />
 
-        {/* Slider Navigation Arrows */}
-        <div className="absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-2 sm:px-6 pointer-events-none opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex flex-col justify-end p-4 md:p-6 lg:p-8 text-white">
+                    
+                    <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black uppercase mb-2 leading-tight">
+                      {heroSlides[currentSlide].title}
+                    </h2>
+
+                    <p className="text-xs sm:text-sm md:text-base mb-3 max-w-sm opacity-90 hidden sm:block">
+                      {heroSlides[currentSlide].sub}
+                    </p>
+
+                    <div className="inline-block w-max bg-red-600 hover:bg-white hover:text-red-600 text-white px-5 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all">
+                      {heroSlides[currentSlide].btnText}
+                    </div>
+
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation */}
           <button 
             onClick={prevSlide}
-            className="pointer-events-auto w-10 h-10 sm:w-14 sm:h-14 bg-black/20 hover:bg-black/50 lg:bg-transparent border border-white/30 rounded-full flex items-center justify-center text-white hover:border-[#ff9f22] hover:text-[#ff9f22] transition-all"
-            aria-label="Previous slide"
+            className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 bg-black/40 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all"
           >
-            <FaChevronLeft className="text-sm sm:text-base pr-0.5 sm:pr-1" />
+            <FaChevronLeft size={14} />
           </button>
+
           <button 
             onClick={nextSlide}
-            className="pointer-events-auto w-10 h-10 sm:w-14 sm:h-14 bg-black/20 hover:bg-black/50 lg:bg-transparent border border-white/30 rounded-full flex items-center justify-center text-white hover:border-[#ff9f22] hover:text-[#ff9f22] transition-all"
-            aria-label="Next slide"
+            className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 bg-black/40 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-all"
           >
-            <FaChevronRight className="text-sm sm:text-base pl-0.5 sm:pl-1" />
+            <FaChevronRight size={14} />
           </button>
-        </div>
 
-        {/* Slider Pagination Dots */}
-        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 hidden sm:flex gap-2">
-          {heroSlides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentSlide(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 ${i === currentSlide ? "bg-[#ff9f22] w-8" : "bg-white/50 hover:bg-white w-2.5"}`}
-            />
+        </div>
+      </div>
+
+      {/* Right: Events */}
+      <div className="lg:col-span-5 flex flex-col lg:h-[420px] xl:h-[460px] min-h-0 overflow-hidden">
+        
+        <div className="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
+          <h3 className="text-[#13397F] text-lg md:text-xl font-black uppercase">
+            Upcoming Events
+          </h3>
+          <Link href="/media/events" className="text-[10px] md:text-xs font-black text-[#ff9f22] uppercase tracking-wider hover:underline">
+            View All →
+          </Link>
+        </div>
+        
+        <div className="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1 custom-scrollbar">
+          {events.map((event) => (
+            <Link key={event.id} href={`/media/events/${event.id}`} className="group block">
+              <div className="flex gap-3 p-3 rounded-lg border border-gray-100 hover:border-[#ff9f22]/30 hover:shadow-sm transition-all">
+                
+                <div className="relative w-16 h-16 md:w-18 md:h-18 shrink-0 overflow-hidden rounded-md">
+                  <Image 
+                    src={event.image} 
+                    alt={event.title} 
+                    fill 
+                    className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                  />
+                </div>
+
+                <div className="flex flex-col justify-center min-w-0">
+                  <p className="text-[#ff9f22] text-[9px] font-black uppercase mb-1">
+                    {event.date}
+                  </p>
+
+                  <h4 className="text-[#002866] text-xs md:text-sm font-bold line-clamp-2 group-hover:text-[#ff9f22] transition-colors">
+                    {event.title}
+                  </h4>
+
+                  <p className="text-gray-500 text-[10px] md:text-xs flex items-center gap-1">
+                    • {event.location}
+                  </p>
+                </div>
+
+              </div>
+            </Link>
           ))}
         </div>
-      </section>
 
-      {/* Decorative vertical text seen in Screenshot 024543 */}
-      {/* <div className="hidden xl:flex absolute left-8 top-2/3 -rotate-90 origin-left items-center gap-4 z-20 whitespace-nowrap">
-        <span className="w-12 h-[1px] bg-[#002866]/20"></span>
-        <span className="text-[10px] font-black uppercase tracking-[0.8em] text-[#002866]/40">
-          Volunteer Medical Corps
-        </span>
-      </div> */}
+        {/* CTA */}
+        <div className="mt-4 lg:mt-6">
+          <Link 
+            href="/register" 
+            className="flex items-center justify-between bg-[#002866] hover:bg-[#ff9f22] hover:text-[#002866] text-white px-4 py-4 md:px-5 md:py-5 rounded-xl transition-all group"
+          >
+            <div>
+              <p className="text-[10px] font-black uppercase opacity-70">Get Involved</p>
+              <p className="text-sm md:text-base font-black uppercase">Join as a Volunteer</p>
+            </div>
+            <span className="text-xl group-hover:translate-x-2 transition-transform">→</span>
+          </Link>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 50s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
       {/* Intro & Counters Section */}
       <section className="py-24 bg-white relative overflow-hidden">
@@ -351,16 +422,16 @@ export default function Home() {
                 Partner With Us
               </Link>
 
-              {/* Country Filter Dropdown */}
+              {/* Region Filter Dropdown */}
               <div className="relative w-full sm:w-auto min-w-[200px]">
                 <select 
-                  value={selectedCountry}
-                  onChange={handleCountryChange}
+                  value={selectedRegion}
+                  onChange={handleRegionChange}
                   className="w-full bg-white border-2 border-[#002866] text-[#002866] px-4 py-3 font-bold uppercase text-[12px] tracking-widest focus:outline-none transition-all cursor-pointer appearance-none rounded-none"
                 >
-                  <option value="">Search by Country</option>
-                  {countries.map(c => (
-                    <option key={c} value={c}>{c}</option>
+                  <option value="">Search by Region</option>
+                  {regions.map(r => (
+                    <option key={r} value={r}>{r}</option>
                   ))}
                 </select>
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#002866]">

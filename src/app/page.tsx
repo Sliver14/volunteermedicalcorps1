@@ -164,13 +164,13 @@ export default function Home() {
     <div className="w-full font-roboto text-gray-700">
       
 {/* Hero Section - Optimized Responsive */}
-<section className="bg-white py-4 md:py-8 overflow-hidden">
+<section className="bg-white py-4 md:py-8 my-12 overflow-hidden">
   <div className="max-w-[1300px] mx-auto px-4 md:px-6 lg:px-8">
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
       
       {/* Left: Slider */}
       <div className="lg:col-span-7 relative">
-        <div className="relative w-full h-[260px] sm:h-[320px] md:h-[400px] lg:h-[420px] xl:h-[460px] rounded-xl overflow-hidden group shadow-lg">
+        <div className="relative w-full h-65 sm:h-80 md:h-[400px] lg:h-[420px] xl:h-[460px] rounded-xs overflow-hidden group shadow-lg">
           
           <AnimatePresence mode="wait">
             <motion.div
@@ -279,7 +279,7 @@ export default function Home() {
         <div className="mt-4 lg:mt-6">
           <Link 
             href="/register" 
-            className="flex items-center justify-between bg-[#002866] hover:bg-[#ff9f22] hover:text-[#002866] text-white px-4 py-4 md:px-5 md:py-5 rounded-xl transition-all group"
+            className="flex items-center justify-between bg-[#002866] hover:bg-[#ff9f22] hover:text-[#002866] text-white px-4 py-4 md:px-5 md:py-5 rounded-xs transition-all group"
           >
             <div>
               <p className="text-[10px] font-black uppercase opacity-70">Get Involved</p>

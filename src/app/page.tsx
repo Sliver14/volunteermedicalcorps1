@@ -70,6 +70,7 @@ export default function Home() {
 
   // Hero Slider Logic
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(0);
   const heroSlides = useMemo(() => [
     { 
       bg: "https://volunteermedicalcorps.org/images/sliders/8ZQ9Vj6Az791283465.jpeg", 
@@ -94,8 +95,15 @@ export default function Home() {
     }
   ], []);
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
-  const prevSlide = () => setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
+  };
+  
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -174,13 +182,24 @@ export default function Home() {
       <div className="lg:col-span-7 relative">
         <div className="relative w-full h-65 sm:h-80 md:h-[400px] lg:h-[420px] xl:h-[460px] rounded-xs overflow-hidden group shadow-lg">
           
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={currentSlide}
-              initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
-              animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
-              exit={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 0.98 }}
+              initial={isMobile 
+                ? { opacity: 0, y: 40 } 
+                : { opacity: 0, x: direction > 0 ? 300 : -300 }
+              }
+              animate={isMobile 
+                ? { opacity: 1, y: 0 } 
+                : { opacity: 1, x: 0 }
+              }
+              exit={isMobile 
+                ? { opacity: 0, y: 40 } 
+                : { opacity: 0, x: direction > 0 ? -300 : 300 }
+              }
               transition={{ 
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.4 },
                 duration: isMobile ? 0.35 : 0.6,
                 ease: "easeOut" 
               }}

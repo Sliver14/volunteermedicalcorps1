@@ -165,7 +165,7 @@ export default function Home() {
       
 {/* Hero Section - Optimized Responsive */}
 <section className="bg-white py-4 md:py-8 my-12 overflow-hidden">
-  <div className="max-w-[1300px] mx-auto px-4 md:px-6 lg:px-8">
+  <div className="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-8">
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
       
       {/* Left: Slider */}

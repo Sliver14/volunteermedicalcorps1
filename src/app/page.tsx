@@ -6,6 +6,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion, animate, AnimatePresence } from "framer-motion";
 import { FaCalendarAlt, FaUser, FaComment, FaQuoteLeft, FaStar, FaHeart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 function Counter({ value, suffix = "", prefix = "", decimal = false }: { value: number; suffix?: string, prefix?: string, decimal?: boolean }) {
   const [displayValue, setDisplayValue] = useState(0);
@@ -40,6 +41,7 @@ function Counter({ value, suffix = "", prefix = "", decimal = false }: { value: 
 
 export default function Home() {
   const router = useRouter();
+  const isMobile = useIsMobile();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCampaignId, setSelectedCampaignId] = useState(1);
 
@@ -164,7 +166,7 @@ export default function Home() {
     <div className="w-full font-roboto text-gray-700">
       
 {/* Hero Section - Optimized Responsive */}
-<section className="bg-white py-4 md:py-8 my-12 overflow-hidden">
+<section className="bg-white py-4 md:py-8 md:my-12 overflow-hidden">
   <div className="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-8">
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
       
@@ -175,10 +177,13 @@ export default function Home() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.6 }}
+              initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+              animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
+              exit={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 0.98 }}
+              transition={{ 
+                duration: isMobile ? 0.35 : 0.6,
+                ease: "easeOut" 
+              }}
               className="absolute inset-0"
             >
               <Link href={heroSlides[currentSlide].link} className="block h-full">
@@ -192,7 +197,7 @@ export default function Home() {
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex flex-col justify-end p-4 md:p-6 lg:p-8 text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/10 to-transparent flex flex-col justify-end p-4 md:p-6 lg:p-8 text-white">
                     
                     <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black uppercase mb-2 leading-tight">
                       {heroSlides[currentSlide].title}

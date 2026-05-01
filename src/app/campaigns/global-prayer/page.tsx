@@ -3,8 +3,10 @@
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function GlobalPrayerPage() {
+  const isMobile = useIsMobile();
   const features = [
     {
       title: "Intercessory Prayer",
@@ -40,10 +42,10 @@ export default function GlobalPrayerPage() {
         </div>
         
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+          whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-white text-center"
         >
           <h6 className="text-[#ff9f22] font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase mb-4 md:mb-6 text-sm md:text-base">Global Day of Prayer</h6>

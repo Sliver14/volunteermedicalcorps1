@@ -3,8 +3,10 @@
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function OneMillionSmilesPage() {
+  const isMobile = useIsMobile();
   const steps = [
     {
       title: "Sign up to participate",
@@ -37,10 +39,10 @@ export default function OneMillionSmilesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
             <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
               className="space-y-6 md:space-y-8 relative z-10"
             >
               <h6 className="text-[#ff9f22] font-bold tracking-[0.3em] uppercase text-xs md:text-sm">World Humanitarian Day Campaign</h6>
@@ -60,10 +62,10 @@ export default function OneMillionSmilesPage() {
               </div>
             </motion.div>
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: isMobile ? 0.35 : 0.6, delay: 0.2, ease: "easeOut" }}
               className="relative h-[300px] sm:h-[400px] lg:h-[600px] w-full mt-8 lg:mt-0"
             >
               <Image 

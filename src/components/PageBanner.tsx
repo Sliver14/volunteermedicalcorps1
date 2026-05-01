@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface PageBannerProps {
   title: string;
@@ -9,6 +10,8 @@ interface PageBannerProps {
 }
 
 export default function PageBanner({ title, parent }: PageBannerProps) {
+  const isMobile = useIsMobile();
+
   return (
     <section className="relative bg-[#002866] py-4 md:py-5 text-white overflow-hidden border-b border-[#001f52]">
       {/* Background patterns */}
@@ -19,18 +22,18 @@ export default function PageBanner({ title, parent }: PageBannerProps) {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-between gap-4">
         <motion.h1 
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+          animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
+          transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
           className="text-lg md:text-xl font-poppins font-black uppercase tracking-tight leading-none"
         >
           {title}
         </motion.h1>
         
         <motion.div 
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
+          initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+          animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
+          transition={{ duration: isMobile ? 0.35 : 0.6, delay: 0.1, ease: "easeOut" }}
           className="flex items-center space-x-2 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 whitespace-nowrap"
         >
           <Link href="/" className="hover:text-[#ff9f22] transition-colors">Home</Link>

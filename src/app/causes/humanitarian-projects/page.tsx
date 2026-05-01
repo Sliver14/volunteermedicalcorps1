@@ -3,8 +3,10 @@
 import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function HumanitarianProjectsPage() {
+  const isMobile = useIsMobile();
   const activities = [
     "Clean up your community",
     "Global Voluntary Blood Donation Campaign",
@@ -43,10 +45,10 @@ export default function HumanitarianProjectsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
             <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
               className="relative h-[300px] md:h-[500px]"
             >
               <Image 
@@ -61,10 +63,10 @@ export default function HumanitarianProjectsPage() {
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: isMobile ? 0.35 : 0.6, delay: 0.2, ease: "easeOut" }}
               className="space-y-6 md:space-y-8 mt-8 lg:mt-0"
             >
               <div>

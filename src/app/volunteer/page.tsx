@@ -4,8 +4,11 @@ import PageBanner from "@/components/PageBanner";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function VolunteerLandingPage() {
+  const isMobile = useIsMobile();
+
   return (
     <div className="w-full bg-white">
       <PageBanner title="Become A Volunteer" />
@@ -15,10 +18,10 @@ export default function VolunteerLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
             >
               <h6 className="text-[#ff9f22] font-bold tracking-[0.3em] uppercase mb-4 text-center lg:text-left">Join the Corps</h6>
               <h2 className="text-3xl md:text-5xl font-poppins font-bold text-[#002866] mb-8 leading-tight text-center lg:text-left">
@@ -43,10 +46,10 @@ export default function VolunteerLandingPage() {
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
+              whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: isMobile ? 0.35 : 0.6, delay: 0.2, ease: "easeOut" }}
               className="relative h-[500px] rounded-sm overflow-hidden shadow-2xl"
             >
               <Image 

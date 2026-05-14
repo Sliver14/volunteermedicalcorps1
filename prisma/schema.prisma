@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -71,12 +71,88 @@ model MarqueeItem {
 model Campaign {
   id          String   @id @default(cuid())
   title       String
-  description String
+  description String   @db.Text
   image       String
-  region      String
-  country     String
-  category    String
-  date        String
+  region      String?
+  country     String?
+  category    String   // e.g., "Good Deeds Campaigns", "Medical Projects", etc.
+  date        DateTime?
+  isActive    Boolean  @default(true)
+  ctaType     String?  @default("DONATE") // DONATE, REGISTER, LINK, etc.
+  ctaText     String?  @default("Give Now")
+  ctaLink     String?
+  target      Float?   @default(0)
+  raised      Float?   @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model News {
+  id          String   @id @default(cuid())
+  title       String
+  content     String   @db.Text
+  image       String?
+  category    String?
+  author      String?
+  date        DateTime @default(now())
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Blog {
+  id          String   @id @default(cuid())
+  title       String
+  content     String   @db.Text
+  image       String?
+  category    String?
+  author      String?
+  date        DateTime @default(now())
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  image       String?
+  location    String?
+  date        DateTime
+  isLive      Boolean  @default(false)
+  streamUrl   String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Gallery {
+  id          String   @id @default(cuid())
+  title       String?
+  imageUrl    String
+  category    String?  // e.g., "Medical", "Relief", etc.
+  type        String   @default("IMAGE") // IMAGE or VIDEO
+  videoUrl    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  content     String   @db.Text
+  image       String?
+  role        String?
+  date        DateTime?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  user      String
+  text      String   @db.Text
+  time      String
+  createdAt DateTime @default(now())
 }

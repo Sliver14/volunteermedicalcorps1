@@ -155,7 +155,7 @@ function CampaignSearchContent() {
                       </h3>
                       <div className="mt-auto pt-4 border-t border-gray-100">
                         <Link 
-                          href="/donate" 
+                          href="/give" 
                           className="text-[#002866] text-[12px] font-black uppercase tracking-widest border-b-2 border-gray-200 pb-1 hover:border-[#002866] transition-all"
                         >
                           Learn More

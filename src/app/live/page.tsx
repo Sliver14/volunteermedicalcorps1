@@ -20,11 +20,7 @@ import Hls from "hls.js";
 
 export default function LiveStreamPage() {
   // Chat State
-  const [messages, setMessages] = useState([
-    { id: 1, user: "Dr. Adebayo", text: "Excited for the broadcast!", time: "10:00 AM" },
-    { id: 2, user: "Sarah J.", text: "Watching live from London. Greetings everyone.", time: "10:02 AM" },
-    { id: 3, user: "VMC Admin", text: "Welcome to the stream! We will begin shortly.", time: "10:05 AM" },
-  ]);
+  const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState("");
   
   // Player State
@@ -43,9 +39,37 @@ export default function LiveStreamPage() {
   const initialLoadRef = useRef(true);
   let controlsTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  const [streamUrl, setStreamUrl] = useState(
-    process.env.NEXT_PUBLIC_LIVE_STREAM_URL || "https://pvqybrzodz24-hls-live.5centscdn.com/HSOP/955ad3298db330b5ee880c2c9e6f23a0.sdp/playlist.m3u8"
-  );
+  const [streamUrl, setStreamUrl] = useState("https://pvqybrzodz24-hls-live.5centscdn.com/HSOP/955ad3298db330b5ee880c2c9e6f23a0.sdp/playlist.m3u8");
+
+  // Fetch Stream and Messages
+  useEffect(() => {
+    const fetchData = async () => {
+      // Fetch Live Event
+      try {
+        const eventRes = await fetch('/api/admin/event');
+        const events = await eventRes.json();
+        if (Array.isArray(events)) {
+          const liveEvent = events.find((e: any) => e.isLive && e.isActive);
+          if (liveEvent?.streamUrl) {
+            setStreamUrl(liveEvent.streamUrl);
+          }
+        }
+      } catch (e) {}
+
+      // Fetch Chat
+      try {
+        const chatRes = await fetch('/api/chat');
+        const chatData = await chatRes.json();
+        if (Array.isArray(chatData)) {
+          setMessages(chatData);
+        }
+      } catch (e) {}
+    };
+
+    fetchData();
+    const interval = setInterval(fetchData, 5000); // Poll every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   // Handle HLS Playback
   useEffect(() => {
@@ -156,21 +180,29 @@ export default function LiveStreamPage() {
   };
 
   useEffect(() => {
-    if (initialLoadRef.current) {
-      scrollToBottom();
-      initialLoadRef.current = false;
-    } else {
-      scrollToBottom();
-    }
+    scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newMessage.trim()) return;
+    
     const now = new Date();
     const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    setMessages([...messages, { id: messages.length + 1, user: "You", text: newMessage, time: timeString }]);
-    setNewMessage("");
+    const msg = { user: "User", text: newMessage, time: timeString };
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(msg),
+      });
+      if (res.ok) {
+        const savedMsg = await res.json();
+        setMessages(prev => [...prev, savedMsg]);
+        setNewMessage("");
+      }
+    } catch (e) {}
   };
 
   return (

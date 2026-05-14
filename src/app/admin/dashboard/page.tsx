@@ -15,12 +15,21 @@ export default async function AdminDashboard() {
   const session = await getServerSession(authOptions);
 
   // Fetch some stats
-  const [userCount, slideCount, confessionCount, campaignCount] = await Promise.all([
-    prisma.user.count(),
-    prisma.heroSlide.count(),
-    prisma.dailyConfession.count(),
-    prisma.campaign.count(),
-  ]);
+  let userCount = 0;
+  let slideCount = 0;
+  let confessionCount = 0;
+  let campaignCount = 0;
+
+  try {
+    [userCount, slideCount, confessionCount, campaignCount] = await Promise.all([
+      prisma.user.count(),
+      prisma.heroSlide.count(),
+      prisma.dailyConfession.count(),
+      prisma.campaign.count(),
+    ]);
+  } catch (error) {
+    console.error("Database fetch error in AdminDashboard:", error);
+  }
 
   const stats = [
     { label: "Total Users", value: userCount, icon: Users, color: "text-blue-600", bg: "bg-blue-50" },

@@ -125,8 +125,8 @@ export default function Header() {
                 </svg>
                 Member Portal
               </Link>
-              <Link href="/donate" className="bg-[#002866] text-white uppercase h-full px-8 py-3 flex items-center font-semibold text-[15px] tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all">
-                Donate Now
+              <Link href="/give" className="bg-[#002866] text-white uppercase h-full px-8 py-3 flex items-center font-semibold text-[15px] tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all">
+                Give Now
               </Link>
             </div>
 
@@ -242,8 +242,8 @@ export default function Header() {
             </svg>
           )}
         </button>
-        <Link href="/donate" className="text-white font-black tracking-[0.2em] text-[13px] flex-1 text-center pr-6" onClick={() => setIsMobileOpen(false)}>
-            Donate Now
+        <Link href="/give" className="text-white font-black tracking-[0.2em] text-[13px] flex-1 text-center pr-6" onClick={() => setIsMobileOpen(false)}>
+            Give Now
         </Link>
       </div>
     </>

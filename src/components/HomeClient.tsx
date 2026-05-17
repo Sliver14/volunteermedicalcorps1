@@ -741,13 +741,13 @@ export default function HomeClient({
       </section>
 
       {/* About VMC Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="pt-40 lg:pt-56 pb-24 bg-white relative overflow-hidden">
         {/* Decorative Background */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gray-50 z-0 hidden lg:block"></div>
         <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#ff9f22]/10 rounded-full blur-3xl z-0"></div>
         
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
             
             {/* Left: Video */}
             <motion.div 
@@ -755,22 +755,25 @@ export default function HomeClient({
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="w-full relative order-2 lg:order-1"
+              className="w-full relative order-2 lg:order-1 flex items-center"
             >
-              <div className="relative rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,40,102,0.2)] bg-black aspect-video border-[8px] border-white group z-10">
-                <video 
-                  width="100%" 
-                  height="100%" 
-                  controls 
-                  poster="https://cdnvideos.ceflix.org/thumb/155112-1750685155579932439402.jpg"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                >
-                  <source src="https://cdnvideos.ceflix.org/processed/155112-1750685155579932439402.mp4" type="video/mp4" />
-                </video>
+              <div className="w-full relative">
+                <div className="relative rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,40,102,0.2)] bg-black aspect-video border-[8px] border-white group z-10">
+                  <video 
+                    width="100%" 
+                    height="100%" 
+                    controls 
+                    controlsList="nodownload"
+                    poster="https://cdnvideos.ceflix.org/thumb/155112-1750685155579932439402.jpg"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  >
+                    <source src="https://cdnvideos.ceflix.org/processed/155112-1750685155579932439402.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                
+                {/* Decorative Frame */}
+                <div className="absolute -z-0 -bottom-6 -right-6 w-full h-full border-2 border-[#ff9f22]/30 rounded-xl hidden lg:block"></div>
               </div>
-              
-              {/* Decorative Frame */}
-              <div className="absolute -z-0 -bottom-6 -right-6 w-full h-full border-2 border-[#ff9f22]/30 rounded-xl hidden lg:block"></div>
             </motion.div>
 
             {/* Right: Content */}
@@ -779,33 +782,33 @@ export default function HomeClient({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col order-1 lg:order-2"
+              className="flex flex-col order-1 lg:order-2 justify-center py-4"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <span className="w-12 h-[2px] bg-[#ff9f22]"></span>
-                <h6 className="text-[#ff9f22] font-bold uppercase tracking-[0.3em] text-xs">Who We Are</h6>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="w-10 h-[2px] bg-[#ff9f22]"></span>
+                <h6 className="text-[#ff9f22] font-bold uppercase tracking-[0.3em] text-[10px]">Who We Are</h6>
               </div>
               
-              <h2 className="text-[#002866] text-4xl lg:text-5xl font-poppins font-black leading-[1.1] mb-8">
+              <h2 className="text-[#002866] text-3xl lg:text-5xl font-poppins font-black leading-tight mb-6">
                 About Volunteer <br className="hidden lg:block" />
                 <span className="text-[#ff9f22]">Medical Corps</span>
               </h2>
               
-              <div className="space-y-6 mb-12">
-                <p className="text-gray-700 text-lg lg:text-xl leading-relaxed font-medium italic border-l-4 border-[#ff9f22] pl-6 py-2 bg-gray-50 rounded-r-lg">
+              <div className="space-y-4 mb-10">
+                <p className="text-gray-700 text-base lg:text-lg leading-relaxed font-semibold italic border-l-4 border-[#ff9f22] pl-5 py-1 bg-gray-50 rounded-r-lg">
                   "Providing medical care through outreaches, humanitarian assistance and sustainable health care solutions."
                 </p>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <p className="text-gray-600 text-base leading-relaxed">
                   We are an ever-expanding global network of Christian health care workers, non-medical volunteers and students committed to providing medical care in regions of crisis and to communities in dire need.
                 </p>
               </div>
               
-              <div className="flex flex-wrap gap-6">
-                <Link href="/about" className="inline-flex items-center bg-[#002866] text-white px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm shadow-xl group">
+              <div className="flex flex-wrap gap-4">
+                <Link href="/about" className="inline-flex items-center bg-[#002866] text-white px-8 py-3.5 font-black uppercase tracking-widest text-[11px] hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm shadow-xl group">
                   Learn More 
-                  <FaArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
+                  <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
-                <Link href="/media/video-gallery" className="inline-flex items-center border-2 border-[#002866] text-[#002866] px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-[#002866] hover:text-white transition-all rounded-sm">
+                <Link href="/media/video-gallery" className="inline-flex items-center border-2 border-[#002866] text-[#002866] px-8 py-3.5 font-black uppercase tracking-widest text-[11px] hover:bg-[#002866] hover:text-white transition-all rounded-sm">
                   Watch Gallery
                 </Link>
               </div>

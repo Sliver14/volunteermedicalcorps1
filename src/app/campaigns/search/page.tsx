@@ -40,8 +40,6 @@ const allCampaigns = [
 
 const ITEMS_PER_PAGE = 6;
 
-import { Suspense } from "react";
-
 export default function CampaignSearchPage() {
   return (
     <Suspense fallback={

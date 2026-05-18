@@ -46,11 +46,6 @@ export default async function EventDetailPage({ params }: { params: { id: string
             <div className="flex items-center gap-2">
               <FaCalendarAlt className="text-[#ff9f22]" /> {formatDate(event.date)}
             </div>
-            {event.time && (
-              <div className="flex items-center gap-2">
-                <FaClock className="text-[#ff9f22]" /> {event.time}
-              </div>
-            )}
             {event.location && (
               <div className="flex items-center gap-2">
                 <FaMapMarkerAlt className="text-[#ff9f22]" /> {event.location}

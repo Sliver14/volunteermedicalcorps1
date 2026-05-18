@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PageBanner from "@/components/PageBanner";
 import Image from "next/image";
+import { FaFacebookF, FaTwitter } from "react-icons/fa";
 
 const projects = [
   { id: "EUT-254138", title: "1 Million Smiles", image: "/give-images/projects/1msmiles.jpg", goal: 100000, description: "Join us to bring smiles to millions of people around the world through our humanitarian projects." },
@@ -92,10 +93,10 @@ export default function GivePage() {
                   <span className="text-xs font-bold uppercase tracking-widest text-gray-500">Share:</span>
                   <div className="flex gap-2">
                     <div className="w-8 h-8 bg-[#002866] rounded-full flex items-center justify-center text-white cursor-pointer hover:bg-[#ff9f22] transition-colors">
-                      <i className="fab fa-facebook-f text-sm"></i>
+                      <FaFacebookF size={14} />
                     </div>
                     <div className="w-8 h-8 bg-[#002866] rounded-full flex items-center justify-center text-white cursor-pointer hover:bg-[#ff9f22] transition-colors">
-                      <i className="fab fa-twitter text-sm"></i>
+                      <FaTwitter size={14} />
                     </div>
                   </div>
                 </div>

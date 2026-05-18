@@ -1,15 +1,30 @@
 "use client";
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from "framer-motion";
 import { FaCalendarAlt } from 'react-icons/fa';
 import PageBanner from '@/components/PageBanner';
+import Pagination from '@/components/Pagination';
 
 export default function BlogClient({ allBlogs }: any) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const totalPages = Math.ceil(allBlogs.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentBlogs = allBlogs.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -20,13 +35,13 @@ export default function BlogClient({ allBlogs }: any) {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {allBlogs.map((post: any, index: number) => (
+            {currentBlogs.map((post: any, index: number) => (
               <motion.div 
                 key={index} 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5 }}
                 className="group bg-white rounded-sm overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="relative w-full h-[275px] overflow-hidden">
@@ -67,8 +82,15 @@ export default function BlogClient({ allBlogs }: any) {
             ))}
           </div>
 
+          <Pagination 
+            currentPage={currentPage} 
+            totalPages={totalPages} 
+            onPageChange={handlePageChange} 
+          />
+
         </div>
       </section>
     </div>
   );
 }
+

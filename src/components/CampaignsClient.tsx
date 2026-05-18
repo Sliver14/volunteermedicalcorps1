@@ -1,10 +1,25 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Pagination from "@/components/Pagination";
 
 export default function CampaignsClient({ allCampaigns }: any) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  const totalPages = Math.ceil(allCampaigns.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentCampaigns = allCampaigns.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <section className="py-12 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,7 +47,7 @@ export default function CampaignsClient({ allCampaigns }: any) {
           }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
         >
-          {allCampaigns.map((item: any) => (
+          {currentCampaigns.map((item: any) => (
             <motion.div 
               key={item.id} 
               variants={{
@@ -66,7 +81,14 @@ export default function CampaignsClient({ allCampaigns }: any) {
             </motion.div>
           ))}
         </motion.div>
+
+        <Pagination 
+          currentPage={currentPage} 
+          totalPages={totalPages} 
+          onPageChange={handlePageChange} 
+        />
       </div>
     </section>
   );
 }
+

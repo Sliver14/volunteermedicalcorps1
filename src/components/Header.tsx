@@ -54,7 +54,7 @@ export default function Header() {
         { label: "Testimonials", href: "/media/testimonials" },
       ]
     },
-    { label: "Live", href: "/live" },
+    { label: "Live stream", href: "/tv" },
   ];
 
   return (

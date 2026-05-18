@@ -1,11 +1,36 @@
 "use client";
 
+import { useState, useMemo } from "react";
 import PageBanner from "@/components/PageBanner";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaQuoteLeft, FaStar, FaHeart } from "react-icons/fa";
+import Pagination from "@/components/Pagination";
 
 export default function TestimonialsClient({ allTestimonials }: any) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+
+  // Deduplicate testimonials by content
+  const uniqueTestimonials = useMemo(() => {
+    const seen = new Set();
+    return allTestimonials.filter((t: any) => {
+      const duplicate = seen.has(t.content);
+      seen.add(t.content);
+      return !duplicate;
+    });
+  }, [allTestimonials]);
+
+  const totalPages = Math.ceil(uniqueTestimonials.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentTestimonials = uniqueTestimonials.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="w-full bg-white">
       <PageBanner title="Testimonials" parent={{ label: "Media", href: "/media/news" }} />
@@ -32,13 +57,13 @@ export default function TestimonialsClient({ allTestimonials }: any) {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
-            {allTestimonials.map((testimonial: any, index: number) => (
+            {currentTestimonials.map((testimonial: any, index: number) => (
               <motion.div 
                 key={index}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5 }}
                 className="bg-white p-10 shadow-lg border border-slate-100 rounded-sm flex flex-col items-center text-center relative mt-12 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group"
               >
                 <div className="absolute -top-12 w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-lg group-hover:border-[#ff9f22] transition-colors duration-300">
@@ -70,8 +95,15 @@ export default function TestimonialsClient({ allTestimonials }: any) {
               </motion.div>
             ))}
           </div>
+
+          <Pagination 
+            currentPage={currentPage} 
+            totalPages={totalPages} 
+            onPageChange={handlePageChange} 
+          />
         </div>
       </section>
+
 
       <section className="py-20 bg-[#002866] text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">

@@ -11,17 +11,30 @@ export default async function Home() {
   let latestTestimonials: any[] = [];
 
   try {
-    // Fetch latest data for different sections
-    [latestNews, latestEvents, latestBlogs, latestTestimonials] = await Promise.all([
+    // Fetch upcoming events
+    latestEvents = await prisma.event.findMany({
+      where: { 
+        isActive: true,
+        date: { gte: new Date() }
+      },
+      orderBy: { date: 'asc' },
+      take: 4,
+    });
+
+    // If no upcoming events, fetch most recent past events
+    if (latestEvents.length === 0) {
+      latestEvents = await prisma.event.findMany({
+        where: { isActive: true },
+        orderBy: { date: 'desc' },
+        take: 4,
+      });
+    }
+
+    [latestNews, latestBlogs, latestTestimonials] = await Promise.all([
       prisma.news.findMany({
         where: { isActive: true },
         orderBy: { date: 'desc' },
         take: 3,
-      }),
-      prisma.event.findMany({
-        where: { isActive: true },
-        orderBy: { date: 'asc' },
-        take: 4,
       }),
       prisma.blog.findMany({
         where: { isActive: true },

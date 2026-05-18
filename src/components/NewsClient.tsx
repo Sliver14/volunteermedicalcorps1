@@ -1,20 +1,41 @@
 "use client";
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaChevronRight, FaClock, FaInstagram } from 'react-icons/fa';
 import PageBanner from '@/components/PageBanner';
+import Pagination from '@/components/Pagination';
 
 export default function NewsClient({ allNews, recentBlogs, galleryImages }: any) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const stripHtml = (html: string) => {
+    if (!html) return "";
+    return html.replace(/<[^>]*>?/gm, '');
+  };
+
   const getExcerpt = (content: string) => {
     if (!content) return "";
-    return content.substring(0, 150) + (content.length > 150 ? "..." : "");
+    const plainText = stripHtml(content);
+    return plainText.substring(0, 150) + (plainText.length > 150 ? "..." : "");
+  };
+
+  const totalPages = Math.ceil(allNews.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentNews = allNews.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -28,13 +49,13 @@ export default function NewsClient({ allNews, recentBlogs, galleryImages }: any)
             {/* Left Column: Main Blog Content */}
             <div className="lg:w-2/3">
               <div className="space-y-12">
-                {allNews.map((post: any, index: number) => (
+                {currentNews.map((post: any, index: number) => (
                   <motion.div 
                     key={index}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    transition={{ duration: 0.6 }}
                     className="bg-white rounded-sm shadow-sm overflow-hidden border border-gray-100 group"
                   >
                     <div className="relative w-full h-[250px] sm:h-[350px] md:h-[450px] overflow-hidden">
@@ -83,6 +104,12 @@ export default function NewsClient({ allNews, recentBlogs, galleryImages }: any)
                   </motion.div>
                 ))}
               </div>
+
+              <Pagination 
+                currentPage={currentPage} 
+                totalPages={totalPages} 
+                onPageChange={handlePageChange} 
+              />
             </div>
 
             {/* Right Column: Sidebar */}

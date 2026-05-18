@@ -3,12 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import PageBanner from "@/components/PageBanner";
 import { motion } from "framer-motion";
 
 // Mock data generation for pagination demonstration
 const allCampaigns = [
+// ... (rest of allCampaigns stays the same)
   // Nigeria (Lots of entries for pagination)
   { id: 1, title: "Lagos Medical Outreach", country: "Nigeria", region: "Nigeria", date: "Oct 2023", image: "https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg", category: "Medical Projects" },
   { id: 5, title: "Abuja Disaster Relief", country: "Nigeria", region: "Nigeria", date: "Feb 2024", image: "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg", category: "Relief Missions" },
@@ -60,6 +61,11 @@ function CampaignSearchContent() {
   const query = regionQuery || countryQuery;
   
   const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset page on query change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query]);
 
   // Filter campaigns based on query
   const filteredCampaigns = useMemo(() => {

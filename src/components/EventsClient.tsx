@@ -1,12 +1,17 @@
 "use client";
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from "framer-motion";
 import { FaCalendarAlt } from 'react-icons/fa';
 import PageBanner from '@/components/PageBanner';
+import Pagination from '@/components/Pagination';
 
 export default function EventsClient({ allEvents }: any) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -17,21 +22,42 @@ export default function EventsClient({ allEvents }: any) {
     return description.substring(0, 150) + (description.length > 150 ? "..." : "");
   };
 
+  const totalPages = Math.ceil(allEvents.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentEvents = allEvents.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const isUpcoming = allEvents.some((e: any) => new Date(e.date) >= new Date());
+
   return (
     <div className="w-full bg-white font-roboto">
-      <PageBanner title="UPCOMING EVENTS" parent={{ label: "Media", href: "#" }} />
+      <PageBanner 
+        title={isUpcoming ? "UPCOMING EVENTS" : "PAST EVENTS"} 
+        parent={{ label: "Media", href: "#" }} 
+      />
       
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
           
+          {!isUpcoming && allEvents.length > 0 && (
+            <div className="mb-12 p-4 bg-blue-50 border-l-4 border-[#002866] text-[#002866] text-sm font-medium">
+              Note: There are currently no upcoming events scheduled. Showing our most recent past events below.
+            </div>
+          )}
+          
           <div className="space-y-16">
-            {allEvents.map((event: any, index: number) => (
+            {currentEvents.map((event: any, index: number) => (
               <motion.div 
                 key={index} 
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.05 }}
+                transition={{ duration: 0.6 }}
                 className="group bg-white rounded-sm overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Event Image */}
@@ -78,8 +104,15 @@ export default function EventsClient({ allEvents }: any) {
             ))}
           </div>
 
+          <Pagination 
+            currentPage={currentPage} 
+            totalPages={totalPages} 
+            onPageChange={handlePageChange} 
+          />
+
         </div>
       </section>
     </div>
   );
 }
+

@@ -7,7 +7,7 @@ import Providers from "./Providers";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isDashboard = pathname?.startsWith('/admin') || pathname?.startsWith('/portal');
+  const isDashboard = pathname?.startsWith('/admin') || pathname?.startsWith('/portal') || pathname?.startsWith('/elearn');
 
   return (
     <Providers>

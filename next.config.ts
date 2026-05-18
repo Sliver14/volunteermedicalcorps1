@@ -16,6 +16,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/learn/:path*',
+        destination: 'http://localhost/elearn/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

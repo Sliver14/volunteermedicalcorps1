@@ -4,10 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
 import { 
   FaTachometerAlt, 
-  FaGraduationCap, 
-  FaBookOpen, 
   FaGlobeAmericas, 
   FaCoins, 
   FaUserCircle,
@@ -31,8 +30,6 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
 
   const navigation = [
     { name: "Dashboard", href: "/portal", icon: FaTachometerAlt },
-    { name: "VMC Academy", href: "/portal/academy", icon: FaGraduationCap },
-    { name: "My Learning", href: "/portal/my-learning", icon: FaBookOpen },
     { name: "Missions", href: "/portal/missions", icon: FaGlobeAmericas },
     { name: "Credit History", href: "/portal/credits", icon: FaCoins },
     { name: "My Profile", href: "/portal/profile", icon: FaUserCircle },
@@ -92,7 +89,10 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
 
         {/* Sidebar Footer */}
         <div className="p-4 border-t border-slate-100 bg-slate-50/50">
-          <button className="flex items-center w-full px-4 py-3 text-slate-500 hover:text-red-600 transition-colors rounded-lg text-sm font-medium">
+          <button 
+            onClick={() => signOut({ callbackUrl: "/" })}
+            className="flex items-center w-full px-4 py-3 text-slate-500 hover:text-red-600 transition-colors rounded-lg text-sm font-medium"
+          >
             <FaSignOutAlt className="mr-3.5 text-lg" />
             Sign Out
           </button>

@@ -19,20 +19,93 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   profile       Profile?
+  enrollments   Enrollment[]
 }
 
 model Profile {
-  id        String  @id @default(cuid())
-  bio       String?
-  avatar    String?
-  userId    String  @unique
-  user      User    @relation(fields: [userId], references: [id])
+  id                String  @id @default(cuid())
+  bio               String? @db.Text
+  avatar            String?
+  userId            String  @unique
+  user              User    @relation(fields: [userId], references: [id])
+  
+  // Volunteer specific fields
+  vid               String? @unique
+  firstName         String?
+  lastName          String?
+  phone             String?
+  gender            String?
+  dob               String?
+  profession        String?
+  qualification     String?
+  preferredRole     String?
+  church            String?
+  location          String?
+  country           String?
+  bloodGroup        String?
+  newsletter        Boolean @default(false)
+  stats             Int     @default(0)
+  dateJoined        DateTime? @default(now())
+  timeJoined        String?
+  ref               String?
 }
 
 enum Role {
   USER
   ADMIN
   VOLUNTEER
+  MEMBER
+  PARTNER
+}
+
+model Course {
+  id            String    @id @default(cuid())
+  title         String
+  description   String    @db.Text
+  image         String?
+  price         Float     @default(0)
+  duration      String?
+  level         String?   @default("Beginner") // Beginner, Intermediate, Advanced
+  categoryId    String
+  category      CourseCategory @relation(fields: [categoryId], references: [id])
+  lessons       Lesson[]
+  enrollments   Enrollment[]
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model CourseCategory {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  courses   Course[]
+  createdAt DateTime @default(now())
+}
+
+model Lesson {
+  id          String   @id @default(cuid())
+  title       String
+  content     String?  @db.Text
+  videoUrl    String?
+  duration    String?
+  order       Int      @default(0)
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model Enrollment {
+  id          String   @id @default(cuid())
+  userId      String
+  courseId    String
+  user        User     @relation(fields: [userId], references: [id])
+  course      Course   @relation(fields: [courseId], references: [id])
+  progress    Float    @default(0)
+  isCompleted Boolean  @default(false)
+  enrolledAt  DateTime @default(now())
+  completedAt DateTime?
+
+  @@unique([userId, courseId])
 }
 
 model HeroSlide {

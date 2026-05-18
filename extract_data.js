@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const baseDir = path.join(process.cwd(), 'src', 'volunteer original', 'volunteermedicalcorps.org');
+const baseDir = path.join(process.cwd(), 'volunteer original', 'volunteermedicalcorps.org');
 
 function extractCampaigns() {
     const campaigns = [];
@@ -70,25 +70,40 @@ function extractCampaigns() {
 
 function extractMedia() {
     const mediaDir = path.join(baseDir, 'view-media');
-    if (!fs.existsSync(mediaDir)) return { news: [], blogs: [] };
-    const dirs = fs.readdirSync(mediaDir).filter(d => fs.lstatSync(path.join(mediaDir, d)).isDirectory());
     const news = [], blogs = [];
+    const titlesSeen = new Set();
+
+    if (!fs.existsSync(mediaDir)) return { news, blogs };
+    const dirs = fs.readdirSync(mediaDir).filter(d => fs.lstatSync(path.join(mediaDir, d)).isDirectory());
+    
     dirs.forEach(dir => {
         try {
             const folderFiles = fs.readdirSync(path.join(mediaDir, dir));
             const htmlFile = folderFiles.find(f => f.endsWith('.html') && f !== 'index.html') || folderFiles.find(f => f.endsWith('.html'));
             if (!htmlFile) return;
             const content = fs.readFileSync(path.join(mediaDir, dir, htmlFile), 'utf8');
-            const title = content.match(/<h3 class="blog-title mb-20">[\s\S]*?<a[\s\S]*?>([\s\S]*?)<\/a>/)?.[1].trim();
-            const body = content.match(/<div style="text-align: justify;[\s\S]*?">([\s\S]*?)<\/div>/)?.[1].trim();
+            const titleMatch = content.match(/<h3 class="blog-title mb-20">[\s\S]*?<a[\s\S]*?>([\s\S]*?)<\/a>/) || 
+                               content.match(/<title>([\s\S]*?) - Volunteer Medical Corps<\/title>/);
+            const title = titleMatch?.[1].trim();
+            if (!title || titlesSeen.has(title)) return;
+            titlesSeen.add(title);
+
+            const bodyMatch = content.match(/<div style="text-align: justify;[\s\S]*?">([\s\S]*?)<\/div>/);
+            const body = bodyMatch ? bodyMatch[1].trim() : "";
             const image = content.match(/<div class="blog__thumb mb-35">[\s\S]*?<img src="([\s\S]*?)"/)?.[1];
             const dateStr = content.match(/<i class="far fa-calendar-alt"><\/i>\s*([\s\S]*?)\s*<\/li>/)?.[1].trim();
             const category = content.match(/<a class="tag"[\s\S]*?>([\s\S]*?)<\/a>/)?.[1].trim();
-            if (title && body) {
-                const date = dateStr ? new Date(dateStr) : new Date();
-                const item = { title, content: body, image: image ? image.replace('../../', '/') : "/logo.png", date: isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString(), category: category || "News", isActive: true };
-                if (category === 'Blog') blogs.push(item); else news.push(item);
-            }
+            
+            const date = dateStr ? new Date(dateStr) : new Date();
+            const item = { 
+                title, 
+                content: body || "Read more about this story...", 
+                image: image ? image.replace('../../', '/') : "/logo.png", 
+                date: isNaN(date.getTime()) ? new Date().toISOString() : date.toISOString(), 
+                category: category || "News", 
+                isActive: true 
+            };
+            if (category === 'Blog') blogs.push(item); else news.push(item);
         } catch (e) {}
     });
     return { news, blogs };
@@ -147,13 +162,72 @@ function extractGallery() {
     return gallery;
 }
 
+function extractVolunteers() {
+    const volunteers = [];
+    const sqlPath = path.join(process.cwd(), 'tbl_volunteers18may2026.sql');
+    if (!fs.existsSync(sqlPath)) return [];
+
+    try {
+        const content = fs.readFileSync(sqlPath, 'utf8');
+        // The SQL file can be very large, let's process it more carefully if needed
+        // For now, let's use a regex that matches multi-line INSERT values
+        const insertMatch = content.match(/INSERT INTO `tbl_volunteers` .*? VALUES\s*([\s\S]*?);/g);
+        
+        if (insertMatch) {
+            insertMatch.forEach(match => {
+                const valuesStr = match.replace(/INSERT INTO `tbl_volunteers` .*? VALUES\s*/, '').replace(/;$/, '');
+                // Match (val1, val2, ...) records
+                const records = valuesStr.match(/\(([^)]+)\)/g);
+                if (records) {
+                    records.forEach(record => {
+                        const cleanRecord = record.slice(1, -1);
+                        // Split by comma, handling quoted strings
+                        const fields = cleanRecord.match(/'(?:''|[^'])*'|[^,]+/g).map(f => f.trim().replace(/^'|'$/g, '').replace(/''/g, "'"));
+                        
+                        if (fields[4] && fields[4].includes('@')) {
+                            volunteers.push({
+                                vid: fields[1],
+                                firstName: fields[2],
+                                lastName: fields[3],
+                                email: fields[4],
+                                phone: fields[5],
+                                bio: fields[6],
+                                password: fields[7],
+                                image: fields[8],
+                                gender: fields[9],
+                                dob: fields[10],
+                                profession: fields[11],
+                                qualification: fields[12],
+                                preferredRole: fields[13],
+                                church: fields[14],
+                                location: fields[15],
+                                country: fields[16],
+                                bloodGroup: fields[17],
+                                newsletter: fields[18] === '1',
+                                stats: parseInt(fields[20]) || 0,
+                                dateJoined: fields[21],
+                                timeJoined: fields[22],
+                                ref: fields[23]
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    } catch (e) {
+        console.error("Error extracting volunteers:", e);
+    }
+    return volunteers;
+}
+
 const data = {
     campaigns: extractCampaigns(),
     ...extractMedia(),
     events: extractEvents(),
     gallery: extractGallery(),
-    testimonials: extractTestimonials()
+    testimonials: extractTestimonials(),
+    volunteers: extractVolunteers()
 };
 
 fs.writeFileSync('extracted_data.json', JSON.stringify(data, null, 2));
-console.log(`Extraction complete. Campaigns: ${data.campaigns.length}, News: ${data.news.length}, Blogs: ${data.blogs.length}, Events: ${data.events.length}, Gallery: ${data.gallery.length}, Testimonials: ${data.testimonials.length}`);
+console.log(`Extraction complete. Campaigns: ${data.campaigns.length}, News: ${data.news.length}, Blogs: ${data.blogs.length}, Events: ${data.events.length}, Gallery: ${data.gallery.length}, Testimonials: ${data.testimonials.length}, Volunteers: ${data.volunteers.length}`);

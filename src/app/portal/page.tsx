@@ -14,23 +14,27 @@ import Image from "next/image";
 
 export default function PortalDashboard() {
   const stats = [
-    { label: "Courses Completed", value: "12", icon: FaGraduationCap, color: "text-blue-600", bg: "bg-blue-50" },
-    { label: "Missions Joined", value: "8", icon: FaHandsHelping, color: "text-green-600", bg: "bg-green-50" },
-    { label: "Pending Tasks", value: "3", icon: FaClock, color: "text-amber-600", bg: "bg-amber-50" },
+    { label: "Missions Completed", value: "8", icon: FaCheckCircle, color: "text-green-600", bg: "bg-green-50" },
+    { label: "Hours Volunteered", value: "120", icon: FaClock, color: "text-blue-600", bg: "bg-blue-50" },
+    { label: "Pending Missions", value: "2", icon: FaHandsHelping, color: "text-amber-600", bg: "bg-amber-50" },
     { label: "Credits Earned", value: "1,250", icon: FaCheckCircle, color: "text-purple-600", bg: "bg-purple-50" },
-  ];
-
-  const ongoingCourses = [
-    { title: "Introduction to Disaster Response", progress: 65, category: "Basic Training", image: "https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg" },
-    { title: "Advanced Medical Outreach Ethics", progress: 30, category: "Ethics", image: "https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg" },
   ];
 
   return (
     <div className="space-y-8">
       {/* Header Section */}
-      <div>
-        <h2 className="text-2xl font-poppins font-black text-[#002866] uppercase tracking-tight">Overview</h2>
-        <p className="text-slate-500">Track your progress and upcoming medical missions.</p>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <h2 className="text-2xl font-poppins font-black text-[#002866] uppercase tracking-tight">Portal Dashboard</h2>
+          <p className="text-slate-500">Manage your volunteer profile and medical missions.</p>
+        </div>
+        <Link 
+          href="/elearn" 
+          className="bg-[#ff9f22] text-[#002866] px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center gap-3 shadow-xl shadow-orange-500/10 hover:scale-105 transition-all"
+        >
+          <FaGraduationCap className="text-lg" />
+          Go to VMC Academy
+        </Link>
       </div>
 
       {/* Stats Grid */}
@@ -53,48 +57,27 @@ export default function PortalDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Ongoing Courses */}
+        {/* Main Content: Missions */}
         <div className="lg:col-span-2 space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-[#002866] flex items-center">
-              <FaPlayCircle className="mr-2 text-[#ff9f22]" />
-              Continue Learning
+              <FaHandsHelping className="mr-2 text-[#ff9f22]" />
+              Active Missions
             </h3>
-            <Link href="/portal/my-learning" className="text-sm font-bold text-[#ff9f22] hover:underline flex items-center">
+            <Link href="/portal/missions" className="text-sm font-bold text-[#ff9f22] hover:underline flex items-center">
               View All <FaArrowRight className="ml-1 text-xs" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {ongoingCourses.map((course, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden group">
-                <div className="relative h-32">
-                  <Image src={course.image} alt={course.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <span className="absolute bottom-3 left-3 bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded uppercase">
-                    {course.category}
-                  </span>
-                </div>
-                <div className="p-5">
-                  <h4 className="font-bold text-slate-800 leading-snug mb-4 h-10 line-clamp-2">{course.title}</h4>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs font-bold mb-1">
-                      <span className="text-slate-400 uppercase">Progress</span>
-                      <span className="text-[#002866]">{course.progress}%</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-[#002866] to-[#ff9f22] rounded-full transition-all duration-500" 
-                        style={{ width: `${course.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                  <button className="w-full mt-6 bg-[#002866] text-white py-2.5 rounded-lg text-sm font-bold hover:bg-[#ff9f22] hover:text-[#002866] transition-all">
-                    Resume Lesson
-                  </button>
-                </div>
-              </div>
-            ))}
+          <div className="bg-white rounded-3xl border border-slate-100 p-8 text-center space-y-4">
+            <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto text-slate-300">
+              <FaHandsHelping size={32} />
+            </div>
+            <h4 className="font-bold text-slate-800">No active missions currently</h4>
+            <p className="text-sm text-slate-400 max-w-xs mx-auto">Explore upcoming campaigns and join a team to start making an impact.</p>
+            <Link href="/campaigns" className="inline-block bg-[#002866] text-white px-8 py-3 rounded-xl font-bold text-sm">
+              Explore Campaigns
+            </Link>
           </div>
         </div>
 

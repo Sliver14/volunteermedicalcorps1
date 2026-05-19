@@ -204,11 +204,8 @@ export default function HomeClient({
         
         <div className="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
           <h3 className="text-[#13397F] text-lg md:text-xl font-black uppercase">
-            Upcoming Events
+            Campaigns & Events
           </h3>
-          <Link href="/media/events" className="text-[10px] md:text-xs font-black text-[#ff9f22] uppercase tracking-wider hover:underline">
-            View All →
-          </Link>
         </div>
         
         <div className="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1 custom-scrollbar">
@@ -266,8 +263,13 @@ export default function HomeClient({
 </section>
 
       {/* Intro & Counters Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+      <section className="py-24 bg-white dark:bg-[#0a0a0a] relative overflow-hidden transition-colors duration-300">
+        {/* Decorative Textures */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#ff9f22]/5 rounded-full blur-3xl -mr-64 -mt-64"></div>
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#002866]/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "radial-gradient(#002866 1px, transparent 1px)", backgroundSize: "40px 40px" }}></div>
+
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-stretch">
             
             {/* Left: Reduced size counters */}
@@ -280,35 +282,35 @@ export default function HomeClient({
             >
               
               {/* Item 1 */}
-              <div className="text-center lg:text-right border-b border-gray-100 pb-4">
-                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+              <div className="text-center lg:text-right border-b border-gray-100 dark:border-gray-800 pb-4">
+                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] dark:text-[#ff9f22] leading-none mb-1">
                   <Counter value={10} suffix="+" />
                 </div>
-                <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Years of Existence</p>
+                <p className="text-[#002866] dark:text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Years of Existence</p>
               </div>
 
               {/* Item 2 */}
-              <div className="text-center lg:text-right border-b border-gray-100 pb-4">
-                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+              <div className="text-center lg:text-right border-b border-gray-100 dark:border-gray-800 pb-4">
+                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] dark:text-[#ff9f22] leading-none mb-1">
                   <Counter value={210} suffix="+" />
                 </div>
-                <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Countries</p>
+                <p className="text-[#002866] dark:text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Countries</p>
               </div>
 
               {/* Item 3 (Highlighted) */}
-              <div className="text-center lg:text-right border-b border-gray-100 pb-4">
-                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+              <div className="text-center lg:text-right border-b border-gray-100 dark:border-gray-800 pb-4">
+                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] dark:text-[#ff9f22] leading-none mb-1">
                   <Counter value={6} suffix="M+" />
                 </div>
-                <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em]">Volunteers</p>
+                <p className="text-[#002866] dark:text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">Volunteers</p>
               </div>
 
               {/* Item 4 */}
               <div className="text-center lg:text-right pb-2">
-                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] leading-none mb-1">
+                <div className="text-[42px] lg:text-[32px] font-black text-[#002866] dark:text-[#ff9f22] leading-none mb-1">
                   <Counter value={4.4} suffix="M+" decimal={true} />
                 </div>
-                <p className="text-[#002866] text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Good deeds</p>
+                <p className="text-[#002866] dark:text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Good deeds</p>
               </div>
             </motion.div>
 
@@ -320,12 +322,15 @@ export default function HomeClient({
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="lg:col-span-9 flex flex-col justify-center text-center lg:text-left items-center lg:items-start"
             >
-              <h3 className="text-[#ff9f22] font-bold text-sm uppercase tracking-[0.2em] mb-4">Why VMC</h3>
-              <h2 className="text-[#002866] text-3xl md:text-5xl font-black uppercase leading-[1.1] mb-8">
+              <div className="flex items-center gap-4 mb-4">
+                <span className="w-12 h-1 bg-[#ff9f22]"></span>
+                <h3 className="text-[#ff9f22] font-bold text-sm uppercase tracking-[0.2em]">Why VMC</h3>
+              </div>
+              <h2 className="text-[#002866] dark:text-white text-3xl md:text-5xl font-black uppercase leading-[1.1] mb-8">
                 Join the Volunteer <br className="hidden md:block" />
                 Medical Corps
               </h2>
-              <p className="text-gray-500 text-lg leading-relaxed mb-10 max-w-2xl">
+              <p className="text-gray-500 dark:text-gray-400 text-lg leading-relaxed mb-10 max-w-2xl">
                 We are an ever-expanding global network of Christian health care workers, 
                 non-medical volunteers and students committed to providing medical care 
                 through outreaches, humanitarian assistance and sustainable health care solutions 
@@ -333,7 +338,7 @@ export default function HomeClient({
               </p>
               <Link 
                 href="/about" 
-                className="inline-block bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all hover:bg-[#002866] hover:text-white shadow-md"
+                className="inline-block bg-[#ff9f22] text-[#002866] px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all hover:bg-[#002866] hover:text-white dark:hover:bg-white dark:hover:text-[#002866] shadow-md hover:shadow-xl"
               >
                 About Us
               </Link>

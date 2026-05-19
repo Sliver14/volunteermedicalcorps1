@@ -6,7 +6,7 @@ export default withAuth(
     const token = req.nextauth.token;
     const path = req.nextUrl.pathname;
 
-    if (path.startsWith("/admin") && token?.role !== "ADMIN") {
+    if (path.startsWith("/envmc") && token?.role !== "ADMIN") {
       return NextResponse.redirect(new URL("/", req.url));
     }
   },
@@ -18,5 +18,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/admin/:path*", "/portal/:path*", "/elearn/dashboard/:path*"],
+  matcher: ["/envmc/:path*", "/portal/:path*", "/elearn/dashboard/:path*"],
 };

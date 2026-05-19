@@ -42,7 +42,7 @@ model Profile {
   church            String?
   location          String?
   country           String?
-  bloodGroup        String?
+  socialMediaHandle String?
   newsletter        Boolean @default(false)
   stats             Int     @default(0)
   dateJoined        DateTime? @default(now())

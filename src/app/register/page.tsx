@@ -105,18 +105,8 @@ export default function RegisterPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Blood Group</label>
-                    <select className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]">
-                      <option value="">Select Blood Group</option>
-                      <option value="A+">A+</option>
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option>
-                      <option value="B-">B-</option>
-                      <option value="AB+">AB+</option>
-                      <option value="AB-">AB-</option>
-                      <option value="O+">O+</option>
-                      <option value="O-">O-</option>
-                    </select>
+                    <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Social Media Handle (X/Instagram/FB)</label>
+                    <input type="text" placeholder="@yourhandle" className="w-full bg-gray-50 border border-gray-200 p-4 rounded-sm focus:outline-none focus:border-[#002866] focus:ring-1 focus:ring-[#002866]" />
                   </div>
                 </div>
 

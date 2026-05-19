@@ -191,7 +191,6 @@ async function main() {
               church: v.church,
               location: v.location,
               country: v.country,
-              bloodGroup: v.bloodGroup,
               newsletter: v.newsletter,
               stats: v.stats,
               dateJoined: v.dateJoined ? new Date(v.dateJoined) : new Date(),

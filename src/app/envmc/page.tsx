@@ -13,7 +13,7 @@ export default function AdminLogin() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // Simple mock authentication for demonstration
-    router.push("/admin/dashboard");
+    router.push("/envmc/dashboard");
   };
 
   return (

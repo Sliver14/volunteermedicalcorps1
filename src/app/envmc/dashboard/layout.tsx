@@ -20,13 +20,13 @@ import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 
 const sidebarLinks = [
-  { href: "/admin/dashboard", label: "Overview", icon: LayoutDashboard },
-  { href: "/admin/dashboard/hero", label: "Hero Slides", icon: ImageIcon },
-  { href: "/admin/dashboard/confessions", label: "Confessions", icon: MessageSquare },
-  { href: "/admin/dashboard/marquee", label: "Marquee", icon: Megaphone },
-  { href: "/admin/dashboard/campaigns", label: "Campaigns", icon: FolderKanban },
-  { href: "/admin/dashboard/volunteers", label: "Volunteers", icon: Users },
-  { href: "/admin/dashboard/news", label: "News", icon: Newspaper },
+  { href: "/envmc/dashboard", label: "Overview", icon: LayoutDashboard },
+  { href: "/envmc/dashboard/hero", label: "Hero Slides", icon: ImageIcon },
+  { href: "/envmc/dashboard/confessions", label: "Confessions", icon: MessageSquare },
+  { href: "/envmc/dashboard/marquee", label: "Marquee", icon: Megaphone },
+  { href: "/envmc/dashboard/campaigns", label: "Campaigns", icon: FolderKanban },
+  { href: "/envmc/dashboard/volunteers", label: "Volunteers", icon: Users },
+  { href: "/envmc/dashboard/news", label: "News", icon: Newspaper },
 ];
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {

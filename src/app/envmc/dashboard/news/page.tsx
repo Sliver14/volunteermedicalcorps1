@@ -28,7 +28,7 @@ export default function NewsManager() {
 
   const fetchItems = async () => {
     setLoading(true);
-    const res = await fetch("/api/admin/news");
+    const res = await fetch("/api/envmc/news");
     const data = await res.json();
     setItems(data);
     setLoading(false);
@@ -41,7 +41,7 @@ export default function NewsManager() {
 
   const handleSave = async () => {
     const method = editForm.id ? "PUT" : "POST";
-    const res = await fetch("/api/admin/news", {
+    const res = await fetch("/api/envmc/news", {
       method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editForm),
@@ -56,7 +56,7 @@ export default function NewsManager() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this news item?")) return;
-    const res = await fetch(`/api/admin/news?id=${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/envmc/news?id=${id}`, { method: "DELETE" });
     if (res.ok) fetchItems();
   };
 

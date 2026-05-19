@@ -3,8 +3,42 @@
 @theme {
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-roboto: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  
+  /* Brand Colors */
   --color-brand-primary: #002866;
   --color-brand-secondary: #ff9f22;
+
+  /* Semantic Colors mapped to CSS Variables */
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-border-main: var(--border-main);
+
+  /* Enable class-based dark mode in Tailwind v4 */
+  --variant-dark: (&:where(.dark, .dark *));
+}
+
+@layer base {
+  :root {
+    --bg-base: #ffffff;
+    --bg-surface: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border-main: #f3f4f6;
+  }
+
+  .dark {
+    --bg-base: #121212;
+    --bg-surface: #1e1e1e;
+    --text-main: #f1f3f5;
+    --text-muted: #adb5bd;
+    --border-main: #2c2e33;
+  }
+
+  body {
+    @apply bg-bg-base text-text-main transition-colors duration-300;
+  }
 }
 
 @layer utilities {

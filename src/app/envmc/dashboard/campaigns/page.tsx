@@ -38,7 +38,7 @@ export default function CampaignsManager() {
 
   const fetchCampaigns = async () => {
     setLoading(true);
-    const res = await fetch("/api/admin/campaign");
+    const res = await fetch("/api/envmc/campaign");
     const data = await res.json();
     setCampaigns(data);
     setLoading(false);
@@ -51,7 +51,7 @@ export default function CampaignsManager() {
 
   const handleSave = async () => {
     const method = editForm.id ? "PUT" : "POST";
-    const res = await fetch("/api/admin/campaign", {
+    const res = await fetch("/api/envmc/campaign", {
       method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editForm),
@@ -66,7 +66,7 @@ export default function CampaignsManager() {
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this campaign?")) return;
-    const res = await fetch(`/api/admin/campaign?id=${id}`, { method: "DELETE" });
+    const res = await fetch(`/api/envmc/campaign?id=${id}`, { method: "DELETE" });
     if (res.ok) fetchCampaigns();
   };
 

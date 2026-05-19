@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
@@ -59,13 +60,13 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full bg-white dark:bg-[#0a0a0a] border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 transition-colors duration-300">
+      <header className="w-full bg-bg-surface border-b border-border-main sticky top-0 z-50 transition-colors duration-300">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6">
           <div className="flex justify-between items-center h-20 md:h-24">
             {/* Logo */}
             <div className="flex-shrink-0">
               <Link href="/" onClick={() => setIsMobileOpen(false)}>
-                <Image src="/logo.png" alt="Logo" width={180} height={60} className="object-contain w-32 md:w-[180px] dark:brightness-110" priority />
+                <Image src="/logo.png" alt="Logo" width={180} height={60} className="object-contain w-32 md:w-[180px] dark:brightness-110 transition-all" priority />
               </Link>
             </div>
 
@@ -86,8 +87,8 @@ export default function Header() {
                   >
                     <Link 
                       href={item.href} 
-                      className={`flex items-center px-5 h-full text-[#002866] dark:text-gray-100 font-semibold text-[15px] tracking-wider transition-all
-                        ${isActive ? 'bg-[#ff9f22] dark:text-[#002866]' : 'hover:bg-[#ff9f22] dark:hover:text-[#002866]'}`}
+                      className={`flex items-center px-5 h-full text-text-main font-semibold text-[15px] tracking-wider transition-all
+                        ${isActive ? 'bg-brand-secondary text-brand-primary' : 'hover:bg-brand-secondary hover:text-brand-primary'}`}
                     >
                       {item.label}
                       {item.subItems && <svg className="ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>}
@@ -101,10 +102,10 @@ export default function Header() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 w-64 bg-white dark:bg-[#111] shadow-2xl border-t-4 border-[#ff9f22] py-2"
+                            className="absolute top-full left-0 w-64 bg-bg-surface shadow-2xl border-t-4 border-brand-secondary py-2"
                           >
                             {item.subItems.map((sub) => (
-                              <Link key={sub.label} href={sub.href} className="block px-6 py-3 text-[14px] font-semibold text-[#002866] dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 hover:pl-8 transition-all">
+                              <Link key={sub.label} href={sub.href} className="block px-6 py-3 text-[14px] font-semibold text-text-main hover:bg-brand-primary/5 hover:pl-8 transition-all">
                                 {sub.label}
                               </Link>
                             ))}
@@ -120,22 +121,21 @@ export default function Header() {
             {/* Desktop Actions */}
             <div className="hidden lg:flex h-18 items-center gap-4">
               <ThemeToggle />
-              <Link href="/login" className="text-[#002866] dark:text-gray-300 font-bold text-[14px] uppercase tracking-wider hover:text-[#ff9f22] transition-colors flex items-center gap-2">
+              <Link href="/login" className="text-text-main font-bold text-[14px] uppercase tracking-wider hover:text-brand-secondary transition-colors flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 Member Portal
               </Link>
-              <Link href="/give" className="bg-[#002866] dark:bg-[#ff9f22] text-white dark:text-[#002866] uppercase h-full px-8 py-3 flex items-center font-semibold text-[15px] tracking-widest hover:bg-[#ff9f22] dark:hover:bg-white hover:text-[#002866] transition-all">
+              <Link href="/give" className="bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary uppercase h-full px-8 py-3 flex items-center font-semibold text-[15px] tracking-widest hover:bg-brand-secondary dark:hover:bg-white hover:text-brand-primary transition-all">
                 Give Now
               </Link>
             </div>
 
             {/* Mobile Hamburger Toggle */}
             <div className="lg:hidden flex items-center gap-3">
-              <ThemeToggle />
               <button 
-                className="text-[#002866] dark:text-[#ff9f22] p-2 focus:outline-none"
+                className="text-text-main p-2 focus:outline-none"
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
                 aria-label="Toggle Menu"
               >
@@ -154,33 +154,14 @@ export default function Header() {
         </div>
 
         {/* Improved Mobile Menu Drawer */}
-        <div className={`lg:hidden fixed inset-0 top-20 bg-white dark:bg-[#0a0a0a] z-40 transform transition-transform duration-300 ease-in-out ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`lg:hidden fixed inset-0 top-20 bg-bg-surface z-40 transform transition-transform duration-300 ease-in-out ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <nav className="flex flex-col h-full overflow-y-auto pb-32">
-            
-            {/* Mobile Auth Links */}
-            <div className="bg-gray-50 dark:bg-white/5 border-b border-gray-100 dark:border-gray-800 p-6 flex flex-col gap-3">
-              <Link 
-                href="/login" 
-                className="w-full bg-[#002866] dark:bg-[#ff9f22] text-white dark:text-[#002866] py-3 rounded-md font-bold uppercase tracking-widest text-center text-sm shadow-md"
-                onClick={() => setIsMobileOpen(false)}
-              >
-                Member Login
-              </Link>
-              <Link 
-                href="/register" 
-                className="w-full bg-white dark:bg-[#111] border-2 border-[#002866] dark:border-[#ff9f22] text-[#002866] dark:text-[#ff9f22] py-3 rounded-md font-bold uppercase tracking-widest text-center text-sm"
-                onClick={() => setIsMobileOpen(false)}
-              >
-                Become a Volunteer
-              </Link>
-            </div>
-
             {navigation.map((item) => (
-              <div key={item.label} className="border-b border-gray-100 dark:border-gray-800">
+              <div key={item.label} className="border-b border-border-main">
                 <div className="flex justify-between items-center pr-4">
                   <Link 
                     href={item.href} 
-                    className="block flex-1 px-6 py-5 text-[#002866] dark:text-gray-100 font-semibold text-lg tracking-wide"
+                    className="block flex-1 px-6 py-5 text-text-main font-semibold text-lg tracking-wide"
                     onClick={() => setIsMobileOpen(false)}
                   >
                     {item.label}
@@ -188,7 +169,7 @@ export default function Header() {
                   {item.subItems && (
                     <button 
                       onClick={() => setOpenSubMenu(openSubMenu === item.label ? null : item.label)}
-                      className="p-4 text-[#002866] dark:text-[#ff9f22]"
+                      className="p-4 text-brand-secondary"
                     >
                       <svg className={`w-5 h-5 transition-transform duration-200 ${openSubMenu === item.label ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
@@ -206,13 +187,13 @@ export default function Header() {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="bg-gray-50 dark:bg-white/5 overflow-hidden"
+                        className="bg-bg-base overflow-hidden"
                       >
                         {item.subItems.map((sub) => (
                           <Link 
                             key={sub.label} 
                             href={sub.href}
-                            className="block px-10 py-4 text-base font-semibold text-gray-600 dark:text-gray-400 hover:text-[#002866] dark:hover:text-[#ff9f22] border-b border-gray-200 dark:border-gray-800 last:border-0"
+                            className="block px-10 py-4 text-base font-semibold text-text-muted hover:text-brand-primary border-b border-border-main last:border-0"
                             onClick={() => setIsMobileOpen(false)}
                           >
                             {sub.label}
@@ -224,6 +205,33 @@ export default function Header() {
                 )}
               </div>
             ))}
+
+            {/* Mobile Actions (Moved beneath navigation) */}
+            <div className="p-6 flex flex-col gap-6">
+              {/* Theme Toggle in Mobile Sidebar */}
+              <div className="flex items-center justify-between px-2">
+                <span className="text-text-main font-bold uppercase tracking-widest text-sm">Switch Theme</span>
+                <ThemeToggle />
+              </div>
+
+              {/* Auth Links */}
+              <div className="flex flex-col gap-3">
+                <Link 
+                  href="/login" 
+                  className="w-full bg-brand-primary text-white py-3 rounded-md font-bold uppercase tracking-widest text-center text-sm shadow-md"
+                  onClick={() => setIsMobileOpen(false)}
+                >
+                  Member Login
+                </Link>
+                <Link 
+                  href="/register" 
+                  className="w-full bg-bg-surface border-2 border-brand-primary text-text-main py-3 rounded-md font-bold uppercase tracking-widest text-center text-sm"
+                  onClick={() => setIsMobileOpen(false)}
+                >
+                  Become a Volunteer
+                </Link>
+              </div>
+            </div>
           </nav>
         </div>
       </header>

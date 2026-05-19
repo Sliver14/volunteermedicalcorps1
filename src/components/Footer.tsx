@@ -3,10 +3,10 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#002866] text-white pt-24 pb-8 overflow-hidden">
+    <footer className="relative bg-brand-primary text-white pt-24 pb-8 overflow-hidden border-t border-brand-primary/20">
       {/* Background Image with Overlay */}
       <div 
-        className="absolute inset-0 z-0 opacity-40 mix-blend-overlay bg-cover bg-center" 
+        className="absolute inset-0 z-0 opacity-40 mix-blend-overlay bg-brand-primary bg-cover bg-center" 
         style={{ backgroundImage: "url('/pmr-bg-footer.jpg')" }}
       ></div>
 
@@ -15,7 +15,7 @@ export default function Footer() {
           
           {/* Column 1: Quick Links */}
           <div className="md:col-span-3">
-            <h3 className="text-[#ff9f22] text-xl font-black uppercase mb-8">Quick Links</h3>
+            <h3 className="text-brand-secondary text-xl font-black uppercase mb-8">Quick Links</h3>
             <ul className="space-y-4">
               {[
                 { name: "About Us", href: "/about" },
@@ -25,7 +25,7 @@ export default function Footer() {
                 { name: "Become a Volunteer", href: "/volunteer" }
               ].map((link) => (
                 <li key={link.name} className="flex items-center group">
-                  <span className="text-[#ff9f22] mr-2 transition-transform group-hover:translate-x-1">›</span>
+                  <span className="text-brand-secondary mr-2 transition-transform group-hover:translate-x-1">›</span>
                   <Link href={link.href} className="text-gray-200 hover:text-white transition-colors font-medium">
                     {link.name}
                   </Link>
@@ -34,17 +34,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 2: Center About & Restored Socials */}
+          {/* Column 2: Center About & Socials */}
           <div className="md:col-span-5 flex flex-col items-start">
             <p className="text-lg leading-relaxed text-gray-200 mb-10 max-w-md">
               The Volunteer Medical Corps is the fastest growing global Christian medical outreach, committed to making a positive impact across communities and countries.
             </p>
             
-            <h4 className="text-[#ff9f22] text-sm font-black uppercase tracking-widest mb-6">Connect With Us:</h4>
+            <h4 className="text-brand-secondary text-sm font-black uppercase tracking-widest mb-6">Connect With Us:</h4>
             
-            {/* Restored Social Media Icons with Image-style background blocks */}
             <div className="flex flex-wrap gap-3">
-              {/* KingsChat (Custom SVG Restored) */}
+              {/* KingsChat */}
               <a href="https://web.kingsch.at/superusers/vmcorps" target="_blank" rel="noopener noreferrer" 
                  className="w-10 h-10 flex items-center justify-center rounded-sm bg-[#004a99] text-white hover:scale-110 transition-transform" title="KingsChat">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -74,19 +73,20 @@ export default function Footer() {
               <a href="https://youtube.com/channel/UCQsqixtIBuYnsAM48Kigb4w" target="_blank" rel="noopener noreferrer"
                   className="w-10 h-10 flex items-center justify-center rounded-sm bg-[#FF0000] text-white hover:scale-110 transition-transform" title="Youtube">
                 <FaYoutube className="w-5 h-5" />
-              </a>            </div>
+              </a>
+            </div>
           </div>
 
           {/* Column 3: Newsletter */}
           <div className="md:col-span-4">
-            <h3 className="text-[#ff9f22] text-xl font-black uppercase mb-8">Join The Newsletter</h3>
+            <h3 className="text-brand-secondary text-xl font-black uppercase mb-8">Join The Newsletter</h3>
             <div className="flex flex-col space-y-4">
               <input 
                 type="email" 
                 placeholder="Your email here..." 
-                className="w-full px-6 py-4 bg-white text-[#002866] outline-none"
+                className="w-full px-6 py-4 bg-white text-brand-primary outline-none border-none focus:ring-2 focus:ring-brand-secondary transition-all"
               />
-              <button className="w-full bg-[#ff9f22] text-[#002866] font-black uppercase py-4 tracking-widest hover:bg-white transition-colors">
+              <button className="w-full bg-brand-secondary text-brand-primary font-black uppercase py-4 tracking-widest hover:bg-white hover:text-brand-primary transition-colors">
                 Subscribe Now
               </button>
             </div>

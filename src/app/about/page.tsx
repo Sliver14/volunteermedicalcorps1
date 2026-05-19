@@ -28,7 +28,7 @@ export default function AboutLandingPage() {
   ];
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-bg-base transition-colors duration-300">
       <PageBanner title="About Us" />
       
       <section className="py-12 md:py-24">
@@ -40,9 +40,9 @@ export default function AboutLandingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-10 md:mb-16"
           >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold text-[#002866] uppercase">Who We Are</h2>
-            <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-4 md:mt-6 mb-6 md:mb-8"></div>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold text-brand-primary dark:text-brand-secondary uppercase">Who We Are</h2>
+            <div className="w-24 h-1 bg-brand-secondary mx-auto mt-4 md:mt-6 mb-6 md:mb-8"></div>
+            <p className="text-lg md:text-xl text-text-muted max-w-3xl mx-auto leading-relaxed">
               The Volunteer Medical Corps is a global network of Christian health workers, para-medics, and volunteers committed to providing medical care and sustainable health solutions in regions of crisis.
             </p>
           </motion.div>
@@ -64,7 +64,7 @@ export default function AboutLandingPage() {
                   hidden: { opacity: 0, y: 30 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
                 }}
-                className="group bg-gray-50 rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+                className="group bg-bg-surface rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col border border-border-main"
               >
                 <div className="relative h-48 md:h-64 overflow-hidden">
                   <Image 
@@ -75,11 +75,11 @@ export default function AboutLandingPage() {
                   />
                 </div>
                 <div className="p-6 md:p-8 flex flex-col flex-grow">
-                  <h3 className="text-xl md:text-2xl font-bold text-[#002866] mb-3 md:mb-4 uppercase">{section.title}</h3>
-                  <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8 flex-grow">{section.description}</p>
+                  <h3 className="text-xl md:text-2xl font-bold text-brand-primary dark:text-text-main mb-3 md:mb-4 uppercase">{section.title}</h3>
+                  <p className="text-sm md:text-base text-text-muted mb-6 md:mb-8 flex-grow">{section.description}</p>
                   <Link 
                     href={section.href}
-                    className="inline-block bg-[#002866] text-white px-6 md:px-8 py-3 font-bold uppercase tracking-widest text-xs md:text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all text-center"
+                    className="inline-block bg-brand-primary text-white px-6 md:px-8 py-3 font-bold uppercase tracking-widest text-xs md:text-sm hover:bg-brand-secondary hover:text-brand-primary transition-all text-center"
                   >
                     Learn More
                   </Link>

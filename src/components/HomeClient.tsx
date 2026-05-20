@@ -117,204 +117,213 @@ export default function HomeClient({
   return (
     <div className="w-full font-roboto text-text-main">
       
-{/* Hero Section - Optimized Responsive */}
-<section className="bg-bg-base py-4 md:py-8 md:my-12 overflow-hidden transition-colors duration-300">
-  <div className="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-8">
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-      
-      {/* Left: Slider */}
-      <div className="lg:col-span-7 relative">
-        <div className="relative w-full h-65 sm:h-80 md:h-[400px] lg:h-[420px] xl:h-[460px] rounded-xs overflow-hidden group shadow-lg border border-border-main">
-          
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={currentSlide}
-              initial={isMobile 
-                ? { opacity: 0, y: 40 } 
-                : { opacity: 0, x: direction > 0 ? 300 : -300 }
-              }
-              animate={isMobile 
-                ? { opacity: 1, y: 0 } 
-                : { opacity: 1, x: 0 }
-              }
-              exit={isMobile 
-                ? { opacity: 0, y: 40 } 
-                : { opacity: 0, x: direction > 0 ? -300 : 300 }
-              }
-              transition={{ 
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.4 },
-                duration: isMobile ? 0.35 : 0.6,
-                ease: "easeOut" 
-              }}
-              className="absolute inset-0"
-            >
-              <Link href={heroSlides[currentSlide].link} className="block h-full">
-                <div className="relative w-full h-full">
-                  <Image 
-                    src={heroSlides[currentSlide].bg} 
-                    alt="Slide Background" 
-                    fill 
-                    className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]" 
-                    priority 
-                    unoptimized
-                  />
-
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/10 to-transparent flex flex-col justify-end p-4 md:p-6 lg:p-8 text-white">
-                    
-                    <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black uppercase mb-2 leading-tight">
-                      {heroSlides[currentSlide].title}
-                    </h2>
-
-                    <p className="text-xs sm:text-sm md:text-base mb-3 max-w-sm opacity-90 hidden sm:block">
-                      {heroSlides[currentSlide].sub}
-                    </p>
-
-                    <div className="inline-block w-max bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-5 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all">
-                      {heroSlides[currentSlide].btnText}
-                    </div>
-
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation */}
-          <button 
-            onClick={prevSlide}
-            className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 bg-black/40 hover:bg-brand-secondary text-white rounded-full flex items-center justify-center transition-all"
-          >
-            <FaChevronLeft size={14} />
-          </button>
-
-          <button 
-            onClick={nextSlide}
-            className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 bg-black/40 hover:bg-brand-secondary text-white rounded-full flex items-center justify-center transition-all"
-          >
-            <FaChevronRight size={14} />
-          </button>
-
-        </div>
-      </div>
-
-      {/* Right: Events */}
-      <div className="lg:col-span-5 flex flex-col lg:h-[420px] xl:h-[460px] min-h-0 overflow-hidden">
-        
-        <div className="flex justify-between items-center border-b border-border-main pb-3 mb-4">
-          <h3 className="text-brand-primary dark:text-brand-secondary text-lg md:text-xl font-black uppercase">
-            Campaigns & Events
-          </h3>
-        </div>
-        
-        <div className="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1 custom-scrollbar">
-          {initialEvents.map((event: any) => (
-            <Link key={event.id} href={`/media/events/${event.id}`} className="group block">
-              <div className="flex gap-3 p-3 rounded-lg border border-border-main bg-bg-surface hover:border-brand-secondary/30 hover:shadow-sm transition-all">
+      {/* Hero Section - Optimized Responsive */}
+      <section className="bg-bg-base py-4 md:py-8 md:my-12 overflow-hidden transition-colors duration-300">
+        <div className="max-w-[1600px] mx-auto px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+            
+            {/* Left: Slider */}
+            <div className="lg:col-span-7 relative">
+              <div className="relative w-full h-65 sm:h-80 md:h-[400px] lg:h-[420px] xl:h-[460px] rounded-xs overflow-hidden group shadow-lg border border-border-main">
                 
-                <div className="relative w-16 h-16 md:w-18 md:h-18 shrink-0 overflow-hidden rounded-md border border-border-main">
-                  <Image 
-                    src={event.image || "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg"} 
-                    alt={event.title} 
-                    fill 
-                    className="object-cover group-hover:scale-110 transition-transform duration-500" 
-                    unoptimized
-                  />
-                </div>
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={currentSlide}
+                    initial={isMobile 
+                      ? { opacity: 0, y: 40 } 
+                      : { opacity: 0, x: direction > 0 ? 300 : -300 }
+                    }
+                    animate={isMobile 
+                      ? { opacity: 1, y: 0 } 
+                      : { opacity: 1, x: 0 }
+                    }
+                    exit={isMobile 
+                      ? { opacity: 0, y: 40 } 
+                      : { opacity: 0, x: direction > 0 ? -300 : 300 }
+                    }
+                    transition={{ 
+                      x: { type: "spring", stiffness: 300, damping: 30 },
+                      opacity: { duration: 0.4 },
+                      duration: isMobile ? 0.35 : 0.6,
+                      ease: "easeOut" 
+                    }}
+                    className="absolute inset-0"
+                  >
+                    <Link href={heroSlides[currentSlide].link} className="block h-full">
+                      <div className="relative w-full h-full">
+                        <Image 
+                          src={heroSlides[currentSlide].bg} 
+                          alt="Slide Background" 
+                          fill 
+                          className="object-cover group-hover:scale-105 transition-transform duration-[2000ms]" 
+                          priority 
+                          unoptimized
+                        />
 
-                <div className="flex flex-col justify-center min-w-0">
-                  <p className="text-brand-secondary text-[9px] font-black uppercase mb-1">
-                    {formatDate(event.date)}
-                  </p>
+                        {/* Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/10 to-transparent flex flex-col justify-end p-4 md:p-6 lg:p-8 text-white">
+                          
+                          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black uppercase mb-2 leading-tight">
+                            {heroSlides[currentSlide].title}
+                          </h2>
 
-                  <h4 className="text-brand-primary dark:text-text-main text-xs md:text-sm font-bold line-clamp-2 group-hover:text-brand-secondary transition-colors">
-                    {event.title}
-                  </h4>
+                          <p className="text-xs sm:text-sm md:text-base mb-3 max-w-sm opacity-90 hidden sm:block">
+                            {heroSlides[currentSlide].sub}
+                          </p>
 
-                  <p className="text-text-muted text-[10px] md:text-xs flex items-center gap-1">
-                    • {event.location || "Global"}
-                  </p>
-                </div>
+                          <div className="inline-block w-max bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-5 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all">
+                            {heroSlides[currentSlide].btnText}
+                          </div>
+
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Navigation */}
+                <button 
+                  onClick={prevSlide}
+                  className="absolute left-2 md:left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 bg-black/40 hover:bg-brand-secondary text-white rounded-full flex items-center justify-center transition-all"
+                >
+                  <FaChevronLeft size={14} />
+                </button>
+
+                <button 
+                  onClick={nextSlide}
+                  className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 bg-black/40 hover:bg-brand-secondary text-white rounded-full flex items-center justify-center transition-all"
+                >
+                  <FaChevronRight size={14} />
+                </button>
 
               </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div className="mt-4 lg:mt-6">
-          <Link 
-            href="/register" 
-            className="flex items-center justify-between bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-4 py-4 md:px-5 md:py-5 rounded-xs transition-all group shadow-lg"
-          >
-            <div>
-              <p className="text-[10px] font-black uppercase opacity-70">Get Involved</p>
-              <p className="text-sm md:text-base font-black uppercase">Join as a Volunteer</p>
             </div>
-            <span className="text-xl group-hover:translate-x-2 transition-transform">→</span>
-          </Link>
+
+            {/* Right: Events */}
+            <div className="lg:col-span-5 flex flex-col lg:h-[420px] xl:h-[460px] min-h-0 overflow-hidden">
+              
+              <div className="flex justify-between items-center border-b border-border-main pb-3 mb-4">
+                <h3 className="text-brand-primary dark:text-brand-secondary text-lg md:text-xl font-black uppercase">
+                  Campaigns & Events
+                </h3>
+              </div>
+              
+              <div className="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1 custom-scrollbar">
+                {initialEvents.map((event: any) => (
+                  <Link key={event.id} href={`/media/events/${event.id}`} className="group block">
+                    <div className="flex gap-3 p-3 rounded-lg border border-border-main bg-bg-surface hover:border-brand-secondary/30 hover:shadow-sm transition-all">
+                      
+                      <div className="relative w-16 h-16 md:w-18 md:h-18 shrink-0 overflow-hidden rounded-md border border-border-main">
+                        <Image 
+                          src={event.image || "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg"} 
+                          alt={event.title} 
+                          fill 
+                          className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                          unoptimized
+                        />
+                      </div>
+
+                      <div className="flex flex-col justify-center min-w-0">
+                        <p className="text-brand-secondary text-[9px] font-black uppercase mb-1">
+                          {formatDate(event.date)}
+                        </p>
+
+                        <h4 className="text-brand-primary dark:text-text-main text-xs md:text-sm font-bold line-clamp-2 group-hover:text-brand-secondary transition-colors">
+                          {event.title}
+                        </h4>
+
+                        <p className="text-text-muted text-[10px] md:text-xs flex items-center gap-1">
+                          • {event.location || "Global"}
+                        </p>
+                      </div>
+
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <div className="mt-4 lg:mt-6">
+                <Link 
+                  href="/register" 
+                  className="flex items-center justify-between bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-4 py-4 md:px-5 md:py-5 rounded-xs transition-all group shadow-lg"
+                >
+                  <div>
+                    <p className="text-[10px] font-black uppercase opacity-70">Get Involved</p>
+                    <p className="text-sm md:text-base font-black uppercase">Join as a Volunteer</p>
+                  </div>
+                  <span className="text-xl group-hover:translate-x-2 transition-transform">→</span>
+                </Link>
+              </div>
+
+            </div>
+
+          </div>
         </div>
-
-      </div>
-
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Intro & Counters Section */}
-      <section className="py-24 bg-bg-base relative overflow-hidden transition-colors duration-300">
-        {/* Decorative Textures */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-secondary/5 rounded-full blur-3xl -mr-64 -mt-64"></div>
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-brand-primary/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "radial-gradient(var(--color-brand-primary) 1px, transparent 1px)", backgroundSize: "40px 40px" }}></div>
+      <section className="relative py-24 bg-brand-primary text-white flex items-center bg-cover bg-center overflow-hidden min-h-[680px] transition-colors duration-300">
+        
+        {/* Background Image - Same approach as Mission Section */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://i.pinimg.com/736x/e9/46/e1/e946e115fb057e425c50ea78b7c06c17.jpg')`,
+          }}
+        />
+
+        {/* Overlay - Exact replication from Mission Section */}
+        <div className="absolute inset-0 bg-brand-primary/90 md:bg-gradient-to-r md:from-brand-primary/90 md:to-blue-900/10"></div>
+
+        {/* Optional extra depth (recommended) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+
+        {/* Decorative Blurs */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-secondary/10 rounded-full blur-3xl -mr-40 -mt-20"></div>
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/10 rounded-full blur-3xl -ml-32 -mb-20"></div>
 
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-stretch">
             
-            {/* Left: Reduced size counters */}
+            {/* Left: Counters */}
             <motion.div 
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="lg:col-span-3 flex flex-col justify-between gap-4"
+              className="lg:col-span-3 flex flex-col justify-between gap-5"
             >
-              
-              {/* Item 1 */}
-              <div className="text-center lg:text-right border-b border-border-main pb-4">
-                <div className="text-[42px] lg:text-[32px] font-black text-brand-primary dark:text-brand-secondary leading-none mb-1">
+              <div className="text-center lg:text-right border-b border-white/20 pb-5">
+                <div className="text-[42px] lg:text-[36px] font-black text-brand-secondary leading-none mb-1">
                   <Counter value={10} suffix="+" />
                 </div>
-                <p className="text-text-main text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Years of Existence</p>
+                <p className="text-blue-100 text-[10px] font-bold uppercase tracking-[0.2em]">Years of Existence</p>
               </div>
 
-              {/* Item 2 */}
-              <div className="text-center lg:text-right border-b border-border-main pb-4">
-                <div className="text-[42px] lg:text-[32px] font-black text-brand-primary dark:text-brand-secondary leading-none mb-1">
+              <div className="text-center lg:text-right border-b border-white/20 pb-5">
+                <div className="text-[42px] lg:text-[36px] font-black text-brand-secondary leading-none mb-1">
                   <Counter value={210} suffix="+" />
                 </div>
-                <p className="text-text-main text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Countries</p>
+                <p className="text-blue-100 text-[10px] font-bold uppercase tracking-[0.2em]">Countries</p>
               </div>
 
-              {/* Item 3 (Highlighted) */}
-              <div className="text-center lg:text-right border-b border-border-main pb-4">
-                <div className="text-[42px] lg:text-[32px] font-black text-brand-primary dark:text-brand-secondary leading-none mb-1">
+              <div className="text-center lg:text-right border-b border-white/20 pb-5">
+                <div className="text-[42px] lg:text-[36px] font-black text-brand-secondary leading-none mb-1">
                   <Counter value={6} suffix="M+" />
                 </div>
-                <p className="text-text-main text-[10px] font-bold uppercase tracking-[0.2em]">Reached</p>
+                <p className="text-blue-100 text-[10px] font-bold uppercase tracking-[0.2em]">People Reached</p>
               </div>
 
-              {/* Item 4 */}
-              <div className="text-center lg:text-right pb-2">
-                <div className="text-[42px] lg:text-[32px] font-black text-brand-primary dark:text-brand-secondary leading-none mb-1">
+              <div className="text-center lg:text-right">
+                <div className="text-[42px] lg:text-[36px] font-black text-brand-secondary leading-none mb-1">
                   <Counter value={4.4} suffix="M+" decimal={true} />
                 </div>
-                <p className="text-text-main text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Good deeds</p>
+                <p className="text-blue-100 text-[10px] font-bold uppercase tracking-[0.2em]">Good Deeds</p>
               </div>
             </motion.div>
 
-            {/* Right: Info */}
+            {/* Right: Content */}
             <motion.div 
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -326,108 +335,114 @@ export default function HomeClient({
                 <span className="w-12 h-1 bg-brand-secondary"></span>
                 <h3 className="text-brand-secondary font-bold text-sm uppercase tracking-[0.2em]">Why VMC</h3>
               </div>
-              <h2 className="text-brand-primary dark:text-text-main text-3xl md:text-5xl font-black uppercase leading-[1.1] mb-8">
+
+              <h2 className="text-white text-3xl md:text-5xl font-black uppercase leading-[1.05] mb-8">
                 Join the Volunteer <br className="hidden md:block" />
                 Medical Corps
               </h2>
-              <p className="text-text-muted text-lg leading-relaxed mb-10 max-w-2xl">
+
+              <p className="text-blue-100 text-lg leading-relaxed mb-10 max-w-2xl">
                 We are an ever-expanding global network of Christian health care workers, 
                 non-medical volunteers and students committed to providing medical care 
                 through outreaches, humanitarian assistance and sustainable health care solutions 
                 in regions of crisis and to communities in dire need.
               </p>
+
               <Link 
                 href="/about" 
-                className="inline-block bg-brand-secondary text-brand-primary px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all hover:bg-brand-primary hover:text-white dark:hover:bg-bg-surface dark:hover:text-brand-secondary shadow-md hover:shadow-xl"
+                className="group inline-flex items-center gap-3 bg-white text-brand-primary px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] 
+                          shadow-xl hover:shadow-2xl transition-all duration-300 
+                          hover:bg-brand-secondary hover:text-white 
+                          hover:-translate-y-1 active:scale-[0.97]"
               >
                 About Us
+                <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
               </Link>
             </motion.div>
-
           </div>
         </div>
       </section>
 
       {/* Sponsor / Map Section */}
       <section className="py-12 bg-bg-base transition-colors duration-300">
-      <div className="max-w-6xl mx-auto md:px-4">
-        {/* Main Yellow Container */}
-        <div className="bg-brand-secondary relative rounded-sm overflow-hidden flex flex-col md:flex-row items-center min-h-[400px]">
-          
-          {/* Left: Content Block */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative z-20 w-full md:w-1/2 p-6 md:p-12 text-center md:text-left"
-          >
-            {/* Dark Blue Sub-heading Tag */}
-            <div className="inline-block bg-brand-primary text-white px-5 py-1.5 text-[10px] font-bold uppercase tracking-widest mb-4 rounded-sm">
-              Earn VMC Rewards
-            </div>
+        <div className="max-w-6xl mx-auto md:px-4">
+          {/* Main Yellow Container */}
+          <div className="bg-brand-secondary relative rounded-sm overflow-hidden flex flex-col md:flex-row items-center min-h-[400px]">
+            
+            {/* Left: Content Block */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative z-20 w-full md:w-1/2 p-6 md:p-12 text-center md:text-left"
+            >
+              {/* Dark Blue Sub-heading Tag */}
+              <div className="inline-block bg-brand-primary text-white px-5 py-1.5 text-[10px] font-bold uppercase tracking-widest mb-4 rounded-sm">
+                Earn VMC Rewards
+              </div>
 
-            <h2 className="text-brand-primary text-2xl md:text-4xl font-black uppercase leading-tight mb-4 w-full">
-              SPONSOR A GOOD DEEDS PROJECT TODAY!
-            </h2>
+              <h2 className="text-brand-primary text-2xl md:text-4xl font-black uppercase leading-tight mb-4 w-full">
+                SPONSOR A GOOD DEEDS PROJECT TODAY!
+              </h2>
 
-            <p className="text-brand-primary text-base font-medium mb-6 opacity-90 w-full max-w-none md:max-w-md mx-auto md:mx-0">
-              Provide medical kits, hygiene packs, and mother & baby care kits to communities in dire need.
-            </p>
+              <p className="text-brand-primary text-base font-medium mb-6 opacity-90 w-full max-w-none md:max-w-md mx-auto md:mx-0">
+                Provide medical kits, hygiene packs, and mother & baby care kits to communities in dire need.
+              </p>
 
-            {/* Outlined CTA Button & Dropdown */}
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link
-                href="/give"
-                className="w-full sm:w-auto border-2 border-brand-primary text-brand-primary px-8 py-3 font-bold uppercase text-[12px] tracking-widest hover:bg-brand-primary hover:text-white transition-all text-center"
-              >
-                Partner With Us
-              </Link>
-
-              {/* Region Filter Dropdown */}
-              <div className="relative w-full sm:w-auto min-w-[200px]">
-                <select 
-                  value={selectedRegion}
-                  onChange={handleRegionChange}
-                  className="w-full bg-white border-2 border-brand-primary text-brand-primary px-4 py-3 font-bold uppercase text-[12px] tracking-widest focus:outline-none transition-all cursor-pointer appearance-none rounded-none"
+              {/* Outlined CTA Button & Dropdown */}
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <Link
+                  href="/give"
+                  className="w-full sm:w-auto border-2 border-brand-primary text-brand-primary px-8 py-3 font-bold uppercase text-[12px] tracking-widest hover:bg-brand-primary hover:text-white transition-all text-center"
                 >
-                  <option value="">Search by Region</option>
-                  {regions.map(r => (
-                    <option key={r} value={r}>{r}</option>
-                  ))}
-                </select>
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-brand-primary">
-                  ▼
+                  Partner With Us
+                </Link>
+
+                {/* Region Filter Dropdown */}
+                <div className="relative w-full sm:w-auto min-w-[200px]">
+                  <select 
+                    value={selectedRegion}
+                    onChange={handleRegionChange}
+                    className="w-full bg-white border-2 border-brand-primary text-brand-primary px-4 py-3 font-bold uppercase text-[12px] tracking-widest focus:outline-none transition-all cursor-pointer appearance-none rounded-none"
+                  >
+                    <option value="">Search by Region</option>
+                    {regions.map(r => (
+                      <option key={r} value={r}>{r}</option>
+                    ))}
+                  </select>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-brand-primary">
+                    ▼
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* Right: Map Overlay */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative w-full md:w-1/2 h-[250px] md:h-full min-h-[300px]"
-          >
-            <Image 
-              src="/prm-world-map.png" 
-              alt="World Map" 
-              fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-contain p-4 md:p-8 opacity-80 mix-blend-multiply"
-            />
+            {/* Right: Map Overlay */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative w-full md:w-1/2 h-[250px] md:h-full min-h-[300px]"
+            >
+              <Image 
+                src="/prm-world-map.png" 
+                alt="World Map" 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-contain p-4 md:p-8 opacity-80 mix-blend-multiply"
+              />
+              
+              {/* Pulsing Hotspots */}
+              <div className="absolute top-[51%] left-[45%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
+              <div className="absolute top-[28%] left-[75%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
+              <div className="absolute top-[40%] left-[20%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
+              <div className="absolute top-[75%] left-[30%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
+            </motion.div>
             
-            {/* Pulsing Hotspots */}
-            <div className="absolute top-[51%] left-[45%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
-            <div className="absolute top-[28%] left-[75%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
-            <div className="absolute top-[40%] left-[20%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
-            <div className="absolute top-[75%] left-[30%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
-          </motion.div>
-          
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Causes / Campaigns Section */}
       <section className="py-24 bg-bg-base overflow-hidden transition-colors duration-300">
@@ -548,9 +563,9 @@ export default function HomeClient({
       </section>
 
       {/* Mission Section */}
-      <section className="relative py-20 md:py-16 bg-brand-primary text-white flex items-center bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg')" }}>
+      <section className="relative py-20 md:py-16 bg-brand-primary text-white flex items-center bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('https://i1-c.pinimg.com/736x/21/3a/aa/213aaa8d104c3dddeec2827de5186923.jpg')" }}>
         {/* Overlay */}
-        <div className="absolute inset-0 bg-brand-primary/90 md:bg-gradient-to-r md:from-brand-primary/90 md:to-blue-900/60"></div>
+        <div className="absolute inset-0 bg-brand-primary/90 md:bg-gradient-to-r md:from-brand-primary/90 md:to-blue-900/10"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center text-center md:text-left">
@@ -662,11 +677,8 @@ export default function HomeClient({
       <section className="bg-bg-base relative z-20 transition-colors duration-300">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+          <div 
+            id="donation-overlap"
             className="relative -top-32 lg:-top-40 mb-[-128px] lg:mb-[-160px] flex flex-col lg:flex-row bg-bg-surface rounded-sm overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-border-main"
           >
             
@@ -741,7 +753,7 @@ export default function HomeClient({
               </div>
             </div>
             
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -945,7 +957,7 @@ export default function HomeClient({
       </section>
 
       {/* Recent News & Updates Section */}
-      <section className="py-24 bg-bg-base overflow-hidden transition-colors duration-300">
+      <section className="py-24 bg-slate-50 overflow-hidden transition-colors duration-300">
       <div className="max-w-[1200px] mx-auto px-4">
         
         <motion.div 

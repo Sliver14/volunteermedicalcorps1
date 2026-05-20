@@ -128,32 +128,35 @@ export default function ElearnHomeClient({ courses, categories }: { courses: any
         </div>
       </div>
 
-      {/* Boxes Area */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+      {/* Boxes Area (Intro) */}
+      <section className="relative py-24 bg-slate-50 overflow-hidden">
+        {/* Visible Geometric Texture */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23002866' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM36 4V0h-2v4h-4v2h4v4h2V6h4V4h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}></div>
+        
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-[#002866] p-10 rounded-3xl text-white space-y-4">
+            <div className="bg-[#002866] p-10 rounded-3xl text-white shadow-xl shadow-blue-900/20 space-y-4 hover:-translate-y-2 transition-transform duration-300">
               <h3 className="text-2xl font-black">Learn The Latest Skills</h3>
               <p className="text-white/70">Like medical, business, professional skills and more...</p>
               <Link href="/elearn/courses" className="inline-flex items-center gap-2 font-bold hover:text-[#ff9f22] transition-colors">
                 View Courses <FaPlus />
               </Link>
             </div>
-            <div className="bg-slate-50 p-10 rounded-3xl space-y-4">
+            <div className="bg-white p-10 rounded-3xl shadow-xl shadow-slate-200/50 space-y-4 hover:-translate-y-2 transition-transform duration-300">
               <h3 className="text-2xl font-black text-[#002866]">Premium Online Courses</h3>
               <p className="text-slate-500">In high-demand fields like Medicine, IT and Management.</p>
               <Link href="/elearn/courses" className="inline-flex items-center gap-2 font-bold text-[#002866] hover:text-[#ff9f22] transition-colors">
                 View More <FaPlus />
               </Link>
             </div>
-            <div className="bg-[#ff9f22] p-10 rounded-3xl text-[#002866] space-y-4">
+            <div className="bg-[#ff9f22] p-10 rounded-3xl text-[#002866] shadow-xl shadow-orange-500/10 space-y-4 hover:-translate-y-2 transition-transform duration-300">
               <h3 className="text-2xl font-black">Earn a Certificate</h3>
               <p className="text-[#002866]/70">From a leading university in medicine, business, non-profit management and more.</p>
               <Link href="/elearn/courses" className="inline-flex items-center gap-2 font-bold hover:underline transition-colors">
                 In-View <FaPlus />
               </Link>
             </div>
-            <div className="bg-slate-50 p-10 rounded-3xl space-y-4">
+            <div className="bg-white p-10 rounded-3xl shadow-xl shadow-slate-200/50 space-y-4 hover:-translate-y-2 transition-transform duration-300">
               <h3 className="text-2xl font-black text-[#002866]">Upgrade Your Skills</h3>
               <p className="text-slate-500">With on-demand training and development programs.</p>
               <Link href="/elearn/courses" className="inline-flex items-center gap-2 font-bold text-[#002866] hover:text-[#ff9f22] transition-colors">
@@ -227,8 +230,10 @@ export default function ElearnHomeClient({ courses, categories }: { courses: any
       {/* Mission Area */}
       <section className="relative py-32 bg-[#002866] overflow-hidden text-white">
         <div className="absolute inset-0 opacity-10">
-          <Image src="https://volunteermedicalcorps.org/public/pmr-bg-mission.jpg" alt="Background" fill className="object-cover" unoptimized />
+          <Image src="https://volunteermedicalcorps.org/pmr-bg-mission.jpg" alt="Background" fill className="object-cover" unoptimized />
         </div>
+        {/* Subtle Texture Overlay */}
+        <div className="absolute inset-0 opacity-30" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 86c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm66 3c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm-46-45c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm26 18c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm16-18c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-38 32c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-4-48c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zM66 2c.552 0 1-.448 1-1s-.448-1-1-1-1 .448-1 1 .448 1 1 1zm-11 78c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm34-18c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-58 33c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm38-46c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM25 71c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm9-61c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm44 4c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-44 71c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM48 88c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM25 43c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm54 13c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM8 46c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm15-26c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm57 10c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-60 46c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm57 4c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM33 32c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm6 4c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm33 2c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-5-24c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm14 48c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-28-10c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm8 21c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-33-8c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-8-85c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm0 20c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm5 64c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm13-72c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm7 40c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-20-44c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM21 68c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm19-2c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-11 44c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm38-16c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm31 2c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-4-73c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-74 5c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm28 16c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm14-13c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-25 19c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm8 28c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm39-26c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-24 13c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM9 22c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm57-21c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM9 54c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm40 4c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM99 91c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-45-14c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-31-9c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm33-31c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-5-51c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM33 71c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-1-47c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm31 2c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM88 45c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM8 77c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm56 28c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-8-32c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm54-32c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM9 90c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm75-26c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-41 22c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm53-24c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM24 22c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm7 35c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm63 2c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM67 22c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM91 5c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM80 5c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-32 92c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-6-71c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zM44 3c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm-12 19c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1zm69 76c0 .552-.448 1-1 1s-1-.448-1-1 .448-1 1-1 1 .448 1 1z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E")` }}></div>
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-8">
@@ -316,8 +321,11 @@ export default function ElearnHomeClient({ courses, categories }: { courses: any
       </section>
 
       {/* Offer Area */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="relative py-24 bg-slate-50 overflow-hidden">
+        {/* Visible Geometric Texture */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23002866' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6zM36 4V0h-2v4h-4v2h4v4h2V6h4V4h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}></div>
+        
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
             <div className="text-center max-w-3xl mx-auto space-y-6 mb-16">
                 <span className="text-[#ff9f22] font-black uppercase tracking-widest text-sm">Make Connections</span>
                 <h2 className="text-4xl font-black text-[#002866]">What We Offer</h2>
@@ -327,21 +335,21 @@ export default function ElearnHomeClient({ courses, categories }: { courses: any
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div className="text-center space-y-6 p-8 rounded-3xl hover:bg-slate-50 transition-colors">
+                <div className="text-center space-y-6 p-8 rounded-3xl bg-white shadow-xl shadow-slate-200/50 hover:bg-slate-50 transition-colors">
                     <div className="w-20 h-20 bg-blue-50 text-[#002866] rounded-3xl mx-auto flex items-center justify-center text-3xl">
                         <FaUserGraduate />
                     </div>
                     <h3 className="text-xl font-black text-[#002866]">Exclusive Advisor</h3>
                     <p className="text-slate-500 text-sm leading-relaxed">Our Instructors are top professionals in their respective field of discipline. That's a fact.</p>
                 </div>
-                <div className="text-center space-y-6 p-8 rounded-3xl hover:bg-slate-50 transition-colors">
+                <div className="text-center space-y-6 p-8 rounded-3xl bg-white shadow-xl shadow-slate-200/50 hover:bg-slate-50 transition-colors">
                     <div className="w-20 h-20 bg-amber-50 text-[#ff9f22] rounded-3xl mx-auto flex items-center justify-center text-3xl">
                         <FaBullseye />
                     </div>
                     <h3 className="text-xl font-black text-[#002866]">Reach Your Goals</h3>
                     <p className="text-slate-500 text-sm leading-relaxed">Set goals and reach them following our well structured learning process as a guide.</p>
                 </div>
-                <div className="text-center space-y-6 p-8 rounded-3xl hover:bg-slate-50 transition-colors">
+                <div className="text-center space-y-6 p-8 rounded-3xl bg-white shadow-xl shadow-slate-200/50 hover:bg-slate-50 transition-colors">
                     <div className="w-20 h-20 bg-green-50 text-green-600 rounded-3xl mx-auto flex items-center justify-center text-3xl">
                         <FaThermometerHalf />
                     </div>

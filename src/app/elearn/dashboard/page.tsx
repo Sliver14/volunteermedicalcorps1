@@ -1,61 +1,73 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import prisma from "@/lib/prisma";
-import { 
-  FaBook, 
-  FaClock, 
-  FaTrophy, 
-  FaStar,
-  FaPlay,
-  FaSearch
-} from "react-icons/fa";
-import Image from "next/image";
-import Link from "next/link";
 import ElearnDashboardClient from "@/components/ElearnDashboardClient";
 
 export default async function ElearnDashboard() {
-  const session = await getServerSession(authOptions);
-  
-  if (!session) return null;
+  // Mock session
+  const mockSession = {
+    user: {
+      id: "demo-user",
+      name: "Demo Student",
+      email: "student@example.com",
+      image: "https://volunteermedicalcorps.org/elearn/students/images/users/default-avatar.jpg",
+      role: "STUDENT"
+    }
+  };
 
-  // Fetch real data
-  const enrollments = await prisma.enrollment.findMany({
-    where: { userId: session.user.id },
-    include: {
+  const demoEnrollments = [
+    {
+      id: "e1",
+      progress: 65,
       course: {
-        include: {
-          lessons: true,
-          category: true
-        }
+        id: "1",
+        title: "Introduction to the Volunteer Medical Corps",
+        image: "https://volunteermedicalcorps.org/elearn/instructors/images/courses/7vWQjZUTR.jpeg",
+        category: { name: "Leadership & Management" }
       }
     },
-    orderBy: { enrolledAt: 'desc' }
-  });
-
-  const recommendedCourses = await prisma.course.findMany({
-    where: { 
-      isActive: true,
-      enrollments: {
-        none: { userId: session.user.id }
+    {
+      id: "e2",
+      progress: 30,
+      course: {
+        id: "2",
+        title: "Basic First Aid Training",
+        image: "https://volunteermedicalcorps.org/elearn/instructors/images/courses/sb8UD1MCE.jpg",
+        category: { name: "First Aid" }
       }
-    },
-    include: { category: true },
-    take: 3,
-    orderBy: { createdAt: 'desc' }
-  });
+    }
+  ];
 
-  const stats = {
-    certificates: enrollments.filter(e => e.isCompleted).length,
-    learningTime: "12h", // Mock for now as we don't track exact time
-    totalCourses: enrollments.length
+  const demoRecommended = [
+    {
+      id: "r1",
+      title: "Advanced Clinical Training",
+      level: "Intermediate",
+      image: "https://volunteermedicalcorps.org/elearn/instructors/images/courses/mXFMVbthS.jpg"
+    },
+    {
+      id: "r2",
+      title: "Public Health Management",
+      level: "Advanced",
+      image: "https://volunteermedicalcorps.org/elearn/instructors/images/courses/p1NVEcC3P.png"
+    },
+    {
+      id: "r3",
+      title: "Leadership in Medical Missions",
+      level: "Beginner",
+      image: "https://volunteermedicalcorps.org/elearn/instructors/images/courses/fsPMurJ5Z.jpg"
+    }
+  ];
+
+  const demoStats = {
+    totalCourses: 15,
+    certificates: 2,
+    learningTime: "24h"
   };
 
   return (
     <ElearnDashboardClient 
-      session={session}
-      enrollments={enrollments}
-      recommendedCourses={recommendedCourses}
-      stats={stats}
+      session={mockSession}
+      enrollments={demoEnrollments}
+      recommendedCourses={demoRecommended}
+      stats={demoStats}
     />
   );
 }

@@ -302,7 +302,7 @@ export default function HomeClient({
                 <div className="text-[42px] lg:text-[32px] font-black text-brand-primary dark:text-brand-secondary leading-none mb-1">
                   <Counter value={6} suffix="M+" />
                 </div>
-                <p className="text-text-main text-[10px] font-bold uppercase tracking-[0.2em]">Volunteers</p>
+                <p className="text-text-main text-[10px] font-bold uppercase tracking-[0.2em]">Reached</p>
               </div>
 
               {/* Item 4 */}

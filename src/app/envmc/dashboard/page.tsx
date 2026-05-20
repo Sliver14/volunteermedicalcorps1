@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 export default async function AdminDashboard() {
-  const session = await getServerSession(authOptions);
+  // Authentication removed for mock data access
 
   // Fetch some stats
   let userCount = 0;

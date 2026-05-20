@@ -8,9 +8,9 @@ export default function ElearnNav({ session }: { session: any }) {
   return (
     <>
       <nav className="hidden md:flex items-center gap-8">
-        <Link href="/elearn" className="text-sm font-bold text-slate-600 hover:text-[#002866]">Home</Link>
-        <Link href="/elearn/courses" className="text-sm font-bold text-slate-600 hover:text-[#002866]">Courses</Link>
-        <Link href="/portal" className="text-sm font-bold text-[#ff9f22] hover:underline">Back to Volunteer Portal</Link>
+        <Link href="/elearn" className="text-sm font-bold text-text-muted hover:text-brand-primary dark:hover:text-brand-secondary transition-colors">Home</Link>
+        <Link href="/elearn/courses" className="text-sm font-bold text-text-muted hover:text-brand-primary dark:hover:text-brand-secondary transition-colors">Courses</Link>
+        <Link href="/portal" className="text-sm font-bold text-brand-secondary hover:underline transition-all">Back to Volunteer Portal</Link>
       </nav>
 
       <div className="flex items-center gap-4">
@@ -18,15 +18,18 @@ export default function ElearnNav({ session }: { session: any }) {
           <div className="flex items-center gap-4">
             <Link 
               href="/elearn/dashboard" 
-              className="bg-[#002866] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#ff9f22] transition-all shadow-lg shadow-blue-900/10 flex items-center gap-2"
+              className="group relative overflow-hidden bg-brand-primary text-white px-6 py-2.5 font-bold text-sm transition-all flex items-center gap-2 shadow-lg"
             >
-              <FaBook />
-              Dashboard
+              <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+              <span className="relative z-10 flex items-center gap-2 group-hover:text-brand-primary transition-colors">
+                <FaBook />
+                Dashboard
+              </span>
             </Link>
-            <div className="h-8 w-px bg-slate-200 hidden sm:block"></div>
+            <div className="h-8 w-px bg-border-main hidden sm:block"></div>
             <button 
               onClick={() => signOut({ callbackUrl: "/" })}
-              className="text-slate-400 hover:text-red-500 transition-colors p-2 rounded-lg"
+              className="text-text-muted hover:text-red-500 transition-colors p-2"
               title="Sign Out"
             >
               <FaSignOutAlt size={18} />
@@ -35,9 +38,10 @@ export default function ElearnNav({ session }: { session: any }) {
         ) : (
           <Link 
             href="/login" 
-            className="bg-[#002866] text-white px-8 py-2.5 rounded-xl font-bold text-sm hover:bg-[#ff9f22] transition-all"
+            className="group relative overflow-hidden bg-brand-primary text-white px-8 py-2.5 font-bold text-sm transition-all shadow-lg"
           >
-            Sign In
+            <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+            <span className="relative z-10 group-hover:text-brand-primary transition-colors">Sign In</span>
           </Link>
         )}
       </div>

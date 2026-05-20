@@ -69,7 +69,7 @@ function LoginForm() {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.4 }}
       className="bg-white p-6 md:p-12 shadow-xl border-t-4 border-[#002866] rounded-sm"
     >
       <h3 className="text-2xl font-poppins font-bold mb-8 uppercase text-[#002866] text-center">Member Login</h3>

@@ -120,7 +120,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
           </div>
         </header>
 
-        <div className="animate-in fade-in duration-500">
+        <div className="animate-in fade-in duration-300">
           {children}
         </div>
       </main>

@@ -7,6 +7,8 @@
   /* Brand Colors */
   --color-brand-primary: #002866;
   --color-brand-secondary: #ff9f22;
+  --color-brand-tertiary: #1db2ec;
+  --color-brand-accent: #9ccfcf;
 
   /* Semantic Colors mapped to CSS Variables */
   --color-bg-base: var(--bg-base);
@@ -94,6 +96,6 @@
 }
 
 .animate-fadeInUp {
-  animation: fadeInUp 0.8s ease-out forwards;
+  animation: fadeInUp 0.5s ease-out forwards;
   opacity: 0; /* Keep hidden until animation starts */
 }

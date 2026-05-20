@@ -3,84 +3,75 @@
 import PageBanner from "@/components/PageBanner";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function RegisterPage() {
+  const isMobile = useIsMobile();
+
   return (
-    <div className="w-full bg-gray-50 font-roboto">
+    <div className="w-full bg-bg-base font-roboto transition-colors duration-300">
       <PageBanner title="Join Volunteer Medical Corps" />
 
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 text-center lg:text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 text-center lg:text-left items-start">
 
-            {/* LEFT SIDE (unchanged) */}
+            {/* LEFT SIDE */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.4 }}
               className="lg:col-span-2"
             >
-              <h2 className="text-3xl font-poppins font-bold text-[#002866] mb-6 uppercase">
+              <h2 className="text-2xl md:text-3xl font-bold text-brand-primary dark:text-brand-secondary mb-6 uppercase">
                 Become a Volunteer
               </h2>
 
-              <p className="text-gray-600 text-lg mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-text-muted text-lg mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 font-medium">
                 Whether you are a Christian health care worker, para-medic, or student, your skills can change lives.
                 Join us in providing medical care, relief assistance, and sustainable health care solutions to communities in dire need.
               </p>
 
-              <div className="space-y-6">
-                <div className="flex flex-col md:flex-row items-center md:items-start">
-                  <div className="bg-[#ff9f22] text-[#002866] p-3 rounded-full md:mr-4 mb-4 md:mb-0">✓</div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Make a Global Impact</h4>
-                    <p className="text-gray-600 text-sm">
-                      Contribute to medical outreaches and humanitarian projects worldwide.
-                    </p>
+              <div className="space-y-8">
+                {[
+                  { title: "Make a Global Impact", desc: "Contribute to medical outreaches and humanitarian projects worldwide." },
+                  { title: "Earn VMC Rewards", desc: "Gain volunteer credits and be recognized for your active participation." },
+                  { title: "Join a Network", desc: "Connect with thousands of Christian health professionals globally." }
+                ].map((item, i) => (
+                  <div key={i} className="flex flex-col md:flex-row items-center md:items-start group">
+                    <div className="bg-brand-secondary text-brand-primary w-10 h-10 flex items-center justify-center font-bold md:mr-5 mb-4 md:mb-0 shadow-lg transition-transform group-hover:scale-110">✓</div>
+                    <div className="text-center md:text-left">
+                      <h4 className="font-bold text-brand-primary dark:text-brand-secondary mb-1 uppercase text-sm tracking-tight">{item.title}</h4>
+                      <p className="text-text-muted text-sm font-medium opacity-80 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex flex-col md:flex-row items-center md:items-start">
-                  <div className="bg-[#ff9f22] text-[#002866] p-3 rounded-full md:mr-4 mb-4 md:mb-0">✓</div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Earn VMC Rewards</h4>
-                    <p className="text-gray-600 text-sm">
-                      Gain volunteer credits and be recognized for your active participation.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col md:flex-row items-center md:items-start">
-                  <div className="bg-[#ff9f22] text-[#002866] p-3 rounded-full md:mr-4 mb-4 md:mb-0">✓</div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 mb-1">Join a Network</h4>
-                    <p className="text-gray-600 text-sm">
-                      Connect with thousands of Christian health professionals globally.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
             </motion.div>
 
-            {/* RIGHT SIDE FORM (UPDATED TO MATCH YOUR SCHEMA) */}
+            {/* RIGHT SIDE FORM */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:col-span-3 bg-white p-6 md:p-12 shadow-xl border-t-4 border-[#002866] rounded-sm text-left"
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="lg:col-span-3 bg-bg-surface p-8 md:p-12 shadow-2xl border border-border-main text-left relative overflow-hidden"
             >
-              <h3 className="text-2xl font-poppins font-bold mb-8 uppercase text-[#002866]">
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-brand-primary"></div>
+              
+              <h3 className="text-xl md:text-2xl font-bold mb-10 uppercase text-brand-primary dark:text-brand-secondary tracking-tight">
                 Registration Form
               </h3>
 
-              <form className="space-y-6">
+              <form className="space-y-8">
 
                 {/* Title */}
-                <div>
-                  <label className="block text-sm font-bold uppercase mb-2">Title *</label>
-                  <select className="w-full bg-gray-50 border p-4 rounded-sm">
+                <div className="space-y-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-text-muted">Title *</label>
+                  <select className="w-full bg-bg-base border border-border-main p-4 focus:outline-none focus:border-brand-secondary text-text-main font-medium">
                     <option value="">Select Title</option>
                     <option>Pastor</option>
                     <option>Deacon</option>
@@ -91,48 +82,41 @@ export default function RegisterPage() {
                 </div>
 
                 {/* Name */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <input className="p-4 bg-gray-50 border rounded-sm" placeholder="First Name *" />
-                  <input className="p-4 bg-gray-50 border rounded-sm" placeholder="Last Name *" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-text-muted">First Name *</label>
+                    <input className="w-full p-4 bg-bg-base border border-border-main focus:outline-none focus:border-brand-secondary text-text-main font-medium" placeholder="First Name" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-text-muted">Last Name *</label>
+                    <input className="w-full p-4 bg-bg-base border border-border-main focus:outline-none focus:border-brand-secondary text-text-main font-medium" placeholder="Last Name" />
+                  </div>
                 </div>
 
                 {/* Email + Phone */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <input className="p-4 bg-gray-50 border rounded-sm" placeholder="Email Address *" />
-                  <input className="p-4 bg-gray-50 border rounded-sm" placeholder="Phone Number *" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-text-muted">Email Address *</label>
+                    <input className="w-full p-4 bg-bg-base border border-border-main focus:outline-none focus:border-brand-secondary text-text-main font-medium" placeholder="Email Address" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-text-muted">Phone Number *</label>
+                    <input className="w-full p-4 bg-bg-base border border-border-main focus:outline-none focus:border-brand-secondary text-text-main font-medium" placeholder="Phone Number" />
+                  </div>
                 </div>
 
                 {/* Profession */}
-                <div>
-                  <select className="w-full p-4 bg-gray-50 border rounded-sm">
-                    <option>Profession *</option>
+                <div className="space-y-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-text-muted">Profession *</label>
+                  <select className="w-full p-4 bg-bg-base border border-border-main focus:outline-none focus:border-brand-secondary text-text-main font-medium">
+                    <option>Select Profession</option>
                     {[
-                      "Doctor",
-                      "Nurse",
-                      "Pharmacist",
-                      "Laboratory Technician",
-                      "Laboratory Scientist",
-                      "Public Health Practitioner",
-                      "Paramedic",
-                      "Information Technology",
-                      "Physiotherapist",
-                      "Dentist",
-                      "Aid Worker",
-                      "Hospice Worker",
-                      "Emergency Medical Technician",
-                      "Ophthalmologist",
-                      "Optometrist",
-                      "Medical and Health Services Manager",
-                      "Social Worker",
-                      "Psychologist",
-                      "Dietician",
-                      "Pathologist",
-                      "Media Practitioner",
-                      "Nutritionist",
-                      "Psychiatrist",
-                      "Pharmacy Technician",
-                      "Student",
-                      "Others",
+                      "Doctor", "Nurse", "Pharmacist", "Laboratory Technician", "Laboratory Scientist",
+                      "Public Health Practitioner", "Paramedic", "Information Technology", "Physiotherapist",
+                      "Dentist", "Aid Worker", "Hospice Worker", "Emergency Medical Technician", "Ophthalmologist",
+                      "Optometrist", "Medical and Health Services Manager", "Social Worker", "Psychologist",
+                      "Dietician", "Pathologist", "Media Practitioner", "Nutritionist", "Psychiatrist",
+                      "Pharmacy Technician", "Student", "Others",
                     ].map((p) => (
                       <option key={p}>{p}</option>
                     ))}
@@ -140,185 +124,66 @@ export default function RegisterPage() {
                 </div>
 
                 {/* Qualification */}
-                <div>
-                  <select className="w-full p-4 bg-gray-50 border rounded-sm">
-                    <option>Qualification *</option>
+                <div className="space-y-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-text-muted">Qualification *</label>
+                  <select className="w-full p-4 bg-bg-base border border-border-main focus:outline-none focus:border-brand-secondary text-text-main font-medium">
+                    <option>Select Qualification</option>
                     {[
-                      "School Leaver",
-                      "Pre-Med",
-                      "Undergraduate",
-                      "Medical Student",
-                      "Intern",
-                      "Medical Officer",
-                      "Nurse Practitioner",
-                      "Resident",
-                      "Chief Resident",
-                      "Specialist Surgeons",
-                      "MSc",
-                      "PhD",
-                      "CNO",
-                      "Fellow",
-                      "Attending Physician",
-                      "Health Care Administrator",
-                      "Medical Director",
-                      "Professor",
-                      "Dean",
-                      "Others",
+                      "School Leaver", "Pre-Med", "Undergraduate", "Medical Student", "Intern",
+                      "Medical Officer", "Nurse Practitioner", "Resident", "Chief Resident",
+                      "Specialist Surgeons", "MSc", "PhD", "CNO", "Fellow", "Attending Physician",
+                      "Health Care Administrator", "Medical Director", "Professor", "Dean", "Others",
                     ].map((q) => (
                       <option key={q}>{q}</option>
                     ))}
                   </select>
                 </div>
 
-                {/* Preferred Opportunity */}
-                <div>
-                  <select className="w-full p-4 bg-gray-50 border rounded-sm">
-                    <option>Preferred Opportunity *</option>
-                    {[
-                      "Volunteer Support Services",
-                      "Medical, Hospital and Surgical Outreaches",
-                      "Community Volunteering Projects",
-                      "VMC Disaster Response Team",
-                      "VMC Academy Instructor",
-                      "Blood Donor Recruiter",
-                      "Online Support",
-                      "Media Advocacy",
-                      "Social Media Support",
-                      "Media (Graphics and Video Editing)",
-                      "Fundraising",
-                      "Administrative Support",
-                      "Translator",
-                      "Script Writer",
-                      "Social Media Ambassador",
-                    ].map((o) => (
-                      <option key={o}>{o}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Phone */}
-                <input
-                  className="w-full p-4 bg-gray-50 border rounded-sm"
-                  placeholder="Phone *"
-                />
-
                 {/* Country */}
-                <div>
-                  <select className="w-full p-4 bg-gray-50 border rounded-sm">
-                    <option>Choose Country *</option>
+                <div className="space-y-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-text-muted">Country *</label>
+                  <select className="w-full p-4 bg-bg-base border border-border-main focus:outline-none focus:border-brand-secondary text-text-main font-medium">
+                    <option>Choose Country</option>
                     {[
-                      "Afghanistan",
-                      "Albania",
-                      "Algeria",
-                      "Andorra",
-                      "Angola",
-                      "Argentina",
-                      "Australia",
-                      "Austria",
-                      "Bangladesh",
-                      "Belgium",
-                      "Benin",
-                      "Botswana",
-                      "Brazil",
-                      "Burkina Faso",
-                      "Burundi",
-                      "Cameroon",
-                      "Canada",
-                      "Chad",
-                      "China",
-                      "Congo",
-                      "Democratic Republic of the Congo",
-                      "Egypt",
-                      "Ethiopia",
-                      "France",
-                      "Germany",
-                      "Ghana",
-                      "India",
-                      "Ireland",
-                      "Italy",
-                      "Japan",
-                      "Kenya",
-                      "Liberia",
-                      "Malaysia",
-                      "Morocco",
-                      "Mozambique",
-                      "Namibia",
-                      "Nepal",
-                      "Netherlands",
-                      "New Zealand",
-                      "Niger",
-                      "Nigeria",
-                      "Norway",
-                      "Pakistan",
-                      "Philippines",
-                      "Portugal",
-                      "Rwanda",
-                      "Saudi Arabia",
-                      "Senegal",
-                      "Sierra Leone",
-                      "Singapore",
-                      "Somalia",
-                      "South Africa",
-                      "South Korea",
-                      "Spain",
-                      "Sudan",
-                      "Sweden",
-                      "Switzerland",
-                      "Tanzania",
-                      "Thailand",
-                      "Turkey",
-                      "Uganda",
-                      "United Arab Emirates",
-                      "United Kingdom",
-                      "United States",
-                      "Zambia",
-                      "Zimbabwe",
+                      "Nigeria", "USA", "United Kingdom", "Canada", "South Africa", "Others"
                     ].map((c) => (
                       <option key={c}>{c}</option>
                     ))}
                   </select>
                 </div>
 
-                {/* City */}
-                <input
-                  className="w-full p-4 bg-gray-50 border rounded-sm"
-                  placeholder="City *"
-                />
-
-                {/* Zonal Church */}
-                <select className="w-full p-4 bg-gray-50 border rounded-sm">
-                  <option value="">Select Zonal Church...</option>
-                  <option value="">(To be added later)</option>
-                </select>
-
                 {/* Bio */}
-                <textarea
-                  className="w-full p-4 bg-gray-50 border rounded-sm"
-                  rows={5}
-                  placeholder="Enter Brief Info About You Here..."
-                />
+                <div className="space-y-2">
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-text-muted">Brief Bio</label>
+                  <textarea
+                    className="w-full p-4 bg-bg-base border border-border-main focus:outline-none focus:border-brand-secondary text-text-main font-medium"
+                    rows={4}
+                    placeholder="Enter Brief Info About You Here..."
+                  />
+                </div>
 
                 {/* Terms */}
-                <div className="flex items-start gap-3">
-                  <input type="checkbox" className="mt-1" required />
-                  <p className="text-sm text-gray-600">
-                    I agree to the Terms of Service and Privacy Policy.
+                <div className="flex items-start gap-4 p-4 bg-bg-base border border-border-main">
+                  <input type="checkbox" className="mt-1 accent-brand-primary" required />
+                  <p className="text-xs text-text-muted font-medium leading-relaxed">
+                    I agree to the <Link href="/terms" className="text-brand-secondary underline">Terms of Service</Link> and <Link href="/privacy" className="text-brand-secondary underline">Privacy Policy</Link>.
                   </p>
                 </div>
 
                 {/* Submit */}
                 <button
                   type="button"
-                  className="w-full bg-[#002866] text-white py-5 font-bold uppercase hover:bg-[#ff9f22] transition"
+                  className="group relative overflow-hidden w-full bg-brand-primary text-white py-5 font-bold uppercase tracking-[0.2em] text-xs transition-all shadow-xl"
                 >
-                  Complete Registration
+                   <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                   <span className="relative z-10 group-hover:text-brand-primary transition-colors">Complete Registration</span>
                 </button>
 
               </form>
 
-              <p className="mt-6 text-center text-sm text-gray-600">
+              <p className="mt-10 text-center text-xs font-bold uppercase tracking-widest text-text-muted">
                 Already have an account?{" "}
-                <Link href="/login" className="text-[#002866] font-bold">
+                <Link href="/login" className="text-brand-secondary hover:underline ml-1">
                   Login here
                 </Link>
               </p>

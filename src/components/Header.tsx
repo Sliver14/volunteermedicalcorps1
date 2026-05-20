@@ -19,40 +19,40 @@ export default function Header() {
       label: "About Us", 
       href: "/about",
       subItems: [
-        { label: "Our Story", href: "/about/our-story" },
-        { label: "Board of Trustees", href: "/about/board-of-trustees" },
-        { label: "Annual Reports", href: "/about/annual-reports" },
+        { label: "Our Story", href: "/our-story" },
+        { label: "Board of Trustees", href: "/board-of-trustees" },
+        { label: "Annual Reports", href: "/annual-reports" },
       ]
     },
     { 
       label: "What We Do", 
-      href: "/causes/humanitarian-projects",
+      href: "/humanitarian-projects",
       subItems: [
-        { label: "Good Deeds Campaigns", href: "/causes/good-deeds-campaigns" },
-        { label: "Medical Projects", href: "/causes/medical-projects" },
-        { label: "Humanitarian Projects", href: "/causes/humanitarian-projects" },
-        { label: "VMC Academy", href: "/causes/vmc-academy" },
+        { label: "Good Deeds Campaigns", href: "/good-deeds-campaigns" },
+        { label: "Medical Projects", href: "/medical-projects" },
+        { label: "Humanitarian Projects", href: "/humanitarian-projects" },
+        { label: "VMC Academy", href: "/vmc-academy" },
       ]
     },
     { 
       label: "Campaigns", 
       href: "/campaigns",
       subItems: [
-        { label: "1 Million Smiles", href: "/campaigns/1-million-smiles" },
-        { label: "Global Hospital Outreach", href: "/campaigns/ghoc" },
-        { label: "Praying Medics", href: "/campaigns/global-prayer" },
+        { label: "1 Million Smiles", href: "/1-million-smiles" },
+        { label: "Global Hospital Outreach", href: "/ghoc" },
+        { label: "Praying Medics", href: "/global-prayer" },
       ]
     },
     { 
       label: "Media", 
-      href: "/media/news",
+      href: "/news",
       subItems: [
-        { label: "News", href: "/media/news" },
-        { label: "Blog", href: "/media/blog" },
-        { label: "Events", href: "/media/events" },
-        { label: "Gallery", href: "/media/gallery" },
-        { label: "Video Gallery", href: "/media/video-gallery" },
-        { label: "Testimonials", href: "/media/testimonials" },
+        { label: "News", href: "/news" },
+        { label: "Blog", href: "/blog" },
+        { label: "Events", href: "/events" },
+        { label: "Gallery", href: "/gallery" },
+        { label: "Video Gallery", href: "/video-gallery" },
+        { label: "Testimonials", href: "/testimonials" },
       ]
     },
     { label: "Live stream", href: "/tv" },
@@ -87,11 +87,11 @@ export default function Header() {
                   >
                     <Link 
                       href={item.href} 
-                      className={`flex items-center px-5 h-full text-text-main font-semibold text-[15px] tracking-wider transition-all
+                      className={`flex items-center px-5 h-full text-text-main text-sm tracking-wide transition-all
                         ${isActive ? 'bg-brand-secondary text-brand-primary' : 'hover:bg-brand-secondary hover:text-brand-primary'}`}
                     >
                       {item.label}
-                      {item.subItems && <svg className="ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>}
+                      {item.subItems && <svg className="ml-1 h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" /></svg>}
                     </Link>
 
                     {item.subItems && (
@@ -102,10 +102,10 @@ export default function Header() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: 10 }}
                             transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 w-64 bg-bg-surface shadow-2xl border-t-4 border-brand-secondary py-2"
+                            className="absolute top-full left-0 w-64 bg-bg-surface shadow-2xl border-t-2 border-brand-secondary py-2"
                           >
                             {item.subItems.map((sub) => (
-                              <Link key={sub.label} href={sub.href} className="block px-6 py-3 text-[14px] font-semibold text-text-main hover:bg-brand-primary/5 hover:pl-8 transition-all">
+                              <Link key={sub.label} href={sub.href} className="block px-6 py-3 text-sm text-text-main hover:bg-brand-primary/5 hover:pl-8 transition-all">
                                 {sub.label}
                               </Link>
                             ))}
@@ -121,14 +121,26 @@ export default function Header() {
             {/* Desktop Actions */}
             <div className="hidden lg:flex h-18 items-center gap-4">
               <ThemeToggle />
-              <Link href="/login" className="text-text-main font-bold text-[14px] uppercase tracking-wider hover:text-brand-secondary transition-colors flex items-center gap-2">
+              <Link href="/login" className="text-text-main text-[13px] uppercase tracking-wider hover:text-brand-secondary transition-colors flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 Member Portal
               </Link>
-              <Link href="/give" className="bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary uppercase h-full px-8 py-3 flex items-center font-semibold text-[15px] tracking-widest hover:bg-brand-secondary dark:hover:bg-white hover:text-brand-primary transition-all">
-                Give Now
+              <Link 
+                href="/give" 
+                className="group relative overflow-hidden bg-brand-primary dark:bg-brand-secondary 
+                          text-white dark:text-brand-primary uppercase h-full px-8 py-3 
+                          flex items-center justify-center font-bold text-[12px] tracking-widest 
+                          transition-all duration-300"
+              >
+                {/* Sliding Background */}
+                <span className="absolute inset-0 bg-brand-secondary dark:bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                
+                {/* Centered Text */}
+                <span className="relative z-10 group-hover:text-brand-primary dark:group-hover:text-white transition-colors">
+                  Give Now
+                </span>
               </Link>
             </div>
 
@@ -218,17 +230,19 @@ export default function Header() {
               <div className="flex flex-col gap-3">
                 <Link 
                   href="/login" 
-                  className="w-full bg-brand-primary text-white py-3 rounded-md font-bold uppercase tracking-widest text-center text-sm shadow-md"
+                  className="group relative overflow-hidden w-full bg-brand-primary text-white py-4 font-bold uppercase tracking-widest text-center text-sm shadow-md"
                   onClick={() => setIsMobileOpen(false)}
                 >
-                  Member Login
+                  <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-brand-primary transition-colors">Member Login</span>
                 </Link>
                 <Link 
                   href="/register" 
-                  className="w-full bg-bg-surface border-2 border-brand-primary text-text-main py-3 rounded-md font-bold uppercase tracking-widest text-center text-sm"
+                  className="group relative overflow-hidden w-full bg-bg-surface border-2 border-brand-primary text-text-main py-4 font-bold uppercase tracking-widest text-center text-sm"
                   onClick={() => setIsMobileOpen(false)}
                 >
-                  Become a Volunteer
+                  <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-white transition-colors">Become a Volunteer</span>
                 </Link>
               </div>
             </div>
@@ -237,22 +251,22 @@ export default function Header() {
       </header>
 
       {/* Mobile Sticky Footer (Synchronized with Drawer State) */}
-      <div className={`lg:hidden fixed bottom-0 left-0 w-full h-[52px] bg-[#002866] flex items-center justify-between px-4 z-50 transition-transform duration-300 ${isMobileOpen ? 'translate-y-20' : 'translate-y-0'}`}>
+      <div className={`lg:hidden fixed bottom-0 left-0 w-full h-[52px] bg-brand-primary flex items-center justify-between px-4 z-50 transition-transform duration-300 ${isMobileOpen ? 'translate-y-20' : 'translate-y-0'}`}>
         <button 
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="bg-white rounded-full p-1.5 border-2 border-[#002866] -mt-6 shadow-lg active:scale-90 transition-transform"
+          className="bg-white p-1.5 border-2 border-brand-primary -mt-6 shadow-lg active:scale-90 transition-transform"
         >
           {isMobileOpen ? (
-             <svg className="w-7 h-7 text-[#002866]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+             <svg className="w-7 h-7 text-brand-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
              </svg>
           ) : (
-            <svg className="w-7 h-7 text-[#002866]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg className="w-7 h-7 text-brand-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           )}
         </button>
-        <Link href="/give" className="text-white font-black tracking-[0.2em] text-[13px] flex-1 text-center pr-6" onClick={() => setIsMobileOpen(false)}>
+        <Link href="/give" className="text-white font-bold tracking-[0.2em] text-[13px] flex-1 text-center pr-6 uppercase" onClick={() => setIsMobileOpen(false)}>
             Give Now
         </Link>
       </div>

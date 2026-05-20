@@ -61,7 +61,7 @@ export default function HomeClient({
     const val = e.target.value;
     setSelectedRegion(val);
     if (val) {
-      router.push(`/campaigns/search?region=${encodeURIComponent(val)}`);
+      router.push(`/campaign-search?region=${encodeURIComponent(val)}`);
     }
   };
 
@@ -163,15 +163,15 @@ export default function HomeClient({
                         {/* Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/10 to-transparent flex flex-col justify-end p-4 md:p-6 lg:p-8 text-white">
                           
-                          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black uppercase mb-2 leading-tight">
+                          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase mb-2 leading-tight">
                             {heroSlides[currentSlide].title}
                           </h2>
 
-                          <p className="text-xs sm:text-sm md:text-base mb-3 max-w-sm opacity-90 hidden sm:block">
+                          <p className="text-sm md:text-base mb-4 max-w-sm opacity-90 hidden sm:block">
                             {heroSlides[currentSlide].sub}
                           </p>
 
-                          <div className="inline-block w-max bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-5 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all">
+                          <div className="inline-block w-max bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-6 py-2.5 text-xs font-bold uppercase tracking-wider transition-all">
                             {heroSlides[currentSlide].btnText}
                           </div>
 
@@ -203,14 +203,14 @@ export default function HomeClient({
             <div className="lg:col-span-5 flex flex-col lg:h-[420px] xl:h-[460px] min-h-0 overflow-hidden">
               
               <div className="flex justify-between items-center border-b border-border-main pb-3 mb-4">
-                <h3 className="text-brand-primary dark:text-brand-secondary text-lg md:text-xl font-black uppercase">
+                <h3 className="text-brand-primary dark:text-brand-secondary text-lg md:text-sm font-semibold uppercase">
                   Campaigns & Events
                 </h3>
               </div>
               
               <div className="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1 custom-scrollbar">
                 {initialEvents.map((event: any) => (
-                  <Link key={event.id} href={`/media/events/${event.id}`} className="group block">
+                  <Link key={event.id} href={`/events/${event.id}`} className="group block">
                     <div className="flex gap-3 p-3 rounded-lg border border-border-main bg-bg-surface hover:border-brand-secondary/30 hover:shadow-sm transition-all">
                       
                       <div className="relative w-16 h-16 md:w-18 md:h-18 shrink-0 overflow-hidden rounded-md border border-border-main">
@@ -218,7 +218,7 @@ export default function HomeClient({
                           src={event.image || "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg"} 
                           alt={event.title} 
                           fill 
-                          className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                          className="object-cover group-hover:scale-110 transition-transform duration-300" 
                           unoptimized
                         />
                       </div>
@@ -288,60 +288,60 @@ export default function HomeClient({
             
             {/* Left: Counters */}
             <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
               className="lg:col-span-3 flex flex-col justify-between gap-5"
             >
               <div className="text-center lg:text-right border-b border-white/20 pb-5">
-                <div className="text-[42px] lg:text-[36px] font-black text-brand-secondary leading-none mb-1">
+                <div className="text-3xl md:text-4xl font-bold text-brand-secondary leading-none mb-1">
                   <Counter value={10} suffix="+" />
                 </div>
-                <p className="text-blue-100 text-[10px] font-bold uppercase tracking-[0.2em]">Years of Existence</p>
+                <p className="text-blue-100 text-[10px] font-medium uppercase tracking-[0.2em]">Years of Existence</p>
               </div>
 
               <div className="text-center lg:text-right border-b border-white/20 pb-5">
-                <div className="text-[42px] lg:text-[36px] font-black text-brand-secondary leading-none mb-1">
+                <div className="text-3xl md:text-4xl font-bold text-brand-secondary leading-none mb-1">
                   <Counter value={210} suffix="+" />
                 </div>
-                <p className="text-blue-100 text-[10px] font-bold uppercase tracking-[0.2em]">Countries</p>
+                <p className="text-blue-100 text-[10px] font-medium uppercase tracking-[0.2em]">Countries</p>
               </div>
 
               <div className="text-center lg:text-right border-b border-white/20 pb-5">
-                <div className="text-[42px] lg:text-[36px] font-black text-brand-secondary leading-none mb-1">
+                <div className="text-3xl md:text-4xl font-bold text-brand-secondary leading-none mb-1">
                   <Counter value={6} suffix="M+" />
                 </div>
-                <p className="text-blue-100 text-[10px] font-bold uppercase tracking-[0.2em]">People Reached</p>
+                <p className="text-blue-100 text-[10px] font-medium uppercase tracking-[0.2em]">People Reached</p>
               </div>
 
               <div className="text-center lg:text-right">
-                <div className="text-[42px] lg:text-[36px] font-black text-brand-secondary leading-none mb-1">
+                <div className="text-3xl md:text-4xl font-bold text-brand-secondary leading-none mb-1">
                   <Counter value={4.4} suffix="M+" decimal={true} />
                 </div>
-                <p className="text-blue-100 text-[10px] font-bold uppercase tracking-[0.2em]">Good Deeds</p>
+                <p className="text-blue-100 text-[10px] font-medium uppercase tracking-[0.2em]">Good Deeds</p>
               </div>
             </motion.div>
 
             {/* Right: Content */}
             <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
               className="lg:col-span-9 flex flex-col justify-center text-center lg:text-left items-center lg:items-start"
             >
               <div className="flex items-center gap-4 mb-4">
-                <span className="w-12 h-1 bg-brand-secondary"></span>
-                <h3 className="text-brand-secondary font-bold text-sm uppercase tracking-[0.2em]">Why VMC</h3>
+                <span className="w-12 h-0.5 bg-brand-secondary"></span>
+                <h3 className="text-brand-secondary font-bold text-xs uppercase tracking-[0.2em]">Why VMC</h3>
               </div>
 
-              <h2 className="text-white text-3xl md:text-5xl font-black uppercase leading-[1.05] mb-8">
+              <h2 className="text-white text-3xl md:text-4xl font-bold uppercase leading-[1.1] mb-8">
                 Join the Volunteer <br className="hidden md:block" />
                 Medical Corps
               </h2>
 
-              <p className="text-blue-100 text-lg leading-relaxed mb-10 max-w-2xl">
+              <p className="text-blue-50 text-base md:text-lg leading-relaxed mb-10 max-w-2xl opacity-90">
                 We are an ever-expanding global network of Christian health care workers, 
                 non-medical volunteers and students committed to providing medical care 
                 through outreaches, humanitarian assistance and sustainable health care solutions 
@@ -350,13 +350,18 @@ export default function HomeClient({
 
               <Link 
                 href="/about" 
-                className="group inline-flex items-center gap-3 bg-white text-brand-primary px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] 
-                          shadow-xl hover:shadow-2xl transition-all duration-300 
-                          hover:bg-brand-secondary hover:text-white 
-                          hover:-translate-y-1 active:scale-[0.97]"
+                className="group relative inline-block overflow-hidden bg-white text-brand-primary 
+                          px-10 py-4 font-bold uppercase text-xs tracking-[0.2em] 
+                          shadow-xl hover:shadow-2xl transition-all duration-300
+                          hover:text-white"
               >
-                About Us
-                <span className="transition-transform duration-300 group-hover:translate-x-2">→</span>
+                {/* Sliding Fill - Clean & Full Coverage */}
+                <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                
+                {/* Button Text */}
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  About Us
+                </span>
               </Link>
             </motion.div>
           </div>
@@ -371,22 +376,22 @@ export default function HomeClient({
             
             {/* Left: Content Block */}
             <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
               className="relative z-20 w-full md:w-1/2 p-6 md:p-12 text-center md:text-left"
             >
               {/* Dark Blue Sub-heading Tag */}
-              <div className="inline-block bg-brand-primary text-white px-5 py-1.5 text-[10px] font-bold uppercase tracking-widest mb-4 rounded-sm">
+              <div className="inline-block bg-brand-primary text-white px-5 py-1.5 text-[10px] font-bold uppercase tracking-widest mb-4">
                 Earn VMC Rewards
               </div>
 
-              <h2 className="text-brand-primary text-2xl md:text-4xl font-black uppercase leading-tight mb-4 w-full">
-                SPONSOR A GOOD DEEDS PROJECT TODAY!
+              <h2 className="text-brand-primary text-2xl md:text-3xl font-bold uppercase leading-tight mb-4 w-full">
+                Sponsor a Good Deeds <br className="hidden md:block" /> Project Today!
               </h2>
 
-              <p className="text-brand-primary text-base font-medium mb-6 opacity-90 w-full max-w-none md:max-w-md mx-auto md:mx-0">
+              <p className="text-brand-primary text-sm md:text-base font-medium mb-8 opacity-90 w-full max-w-none md:max-w-md mx-auto md:mx-0">
                 Provide medical kits, hygiene packs, and mother & baby care kits to communities in dire need.
               </p>
 
@@ -394,9 +399,10 @@ export default function HomeClient({
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <Link
                   href="/give"
-                  className="w-full sm:w-auto border-2 border-brand-primary text-brand-primary px-8 py-3 font-bold uppercase text-[12px] tracking-widest hover:bg-brand-primary hover:text-white transition-all text-center"
+                  className="group relative overflow-hidden w-full sm:w-auto border-2 border-brand-primary text-brand-primary px-8 py-3 font-bold uppercase text-xs tracking-widest transition-all text-center"
                 >
-                  Partner With Us
+                  <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-white transition-colors">Partner With Us</span>
                 </Link>
 
                 {/* Region Filter Dropdown */}
@@ -404,7 +410,7 @@ export default function HomeClient({
                   <select 
                     value={selectedRegion}
                     onChange={handleRegionChange}
-                    className="w-full bg-white border-2 border-brand-primary text-brand-primary px-4 py-3 font-bold uppercase text-[12px] tracking-widest focus:outline-none transition-all cursor-pointer appearance-none rounded-none"
+                    className="w-full bg-white border-2 border-brand-primary text-brand-primary px-4 py-3 font-bold uppercase text-xs tracking-widest focus:outline-none transition-all cursor-pointer appearance-none"
                   >
                     <option value="">Search by Region</option>
                     {regions.map(r => (
@@ -420,10 +426,10 @@ export default function HomeClient({
 
             {/* Right: Map Overlay */}
             <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
               className="relative w-full md:w-1/2 h-[250px] md:h-full min-h-[300px]"
             >
               <Image 
@@ -434,10 +440,10 @@ export default function HomeClient({
               />
               
               {/* Pulsing Hotspots */}
-              <div className="absolute top-[51%] left-[45%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
-              <div className="absolute top-[28%] left-[75%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
-              <div className="absolute top-[40%] left-[20%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
-              <div className="absolute top-[75%] left-[30%] w-3 h-3 bg-red-700 rounded-full shadow-lg animate-pulse"></div>
+              <div className="absolute top-[51%] left-[45%] w-3 h-3 bg-red-700 shadow-lg animate-pulse"></div>
+              <div className="absolute top-[28%] left-[75%] w-3 h-3 bg-red-700 shadow-lg animate-pulse"></div>
+              <div className="absolute top-[40%] left-[20%] w-3 h-3 bg-red-700 shadow-lg animate-pulse"></div>
+              <div className="absolute top-[75%] left-[30%] w-3 h-3 bg-red-700 shadow-lg animate-pulse"></div>
             </motion.div>
             
           </div>
@@ -452,11 +458,11 @@ export default function HomeClient({
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-poppins font-bold text-brand-primary dark:text-brand-secondary mb-4">Good Deeds Campaigns</h2>
-            <p className="text-xl text-text-muted font-poppins max-w-3xl mx-auto">Find volunteer opportunities that fit your time and skill, earn volunteer credits and make impact with us.</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-brand-primary dark:text-brand-secondary mb-4">Good Deeds Campaigns</h2>
+            <p className="text-base md:text-lg text-text-muted font-medium max-w-3xl mx-auto opacity-80">Find volunteer opportunities that fit your time and skill, earn volunteer credits and make impact with us.</p>
           </motion.div>
 
           {/* Cards Grid */}
@@ -464,20 +470,20 @@ export default function HomeClient({
             
             {/* Card 1 */}
             <motion.div 
-              initial={{ opacity: 0, y: 50 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-              className="bg-bg-surface rounded-lg shadow-lg overflow-hidden border border-border-main group"
+              transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
+              className="bg-bg-surface shadow-lg overflow-hidden border border-border-main group"
             >
               <div className="relative h-64 overflow-hidden">
                 <Image 
                   src="https://volunteermedicalcorps.org/admin/images/gallery/173895-bronx3.jpg" 
                   alt="Eye Healthcare Campaign" 
                   fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 unoptimized />
-                <div className="absolute top-4 left-4 bg-brand-secondary text-brand-primary text-xs font-bold uppercase px-3 py-1 rounded-sm">
+                <div className="absolute top-4 left-4 bg-brand-secondary text-brand-primary text-xs font-bold uppercase px-3 py-1">
                   Healthcare
                 </div>
               </div>
@@ -488,28 +494,29 @@ export default function HomeClient({
                 <div className="mb-6">
                   <p className="text-text-muted text-sm font-roboto">Provide vision screenings and corrective treatments for communities lacking access to basic eye care.</p>
                 </div>
-                <Link href="/register" className="w-full bg-transparent border-2 border-brand-primary text-text-main py-3 font-semibold uppercase tracking-wider hover:bg-brand-primary hover:text-white transition-colors rounded-sm flex items-center justify-center">
-                  Volunteer Now
+                <Link href="/register" className="group relative overflow-hidden w-full bg-transparent border-2 border-brand-primary text-text-main py-3 font-semibold uppercase tracking-wider transition-colors flex items-center justify-center">
+                  <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-white transition-colors">Volunteer Now</span>
                 </Link>
               </div>
             </motion.div>
 
             {/* Card 2 */}
             <motion.div 
-              initial={{ opacity: 0, y: 50 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-              className="bg-bg-surface rounded-lg shadow-lg overflow-hidden border border-border-main group"
+              transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
+              className="bg-bg-surface shadow-lg overflow-hidden border border-border-main group"
             >
               <div className="relative h-64 overflow-hidden">
                 <Image 
                   src="https://volunteermedicalcorps.org/admin/images/campaigns/e5cjrn3mD326785419.jpg" 
                   alt="Praying for the Sick" 
                   fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 unoptimized />
-                <div className="absolute top-4 left-4 bg-brand-secondary text-brand-primary text-xs font-bold uppercase px-3 py-1 rounded-sm">
+                <div className="absolute top-4 left-4 bg-brand-secondary text-brand-primary text-xs font-bold uppercase px-3 py-1">
                   Spiritual Care
                 </div>
               </div>
@@ -520,28 +527,29 @@ export default function HomeClient({
                 <div className="mb-6">
                   <p className="text-text-muted text-sm font-roboto">Join our global network of Christian health workers offering spiritual support and prayers to patients.</p>
                 </div>
-                <Link href="/register" className="w-full bg-transparent border-2 border-brand-primary text-text-main py-3 font-semibold uppercase tracking-wider hover:bg-brand-primary hover:text-white transition-colors rounded-sm flex items-center justify-center">
-                  Volunteer Now
+                <Link href="/register" className="group relative overflow-hidden w-full bg-transparent border-2 border-brand-primary text-text-main py-3 font-semibold uppercase tracking-wider transition-colors flex items-center justify-center">
+                  <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-white transition-colors">Volunteer Now</span>
                 </Link>
               </div>
             </motion.div>
 
             {/* Card 3 */}
             <motion.div 
-              initial={{ opacity: 0, y: 50 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-              className="bg-bg-surface rounded-lg shadow-lg overflow-hidden border border-border-main group"
+              transition={{ duration: 0.4, delay: 0.5, ease: "easeOut" }}
+              className="bg-bg-surface shadow-lg overflow-hidden border border-border-main group"
             >
               <div className="relative h-64 overflow-hidden">
                 <Image 
                   src="https://volunteermedicalcorps.org/admin/images/campaigns/VvjfzE9kJ596372148.jpg" 
                   alt="Fund Raise for VMC" 
                   fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 unoptimized />
-                <div className="absolute top-4 left-4 bg-brand-secondary text-brand-primary text-xs font-bold uppercase px-3 py-1 rounded-sm">
+                <div className="absolute top-4 left-4 bg-brand-secondary text-brand-primary text-xs font-bold uppercase px-3 py-1">
                   Fundraising
                 </div>
               </div>
@@ -552,8 +560,9 @@ export default function HomeClient({
                 <div className="mb-6">
                   <p className="text-text-muted text-sm font-roboto">Set up your own campaign to help sponsor free surgeries, relief missions, and community clinics.</p>
                 </div>
-                <Link href="/register" className="w-full bg-transparent border-2 border-brand-primary text-text-main py-3 font-semibold uppercase tracking-wider hover:bg-brand-primary hover:text-white transition-colors rounded-sm flex items-center justify-center">
-                  Start Campaign
+                <Link href="/register" className="group relative overflow-hidden w-full bg-transparent border-2 border-brand-primary text-text-main py-3 font-semibold uppercase tracking-wider transition-colors flex items-center justify-center">
+                  <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-white transition-colors">Start Campaign</span>
                 </Link>
               </div>
             </motion.div>
@@ -570,33 +579,34 @@ export default function HomeClient({
         <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center text-center md:text-left">
             <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <h3 className="text-brand-secondary font-poppins font-medium text-lg md:text-xl mb-3">
+              <h3 className="text-brand-secondary font-medium text-lg md:text-xl mb-3">
                 Volunteer Medical Corps
               </h3>
-              <h2 className="text-3xl md:text-5xl font-poppins font-bold mb-6 leading-tight">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 leading-tight">
                 To provide the best and most suitable medical aid to communities in need.
               </h2>
-              <p className="text-gray-200 text-base md:text-lg font-roboto mx-auto md:mx-0 max-w-lg leading-relaxed">
+              <p className="text-gray-200 text-sm md:text-base font-normal mx-auto md:mx-0 max-w-lg leading-relaxed">
                 Our Core Values: Faith, Innovation, Integrity, Effectiveness, and Compassion.
               </p>
             </motion.div>
             <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
               className="flex justify-center md:justify-end mt-4 md:mt-0"
             >
               <Link 
                 href="/about" 
-                className="inline-block bg-brand-secondary text-brand-primary px-10 py-4 text-[13px] md:text-sm font-black uppercase tracking-wider hover:bg-white transition-colors rounded-sm shadow-lg"
+                className="group relative overflow-hidden inline-block bg-brand-secondary text-brand-primary px-8 py-3 text-xs md:text-sm font-bold uppercase tracking-wider transition-all shadow-lg"
               >
-                Learn Our Vision
+                <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                <span className="relative z-10">Learn Our Vision</span>
               </Link>
             </motion.div>
           </div>
@@ -610,10 +620,10 @@ export default function HomeClient({
             
             {/* Left: Events Intro */}
             <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
               className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left"
             >
               <h2 className="text-brand-primary text-4xl md:text-5xl font-black uppercase leading-[1.1] mb-8">
@@ -624,23 +634,24 @@ export default function HomeClient({
               </p>
               
               <Link
-                href="/causes/humanitarian-projects"
-                className="inline-block bg-brand-primary text-brand-secondary px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all hover:bg-white hover:text-brand-primary shadow-xl"
+                href="/humanitarian-projects"
+                className="group relative overflow-hidden inline-block bg-brand-primary text-brand-secondary px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all shadow-xl"
               >
-                View All Projects
+                <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                <span className="relative z-10 group-hover:text-brand-primary transition-colors">View All Projects</span>
               </Link>
             </motion.div>
 
             {/* Right: Events List - Hardcoded for now as it maps to projects */}
             <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
               className="lg:col-span-8 space-y-6"
             >
               {/* Card 1 */}
-              <div className="flex flex-col md:flex-row items-center bg-bg-surface rounded-sm overflow-hidden shadow-sm group text-center md:text-left border border-border-main">
+              <div className="flex flex-col md:flex-row items-center bg-bg-surface overflow-hidden shadow-sm group text-center md:text-left border border-border-main">
                 <div className="relative w-full md:w-1/4 h-48 md:h-32 shrink-0">
                   <Image src="https://volunteermedicalcorps.org/admin/images/gallery/429831-3a.jpg" alt="Light of Hope" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" unoptimized />
                 </div>
@@ -655,7 +666,7 @@ export default function HomeClient({
               </div>
 
               {/* Card 2 */}
-              <div className="flex flex-col md:flex-row items-center bg-bg-surface rounded-sm overflow-hidden shadow-sm group text-center md:text-left border border-border-main">
+              <div className="flex flex-col md:flex-row items-center bg-bg-surface overflow-hidden shadow-sm group text-center md:text-left border border-border-main">
                 <div className="relative w-full md:w-1/4 h-48 md:h-32 shrink-0">
                   <Image src="https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg" alt="Hospital Outreach" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" unoptimized />
                 </div>
@@ -679,7 +690,7 @@ export default function HomeClient({
           
           <div 
             id="donation-overlap"
-            className="relative -top-32 lg:-top-40 mb-[-128px] lg:mb-[-160px] flex flex-col lg:flex-row bg-bg-surface rounded-sm overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-border-main"
+            className="relative -top-32 lg:-top-40 mb-[-128px] lg:mb-[-160px] flex flex-col lg:flex-row bg-bg-surface overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-border-main"
           >
             
             {/* Left Column: Progress */}
@@ -696,7 +707,7 @@ export default function HomeClient({
                   return (
                     <div 
                       key={camp.id} 
-                      className={`w-full cursor-pointer p-2 rounded-sm transition-all ${selectedCampaignId === camp.id ? 'bg-white/10 ring-1 ring-white/20' : 'hover:bg-white/5'}`}
+                      className={`w-full cursor-pointer p-2 transition-all ${selectedCampaignId === camp.id ? 'bg-white/10 ring-1 ring-white/20' : 'hover:bg-white/5'}`}
                       onClick={() => setSelectedCampaignId(camp.id)}
                     >
                       <div className="flex justify-between items-end mb-2">
@@ -708,7 +719,7 @@ export default function HomeClient({
                           <p className="text-[9px] font-bold uppercase tracking-[0.2em] opacity-50">Donations</p>
                         </div>
                       </div>
-                      <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-white/10 overflow-hidden">
                         <div className="bg-white h-full transition-all duration-1000" style={{ width: `${progressPercentage}%` }} />
                       </div>
                     </div>
@@ -719,7 +730,7 @@ export default function HomeClient({
 
             {/* Right Column: Campaign Preview */}
             <div className="lg:w-3/5 p-10 md:p-16 bg-bg-surface text-center lg:text-left flex flex-col md:flex-row gap-8 items-center">
-              <div className="relative w-full md:w-1/2 h-64 md:h-full min-h-[250px] overflow-hidden rounded-sm shadow-inner bg-bg-base border border-border-main">
+              <div className="relative w-full md:w-1/2 h-64 md:h-full min-h-[250px] overflow-hidden shadow-inner bg-bg-base border border-border-main">
                 <Image 
                   src={selectedCampaign.image} 
                   alt={selectedCampaign.title} 
@@ -746,9 +757,10 @@ export default function HomeClient({
 
                 <Link 
                   href="/give" 
-                  className="bg-brand-primary text-white px-10 py-4 font-black uppercase text-[12px] tracking-[0.2em] hover:bg-brand-secondary hover:text-brand-primary transition-all shadow-md inline-block text-center"
+                  className="group relative overflow-hidden bg-brand-primary text-white px-10 py-4 font-black uppercase text-[12px] tracking-[0.2em] transition-all shadow-md inline-block text-center"
                 >
-                  Sponsor Project
+                   <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                   <span className="relative z-10 group-hover:text-brand-primary transition-colors">Sponsor Project</span>
                 </Link>
               </div>
             </div>
@@ -768,37 +780,37 @@ export default function HomeClient({
             
             {/* Left: Video */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.4 }}
               className="w-full relative order-2 lg:order-1 flex items-center"
             >
               <div className="w-full relative">
-                <div className="relative rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,40,102,0.2)] bg-black aspect-video border-[8px] border-bg-surface group z-10 transition-colors duration-300">
+                <div className="relative overflow-hidden shadow-[0_20px_50px_rgba(0,40,102,0.2)] bg-black aspect-video border-[8px] border-bg-surface group z-10 transition-colors duration-300">
                   <video 
                     width="100%" 
                     height="100%" 
                     controls 
                     controlsList="nodownload"
                     poster="https://cdnvideos.ceflix.org/thumb/155112-1750685155579932439402.jpg"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
                   >
                     <source src="https://cdnvideos.ceflix.org/processed/155112-1750685155579932439402.mp4" type="video/mp4" />
                   </video>
                 </div>
                 
                 {/* Decorative Frame */}
-                <div className="absolute -z-0 -bottom-6 -right-6 w-full h-full border-2 border-brand-secondary/30 rounded-xl hidden lg:block"></div>
+                <div className="absolute -z-0 -bottom-6 -right-6 w-full h-full border-2 border-brand-secondary/30 hidden lg:block"></div>
               </div>
             </motion.div>
 
             {/* Right: Content */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
               className="flex flex-col order-1 lg:order-2 justify-center py-4"
             >
               <div className="flex items-center gap-3 mb-4">
@@ -812,7 +824,7 @@ export default function HomeClient({
               </h2>
               
               <div className="space-y-4 mb-10">
-                <p className="text-text-main text-base lg:text-lg leading-relaxed font-semibold italic border-l-4 border-brand-secondary pl-5 py-1 bg-bg-surface rounded-r-lg transition-colors duration-300">
+                <p className="text-text-main text-base lg:text-lg leading-relaxed font-semibold italic border-l-4 border-brand-secondary pl-5 py-1 bg-bg-surface transition-colors duration-300">
                   "Providing medical care through outreaches, humanitarian assistance and sustainable health care solutions."
                 </p>
                 <p className="text-text-muted text-base leading-relaxed">
@@ -821,12 +833,16 @@ export default function HomeClient({
               </div>
               
               <div className="flex flex-wrap gap-4">
-                <Link href="/about" className="inline-flex items-center bg-brand-primary text-white px-8 py-3.5 font-black uppercase tracking-widest text-[11px] hover:bg-brand-secondary hover:text-brand-primary transition-all rounded-sm shadow-xl group">
-                  Learn More 
-                  <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                <Link href="/about" className="group relative overflow-hidden inline-flex items-center bg-brand-primary text-white px-8 py-3.5 font-black uppercase tracking-widest text-[11px] transition-all shadow-xl">
+                  <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-brand-primary transition-colors flex items-center">
+                    Learn More 
+                    <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Link>
-                <Link href="/media/video-gallery" className="inline-flex items-center border-2 border-brand-primary text-brand-primary px-8 py-3.5 font-black uppercase tracking-widest text-[11px] hover:bg-brand-primary hover:text-white transition-all rounded-sm">
-                  Watch Gallery
+                <Link href="/video-gallery" className="group relative overflow-hidden inline-flex items-center border-2 border-brand-primary text-brand-primary px-8 py-3.5 font-black uppercase tracking-widest text-[11px] transition-all">
+                  <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-white transition-colors">Watch Gallery</span>
                 </Link>
               </div>
             </motion.div>
@@ -842,10 +858,10 @@ export default function HomeClient({
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
           
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="text-center mb-20"
           >
             <h3 className="text-brand-secondary font-bold text-[11px] uppercase tracking-[0.2em] mb-4 flex justify-center items-center gap-2">
@@ -862,11 +878,11 @@ export default function HomeClient({
             {initialTestimonials.map((testimonial: any, index: number) => (
               <motion.div 
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
+                initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
-                className={`bg-bg-surface p-10 shadow-lg border border-border-main rounded-sm flex flex-col items-center text-center relative mt-12 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group ${index === 1 ? 'md:-translate-y-6 md:mt-0' : ''}`}
+                transition={{ duration: 0.4, delay: index * 0.2, ease: "easeOut" }}
+                className={`bg-bg-surface p-10 shadow-lg border border-border-main flex flex-col items-center text-center relative mt-12 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group ${index === 1 ? 'md:-translate-y-6 md:mt-0' : ''}`}
               >
                 <div className="absolute -top-12 w-24 h-24 rounded-full border-4 border-bg-surface overflow-hidden shadow-lg group-hover:border-brand-secondary transition-colors duration-300">
                   <Image src={testimonial.image || "https://volunteermedicalcorps.org/images/testimonies/patricia.jpg"} alt={testimonial.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover" unoptimized />
@@ -892,8 +908,9 @@ export default function HomeClient({
           </div>
           
           <div className="text-center mt-16 md:mt-20">
-            <Link href="/media/testimonials" className="inline-flex items-center bg-brand-secondary text-brand-primary px-10 py-4 font-black uppercase tracking-widest text-sm hover:bg-white transition-all rounded-sm shadow-xl">
-              View More
+            <Link href="/testimonials" className="group relative overflow-hidden inline-flex items-center bg-brand-secondary text-brand-primary px-10 py-4 font-black uppercase tracking-widest text-sm transition-all shadow-xl">
+              <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+              <span className="relative z-10">View More</span>
             </Link>
           </div>
           
@@ -905,10 +922,10 @@ export default function HomeClient({
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
           
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="text-center mb-16"
           >
             <h6 className="text-brand-secondary text-[13px] font-black tracking-[0.2em] uppercase mb-3">
@@ -924,21 +941,21 @@ export default function HomeClient({
             {initialBlogs.map((post: any, index: number) => (
               <motion.div 
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
+                initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-bg-surface rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-border-main group"
+                transition={{ duration: 0.3, delay: index * 0.2 }}
+                className="bg-bg-surface overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-border-main group"
               >
                 <div className="relative h-[245px] overflow-hidden">
-                  <Image src={post.image || "https://volunteermedicalcorps.org/admin/images/media/en9p2Ej1Q341529768.jpg"} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700" unoptimized />
+                  <Image src={post.image || "https://volunteermedicalcorps.org/admin/images/media/en9p2Ej1Q341529768.jpg"} alt={post.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-400" unoptimized />
                 </div>
                 <div className="p-8">
-                  <span className="inline-block bg-brand-primary/5 text-brand-primary dark:text-brand-secondary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm mb-4 border border-brand-primary/10">
+                  <span className="inline-block bg-brand-primary/5 text-brand-primary dark:text-brand-secondary text-[10px] font-bold uppercase tracking-widest px-3 py-1 mb-4 border border-brand-primary/10">
                     Blog
                   </span>
                   <h3 className="text-xl font-bold font-poppins text-text-main mb-4 leading-snug group-hover:text-brand-secondary transition-colors line-clamp-2">
-                    <Link href={`/media/blog/${post.id}`}>{post.title}</Link>
+                    <Link href={`/blog/${post.id}`}>{post.title}</Link>
                   </h3>
                   <ul className="flex items-center gap-6 pt-4 border-t border-border-main text-xs font-bold text-text-muted">
                     <li className="flex items-center gap-3">
@@ -961,16 +978,16 @@ export default function HomeClient({
       <div className="max-w-[1200px] mx-auto px-4">
         
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <h2 className="text-[42px] font-black text-brand-primary dark:text-text-main uppercase mb-2 leading-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-brand-primary dark:text-text-main uppercase mb-2 leading-tight">
             Recent News & Updates
           </h2>
-          <p className="text-text-muted text-lg opacity-80">
+          <p className="text-text-muted text-base md:text-lg opacity-80">
             Latest news and updates from the Volunteer Medical Corps.
           </p>
         </motion.div>
@@ -979,10 +996,10 @@ export default function HomeClient({
           {initialNews.map((post: any, idx: number) => (
             <motion.div 
               key={post.id} 
-              initial={{ opacity: 0, y: 50 }}
+              initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: idx * 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.4, delay: idx * 0.2, ease: "easeOut" }}
               className="flex flex-col bg-bg-surface shadow-lg overflow-hidden group text-center md:text-left border border-border-main"
             >
               
@@ -991,7 +1008,7 @@ export default function HomeClient({
                   src={post.image || "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg"}
                   alt={post.title}
                   fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="object-cover group-hover:scale-110 transition-transform duration-400"
                   unoptimized
                 />
               </div>
@@ -1007,7 +1024,7 @@ export default function HomeClient({
                 </h3>
                 
                 <Link 
-                  href={`/media/news/${post.id}`} 
+                  href={`/news/${post.id}`} 
                   className="text-brand-primary dark:text-brand-secondary text-sm font-bold uppercase tracking-widest border-b-2 border-border-main pb-1 hover:border-brand-primary transition-all"
                 >
                   Read More
@@ -1029,17 +1046,18 @@ export default function HomeClient({
         </div>
 
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="text-center mt-16"
         >
           <Link
-            href="/media/news"
-            className="inline-block bg-brand-primary text-brand-secondary px-12 py-5 text-[14px] font-black uppercase tracking-[0.2em] transition-all hover:bg-brand-secondary hover:text-brand-primary shadow-xl"
+            href="/news"
+            className="group relative overflow-hidden inline-block bg-brand-primary text-brand-secondary px-12 py-5 text-[14px] font-black uppercase tracking-[0.2em] transition-all shadow-xl"
           >
-            View All News
+             <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+             <span className="relative z-10 group-hover:text-brand-primary transition-colors">View All News</span>
           </Link>
         </motion.div>
 

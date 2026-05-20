@@ -41,7 +41,7 @@ export default function BlogClient({ allBlogs }: any) {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.3 }}
                 className="group bg-white rounded-sm overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="relative w-full h-[275px] overflow-hidden">
@@ -49,17 +49,17 @@ export default function BlogClient({ allBlogs }: any) {
                     src={post.image || "https://volunteermedicalcorps.org/admin/images/media/en9p2Ej1Q341529768.jpg"} 
                     alt={post.title} 
                     fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover group-hover:scale-105 transition-transform duration-400"
                     unoptimized
                   />
                 </div>
                 <div className="p-8">
-                  <span className="inline-block bg-blue-50 text-[#002866] text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm mb-4 border border-blue-100">
+                  <span className="inline-block bg-blue-50 text-brand-primary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm mb-4 border border-blue-100">
                     Blog
                   </span>
                   
-                  <h3 className="text-xl font-poppins font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors mb-6 leading-snug uppercase">
-                    <Link href={`/media/blog/${post.id}`}>{post.title}</Link>
+                  <h3 className="text-lg md:text-xl font-bold text-brand-primary group-hover:text-brand-secondary transition-colors mb-6 leading-snug">
+                    <Link href={`/blog/${post.id}`}>{post.title}</Link>
                   </h3>
 
                   <ul className="flex items-center gap-6 pt-6 border-t border-gray-100 text-xs font-bold text-gray-500">
@@ -71,10 +71,10 @@ export default function BlogClient({ allBlogs }: any) {
                         className="rounded-full"
                         unoptimized
                       />
-                      <span className="text-[#002866]">{post.author || "Admin"}</span>
+                      <span className="text-brand-primary">{post.author || "Admin"}</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <FaCalendarAlt className="text-[#ff9f22]" /> {formatDate(post.date)}
+                      <FaCalendarAlt className="text-brand-secondary" /> {formatDate(post.date)}
                     </li>
                   </ul>
                 </div>

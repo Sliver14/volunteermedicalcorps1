@@ -57,7 +57,7 @@ export default function EventsClient({ allEvents }: any) {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.4 }}
                 className="group bg-white rounded-sm overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Event Image */}
@@ -66,11 +66,11 @@ export default function EventsClient({ allEvents }: any) {
                     src={event.image || "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg"} 
                     alt={event.title} 
                     fill sizes="(max-width: 1200px) 100vw, 900px" 
-                    className="object-cover md:object-contain group-hover:scale-105 transition-transform duration-700"
+                    className="object-cover md:object-contain group-hover:scale-105 transition-transform duration-400"
                     unoptimized
                   />
                   {/* Overlay Tag */}
-                  <div className="absolute top-6 left-6 bg-[#ff9f22] text-[#002866] px-4 py-1.5 text-xs font-black uppercase tracking-widest shadow-lg">
+                  <div className="absolute top-6 left-6 bg-brand-secondary text-brand-primary px-4 py-1 text-[10px] font-bold uppercase tracking-widest shadow-lg rounded-sm">
                     Event
                   </div>
                 </div>
@@ -79,23 +79,24 @@ export default function EventsClient({ allEvents }: any) {
                 <div className="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                   
                   <div className="flex-1">
-                    <div className="flex items-center text-[#ff9f22] text-sm font-bold uppercase tracking-widest mb-3">
+                    <div className="flex items-center text-brand-secondary text-xs font-bold uppercase tracking-widest mb-3">
                       <FaCalendarAlt className="mr-2" /> {formatDate(event.date)}
                     </div>
                     
-                    <h3 className="text-2xl md:text-3xl font-poppins font-bold text-[#002866] leading-tight uppercase mb-3 group-hover:text-[#ff9f22] transition-colors">
-                      <Link href={`/media/events/${event.id}`}>{event.title}</Link>
+                    <h3 className="text-xl md:text-2xl font-bold text-brand-primary leading-tight mb-3 group-hover:text-brand-secondary transition-colors">
+                      <Link href={`/events/${event.id}`}>{event.title}</Link>
                     </h3>
                     
-                    <p className="text-gray-500 text-base leading-relaxed">
+                    <p className="text-gray-500 text-sm md:text-base leading-relaxed">
                       {getExcerpt(event.description)}
                     </p>
                   </div>
 
                   {/* Action Button */}
                   <div className="md:ml-6 shrink-0 mt-4 md:mt-0">
-                    <Link href={`/media/events/${event.id}`} className="inline-flex items-center bg-[#002866] text-white px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm shadow-md whitespace-nowrap">
-                      View Event
+                    <Link href={`/events/${event.id}`} className="group relative overflow-hidden inline-flex items-center bg-brand-primary text-white px-8 py-3.5 font-bold uppercase tracking-widest text-xs transition-all shadow-md whitespace-nowrap">
+                      <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                      <span className="relative z-10 group-hover:text-brand-primary transition-colors">View Event</span>
                     </Link>
                   </div>
                   

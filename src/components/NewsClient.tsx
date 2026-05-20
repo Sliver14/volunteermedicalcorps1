@@ -55,7 +55,7 @@ export default function NewsClient({ allNews, recentBlogs, galleryImages }: any)
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.4 }}
                     className="bg-white rounded-sm shadow-sm overflow-hidden border border-gray-100 group"
                   >
                     <div className="relative w-full h-[250px] sm:h-[350px] md:h-[450px] overflow-hidden">
@@ -63,18 +63,18 @@ export default function NewsClient({ allNews, recentBlogs, galleryImages }: any)
                         src={post.image || "https://volunteermedicalcorps.org/admin/images/media/onrZbfR8N463291785.jpg"} 
                         alt={post.title} 
                         fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw" 
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="object-cover group-hover:scale-105 transition-transform duration-400"
                         unoptimized
                       />
                     </div>
                     
                     <div className="p-6 md:p-8">
-                      <span className="inline-block bg-blue-50 text-[#002866] text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-sm mb-4 border border-blue-100">
+                      <span className="inline-block bg-blue-50 text-brand-primary text-xs font-bold uppercase tracking-widest px-3 py-1 mb-4 border border-blue-100">
                         News
                       </span>
                       
-                      <h3 className="text-2xl md:text-3xl font-poppins font-bold text-[#002866] uppercase mb-4 leading-snug group-hover:text-[#ff9f22] transition-colors">
-                        <Link href={`/media/news/${post.id}`}>{post.title}</Link>
+                      <h3 className="text-xl md:text-2xl font-bold text-brand-primary mb-4 leading-snug group-hover:text-brand-secondary transition-colors">
+                        <Link href={`/news/${post.id}`}>{post.title}</Link>
                       </h3>
                       
                       <ul className="flex items-center gap-6 mb-6 pb-6 border-b border-gray-100 text-sm font-bold text-gray-500">
@@ -86,19 +86,20 @@ export default function NewsClient({ allNews, recentBlogs, galleryImages }: any)
                             className="rounded-full"
                             unoptimized
                           />
-                          <span className="text-[#002866]">{post.author || "Admin"}</span>
+                          <span className="text-brand-primary">{post.author || "Admin"}</span>
                         </li>
                         <li className="flex items-center gap-2">
-                          <FaCalendarAlt className="text-[#ff9f22]" /> {formatDate(post.date)}
+                          <FaCalendarAlt className="text-brand-secondary" /> {formatDate(post.date)}
                         </li>
                       </ul>
                       
-                      <p className="text-gray-600 mb-8 leading-relaxed text-lg">
+                      <p className="text-gray-600 mb-8 leading-relaxed text-base md:text-lg">
                         {getExcerpt(post.content)}
                       </p>
                       
-                      <Link href={`/media/news/${post.id}`} className="inline-flex items-center bg-[#002866] text-white px-8 py-3.5 font-bold uppercase tracking-widest text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all rounded-sm shadow-md">
-                        Read More
+                      <Link href={`/news/${post.id}`} className="group relative overflow-hidden inline-flex items-center bg-brand-primary text-white px-8 py-3 font-bold uppercase tracking-widest text-xs transition-all shadow-md">
+                        <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                        <span className="relative z-10 group-hover:text-brand-primary transition-colors">Read More</span>
                       </Link>
                     </div>
                   </motion.div>
@@ -122,11 +123,11 @@ export default function NewsClient({ allNews, recentBlogs, galleryImages }: any)
                   {recentBlogs.map((post: any, index: number) => (
                     <li key={index} className="flex items-center gap-4 group cursor-pointer">
                       <div className="relative w-[86px] h-[86px] shrink-0 overflow-hidden rounded-sm">
-                        <Image src={post.image || "https://volunteermedicalcorps.org/admin/images/media/en9p2Ej1Q341529768.jpg"} alt={post.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" unoptimized />
+                        <Image src={post.image || "https://volunteermedicalcorps.org/admin/images/media/en9p2Ej1Q341529768.jpg"} alt={post.title} fill className="object-cover group-hover:scale-110 transition-transform duration-300" unoptimized />
                       </div>
                       <div>
                         <h4 className="font-bold text-[#002866] text-sm group-hover:text-[#ff9f22] transition-colors leading-tight mb-2">
-                          <Link href={`/media/blog/${post.id}`}>{post.title}</Link>
+                          <Link href={`/blog/${post.id}`}>{post.title}</Link>
                         </h4>
                         <div className="flex items-center text-xs text-gray-500 font-bold uppercase tracking-wider">
                           <FaClock className="mr-1.5 text-[#ff9f22]" /> {formatDate(post.date)}

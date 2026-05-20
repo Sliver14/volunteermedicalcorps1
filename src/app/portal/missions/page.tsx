@@ -127,7 +127,7 @@ export default function MissionsPage() {
           >
             {/* Image Section */}
             <div className="relative w-full sm:w-2/5 h-48 sm:h-auto shrink-0">
-              <Image src={mission.image} alt={mission.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <Image src={mission.image} alt={mission.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-400" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#002866]/80 via-transparent to-transparent sm:bg-gradient-to-r"></div>
               
               <div className="absolute top-3 left-3 flex flex-col gap-2">

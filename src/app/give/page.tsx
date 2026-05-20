@@ -4,6 +4,8 @@ import { useState } from "react";
 import PageBanner from "@/components/PageBanner";
 import Image from "next/image";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { motion } from "framer-motion";
 
 const projects = [
   { id: "EUT-254138", title: "1 Million Smiles", image: "/give-images/projects/1msmiles.jpg", goal: 100000, description: "Join us to bring smiles to millions of people around the world through our humanitarian projects." },
@@ -20,6 +22,7 @@ const projects = [
 const presetAmounts = [10, 20, 50, 100, 200, 500, 1000];
 
 export default function GivePage() {
+  const isMobile = useIsMobile();
   const [selectedProj, setSelectedProj] = useState("CXK-145723");
   const [amount, setAmount] = useState<number | string>(10);
   const [frequency, setFrequency] = useState("once");
@@ -54,19 +57,26 @@ export default function GivePage() {
   };
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-bg-base font-roboto transition-colors duration-300">
       <PageBanner title="Give" />
 
-      <section className="py-16 bg-[#fafafa]">
+      <section className="py-16 md:py-24 bg-bg-base">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-[#002866] mb-4">Sponsor this Project Today!</h2>
-          <p className="text-gray-600 mb-8">Join us to save more lives. Give Now!</p>
+          <motion.div
+            initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+          >
+            <h2 className="text-2xl md:text-3xl font-bold text-brand-primary dark:text-brand-secondary mb-4 uppercase">Sponsor this Project Today!</h2>
+            <p className="text-text-muted mb-10 font-medium">Join us to save more lives. Give Now!</p>
+          </motion.div>
 
-          <div className="mb-10">
+          <div className="mb-12">
             <select 
               value={selectedProj}
               onChange={(e) => setSelectedProj(e.target.value)}
-              className="border border-gray-200 p-4 font-bold text-sm w-full max-w-md focus:outline-none focus:border-[#ff9f22] bg-white"
+              className="border border-border-main p-4 font-bold text-sm w-full max-w-md focus:outline-none focus:border-brand-secondary bg-bg-surface text-text-main"
             >
               <option value="">Choose Project...</option>
               {projects.map(p => (
@@ -75,47 +85,54 @@ export default function GivePage() {
             </select>
           </div>
 
-          <div className="bg-[#e1e1e1] rounded-sm overflow-hidden mb-12 shadow-sm">
+          <motion.div 
+            initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="bg-bg-surface border border-border-main overflow-hidden mb-16 shadow-lg"
+          >
             <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/2 relative h-64 md:h-auto min-h-[300px]">
+              <div className="md:w-1/2 relative h-64 md:h-auto min-h-[350px]">
                 <Image 
                   src={activeProject.image} 
                   alt={activeProject.title}
                   fill
-                  className="object-cover transition-opacity duration-500"
+                  className="object-cover transition-opacity duration-300"
+                  unoptimized
                 />
               </div>
-              <div className="md:w-1/2 p-8">
-                <h3 className="text-2xl font-bold text-[#002866] mb-4">{activeProject.title}</h3>
-                <div className="text-[#002866] font-black text-lg mb-4">Goal: ${activeProject.goal.toLocaleString()}</div>
-                <p className="text-black mb-6">{activeProject.description}</p>
-                <div className="flex items-center gap-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-gray-500">Share:</span>
-                  <div className="flex gap-2">
-                    <div className="w-8 h-8 bg-[#002866] rounded-full flex items-center justify-center text-white cursor-pointer hover:bg-[#ff9f22] transition-colors">
+              <div className="md:w-1/2 p-8 md:p-12">
+                <h3 className="text-2xl font-bold text-brand-primary dark:text-brand-secondary mb-4 uppercase leading-tight">{activeProject.title}</h3>
+                <div className="text-brand-primary dark:text-white font-bold text-xl mb-6">Goal: ${activeProject.goal.toLocaleString()}</div>
+                <p className="text-text-muted mb-8 leading-relaxed font-medium">{activeProject.description}</p>
+                <div className="flex items-center gap-4 pt-6 border-t border-border-main">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted">Share Project:</span>
+                  <div className="flex gap-3">
+                    <div className="w-9 h-9 bg-brand-primary border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-brand-secondary hover:text-brand-primary transition-all">
                       <FaFacebookF size={14} />
                     </div>
-                    <div className="w-8 h-8 bg-[#002866] rounded-full flex items-center justify-center text-white cursor-pointer hover:bg-[#ff9f22] transition-colors">
+                    <div className="w-9 h-9 bg-brand-primary border border-white/10 flex items-center justify-center text-white cursor-pointer hover:bg-brand-secondary hover:text-brand-primary transition-all">
                       <FaTwitter size={14} />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <form onSubmit={handleProceed} className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <form onSubmit={handleProceed} className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Payment Section */}
-            <div className="lg:col-span-7 bg-[#f1f1f1] border border-gray-200 p-8 rounded-sm">
-              <h3 className="text-xl font-bold text-[#002866] mb-6 uppercase tracking-tight">Partnership Amount</h3>
+            <div className="lg:col-span-7 bg-bg-surface border border-border-main p-8 md:p-12 shadow-sm">
+              <h3 className="text-lg font-bold text-brand-primary dark:text-brand-secondary mb-8 uppercase tracking-widest border-b border-border-main pb-4">Partnership Amount</h3>
               
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex flex-wrap gap-3 mb-10">
                 {presetAmounts.map(amt => (
                   <button
                     key={amt}
                     type="button"
                     onClick={() => setAmount(amt)}
-                    className={`px-6 py-3 border-2 font-black transition-all ${amount === amt ? 'bg-[#ff9f22] border-[#ff9f22] text-[#002866]' : 'bg-white border-gray-200 text-gray-400 hover:border-[#ff9f22]'}`}
+                    className={`px-6 py-4 border-2 font-bold transition-all text-sm tracking-tighter min-w-[80px] ${amount === amt ? 'bg-brand-secondary border-brand-secondary text-brand-primary shadow-lg' : 'bg-bg-base border-border-main text-text-muted hover:border-brand-secondary'}`}
                   >
                     ${amt}
                   </button>
@@ -123,111 +140,116 @@ export default function GivePage() {
                 <button
                   type="button"
                   onClick={() => setAmount("others")}
-                  className={`px-6 py-3 border-2 font-black transition-all ${amount === "others" ? 'bg-[#ff9f22] border-[#ff9f22] text-[#002866]' : 'bg-white border-gray-200 text-gray-400 hover:border-[#ff9f22]'}`}
+                  className={`px-6 py-4 border-2 font-bold transition-all text-sm tracking-tighter ${amount === "others" ? 'bg-brand-secondary border-brand-secondary text-brand-primary shadow-lg' : 'bg-bg-base border-border-main text-text-muted hover:border-brand-secondary'}`}
                 >
                   Others
                 </button>
               </div>
 
               {amount === "others" && (
-                <div className="mb-6 animate-in fade-in slide-in-from-top-2">
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-8"
+                >
                   <input 
                     type="number" 
-                    placeholder="Enter Amount ($)"
-                    className="w-full border-2 border-[#ff9f22] p-4 text-lg font-bold outline-none"
+                    placeholder="Enter Custom Amount ($)"
+                    className="w-full border-2 border-brand-secondary p-5 text-xl font-bold outline-none bg-bg-base text-text-main"
                     onChange={(e) => setAmount(e.target.value)}
                     required
                   />
-                </div>
+                </motion.div>
               )}
 
-              <div className="mb-10">
+              <div className="mb-12">
+                <label className="block text-[10px] font-bold text-text-muted uppercase tracking-widest mb-3">Donation Frequency</label>
                 <select 
                   value={frequency}
                   onChange={(e) => setFrequency(e.target.value)}
-                  className="w-full max-w-xs border-2 border-[#ff9f22] p-4 font-bold rounded-sm focus:outline-none bg-white"
+                  className="w-full max-w-xs border-2 border-border-main p-4 font-bold focus:outline-none focus:border-brand-secondary bg-bg-base text-text-main"
                 >
                   <option value="once">One-Time Payment</option>
                   <option value="recurrent">Recurrent [ Monthly ]</option>
                 </select>
               </div>
 
-              <div className="border border-dashed border-gray-300 p-6 bg-white">
-                <h4 className="text-center font-bold text-[#002866] mb-6 uppercase">Select Payment Option</h4>
-                <div className="grid grid-cols-3 gap-4">
+              <div className="border border-dashed border-border-main p-8 bg-bg-base/50">
+                <h4 className="text-center font-bold text-brand-primary dark:text-brand-secondary mb-8 uppercase text-xs tracking-widest">Select Payment Option</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <label className="flex flex-col items-center gap-2 cursor-pointer group">
                     <input type="radio" name="paymode" value="KINGSPAY" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} required />
-                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center ${paymentMode === 'KINGSPAY' ? 'border-[#ff9f22] bg-orange-50' : 'border-gray-100 group-hover:border-[#ff9f22]'}`}>
-                      <div className="text-[10px] font-black text-center mb-2">KINGSPAY<br/>(Code: BLVMC)</div>
-                      <Image src="/give-images/kingspay.png" alt="Kingspay" width={80} height={30} className="object-contain" unoptimized />
+                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'KINGSPAY' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
+                      <div className="text-[10px] font-bold text-center mb-3 text-text-main">KINGSPAY<br/><span className="text-brand-secondary">(Code: BLVMC)</span></div>
+                      <Image src="/give-images/kingspay.png" alt="Kingspay" width={80} height={30} className="object-contain dark:brightness-200" unoptimized />
                     </div>
                   </label>
                   <label className="flex flex-col items-center gap-2 cursor-pointer group">
                     <input type="radio" name="paymode" value="ESPEES" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} />
-                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center ${paymentMode === 'ESPEES' ? 'border-[#ff9f22] bg-orange-50' : 'border-gray-100 group-hover:border-[#ff9f22]'}`}>
-                      <div className="text-[10px] font-black text-center mb-2">ESPEES<br/>(Code: VMC)</div>
-                      <Image src="/give-images/espees.png" alt="Espees" width={80} height={30} className="object-contain" unoptimized />
-                      {paymentMode === 'ESPEES' && <div className="text-[10px] text-orange-600 font-bold mt-1">Total: {espeesAmount} ESP</div>}
+                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'ESPEES' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
+                      <div className="text-[10px] font-bold text-center mb-3 text-text-main">ESPEES<br/><span className="text-brand-secondary">(Code: VMC)</span></div>
+                      <Image src="/give-images/espees.png" alt="Espees" width={80} height={30} className="object-contain dark:brightness-200" unoptimized />
+                      {paymentMode === 'ESPEES' && <div className="text-[10px] text-brand-secondary font-bold mt-1">Total: {espeesAmount} ESP</div>}
                     </div>
                   </label>
                   <label className="flex flex-col items-center gap-2 cursor-pointer group">
                     <input type="radio" name="paymode" value="BANK" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} />
-                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center ${paymentMode === 'BANK' ? 'border-[#ff9f22] bg-orange-50' : 'border-gray-100 group-hover:border-[#ff9f22]'}`}>
-                      <div className="text-[10px] font-black text-center mb-2">BANK<br/>PAYMENT</div>
-                      <Image src="/give-images/bank.png" alt="Bank" width={80} height={30} className="object-contain" unoptimized />
+                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'BANK' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
+                      <div className="text-[10px] font-bold text-center mb-3 text-text-main uppercase tracking-widest">BANK<br/>PAYMENT</div>
+                      <Image src="/give-images/bank.png" alt="Bank" width={80} height={30} className="object-contain dark:brightness-200" unoptimized />
                     </div>
                   </label>
                 </div>
 
-                <div className="mt-8 pt-8 border-t border-gray-100">
-                  <h4 className="font-bold text-[#002866] mb-2 uppercase">Payment Details</h4>
+                <div className="mt-8 pt-8 border-t border-border-main">
+                  <h4 className="font-bold text-brand-primary dark:text-brand-secondary mb-4 uppercase text-[10px] tracking-widest">Payment Details</h4>
                   {paymentMode === "BANK" ? (
-                    <div className="text-[10px] text-gray-700 space-y-2">
-                      <div className="bg-gray-50 p-2 rounded">
-                        <div className="font-bold text-[#002866] text-center mb-1">NAIRA ACCOUNT</div>
-                        <div>Bank: <b>Sterling Bank PLC</b></div>
-                        <div>Account: <b>0076248534 (₦)</b></div>
+                    <div className="text-[10px] text-text-muted space-y-3">
+                      <div className="bg-bg-surface p-4 border border-border-main">
+                        <div className="font-bold text-brand-primary dark:text-brand-secondary text-center mb-2 uppercase tracking-widest border-b border-border-main pb-2">NAIRA ACCOUNT</div>
+                        <div className="flex justify-between"><span>Bank:</span> <b className="text-text-main">Sterling Bank PLC</b></div>
+                        <div className="flex justify-between"><span>Account:</span> <b className="text-text-main">0076248534 (₦)</b></div>
                       </div>
-                      <div className="bg-gray-50 p-2 rounded">
-                        <div className="font-bold text-[#002866] text-center mb-1">DOLLAR ACCOUNT</div>
-                        <div>Bank: <b>Sterling Bank PLC</b></div>
-                        <div>Account: <b>0076248833 ($)</b></div>
+                      <div className="bg-bg-surface p-4 border border-border-main">
+                        <div className="font-bold text-brand-primary dark:text-brand-secondary text-center mb-2 uppercase tracking-widest border-b border-border-main pb-2">DOLLAR ACCOUNT</div>
+                        <div className="flex justify-between"><span>Bank:</span> <b className="text-text-main">Sterling Bank PLC</b></div>
+                        <div className="flex justify-between"><span>Account:</span> <b className="text-text-main">0076248833 ($)</b></div>
                       </div>
-                      <div className="bg-gray-50 p-2 rounded">
-                        <div className="font-bold text-[#002866] text-center mb-1">JP MORGAN CHASE (USD)</div>
-                        <div>Account: <b>662023830</b></div>
-                        <div>Branch: Ramsey Branch - 948</div>
+                      <div className="bg-bg-surface p-4 border border-border-main">
+                        <div className="font-bold text-brand-primary dark:text-brand-secondary text-center mb-2 uppercase tracking-widest border-b border-border-main pb-2">JP MORGAN CHASE (USD)</div>
+                        <div className="flex justify-between"><span>Account:</span> <b className="text-text-main">662023830</b></div>
+                        <div className="flex justify-between"><span>Branch:</span> <b className="text-text-main">Ramsey Branch - 948</b></div>
                       </div>
                     </div>
                   ) : (
-                    <p className="text-xs text-gray-500">To make your contribution to this project, select from the payment options shown above</p>
+                    <p className="text-xs text-text-muted font-medium italic">To make your contribution to this project, select from the payment options shown above.</p>
                   )}
                 </div>
               </div>
             </div>
 
             {/* Billing Section */}
-            <div className="lg:col-span-5 p-4">
-              <h3 className="text-xl font-bold text-[#002866] mb-6 uppercase tracking-tight">Billing Information</h3>
-              <div className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
+            <div className="lg:col-span-5 p-4 md:p-8 bg-bg-surface border border-border-main shadow-sm h-max sticky top-32">
+              <h3 className="text-lg font-bold text-brand-primary dark:text-brand-secondary mb-10 uppercase tracking-widest border-b border-border-main pb-4">Billing Information</h3>
+              <div className="space-y-8">
+                <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-gray-400 uppercase">First Name *</label>
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest">First Name *</label>
                     <input 
                       type="text" 
-                      className="w-full border-b border-gray-200 p-2 focus:outline-none focus:border-[#ff9f22]" 
-                      placeholder="First Name" 
+                      className="w-full border-b border-border-main p-2 focus:outline-none focus:border-brand-secondary bg-transparent text-text-main font-medium" 
+                      placeholder="e.g. John" 
                       required
                       value={formData.fname}
                       onChange={(e) => setFormData({...formData, fname: e.target.value})}
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-bold text-gray-400 uppercase">Last Name *</label>
+                    <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Last Name *</label>
                     <input 
                       type="text" 
-                      className="w-full border-b border-gray-200 p-2 focus:outline-none focus:border-[#ff9f22]" 
-                      placeholder="Last Name" 
+                      className="w-full border-b border-border-main p-2 focus:outline-none focus:border-brand-secondary bg-transparent text-text-main font-medium" 
+                      placeholder="e.g. Doe" 
                       required
                       value={formData.lname}
                       onChange={(e) => setFormData({...formData, lname: e.target.value})}
@@ -235,46 +257,47 @@ export default function GivePage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-400 uppercase">Email *</label>
+                  <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Email Address *</label>
                   <input 
                     type="email" 
-                    className="w-full border-b border-gray-200 p-2 focus:outline-none focus:border-[#ff9f22]" 
-                    placeholder="Email" 
+                    className="w-full border-b border-border-main p-2 focus:outline-none focus:border-brand-secondary bg-transparent text-text-main font-medium" 
+                    placeholder="john.doe@example.com" 
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-400 uppercase">Phone *</label>
+                  <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Phone Number *</label>
                   <input 
                     type="tel" 
-                    className="w-full border-b border-gray-200 p-2 focus:outline-none focus:border-[#ff9f22]" 
-                    placeholder="Phone" 
+                    className="w-full border-b border-border-main p-2 focus:outline-none focus:border-brand-secondary bg-transparent text-text-main font-medium" 
+                    placeholder="+1 (234) 567-890" 
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-gray-400 uppercase">Country *</label>
+                  <label className="text-[10px] font-bold text-text-muted uppercase tracking-widest">Country *</label>
                   <select 
-                    className="w-full border-b border-gray-200 p-2 focus:outline-none focus:border-[#ff9f22] bg-white"
+                    className="w-full border-b border-border-main p-2 focus:outline-none focus:border-brand-secondary bg-transparent text-text-main font-medium cursor-pointer"
                     required
                     value={formData.country}
                     onChange={(e) => setFormData({...formData, country: e.target.value})}
                   >
-                    <option value="">Select Country...</option>
-                    <option value="Nigeria">Nigeria</option>
-                    <option value="USA">USA</option>
-                    <option value="UK">UK</option>
-                    <option value="Canada">Canada</option>
-                    <option value="South Africa">South Africa</option>
+                    <option value="" className="bg-bg-surface">Select Country...</option>
+                    <option value="Nigeria" className="bg-bg-surface">Nigeria</option>
+                    <option value="USA" className="bg-bg-surface">USA</option>
+                    <option value="UK" className="bg-bg-surface">UK</option>
+                    <option value="Canada" className="bg-bg-surface">Canada</option>
+                    <option value="South Africa" className="bg-bg-surface">South Africa</option>
                   </select>
                 </div>
                 
-                <button type="submit" className="w-full bg-[#002866] text-white py-5 font-black uppercase tracking-widest text-sm hover:bg-[#ff9f22] hover:text-[#002866] transition-all shadow-xl mt-8">
-                  Proceed to Payment
+                <button type="submit" className="group relative overflow-hidden w-full bg-brand-primary text-white py-5 font-bold uppercase tracking-[0.2em] text-xs transition-all shadow-xl mt-8">
+                  <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-brand-primary transition-colors">Proceed to Payment</span>
                 </button>
               </div>
             </div>

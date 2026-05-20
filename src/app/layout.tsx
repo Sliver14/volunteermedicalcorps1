@@ -53,7 +53,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${poppins.variable} ${roboto.variable} font-sans antialiased min-h-screen flex flex-col transition-colors duration-300`}>
+      <body className={`${roboto.variable} ${poppins.variable} font-roboto antialiased min-h-screen flex flex-col transition-colors duration-300`}>
         <ThemeProvider>
           <ClientLayout>
             {children}

@@ -16,23 +16,23 @@ export default function PageBanner({ title, parent }: PageBannerProps) {
     <section className="relative bg-brand-primary py-4 md:py-5 text-white overflow-hidden border-b border-border-main transition-colors duration-300">
       {/* Background patterns */}
       <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute -top-10 -right-10 w-32 h-32 border-[10px] border-white rounded-full"></div>
-        <div className="absolute -bottom-16 -left-16 w-48 h-48 border-[15px] border-brand-secondary rounded-full"></div>
+        <div className="absolute -top-10 -right-10 w-32 h-32 border-[10px] border-white"></div>
+        <div className="absolute -bottom-16 -left-16 w-48 h-48 border-[15px] border-brand-secondary"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-between gap-4">
         <motion.h1 
-          initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
-          animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
+          initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
-          className="text-lg md:text-xl font-poppins font-black uppercase tracking-tight leading-none"
+          className="text-xl md:text-2xl font-bold uppercase tracking-tight leading-none"
         >
           {title}
         </motion.h1>
         
         <motion.div 
-          initial={isMobile ? { opacity: 0, y: 40 } : { opacity: 0, scale: 1.05 }}
-          animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, scale: 1 }}
+          initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: isMobile ? 0.35 : 0.6, delay: 0.1, ease: "easeOut" }}
           className="flex items-center space-x-2 text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-gray-300 whitespace-nowrap"
         >

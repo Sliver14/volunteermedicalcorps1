@@ -21,7 +21,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-3 rounded-sm border border-gray-200 text-gray-500 hover:bg-[#002866] hover:text-white disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-gray-500 transition-all"
+        className="p-3 border border-border-main text-text-muted hover:bg-brand-primary hover:text-white disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-text-muted transition-all bg-bg-surface"
       >
         <FaChevronLeft size={14} />
       </button>
@@ -30,10 +30,10 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`w-12 h-12 flex items-center justify-center rounded-sm font-bold text-sm transition-all border ${
+          className={`w-12 h-12 flex items-center justify-center font-bold text-sm transition-all border ${
             currentPage === page
-              ? "bg-[#002866] text-white border-[#002866]"
-              : "bg-white text-gray-600 border-gray-200 hover:border-[#002866] hover:text-[#002866]"
+              ? "bg-brand-primary text-white border-brand-primary shadow-lg"
+              : "bg-bg-surface text-text-muted border-border-main hover:border-brand-primary hover:text-brand-primary"
           }`}
         >
           {page}
@@ -43,7 +43,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-3 rounded-sm border border-gray-200 text-gray-500 hover:bg-[#002866] hover:text-white disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-gray-500 transition-all"
+        className="p-3 border border-border-main text-text-muted hover:bg-brand-primary hover:text-white disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-text-muted transition-all bg-bg-surface"
       >
         <FaChevronRight size={14} />
       </button>

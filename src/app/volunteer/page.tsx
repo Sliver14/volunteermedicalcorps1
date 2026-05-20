@@ -37,9 +37,10 @@ export default function VolunteerLandingPage() {
                 <div className="pt-8">
                   <Link 
                     href="/register" 
-                    className="block sm:inline-block w-full sm:w-auto text-center bg-brand-secondary text-brand-primary px-12 py-5 font-black uppercase tracking-[0.2em] shadow-xl hover:bg-brand-primary hover:text-white dark:hover:bg-bg-surface dark:hover:text-brand-secondary transition-all"
+                    className="group relative overflow-hidden block sm:inline-block w-full sm:w-auto text-center bg-brand-secondary text-brand-primary px-12 py-5 font-bold uppercase tracking-[0.2em] text-xs shadow-xl transition-all"
                   >
-                    Register Now
+                    <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                    <span className="relative z-10 group-hover:text-white transition-colors">Register Now</span>
                   </Link>
                 </div>
               </div>
@@ -71,7 +72,7 @@ export default function VolunteerLandingPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
             className="text-2xl md:text-3xl font-poppins font-bold text-brand-primary dark:text-brand-secondary mb-16 uppercase"
           >
             Why Volunteer with VMC?
@@ -89,7 +90,7 @@ export default function VolunteerLandingPage() {
             <motion.div 
               variants={{
                 hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
               }}
               className="bg-bg-base p-10 shadow-md rounded-sm border-t-4 border-brand-secondary border border-x-border-main border-b-border-main"
             >
@@ -100,7 +101,7 @@ export default function VolunteerLandingPage() {
             <motion.div 
               variants={{
                 hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
               }}
               className="bg-bg-base p-10 shadow-md rounded-sm border-t-4 border-brand-secondary border border-x-border-main border-b-border-main"
             >
@@ -111,7 +112,7 @@ export default function VolunteerLandingPage() {
             <motion.div 
               variants={{
                 hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
               }}
               className="bg-bg-base p-10 shadow-md rounded-sm border-t-4 border-brand-secondary border border-x-border-main border-b-border-main"
             >

@@ -17,6 +17,7 @@ import {
   FaGlobe
 } from "react-icons/fa";
 import Hls from "hls.js";
+import { motion } from "framer-motion";
 
 export default function LiveStreamPage() {
   // Chat State
@@ -209,27 +210,13 @@ export default function LiveStreamPage() {
   };
 
   return (
-    <div className="w-full bg-gray-50 min-h-screen font-roboto">
+    <div className="w-full bg-bg-base min-h-screen font-roboto transition-colors duration-300">
       <PageBanner title="VMC Live Stream" />
 
-      <section className="py-8 md:py-12">
+      <section className="py-8 md:py-16 bg-bg-base">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* 1. Alert Banner */}
-          {/* {showAlert && (
-            <div className="bg-slate-800 text-white px-4 py-3 rounded-sm mb-6 flex justify-between items-center shadow-sm">
-              <strong className="text-red-500 font-bold uppercase tracking-widest text-sm flex items-center">
-                <span className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
-                LIVE BROADCAST
-              </strong>
-              <button onClick={() => setShowAlert(false)} className="text-slate-400 hover:text-white transition-colors">
-                <FaTimes />
-              </button>
-            </div>
-          )} */}
-
-
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-10 md:gap-12">
 
             {/* Left Column: Video & Main Details */}
             <div className="lg:w-2/3 flex flex-col">
@@ -237,41 +224,41 @@ export default function LiveStreamPage() {
               {/* HLS Player Container */}
               <div 
                 ref={playerContainerRef}
-                className={`relative bg-black group overflow-hidden ${isFullScreen ? 'h-screen w-screen' : 'pt-[56.25%] rounded-sm shadow-2xl'}`}
+                className={`relative bg-black group overflow-hidden border border-border-main transition-all ${isFullScreen ? 'h-screen w-screen' : 'pt-[56.25%] shadow-2xl'}`}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
               >
                 {streamError ? (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-6 text-center">
-                    <p className="text-red-500 font-bold mb-2">Error</p>
-                    <p className="text-sm opacity-70">{streamError}</p>
-                    <button onClick={() => window.location.reload()} className="mt-4 px-6 py-2 bg-[#ff9f22] text-[#002866] font-bold rounded-sm text-sm">Retry Connection</button>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-6 text-center bg-bg-surface/10 backdrop-blur-md">
+                    <p className="text-red-500 font-bold mb-4 uppercase tracking-widest text-sm">Stream Error</p>
+                    <p className="text-sm opacity-70 mb-8 max-w-xs">{streamError}</p>
+                    <button onClick={() => window.location.reload()} className="px-8 py-3 bg-brand-secondary text-brand-primary font-bold uppercase tracking-widest text-xs shadow-xl transition-all hover:bg-white">Retry Connection</button>
                   </div>
                 ) : (
                   <>
                     <video ref={videoRef} className="absolute inset-0 w-full h-full object-contain cursor-pointer" muted={true} playsInline={true} onClick={togglePlay} />
-                    <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-4 py-6 transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                      <div className="flex justify-between items-end mb-4">
-                        <div className="bg-red-600 text-white text-[10px] font-black px-2 py-1 rounded uppercase flex items-center shadow-lg"><span className="w-1.5 h-1.5 bg-white rounded-full mr-1.5 animate-pulse"></span> LIVE</div>
+                    <div className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent px-6 py-8 transition-opacity duration-300 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                      <div className="flex justify-between items-end mb-6">
+                        <div className="bg-red-600 text-white text-[9px] font-bold px-3 py-1 uppercase flex items-center shadow-2xl tracking-widest"><span className="w-1.5 h-1.5 bg-white rounded-full mr-2 animate-pulse"></span> LIVE</div>
                         {isPlaying && isMuted && (
-                          <button onClick={toggleMute} className="bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 hover:bg-white hover:text-black transition-all">
-                            <FaVolumeMute /> TAP TO UNMUTE
+                          <button onClick={toggleMute} className="bg-white/10 backdrop-blur-xl border border-white/20 text-white px-5 py-2 text-[10px] font-bold flex items-center gap-3 hover:bg-white hover:text-brand-primary transition-all uppercase tracking-widest">
+                            <FaVolumeMute /> UNMUTE STREAM
                           </button>
                         )}
                       </div>
-                      <div className="flex items-center gap-4 text-white">
-                        <button onClick={togglePlay} className="hover:text-[#ff9f22] transition-colors p-2 text-xl">{isPlaying ? <FaPause /> : <FaPlay />}</button>
-                        <div className="flex items-center gap-2 group/vol relative">
-                          <button onClick={toggleMute} className="hover:text-[#ff9f22] transition-colors p-2 text-lg">{isMuted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}</button>
-                          <input type="range" min="0" max="1" step="0.05" value={isMuted ? 0 : volume} onChange={handleVolumeChange} className="w-0 opacity-0 group-hover/vol:w-20 group-hover/vol:opacity-100 transition-all duration-300 h-1 bg-white/30 rounded-lg appearance-none cursor-pointer accent-[#ff9f22]" />
+                      <div className="flex items-center gap-6 text-white">
+                        <button onClick={togglePlay} className="hover:text-brand-secondary transition-all p-2 text-2xl drop-shadow-lg">{isPlaying ? <FaPause /> : <FaPlay />}</button>
+                        <div className="flex items-center gap-3 group/vol relative">
+                          <button onClick={toggleMute} className="hover:text-brand-secondary transition-all p-2 text-xl drop-shadow-lg">{isMuted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}</button>
+                          <input type="range" min="0" max="1" step="0.05" value={isMuted ? 0 : volume} onChange={handleVolumeChange} className="w-0 opacity-0 group-hover/vol:w-24 group-hover/vol:opacity-100 transition-all duration-300 h-1 bg-white/20 appearance-none cursor-pointer accent-brand-secondary" />
                         </div>
                         <div className="flex-1"></div>
-                        <button onClick={toggleFullScreen} className="hover:text-[#ff9f22] transition-colors p-2 text-lg">{isFullScreen ? <FaCompress /> : <FaExpand />}</button>
+                        <button onClick={toggleFullScreen} className="hover:text-brand-secondary transition-all p-2 text-xl drop-shadow-lg">{isFullScreen ? <FaCompress /> : <FaExpand />}</button>
                       </div>
                     </div>
                     {!isPlaying && (
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div className="w-20 h-20 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-3xl shadow-2xl"><FaPlay className="ml-1" /></div>
+                        <div className="w-24 h-24 bg-black/40 backdrop-blur-md flex items-center justify-center text-white text-4xl shadow-2xl border border-white/10 group-hover:scale-110 transition-transform"><FaPlay className="ml-1.5" /></div>
                       </div>
                     )}
                   </>
@@ -279,99 +266,143 @@ export default function LiveStreamPage() {
               </div>
 
               {/* 3. Action Buttons Section */}
-              <div className="flex flex-wrap gap-3 py-6 border-b border-gray-200">
-                <a href="https://loveworldmedicalmissions.org/sponsor" target="_blank" className="bg-green-600 text-white px-5 py-2.5 rounded-full text-xs md:text-sm font-bold shadow-md hover:scale-105 transition-transform">Loveworld Medicaid</a>
-                <a href="https://kingspayweb.com/quickpay/blvmc" target="_blank" className="bg-red-600 text-white px-5 py-2.5 rounded-full text-xs md:text-sm font-bold shadow-md hover:scale-105 transition-transform">Give For Healing Streams</a>
-                <Link href="/register" className="bg-cyan-600 text-white px-5 py-2.5 rounded-full text-xs md:text-sm font-bold shadow-md hover:scale-105 transition-transform">Join Our Volunteer Network</Link>
-                <a href="https://volunteermedicalcorps.org/give/" target="_blank" className="bg-amber-500 text-white px-5 py-2.5 rounded-full text-xs md:text-sm font-bold shadow-md hover:scale-105 transition-transform">Partner With VMC</a>
-                <a href="https://volunteermedicalcorps.org/tv/testimonies.php" target="_blank" className="bg-slate-600 text-white px-5 py-2.5 rounded-full text-xs md:text-sm font-bold shadow-md hover:scale-105 transition-transform">Share Your Testimonies</a>
+              <div className="flex flex-wrap gap-4 py-8 border-b border-border-main bg-bg-surface p-6 shadow-sm border-x">
+                <a href="https://loveworldmedicalmissions.org/sponsor" target="_blank" className="group relative overflow-hidden bg-green-600 text-white px-6 py-3 font-bold uppercase tracking-widest text-[10px] md:text-xs shadow-md transition-all flex-1 text-center min-w-[180px]">
+                   <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                   <span className="relative z-10 group-hover:text-green-700 transition-colors">Loveworld Medicaid</span>
+                </a>
+                <a href="https://kingspayweb.com/quickpay/blvmc" target="_blank" className="group relative overflow-hidden bg-red-600 text-white px-6 py-3 font-bold uppercase tracking-widest text-[10px] md:text-xs shadow-md transition-all flex-1 text-center min-w-[180px]">
+                   <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                   <span className="relative z-10 group-hover:text-red-700 transition-colors">Healing Streams</span>
+                </a>
+                <Link href="/register" className="group relative overflow-hidden bg-cyan-600 text-white px-6 py-3 font-bold uppercase tracking-widest text-[10px] md:text-xs shadow-md transition-all flex-1 text-center min-w-[180px]">
+                   <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                   <span className="relative z-10 group-hover:text-cyan-700 transition-colors">Volunteer Network</span>
+                </Link>
+                <a href="https://volunteermedicalcorps.org/give/" target="_blank" className="group relative overflow-hidden bg-brand-secondary text-brand-primary px-6 py-3 font-bold uppercase tracking-widest text-[10px] md:text-xs shadow-md transition-all flex-1 text-center min-w-[180px]">
+                   <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                   <span className="relative z-10 group-hover:text-white transition-colors">Partner With VMC</span>
+                </a>
               </div>
 
               {/* 4. Bottom Info Tabs */}
-              <div className="mt-8 bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden">
-                <div className="flex flex-wrap border-b border-gray-100">
+              <div className="mt-10 bg-bg-surface border border-border-main shadow-sm overflow-hidden">
+                <div className="flex flex-wrap border-b border-border-main">
                   {[{ id: "hotlines", label: "HOT LINES" }, { id: "offerings", label: "GIVE OFFERINGS" }, { id: "join", label: "JOIN VMC" }].map((tab) => (
-                    <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-6 py-4 font-bold text-xs tracking-widest flex items-center transition-colors border-b-2 ${activeTab === tab.id ? "text-[#002866] border-[#002866] bg-gray-50/50" : "text-gray-500 border-transparent hover:text-gray-800 hover:bg-gray-50"}`}>
-                      <FaBullhorn className={`mr-2 ${activeTab === tab.id ? 'text-[#ff9f22]' : 'text-gray-400'}`} /> {tab.label}
+                    <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-8 py-5 font-bold text-[10px] md:text-xs tracking-[0.2em] flex items-center transition-all border-b-2 uppercase ${activeTab === tab.id ? "text-brand-primary dark:text-brand-secondary border-brand-secondary bg-bg-base" : "text-text-muted border-transparent hover:text-text-main hover:bg-bg-base/50"}`}>
+                      <FaBullhorn className={`mr-3 ${activeTab === tab.id ? 'text-brand-secondary' : 'opacity-30'}`} /> {tab.label}
                     </button>
                   ))}
                 </div>
-                <div className="p-6 text-gray-700 min-h-[160px]">
+                <div className="p-8 text-text-main min-h-[180px] transition-colors">
                   {activeTab === "hotlines" && (
-                    <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                      <h3 className="text-lg font-bold text-[#002866] mb-3 uppercase">Contact Hotlines</h3>
-                      <p className="leading-relaxed">Phone lines: <strong className="text-gray-900">+44 203 176 9724, +27 79 967 5852, +234 708 9267 186</strong></p>
-                      <p className="mt-2 text-sm">Send prayer request: <a href="mailto:contact@volunteermedicalcorps.org" className="text-[#002866] hover:underline font-bold">contact@volunteermedicalcorps.org</a></p>
-                    </div>
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                      <h3 className="text-lg font-bold text-brand-primary dark:text-brand-secondary uppercase tracking-tight">Contact Hotlines</h3>
+                      <p className="leading-relaxed font-medium">Phone lines: <strong className="text-brand-primary dark:text-white">+44 203 176 9724, +27 79 967 5852, +234 708 9267 186</strong></p>
+                      <div className="pt-4 border-t border-border-main">
+                        <p className="text-sm font-medium text-text-muted">Send prayer request: <a href="mailto:contact@volunteermedicalcorps.org" className="text-brand-secondary hover:underline font-bold transition-all ml-1">contact@volunteermedicalcorps.org</a></p>
+                      </div>
+                    </motion.div>
                   )}
                   {activeTab === "offerings" && (
-                    <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                      <h3 className="text-lg font-bold text-[#002866] mb-3 uppercase">KINGSPAY</h3>
-                      <p className="font-medium">ESPEES CODE: <span className="bg-[#002866] text-white px-2 py-0.5 rounded ml-2">VMC</span></p>
-                      <p className="font-medium mt-2">KINGSPAY CODE: <span className="bg-[#002866] text-white px-2 py-0.5 rounded ml-2">BLVMC</span></p>
-                    </div>
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                      <h3 className="text-lg font-bold text-brand-primary dark:text-brand-secondary uppercase tracking-tight">KINGSPAY & ESPEES</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="p-4 bg-bg-base border border-border-main">
+                          <p className="text-[10px] font-bold text-text-muted uppercase mb-1 tracking-widest">ESPEES CODE</p>
+                          <span className="text-xl font-bold text-brand-secondary tracking-tighter">VMC</span>
+                        </div>
+                        <div className="p-4 bg-bg-base border border-border-main">
+                          <p className="text-[10px] font-bold text-text-muted uppercase mb-1 tracking-widest">KINGSPAY CODE</p>
+                          <span className="text-xl font-bold text-brand-secondary tracking-tighter">BLVMC</span>
+                        </div>
+                      </div>
+                    </motion.div>
                   )}
                   {activeTab === "join" && (
-                    <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                      <h3 className="text-lg font-bold text-[#002866] mb-3 uppercase">Join Our Network</h3>
-                      <p>Interested in joining our global network of volunteers? <Link href="/register" className="text-[#ff9f22] font-black hover:underline ml-1">Click HERE</Link></p>
-                    </div>
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                      <h3 className="text-lg font-bold text-brand-primary dark:text-brand-secondary uppercase tracking-tight">Join Our Network</h3>
+                      <p className="text-text-muted font-medium leading-relaxed">Interested in joining our global network of Christian health care professionals and volunteers?</p>
+                      <Link href="/register" className="group relative overflow-hidden inline-block bg-brand-secondary text-brand-primary px-8 py-3 font-bold uppercase tracking-widest text-[10px] transition-all shadow-lg mt-4">
+                         <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                         <span className="relative z-10 group-hover:text-white transition-colors">Click Here to Join</span>
+                      </Link>
+                    </motion.div>
                   )}
                 </div>
               </div>
             </div>
 
             {/* Right Column: Chat & Pledge Form */}
-            <div className="lg:w-1/3 flex flex-col gap-8">
+            <div className="lg:w-1/3 flex flex-col gap-10">
               
               {/* Live Chat */}
-              <div className="flex flex-col h-[450px] bg-white border border-gray-200 shadow-sm rounded-sm overflow-hidden">
-                <div className="bg-gray-100 p-4 border-b border-gray-200 text-[#002866] font-bold flex justify-between items-center">
-                  <span>Live Chat</span>
-                  <span className="text-xs bg-[#ff9f22] text-[#002866] px-2 py-1 rounded-full">{messages.length}</span>
+              <div className="flex flex-col h-[500px] bg-bg-surface border border-border-main shadow-xl overflow-hidden transition-colors">
+                <div className="bg-bg-base p-5 border-b border-border-main text-brand-primary dark:text-brand-secondary font-bold flex justify-between items-center uppercase tracking-widest text-xs">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    Live Chat
+                  </div>
+                  <span className="bg-brand-primary/5 dark:bg-white/5 border border-border-main px-3 py-1 font-bold text-[10px]">{messages.length} Active</span>
                 </div>
-                <div className="flex-grow overflow-y-auto p-4 space-y-4 custom-scrollbar relative bg-white">
+                <div className="flex-grow overflow-y-auto p-6 space-y-5 custom-scrollbar relative bg-bg-surface/50">
                   {messages.map((msg) => (
-                    <div key={msg.id} className="flex gap-3 text-sm">
-                      <FaUserCircle className={`text-2xl mt-0.5 ${msg.user === 'VMC Admin' ? 'text-[#ff9f22]' : 'text-gray-400'}`} />
-                      <div>
-                        <div className="flex items-baseline gap-2">
-                          <span className={`font-bold ${msg.user === 'VMC Admin' ? 'text-[#002866]' : 'text-gray-800'}`}>{msg.user}</span>
-                          <span className="text-[10px] text-gray-400">{msg.time}</span>
+                    <div key={msg.id} className="flex gap-4 text-sm group">
+                      <div className="flex-shrink-0">
+                        <FaUserCircle className={`text-3xl mt-1 transition-colors ${msg.user === 'VMC Admin' ? 'text-brand-secondary' : 'text-text-muted opacity-40'}`} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-baseline justify-between mb-1">
+                          <span className={`font-bold uppercase text-[10px] tracking-tight ${msg.user === 'VMC Admin' ? 'text-brand-primary dark:text-brand-secondary' : 'text-text-main'}`}>{msg.user}</span>
+                          <span className="text-[9px] font-medium text-text-muted opacity-50 uppercase">{msg.time}</span>
                         </div>
-                        <p className="text-gray-600 mt-0.5 leading-relaxed">{msg.text}</p>
+                        <p className="text-text-muted font-medium text-sm leading-relaxed">{msg.text}</p>
                       </div>
                     </div>
                   ))}
                   <div ref={messagesEndRef} />
                 </div>
-                <div className="p-4 bg-gray-50 border-t border-gray-200">
+                <div className="p-5 bg-bg-base border-t border-border-main transition-colors">
                   <form onSubmit={handleSendMessage} className="relative">
-                    <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="Say something..." className="w-full bg-white border border-gray-300 rounded-sm py-3 pl-4 pr-12 focus:outline-none focus:border-[#002866] transition-colors" />
-                    <button type="submit" disabled={!newMessage.trim()} className="absolute right-2 top-1/2 -translate-y-1/2 text-[#002866] hover:text-[#ff9f22] p-2"><FaPaperPlane /></button>
+                    <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder="Say something..." className="w-full bg-bg-surface border border-border-main py-4 pl-5 pr-14 focus:outline-none focus:border-brand-secondary transition-all text-sm font-medium text-text-main" />
+                    <button type="submit" disabled={!newMessage.trim()} className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-primary dark:text-brand-secondary hover:scale-125 disabled:opacity-30 disabled:hover:scale-100 transition-all p-3"><FaPaperPlane /></button>
                   </form>
                 </div>
               </div>
 
               {/* 5. Pledge Form */}
-              <div className="bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden">
-                <div className="bg-[#002866] text-white p-4">
-                  <h4 className="font-bold uppercase tracking-wider text-sm">Partner with us</h4>
+              <div className="bg-bg-surface border border-border-main shadow-xl overflow-hidden transition-colors">
+                <div className="bg-brand-primary text-white p-5 border-b border-white/5">
+                  <h4 className="font-bold uppercase tracking-[0.2em] text-[10px]">Partner with VMC</h4>
                 </div>
-                <div className="p-6">
-                  <h5 className="font-bold text-gray-800 mb-6 text-xs uppercase tracking-widest border-b border-gray-100 pb-2">Fill the pledge form below</h5>
-                  <form className="space-y-4">
-                    <input type="text" className="w-full bg-gray-50 border border-gray-200 p-3 rounded-sm text-sm outline-none focus:border-[#ff9f22]" placeholder="Full name" />
-                    <input type="email" className="w-full bg-gray-50 border border-gray-200 p-3 rounded-sm text-sm outline-none focus:border-[#ff9f22]" placeholder="Email address" />
-                    <input type="tel" className="w-full bg-gray-50 border border-gray-200 p-3 rounded-sm text-sm outline-none focus:border-[#ff9f22]" placeholder="Phone number" />
-                    <input type="text" className="w-full bg-gray-50 border border-gray-200 p-3 rounded-sm text-sm outline-none focus:border-[#ff9f22]" placeholder="Pledge (eg. Espees 100)" />
-                    <select className="w-full bg-gray-50 border border-gray-200 p-3 rounded-sm text-sm outline-none focus:border-[#ff9f22] text-gray-500">
-                      <option value="">Select your country</option>
-                      <option value="Nigeria">Nigeria</option>
-                      <option value="United Kingdom">United Kingdom</option>
-                      <option value="United States">USA</option>
-                    </select>
-                    <button type="button" className="w-full bg-[#002866] text-white py-3.5 rounded-sm font-black uppercase tracking-widest text-xs hover:bg-[#ff9f22] hover:text-[#002866] transition-all">Submit Pledge</button>
+                <div className="p-8">
+                  <h5 className="font-bold text-text-main mb-8 text-[10px] uppercase tracking-[0.2em] border-b border-border-main pb-4 opacity-70">Fill the pledge form below</h5>
+                  <form className="space-y-6">
+                    <div className="space-y-2">
+                       <label className="text-[9px] font-bold text-text-muted uppercase tracking-widest ml-1">Full Name</label>
+                       <input type="text" className="w-full bg-bg-base border border-border-main p-4 text-sm outline-none focus:border-brand-secondary text-text-main font-medium transition-all" placeholder="Enter your name" />
+                    </div>
+                    <div className="space-y-2">
+                       <label className="text-[9px] font-bold text-text-muted uppercase tracking-widest ml-1">Email Address</label>
+                       <input type="email" className="w-full bg-bg-base border border-border-main p-4 text-sm outline-none focus:border-brand-secondary text-text-main font-medium transition-all" placeholder="Enter email" />
+                    </div>
+                    <div className="space-y-2">
+                       <label className="text-[9px] font-bold text-text-muted uppercase tracking-widest ml-1">Pledge Amount</label>
+                       <input type="text" className="w-full bg-bg-base border border-border-main p-4 text-sm outline-none focus:border-brand-secondary text-text-main font-medium transition-all" placeholder="e.g. 500 Espees" />
+                    </div>
+                    <div className="space-y-2 pb-4">
+                       <label className="text-[9px] font-bold text-text-muted uppercase tracking-widest ml-1">Country</label>
+                       <select className="w-full bg-bg-base border border-border-main p-4 text-sm outline-none focus:border-brand-secondary text-text-muted font-medium cursor-pointer transition-all">
+                        <option value="">Select country</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="United States">USA</option>
+                      </select>
+                    </div>
+                    <button type="button" className="group relative overflow-hidden w-full bg-brand-primary text-white py-5 font-bold uppercase tracking-[0.2em] text-[10px] transition-all shadow-2xl">
+                       <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                       <span className="relative z-10 group-hover:text-brand-primary transition-colors">Submit My Pledge</span>
+                    </button>
                   </form>
                 </div>
               </div>

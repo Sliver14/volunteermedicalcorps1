@@ -4,7 +4,11 @@ import path from 'path';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient({
-  datasourceUrl: process.env.DATABASE_URL,
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
 });
 const ORIGINAL_DOMAIN = 'https://medicalmissionsnetwork.org';
 

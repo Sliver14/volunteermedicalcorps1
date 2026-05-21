@@ -7,10 +7,20 @@ import {
   FaHandsHelping, 
   FaUsers,
   FaDollarSign,
-  FaHome
+  FaHome,
+  FaCheckCircle,
+  FaClock
 } from "react-icons/fa";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/useIsMobile";
+
+const IconMap: any = {
+  FaCheckCircle: FaCheckCircle,
+  FaClock: FaClock,
+  FaHandsHelping: FaHandsHelping,
+  FaUsers: FaUsers,
+  FaDollarSign: FaDollarSign
+};
 
 export default function PortalDashboardClient({ 
   stats = [], 
@@ -30,16 +40,21 @@ export default function PortalDashboardClient({
     ];
     return {
       ...stat,
+      Icon: IconMap[stat.icon] || FaHome,
       gradient: gradients[index % gradients.length]
     };
   });
 
   const formatDate = (date: string | Date) => {
-    return new Date(date).toLocaleDateString(undefined, { 
-      year: 'numeric', 
-      month: 'short', 
-      day: 'numeric' 
-    });
+    try {
+      return new Date(date).toLocaleDateString(undefined, { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+      });
+    } catch (e) {
+      return "N/A";
+    }
   };
 
   return (
@@ -78,7 +93,7 @@ export default function PortalDashboardClient({
           >
             {/* Large Background Icon */}
             <div className="absolute right-[-10%] bottom-[-10%] opacity-15 group-hover:scale-110 group-hover:rotate-6 transition-all duration-700">
-              <stat.icon size={150} />
+              <stat.Icon size={150} />
             </div>
             
             <div className="relative z-10">

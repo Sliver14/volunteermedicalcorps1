@@ -46,28 +46,28 @@ export default async function PortalDashboard() {
     { 
       label: "My Campaigns", 
       value: enrollmentCount.toString(), 
-      icon: FaCheckCircle, 
+      icon: "FaCheckCircle", 
       color: "text-green-600", 
       bg: "bg-green-50" 
     },
     { 
       label: "Donations", 
       value: recentDonations.length.toString(), 
-      icon: FaClock, 
+      icon: "FaClock", 
       color: "text-blue-600", 
       bg: "bg-blue-50" 
     },
     { 
       label: "Tasks Undertaken", 
       value: profile?.stats?.toString() || "27", 
-      icon: FaHandsHelping, 
+      icon: "FaHandsHelping", 
       color: "text-amber-600", 
       bg: "bg-amber-50" 
     },
     { 
       label: "Tasks Completed", 
       value: completedEnrollments.toString(), 
-      icon: FaCheckCircle, 
+      icon: "FaCheckCircle", 
       color: "text-purple-600", 
       bg: "bg-purple-50" 
     },

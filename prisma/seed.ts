@@ -3,13 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL,
-    },
-  },
-});
+const prisma = new PrismaClient();
 const ORIGINAL_DOMAIN = 'https://medicalmissionsnetwork.org';
 
 function normalizeImagePath(imagePath: string | null | undefined): string {

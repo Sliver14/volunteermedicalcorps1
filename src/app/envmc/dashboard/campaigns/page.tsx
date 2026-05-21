@@ -32,10 +32,6 @@ export default function CampaignsManager() {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 
-  useEffect(() => {
-    fetchCampaigns();
-  }, []);
-
   const fetchCampaigns = async () => {
     setLoading(true);
     const res = await fetch("/api/envmc/campaign");
@@ -43,6 +39,10 @@ export default function CampaignsManager() {
     setCampaigns(data);
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchCampaigns();
+  }, []);
 
   const handleEdit = (camp: Campaign) => {
     setIsEditing(camp.id);
@@ -281,7 +281,7 @@ export default function CampaignsManager() {
             </div>
             <div className="p-6 flex-grow flex flex-col">
               <h4 className="text-[#002866] font-bold uppercase text-sm mb-3 line-clamp-1">{camp.title}</h4>
-              <p className="text-gray-400 text-xs line-clamp-2 italic mb-4">"{camp.description}"</p>
+              <p className="text-gray-400 text-xs line-clamp-2 italic mb-4">&quot;{camp.description}&quot;</p>
               
               <div className="mt-auto space-y-2 border-t border-gray-50 pt-4">
                 <div className="flex items-center justify-between">

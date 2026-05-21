@@ -22,10 +22,6 @@ export default function NewsManager() {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
-
   const fetchItems = async () => {
     setLoading(true);
     const res = await fetch("/api/envmc/news");
@@ -33,6 +29,10 @@ export default function NewsManager() {
     setItems(data);
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
 
   const handleEdit = (item: News) => {
     setIsEditing(item.id);

@@ -34,7 +34,8 @@ export default function BoardOfTrustees() {
     {
       name: "Pastor Modupe Adetoro Isesele",
       role: "B.Sc, MBA, FCLRM, FCPM, M.IOD",
-      image: "/trustees/modupe_img.jpg",
+      extra: "A seasoned management professional with over 20 years of experience.",
+      image: "/trustees/WhatsApp Image 2026-05-21 at 11.07.18 AM.jpeg",
     },
     {
       name: "Barrister Bisi Sogunle",

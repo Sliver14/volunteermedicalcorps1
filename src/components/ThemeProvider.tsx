@@ -24,10 +24,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const initialTheme = savedTheme || systemTheme;
     
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle('dark', initialTheme === 'dark');
-    document.documentElement.setAttribute('data-theme', initialTheme);
-    setMounted(true);
+    setTimeout(() => {
+      setTheme(initialTheme);
+      document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+      document.documentElement.setAttribute('data-theme', initialTheme);
+      setMounted(true);
+    }, 0);
   }, []);
 
   const toggleTheme = () => {

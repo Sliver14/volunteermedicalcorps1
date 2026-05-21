@@ -92,7 +92,7 @@ export default function AdminComments() {
                       <span>On: {comment.target}</span>
                     </div>
                     <p className="text-gray-700 leading-relaxed max-w-2xl italic">
-                      "{comment.text}"
+                      &quot;{comment.text}&quot;
                     </p>
                   </div>
                 </div>

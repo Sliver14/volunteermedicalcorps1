@@ -26,9 +26,9 @@ function normalizeImagePath(imagePath: string | null | undefined): string {
 }
 
 async function main() {
-  const dataPath = path.join(process.cwd(), 'extracted_data.json');
+  const dataPath = path.join(process.cwd(), 'ready_to_seed.json');
   if (!fs.existsSync(dataPath)) {
-    console.error('extracted_data.json not found. Run extract_data.js first.');
+    console.error('ready_to_seed.json not found. Run prepare_data.js first.');
     return;
   }
 
@@ -36,77 +36,74 @@ async function main() {
   const hashedDefaultPassword = await bcrypt.hash('Password123!', 10);
 
   console.log('Cleaning up existing data...');
+  await prisma.lessonStats.deleteMany({});
   await prisma.enrollment.deleteMany({});
   await prisma.lesson.deleteMany({});
   await prisma.course.deleteMany({});
+  await prisma.instructor.deleteMany({});
   await prisma.courseCategory.deleteMany({});
   await prisma.news.deleteMany({});
   await prisma.blog.deleteMany({});
   await prisma.event.deleteMany({});
   await prisma.gallery.deleteMany({});
   await prisma.campaign.deleteMany({});
+  await prisma.testimonial.deleteMany({});
   // Note: We don't delete users to avoid locking ourselves out, but we could if needed.
 
-  console.log('Seeding Admin and Member types...');
-  
-  const usersToSeed = [
-    {
-      email: 'admin@vmc.org',
-      name: 'VMC Admin',
-      role: Role.ADMIN,
-      profile: {
-        firstName: 'VMC',
-        lastName: 'Admin',
-        profession: 'Administrator'
-      }
-    },
-    {
-      email: 'volunteer@vmc.org',
-      name: 'John Volunteer',
-      role: Role.VOLUNTEER,
-      profile: {
-        firstName: 'John',
-        lastName: 'Volunteer',
-        profession: 'Doctor',
-        country: 'Nigeria'
-      }
-    },
-    {
-      email: 'member@vmc.org',
-      name: 'Jane Member',
-      role: Role.MEMBER,
-      profile: {
-        firstName: 'Jane',
-        lastName: 'Member',
-        profession: 'Nurse',
-        country: 'United Kingdom'
-      }
-    },
-    {
-      email: 'partner@vmc.org',
-      name: 'Robert Partner',
-      role: Role.PARTNER,
-      profile: {
-        firstName: 'Robert',
-        lastName: 'Partner',
-        profession: 'Engineer',
-        country: 'USA'
-      }
-    }
-  ];
+  console.log('Seeding Course Categories...');
+  const categoryMap = new Map();
+  for (const cat of data.categories) {
+    const created = await prisma.courseCategory.upsert({
+      where: { name: cat.name },
+      update: { cid: cat.cid },
+      create: { name: cat.name, cid: cat.cid }
+    });
+    categoryMap.set(cat.cid, created.id);
+  }
 
-  for (const u of usersToSeed) {
-    await prisma.user.upsert({
-      where: { email: u.email },
-      update: {},
-      create: {
-        email: u.email,
-        name: u.name,
-        password: hashedDefaultPassword,
-        role: u.role,
-        profile: {
-          create: u.profile
-        }
+  console.log('Seeding Instructors...');
+  const instructorMap = new Map();
+  for (const ins of data.instructors) {
+    const created = await prisma.instructor.upsert({
+      where: { iid: ins.iid },
+      update: { ...ins, avatar: normalizeImagePath(ins.avatar) },
+      create: { ...ins, avatar: normalizeImagePath(ins.avatar) }
+    });
+    instructorMap.set(ins.iid, created.id);
+  }
+
+  console.log('Seeding Courses...');
+  const courseMap = new Map();
+  for (const course of data.courses) {
+    const created = await prisma.course.create({
+      data: {
+        cid: course.cid,
+        title: course.title,
+        brief: course.brief,
+        description: course.description,
+        image: normalizeImagePath(course.image),
+        price: course.price,
+        duration: course.duration,
+        level: course.level,
+        isActive: course.isActive,
+        categoryId: categoryMap.get(course.categoryId) || (await prisma.courseCategory.findFirst())?.id || '',
+        instructorId: instructorMap.get(course.instructorId) || null,
+      }
+    });
+    courseMap.set(course.cid, created.id);
+  }
+
+  console.log('Seeding Lessons...');
+  for (const lesson of data.lessons) {
+    await prisma.lesson.create({
+      data: {
+        lid: lesson.lid,
+        title: lesson.title,
+        content: lesson.content,
+        videoUrl: lesson.videoUrl,
+        duration: lesson.duration,
+        order: lesson.order,
+        courseId: courseMap.get(lesson.courseId) || '',
       }
     });
   }
@@ -148,9 +145,21 @@ async function main() {
   for (const item of data.events) {
     await prisma.event.create({
       data: {
-        ...item,
+        eid: item.eid,
+        title: item.title,
+        brief: item.brief,
+        description: item.description,
         image: normalizeImagePath(item.image),
+        location: item.location,
         date: new Date(item.date),
+        startDate: item.startDate,
+        endDate: item.endDate,
+        startTime: item.startTime,
+        endTime: item.endTime,
+        isLive: item.isLive,
+        streamUrl: item.streamUrl,
+        volOnly: item.volOnly,
+        isActive: item.isActive,
       },
     });
   }
@@ -165,78 +174,52 @@ async function main() {
     });
   }
 
-  console.log('Seeding Volunteers (Limit 500 for performance)...');
-  const volunteers = data.volunteers.slice(0, 500); // Limit to 500 for now
-  for (const v of volunteers) {
-    try {
-      await prisma.user.create({
-        data: {
-          email: v.email,
-          name: `${v.firstName} ${v.lastName}`.trim() || 'Volunteer',
-          password: v.password || hashedDefaultPassword,
-          role: Role.VOLUNTEER,
-          profile: {
-            create: {
-              vid: v.vid,
-              firstName: v.firstName,
-              lastName: v.lastName,
-              phone: v.phone,
-              bio: v.bio,
-              avatar: normalizeImagePath(v.image),
-              gender: v.gender,
-              dob: v.dob,
-              profession: v.profession,
-              qualification: v.qualification,
-              preferredRole: v.preferredRole,
-              church: v.church,
-              location: v.location,
-              country: v.country,
-              newsletter: v.newsletter,
-              stats: v.stats,
-              dateJoined: v.dateJoined ? new Date(v.dateJoined) : new Date(),
-              timeJoined: v.timeJoined,
-              ref: v.ref
+  console.log('Seeding Testimonials...');
+  for (const item of data.testimonials) {
+    await prisma.testimonial.create({
+      data: {
+        ...item,
+        image: normalizeImagePath(item.image),
+        date: item.date ? new Date(item.date) : null,
+      },
+    });
+  }
+
+  console.log(`Seeding All Users (${data.users.length} total)...`);
+  const BATCH_SIZE = 50;
+  for (let i = 0; i < data.users.length; i += BATCH_SIZE) {
+    const batch = data.users.slice(i, i + BATCH_SIZE);
+    await Promise.all(
+      batch.map(async (u: any) => {
+        try {
+          await prisma.user.create({
+            data: {
+              email: u.email,
+              name: u.name || 'VMC User',
+              password: u.password || hashedDefaultPassword,
+              role: u.role || Role.USER,
+              profile: {
+                create: {
+                  ...u.profile,
+                  avatar: normalizeImagePath(u.profile?.avatar),
+                  dateJoined: u.profile?.dateJoined ? new Date(u.profile.dateJoined) : new Date(),
+                }
+              }
             }
-          }
+          });
+        } catch (e) {
+          // Skip duplicates or errors
         }
-      });
-    } catch (e) {
-      // Skip duplicates or errors
+      })
+    );
+    if ((i + BATCH_SIZE) % 500 === 0 || i + batch.length === data.users.length) {
+      console.log(`Progress: ${Math.min(i + BATCH_SIZE, data.users.length)} / ${data.users.length} users seeded`);
     }
   }
 
-  console.log('Seeding E-learning Categories and Courses...');
-  const healthCat = await prisma.courseCategory.upsert({
-    where: { name: 'Health & Medical' },
-    update: {},
-    create: { name: 'Health & Medical' }
-  });
-
-  const reliefCat = await prisma.courseCategory.upsert({
-    where: { name: 'Relief & Humanitarian' },
-    update: {},
-    create: { name: 'Relief & Humanitarian' }
-  });
-
-  await prisma.course.create({
-    data: {
-      title: 'Introduction to First Aid',
-      description: 'Learn the basics of first aid and emergency response.',
-      level: 'Beginner',
-      categoryId: healthCat.id,
-      isActive: true,
-      lessons: {
-        create: [
-          { title: 'Welcome to the Course', order: 1 },
-          { title: 'Basic CPR', order: 2 },
-          { title: 'Choking Response', order: 3 }
-        ]
-      }
-    }
-  });
-
   console.log('Seeding complete!');
 }
+
 
 main()
   .catch((e) => {

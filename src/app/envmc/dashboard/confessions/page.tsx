@@ -19,10 +19,6 @@ export default function ConfessionsManager() {
   const [editForm, setEditData] = useState<Partial<Confession>>({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchConfessions();
-  }, []);
-
   const fetchConfessions = async () => {
     setLoading(true);
     // We need an endpoint that fetches ALL confessions for admin, not just the latest
@@ -31,6 +27,10 @@ export default function ConfessionsManager() {
     setConfessions(data);
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchConfessions();
+  }, []);
 
   const handleEdit = (conf: Confession) => {
     setIsEditing(conf.id);

@@ -7,7 +7,6 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -20,16 +19,24 @@ model User {
   updatedAt     DateTime  @updatedAt
   profile       Profile?
   enrollments   Enrollment[]
+  lessonStats   LessonStats[]
+  resetTokens   PasswordResetToken[]
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }
 
 model Profile {
   id                String  @id @default(cuid())
-  bio               String? @db.Text
-  avatar            String?
   userId            String  @unique
   user              User    @relation(fields: [userId], references: [id])
-  
-  // Volunteer specific fields
+  title             String?
   vid               String? @unique
   firstName         String?
   lastName          String?
@@ -42,9 +49,13 @@ model Profile {
   church            String?
   location          String?
   country           String?
+  bloodGroup        String?
   socialMediaHandle String?
   newsletter        Boolean @default(false)
   stats             Int     @default(0)
+  status            String  @default("Pending")
+  bio               String? @db.Text
+  avatar            String?
   dateJoined        DateTime? @default(now())
   timeJoined        String?
   ref               String?
@@ -56,18 +67,44 @@ enum Role {
   VOLUNTEER
   MEMBER
   PARTNER
+  INSTRUCTOR
+}
+
+model Instructor {
+  id              String   @id @default(cuid())
+  iid             String   @unique
+  firstName       String
+  lastName        String
+  email           String   @unique
+  phone           String?
+  bio             String?  @db.Text
+  discipline      String?
+  qualification   String?
+  avatar          String?
+  country         String?
+  facebook        String?
+  twitter         String?
+  linkedin        String?
+  instagram       String?
+  courses         Course[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Course {
   id            String    @id @default(cuid())
+  cid           String    @unique
   title         String
-  description   String    @db.Text
+  brief         String?   @db.Text
+  description   String?   @db.Text
   image         String?
   price         Float     @default(0)
   duration      String?
   level         String?   @default("Beginner") // Beginner, Intermediate, Advanced
   categoryId    String
   category      CourseCategory @relation(fields: [categoryId], references: [id])
+  instructorId  String?
+  instructor    Instructor?    @relation(fields: [instructorId], references: [id])
   lessons       Lesson[]
   enrollments   Enrollment[]
   isActive      Boolean   @default(true)
@@ -77,6 +114,7 @@ model Course {
 
 model CourseCategory {
   id        String   @id @default(cuid())
+  cid       String?  @unique
   name      String   @unique
   courses   Course[]
   createdAt DateTime @default(now())
@@ -84,6 +122,7 @@ model CourseCategory {
 
 model Lesson {
   id          String   @id @default(cuid())
+  lid         String   @unique
   title       String
   content     String?  @db.Text
   videoUrl    String?
@@ -91,7 +130,21 @@ model Lesson {
   order       Int      @default(0)
   courseId    String
   course      Course   @relation(fields: [courseId], references: [id])
+  lessonStats LessonStats[]
   createdAt   DateTime @default(now())
+}
+
+model LessonStats {
+  id        String   @id @default(cuid())
+  lessonId  String
+  userId    String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  status    Int      @default(0) // 1 for completed
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, lessonId])
 }
 
 model Enrollment {
@@ -188,14 +241,21 @@ model Blog {
 
 model Event {
   id          String   @id @default(cuid())
+  eid         String?  @unique
   title       String
+  brief       String?  @db.Text
   description String?  @db.Text
   image       String?
   location    String?
   date        DateTime
+  startDate   String?
+  endDate     String?
+  startTime   String?
+  endTime     String?
   isLive      Boolean  @default(false)
   streamUrl   String?
   isActive    Boolean  @default(true)
+  volOnly     Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -229,3 +289,4 @@ model Message {
   time      String
   createdAt DateTime @default(now())
 }
+

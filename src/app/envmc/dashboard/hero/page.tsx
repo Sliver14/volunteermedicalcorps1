@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Edit2, Trash2, Save, X, ToggleLeft, ToggleRight } from "lucide-react";
+import { Plus, Edit2, Trash2, X, ToggleLeft, ToggleRight } from "lucide-react";
 import Image from "next/image";
 
 interface Slide {
@@ -22,10 +22,6 @@ export default function HeroSlidesManager() {
   const [editForm, setEditData] = useState<Partial<Slide>>({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchSlides();
-  }, []);
-
   const fetchSlides = async () => {
     setLoading(true);
     const res = await fetch("/api/hero-slides");
@@ -33,6 +29,10 @@ export default function HeroSlidesManager() {
     setSlides(data);
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchSlides();
+  }, []);
 
   const handleEdit = (slide: Slide) => {
     setIsEditing(slide.id);

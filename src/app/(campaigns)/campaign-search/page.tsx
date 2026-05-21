@@ -63,7 +63,7 @@ function CampaignSearchContent() {
 
   // Reset page on query change
   useEffect(() => {
-    setCurrentPage(1);
+    setTimeout(() => setCurrentPage(1), 0);
   }, [query]);
 
   // Filter campaigns based on query

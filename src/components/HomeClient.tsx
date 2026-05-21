@@ -39,20 +39,69 @@ function Counter({ value, suffix = "", prefix = "", decimal = false }: { value: 
   );
 }
 
+interface Campaign {
+  id: number;
+  title: string;
+  country: string;
+  date: string;
+  image: string;
+  description: string;
+}
+
+interface NewsItem {
+  id: string;
+  title: string;
+  image: string | null;
+  date: Date | string;
+  author: string | null;
+}
+
+interface EventItem {
+  id: string;
+  title: string;
+  image: string | null;
+  date: Date | string;
+  location: string | null;
+}
+
+interface BlogItem {
+  id: string;
+  title: string;
+  image: string | null;
+  date: Date | string;
+}
+
+interface TestimonialItem {
+  id: string;
+  name: string;
+  content: string;
+  image: string | null;
+  location?: string | null;
+  role?: string | null;
+}
+
+interface HomeClientProps {
+  initialNews: NewsItem[];
+  initialEvents: EventItem[];
+  initialBlogs: BlogItem[];
+  initialTestimonials: TestimonialItem[];
+  campaignData: Campaign[];
+}
+
 export default function HomeClient({ 
   initialNews, 
   initialEvents, 
   initialBlogs, 
   initialTestimonials,
   campaignData 
-}: any) {
+}: HomeClientProps) {
   const router = useRouter();
   const isMobile = useIsMobile();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCampaignId, setSelectedCampaignId] = useState(1);
 
   const selectedCampaign = useMemo(() => 
-    campaignData.find((c: any) => c.id === selectedCampaignId) || campaignData[0], 
+    campaignData.find((c: Campaign) => c.id === selectedCampaignId) || campaignData[0], 
   [selectedCampaignId, campaignData]);
 
   const regions = ["Africa", "Middle East/Asia", "America/Caribbean", "Nigeria", "Europe", "Australia"];
@@ -109,9 +158,9 @@ export default function HomeClient({
     return () => clearInterval(timer);
   }, [heroSlides.length]);
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (date: string | Date) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    return new Date(date).toLocaleDateString(undefined, options);
   };
 
   return (
@@ -209,7 +258,7 @@ export default function HomeClient({
               </div>
               
               <div className="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1 custom-scrollbar">
-                {initialEvents.map((event: any) => (
+                {initialEvents.map((event: EventItem) => (
                   <Link key={event.id} href={`/events/${event.id}`} className="group block">
                     <div className="flex gap-3 p-3 rounded-lg border border-border-main bg-bg-surface hover:border-brand-secondary/30 hover:shadow-sm transition-all">
                       
@@ -752,7 +801,7 @@ export default function HomeClient({
                   <span>{selectedCampaign.date}</span>
                 </div>
                 <p className="text-text-muted text-sm mb-8 leading-relaxed italic">
-                  "{selectedCampaign.description}"
+                  &quot;{selectedCampaign.description}&quot;
                 </p>
 
                 <Link 
@@ -825,7 +874,7 @@ export default function HomeClient({
               
               <div className="space-y-4 mb-10">
                 <p className="text-text-main text-base lg:text-lg leading-relaxed font-semibold italic border-l-4 border-brand-secondary pl-5 py-1 bg-bg-base transition-colors duration-300">
-                  "Providing medical care through outreaches, humanitarian assistance and sustainable health care solutions."
+                  &quot;Providing medical care through outreaches, humanitarian assistance and sustainable health care solutions.&quot;
                 </p>
                 <p className="text-text-muted text-base leading-relaxed">
                   We are an ever-expanding global network of Christian health care workers, non-medical volunteers and students committed to providing medical care in regions of crisis and to communities in dire need.
@@ -875,7 +924,7 @@ export default function HomeClient({
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {initialTestimonials.map((testimonial: any, index: number) => (
+            {initialTestimonials.map((testimonial: TestimonialItem, index: number) => (
               <motion.div 
                 key={index}
                 initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}
@@ -896,7 +945,7 @@ export default function HomeClient({
                 </div>
                 
                 <p className="text-text-muted italic mb-8 flex-grow leading-relaxed font-medium z-10 relative h-[140px] overflow-y-auto custom-scrollbar pr-2">
-                  "{testimonial.content}"
+                  &quot;{testimonial.content}&quot;
                 </p>
                 
                 <div className="w-full pt-6 border-t border-border-main">
@@ -929,7 +978,7 @@ export default function HomeClient({
             className="text-center mb-16"
           >
             <h6 className="text-brand-secondary text-[13px] font-black tracking-[0.2em] uppercase mb-3">
-              What's New
+              What&apos;s New
             </h6>
             <h2 className="text-brand-primary dark:text-text-main text-4xl md:text-5xl font-black uppercase tracking-tight">
               View Blog Posts
@@ -938,7 +987,7 @@ export default function HomeClient({
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {initialBlogs.map((post: any, index: number) => (
+            {initialBlogs.map((post: BlogItem, index: number) => (
               <motion.div 
                 key={index}
                 initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, y: 50 }}

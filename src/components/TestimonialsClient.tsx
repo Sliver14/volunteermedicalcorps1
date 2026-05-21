@@ -9,15 +9,28 @@ import Pagination from "@/components/Pagination";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-export default function TestimonialsClient({ allTestimonials }: any) {
+interface Testimonial {
+  id: string;
+  name: string;
+  content: string;
+  image: string | null;
+  location?: string | null;
+  role?: string | null;
+}
+
+interface TestimonialsClientProps {
+  allTestimonials: Testimonial[];
+}
+
+export default function TestimonialsClient({ allTestimonials }: TestimonialsClientProps) {
   const isMobile = useIsMobile();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
 
   // Deduplicate testimonials by content
   const uniqueTestimonials = useMemo(() => {
-    const seen = new Set();
-    return allTestimonials.filter((t: any) => {
+    const seen = new Set<string>();
+    return allTestimonials.filter((t: Testimonial) => {
       const duplicate = seen.has(t.content);
       seen.add(t.content);
       return !duplicate;
@@ -88,7 +101,7 @@ export default function TestimonialsClient({ allTestimonials }: any) {
                 </div>
                 
                 <p className="text-text-muted italic mb-8 flex-grow leading-relaxed font-medium z-10 relative">
-                  "{testimonial.content}"
+                  &quot;{testimonial.content}&quot;
                 </p>
                 
                 <div className="w-full pt-6 border-t border-border-main">

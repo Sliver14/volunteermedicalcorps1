@@ -31,7 +31,7 @@ export default function Header() {
         { label: "Good Deeds Campaigns", href: "/good-deeds-campaigns" },
         { label: "Medical Projects", href: "/medical-projects" },
         { label: "Humanitarian Projects", href: "/humanitarian-projects" },
-        { label: "VMC Academy", href: "/vmc-academy" },
+        { label: "VMC Academy", href: "/elearn/dashboard" },
       ]
     },
     { 

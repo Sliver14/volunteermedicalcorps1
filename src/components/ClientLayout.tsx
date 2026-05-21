@@ -11,7 +11,10 @@ import { useEffect } from "react";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isDashboard = pathname?.startsWith('/envmc') || pathname?.startsWith('/portal') || pathname?.startsWith('/elearn');
+  const isDashboard = pathname?.startsWith('/envmc') || 
+                      pathname?.startsWith('/portal') || 
+                      pathname?.startsWith('/elearn') ||
+                      pathname?.startsWith('/sponsor');
 
   // Instant scroll to top on route change
   useEffect(() => {

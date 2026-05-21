@@ -18,7 +18,7 @@ export default function AdminGallery() {
       
       <div className="flex flex-col items-center justify-center h-64 text-gray-400 bg-gray-50 border border-dashed border-gray-200 rounded-sm">
         <p className="mb-2 font-bold text-gray-500 uppercase tracking-widest text-sm">No photos found.</p>
-        <p className="text-sm">Click "Add New Photo" to upload your first image.</p>
+        <p className="text-sm">Click &quot;Add New Photo&quot; to upload your first image.</p>
       </div>
     </motion.div>
   );

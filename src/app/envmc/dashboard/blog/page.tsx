@@ -18,7 +18,7 @@ export default function AdminBlog() {
       
       <div className="flex flex-col items-center justify-center h-64 text-gray-400 bg-gray-50 border border-dashed border-gray-200 rounded-sm">
         <p className="mb-2 font-bold text-gray-500 uppercase tracking-widest text-sm">No blog records found.</p>
-        <p className="text-sm">Click "Add New" to create your first entry.</p>
+        <p className="text-sm">Click &quot;Add New&quot; to create your first entry.</p>
       </div>
     </motion.div>
   );

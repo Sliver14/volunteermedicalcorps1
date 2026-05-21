@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         hostname: 'volunteermedicalcorps.org',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'loveworldmedicalmissions.org',
+        pathname: '/**',
+      },
     ],
   },
   async rewrites() {

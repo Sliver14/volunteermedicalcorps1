@@ -38,7 +38,7 @@ export default function LiveStreamPage() {
   const playerContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const initialLoadRef = useRef(true);
-  let controlsTimeout = useRef<NodeJS.Timeout | null>(null);
+  const controlsTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const [streamUrl, setStreamUrl] = useState("https://pvqybrzodz24-hls-live.5centscdn.com/HSOP/955ad3298db330b5ee880c2c9e6f23a0.sdp/playlist.m3u8");
 

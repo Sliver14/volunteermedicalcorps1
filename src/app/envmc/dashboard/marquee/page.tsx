@@ -17,10 +17,6 @@ export default function MarqueeManager() {
   const [editForm, setEditData] = useState<Partial<MarqueeItem>>({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
-
   const fetchItems = async () => {
     setLoading(true);
     const res = await fetch("/api/marquee");
@@ -28,6 +24,10 @@ export default function MarqueeManager() {
     setItems(data);
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
 
   const handleEdit = (item: MarqueeItem) => {
     setIsEditing(item.id);

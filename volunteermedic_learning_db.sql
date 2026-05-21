@@ -1,0 +1,1043 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: May 21, 2026 at 10:36 AM
+-- Server version: 10.6.26-MariaDB
+-- PHP Version: 8.4.21
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `volunteermedic_learning_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_cart`
+--
+
+CREATE TABLE `tbl_cart` (
+  `cart_id` int(11) NOT NULL,
+  `cart_trans_id` varchar(100) NOT NULL,
+  `cart_session_id` varchar(100) NOT NULL,
+  `cart_iid` varchar(100) NOT NULL,
+  `cart_uid` varchar(100) NOT NULL,
+  `cart_cid` varchar(100) NOT NULL,
+  `cart_qty` int(11) NOT NULL,
+  `cart_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_cart`
+--
+
+INSERT INTO `tbl_cart` (`cart_id`, `cart_trans_id`, `cart_session_id`, `cart_iid`, `cart_uid`, `cart_cid`, `cart_qty`, `cart_price`) VALUES
+(1, 'TID1694529283', 'CT1694529283', 'VO614352-FQK', 'vo296183-QVW', 'CID-1632304771', 1, 0),
+(2, 'TID1694530057', 'CT1694530057', 'VO614352-FQK', 'ae126784-FCP', 'CID-1632304771', 1, 0),
+(3, 'TID1694844724', 'CT1694844724', 'VO614352-FQK', 'rk894651-LVJ', 'CID-1632304771', 1, 0),
+(4, 'TID1694845325', 'CT1694845325', 'VO614352-FQK', 'rk894651-LVJ', 'CID-1694530534', 1, 0),
+(5, 'TID1695043861', 'CT1695043861', 'VO614352-FQK', 'wn139628-EKD', 'CID-1694530534', 1, 0),
+(6, 'TID1695057728', 'CT1695057728', 'VO614352-FQK', 'nm417852-KNB', 'CID-1632304771', 1, 0),
+(7, 'TID1695901638', 'CT1695901638', 'VO614352-FQK', 'SA415983-DQF', 'CID-1694530534', 1, 0),
+(8, 'TID1696663268', 'CT1696663268', 'VO614352-FQK', 'fk924316-HTB', 'CID-1632304771', 1, 0),
+(9, 'TID1697747161', 'CT1697747161', 'VO614352-FQK', 'nl941376-WAV', 'CID-1632304771', 1, 0),
+(10, 'TID1698408021', 'CT1698408021', 'VO614352-FQK', 'ma972153-NDY', 'CID-1632304771', 1, 0),
+(11, 'TID1698408416', 'CT1698408416', 'VO614352-FQK', 'ma972153-NDY', 'CID-1694530534', 1, 0),
+(12, 'TID1699491866', 'CT1699491866', 'VO614352-FQK', 'ea431865-QZG', 'CID-1632304771', 1, 0),
+(13, 'TID1699492143', 'CT1699492143', 'VO614352-FQK', 'ea431865-QZG', 'CID-1694530534', 1, 0),
+(14, 'TID1700411576', 'CT1700411576', 'VO614352-FQK', 'bo983761-YLU', 'CID-1632304771', 1, 0),
+(15, 'TID1700629884', 'CT1700629884', 'VO614352-FQK', 'sc456318-LFV', 'CID-1694530534', 1, 0),
+(16, 'TID1702933711', 'CT1702933711', 'VO614352-FQK', 'cb327954-QMN', 'CID-1694530534', 1, 0),
+(17, 'TID1702933788', 'CT1702933788', 'VO614352-FQK', 'cb327954-QMN', 'CID-1632304771', 1, 0),
+(18, 'TID1707129391', 'CT1707129391', 'VO614352-FQK', 're124876-VMZ', 'CID-1694530534', 1, 0),
+(19, 'TID1707130786', 'CT1707130727', 'VO614352-FQK', 're124876-VMZ', 'CID-1632304771', 1, 0),
+(20, 'TID1707470815', 'CT1707470815', 'VO614352-FQK', 'pa175842-XVE', 'CID-1632304771', 1, 0),
+(21, 'TID1707470851', 'CT1707470815', 'VO614352-FQK', 'pa175842-XVE', 'CID-1694530534', 1, 0),
+(22, 'TID1708602441', 'CT1708602441', 'VO614352-FQK', 're124876-VMZ', 'CID-1695909960', 1, 0),
+(23, 'TID1708602629', 'CT1708602629', 'VO614352-FQK', 're124876-VMZ', 'CID-1695907483', 1, 0),
+(24, 'TID1709303576', 'CT1709303576', 'VO614352-FQK', 'rk894651-LVJ', 'CID-1695909394', 1, 0),
+(25, 'TID1711997114', 'CT1711997114', 'VO614352-FQK', 'fa763249-GBU', 'CID-1695909960', 1, 0),
+(26, 'TID1711997117', 'CT1711997114', 'VO614352-FQK', 'fa763249-GBU', 'CID-1695907835', 1, 0),
+(27, 'TID1711997119', 'CT1711997114', 'VO614352-FQK', 'fa763249-GBU', 'CID-1695907483', 1, 0),
+(28, 'TID1711997122', 'CT1711997114', 'VO614352-FQK', 'fa763249-GBU', 'CID-1632304771', 1, 0),
+(29, 'TID1714128278', 'CT1714128278', 'VO614352-FQK', 'jt628157-AZF', 'CID-1632304771', 1, 0),
+(30, 'TID1714128452', 'CT1714128452', 'VO614352-FQK', 'jt628157-AZF', 'CID-1695907483', 1, 0),
+(31, 'TID1716401889', 'CT1716401889', 'VO614352-FQK', 'om476938-BXE', 'CID-1632304771', 1, 0),
+(32, 'TID1719503833', 'CT1719503833', 'VO614352-FQK', 'es164873-LJD', 'CID-1695909960', 1, 0),
+(33, 'TID1721826124', 'CT1721826124', 'VO614352-FQK', 'fo523967-PXN', 'CID-1695909394', 1, 0),
+(34, 'TID1724055291', 'CT1724055291', 'VO614352-FQK', 'TT158180511801', 'CID-1694530534', 1, 0),
+(35, 'TID1725872586', 'CT1725872586', 'VO614352-FQK', 'kk381527-DWV', 'CID-1695909960', 1, 0),
+(36, 'TID1725872653', 'CT1725872586', 'VO614352-FQK', 'kk381527-DWV', 'CID-1695907835', 1, 0),
+(37, 'TID1726565487', 'CT1726565464', 'VO614352-FQK', 're124876-VMZ', 'CID-1695909394', 1, 0),
+(38, 'TID1726565612', 'CT1726565612', 'VO614352-FQK', 're124876-VMZ', 'CID-1695907835', 1, 0),
+(39, 'TID1727240725', 'CT1727240725', 'VO614352-FQK', 'kd924851-HJT', 'CID-1632304771', 1, 0),
+(40, 'TID1727241100', 'CT1727241100', 'VO614352-FQK', 'kd924851-HJT', 'CID-1695909394', 1, 0),
+(41, 'TID1727241181', 'CT1727241181', 'VO614352-FQK', 'kd924851-HJT', 'CID-1695907835', 1, 0),
+(42, 'TID1727241238', 'CT1727241238', 'VO614352-FQK', 'kd924851-HJT', 'CID-1695907676', 1, 0),
+(43, 'TID1727241297', 'CT1727241297', 'VO614352-FQK', 'kd924851-HJT', 'CID-1695907483', 1, 0),
+(44, 'TID1727241350', 'CT1727241350', 'VO614352-FQK', 'kd924851-HJT', 'CID-1694530534', 1, 0),
+(45, 'TID1727241400', 'CT1727241400', 'VO614352-FQK', 'kd924851-HJT', 'CID-1695909960', 1, 0),
+(46, 'TID1728712504', 'CT1728712504', 'VO614352-FQK', 'ja124739-BMD', 'CID-1632304771', 1, 0),
+(47, 'TID1728713217', 'CT1728713217', 'VO614352-FQK', 'ja124739-BMD', 'CID-1695909960', 1, 0),
+(48, 'TID1729027261', 'CT1729027261', 'VO614352-FQK', 'bg236497-GHF', 'CID-1695907835', 1, 0),
+(49, 'TID1729185124', 'CT1729185124', 'VO614352-FQK', 'im138956-FTS', 'CID-1695909960', 1, 0),
+(50, 'TID1729185240', 'CT1729185124', 'VO614352-FQK', 'im138956-FTS', 'CID-1695909394', 1, 0),
+(51, 'TID1730134404', 'CT1730134404', 'VO614352-FQK', 'na418697-ZAV', 'CID-1632304771', 1, 0),
+(52, 'TID1735010772', 'CT1735010772', 'VO614352-FQK', 'eo265713-EGZ', 'CID-1695907835', 1, 0),
+(53, 'TID1738870853', 'CT1738870853', 'VO614352-FQK', 'co249185-SUH', 'CID-1632304771', 1, 0),
+(54, 'TID1738929601', 'CT1738929601', 'VO614352-FQK', 'ha853629-LRT', 'CID-1695909960', 1, 0),
+(55, 'TID1739620622', 'CT1739620622', 'VO614352-FQK', 'tm526147-QKL', 'CID-1695909960', 1, 0),
+(56, 'TID1740181521', 'CT1740181521', 'VO614352-FQK', 'ca261753-AYH', 'CID-1632304771', 1, 0),
+(57, 'TID1740181885', 'CT1740181885', 'VO614352-FQK', 'ca261753-AYH', 'CID-1695909960', 1, 0),
+(58, 'TID1740497751', 'CT1740497751', 'VO614352-FQK', 'im138956-FTS', 'CID-1695909960', 1, 0),
+(59, 'TID1740497854', 'CT1740497854', 'VO614352-FQK', 'im138956-FTS', 'CID-1632304771', 1, 0),
+(60, 'TID1740582990', 'CT1740582990', 'VO614352-FQK', 'pa493621-AKE', 'CID-1694530534', 1, 0),
+(61, 'TID1740583166', 'CT1740582990', 'VO614352-FQK', 'pa493621-AKE', 'CID-1695909394', 1, 0),
+(62, 'TID1742362042', 'CT1742362042', 'VO614352-FQK', 'je267953-SLD', 'CID-1695909394', 1, 0),
+(63, 'TID1742877859', 'CT1742877859', 'VO614352-FQK', 'lm659834-CUV', 'CID-1632304771', 1, 0),
+(64, 'TID1745862319', 'CT1745862319', 'VO614352-FQK', 'lm375946-SQR', 'CID-1632304771', 1, 0),
+(65, 'TID1747162401', 'CT1747162401', 'VO614352-FQK', 'si485967-VXM', 'CID-1695907835', 1, 0),
+(66, 'TID1748301247', 'CT1748301247', 'VO614352-FQK', 'ao469127-BYL', 'CID-1695909394', 1, 0),
+(67, 'TID1750764780', 'CT1750764780', 'VO614352-FQK', 'ce964182-GBC', 'CID-1695907835', 1, 0),
+(68, 'TID1750765281', 'CT1750764780', 'VO614352-FQK', 'ce964182-GBC', 'CID-1695909960', 1, 0),
+(69, 'TID1750953369', 'CT1750953369', 'VO614352-FQK', 'nl697341-GFZ', 'CID-1695909394', 1, 0),
+(70, 'TID1750968691', 'CT1750968691', 'VO614352-FQK', 'le782495-NCK', 'CID-1632304771', 1, 0),
+(71, 'TID1750968758', 'CT1750968758', 'VO614352-FQK', 'le782495-NCK', 'CID-1695907483', 1, 0),
+(72, 'TID1750968949', 'CT1750968949', 'VO614352-FQK', 'le782495-NCK', 'CID-1695909960', 1, 0),
+(73, 'TID1750969000', 'CT1750969000', 'VO614352-FQK', 'le782495-NCK', 'CID-1695909394', 1, 0),
+(74, 'TID1750969029', 'CT1750969029', 'VO614352-FQK', 'le782495-NCK', 'CID-1695907835', 1, 0),
+(75, 'TID1750969070', 'CT1750969070', 'VO614352-FQK', 'le782495-NCK', 'CID-1695907676', 1, 0),
+(76, 'TID1750969111', 'CT1750969111', 'VO614352-FQK', 'le782495-NCK', 'CID-1694530534', 1, 0),
+(77, 'TID1751372040', 'CT1751372040', 'VO614352-FQK', 'au812736-SHQ', 'CID-1695907835', 1, 0),
+(78, 'TID1752692775', 'CT1752692775', 'VO614352-FQK', 'ie873261-WSK', 'CID-1694530534', 1, 0),
+(79, 'TID1754669892', 'CT1754669892', 'VO614352-FQK', 'ha613789-AUC', 'CID-1695907835', 1, 0),
+(80, 'TID1754674237', 'CT1754674237', 'VO614352-FQK', 'ha613789-AUC', 'CID-1694530534', 1, 0),
+(81, 'TID1754908187', 'CT1754908187', 'VO614352-FQK', 'kk381527-DWV', 'CID-1695909960', 1, 0),
+(82, 'TID1754915516', 'CT1754915516', 'VO614352-FQK', 'kk381527-DWV', 'CID-1695907835', 1, 0),
+(83, 'TID1754915607', 'CT1754915607', 'VO614352-FQK', 'kk381527-DWV', 'CID-1695907676', 1, 0),
+(84, 'TID1755780397', 'CT1755780397', 'VO614352-FQK', 'kk381527-DWV', 'CID-1632304771', 1, 0),
+(85, 'TID1756114630', 'CT1756114630', 'VO614352-FQK', 'ro471589-HXC', 'CID-1695909394', 1, 0),
+(86, 'TID1758473226', 'CT1758473226', 'VO614352-FQK', 'ka489136-BGD', 'CID-1632304771', 1, 0),
+(87, 'TID1758473342', 'CT1758473342', 'VO614352-FQK', 'ka489136-BGD', 'CID-1695909394', 1, 0),
+(88, 'TID1760105405', 'CT1760105405', 'VO614352-FQK', 'pe137925-LKA', 'CID-1695909960', 1, 0),
+(90, 'TID1760706240', 'CT1760706215', 'VO614352-FQK', 'LS264198-SNL', 'CID-1695909960', 1, 0),
+(91, 'TID1760973151', 'CT1760973151', 'JA657349-YVT', 'ce964182-GBC', 'CID-1760706900', 1, 0),
+(92, 'TID1761800765', 'CT1761800765', 'VO614352-FQK', 'io845629-TCP', 'CID-1695909960', 1, 0),
+(93, 'TID1762603907', 'CT1762603907', 'VO614352-FQK', 'mm176953-QPJ', 'CID-1760706900', 1, 0),
+(94, 'TID1762851442', 'CT1762851442', 'VO614352-FQK', 'oa356129-JPM', 'CID-1760706900', 1, 0),
+(95, 'TID1764300839', 'CT1764300839', 'VO614352-FQK', 'sr897264-NQY', 'CID-1760706900', 1, 0),
+(96, 'TID1765733056', 'CT1765733056', 'VO614352-FQK', 'zo461378-ZWN', 'CID-1632304771', 1, 0),
+(97, 'TID1770041863', 'CT1770041863', 'VO614352-FQK', 'go698174-HAT', 'CID-1632304771', 1, 0),
+(98, 'TID1770133430', 'CT1770133430', 'VO614352-FQK', 'no524978-DCK', 'CID-1632304771', 1, 0),
+(99, 'TID1770133501', 'CT1770133501', 'VO614352-FQK', 'no524978-DCK', 'CID-1760706900', 1, 0),
+(100, 'TID1770133545', 'CT1770133545', 'VO614352-FQK', 'no524978-DCK', 'CID-1695907483', 1, 0),
+(101, 'TID1770133633', 'CT1770133633', 'VO614352-FQK', 'no524978-DCK', 'CID-1695909960', 1, 0),
+(102, 'TID1770157153', 'CT1770157153', 'VO614352-FQK', 'ai185236-NFM', 'CID-1694530534', 1, 0),
+(103, 'TID1770157345', 'CT1770157345', 'VO614352-FQK', 'ai185236-NFM', 'CID-1695907835', 1, 0),
+(104, 'TID1775827601', 'CT1775827601', 'VO614352-FQK', 'vi581927-YTB', 'CID-1632304771', 1, 0),
+(105, 'TID1777661902', 'CT1777661902', 'VO614352-FQK', 'bm167349-RNB', 'CID-1695907676', 1, 0),
+(106, 'TID1778198963', 'CT1778198963', 'VO614352-FQK', 'to745296-YXB', 'CID-1695909960', 1, 0),
+(107, 'TID1778199022', 'CT1778198963', 'VO614352-FQK', 'to745296-YXB', 'CID-1632304771', 1, 0),
+(108, 'TID1778550019', 'CT1778550019', 'VO614352-FQK', 'ia597421-VMA', 'CID-1632304771', 1, 0),
+(109, 'TID1778838893', 'CT1778838893', 'VO614352-FQK', 'ej248713-KSA', 'CID-1695909960', 1, 0),
+(110, 'TID1778839030', 'CT1778839030', 'VO614352-FQK', 'ej248713-KSA', 'CID-1694530534', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_categories`
+--
+
+CREATE TABLE `tbl_categories` (
+  `cat_id` int(11) UNSIGNED NOT NULL,
+  `cat_cid` varchar(100) DEFAULT NULL,
+  `cat_name` varchar(100) DEFAULT NULL,
+  `cat_fa` varchar(100) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `tbl_categories`
+--
+
+INSERT INTO `tbl_categories` (`cat_id`, `cat_cid`, `cat_name`, `cat_fa`) VALUES
+(1, '1193446f9b', 'First Aid', '<i class=\'bx bx-code-alt\'></i>'),
+(2, 'f6ef05df6f', 'Clinical Training', '<i class=\'bx bxs-hospital\'></i>'),
+(3, '49e61db502', 'Leadership & Management', '<i class=\'bx bx-layer\'></i>'),
+(4, '8acbcc6ade', 'Public Health', '<i class=\'bx bxs-flag-checkered\'></i>'),
+(5, '126a70a800', 'Professional Skills', '<i class=\'bx bx-camera\'></i>');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_certificates`
+--
+
+CREATE TABLE `tbl_certificates` (
+  `cert_id` int(11) NOT NULL,
+  `cert_cid` varchar(100) NOT NULL,
+  `cert_iid` varchar(100) NOT NULL,
+  `cert_img` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_courses`
+--
+
+CREATE TABLE `tbl_courses` (
+  `cours_id` int(11) NOT NULL,
+  `cours_cid` varchar(100) NOT NULL,
+  `cours_catid` varchar(100) NOT NULL,
+  `cours_iid` varchar(100) NOT NULL,
+  `cours_title` varchar(100) NOT NULL,
+  `cours_brief` mediumtext NOT NULL,
+  `cours_desc` longblob NOT NULL,
+  `cours_requirements` longblob NOT NULL,
+  `cours_features` longblob NOT NULL,
+  `cours_benefactor` longblob NOT NULL,
+  `cours_img` varchar(100) NOT NULL,
+  `cours_type` varchar(100) NOT NULL,
+  `cours_level` varchar(100) NOT NULL,
+  `cours_fee` int(11) NOT NULL,
+  `cours_certification` int(11) NOT NULL,
+  `cours_duration` varchar(100) NOT NULL,
+  `cours_stats` int(11) NOT NULL,
+  `cours_date` date NOT NULL,
+  `cours_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_courses`
+--
+
+INSERT INTO `tbl_courses` (`cours_id`, `cours_cid`, `cours_catid`, `cours_iid`, `cours_title`, `cours_brief`, `cours_desc`, `cours_requirements`, `cours_features`, `cours_benefactor`, `cours_img`, `cours_type`, `cours_level`, `cours_fee`, `cours_certification`, `cours_duration`, `cours_stats`, `cours_date`, `cours_time`) VALUES
+(13, 'CID-1632304771', '49e61db502', 'VO614352-FQK', 'Introduction to the Volunteer Medical Corps', 'Welcome to the Volunteer Medical Corps (VMC)', 0x3c703e5468697320636f757273652070726f766964657320746865206c6561726e6572207769746820696e736967687420696e746f2074686520766973696f6e20616e64206d697373696f6e206f662074686520564d433c2f703e, 0x3c703e537461626c6520696e7465726e657420636f6e6e656374696f6e2c20616e20696e7465726e65742d656e61626c6564206d6f62696c65206465766963653c2f703e, 0x3c703e4761696e20696e736967687420696e746f20796f757220726f6c65206173206120766f6c756e7465657220616e64206761696e20756e6465727374616e64696e67206f66207468652073636f706520616e6420676c6f62616c20696d70616374206f662074686520566f6c756e74656572204d65646963616c20436f7270733c2f703e3c703e266e6273703b3c2f703e, 0x3c703e466f72206e65776c792072656372756974656420766f6c756e74656572733c2f703e, '7vWQjZUTR.jpeg', 'Free', 'Beginner', 0, 0, '0hrs 3mins', 1, '2021-09-22', '10:59:31'),
+(14, 'CID-1694530534', 'f6ef05df6f', 'VO614352-FQK', 'Current Innovations in Metastatic Castration Resistant Prostate Cancer (mCRPC)', 'Advanced and Effective Cancer Therapy', 0x3c703e4120446961676e6f7374696320616e6420546865726170657574696320617070726f61636820746f20612070617469656e742077697468204d6574617374617469632063617374726174696f6e20526573697374616e742050726f73746174652043616e63657220286d43525043292077697468207370656369616c20656d706861736973206f6e20526164696f6e75636c696465206d6574686f64733c2f703e, 0x3c703e496e7465726e657420636f6e6e65637469766974792c20696e7465726e657420656e61626c6573206d6f62696c6520646576696365733c2f703e, 0x3c756c3e3c6c693e496e646976696475616c697a656420726567696d6573266e6273703b3c2f6c693e3c6c693e496e646976696475616c20726573706f6e7365733c2f6c693e3c6c693e54756d6f75722048657465726f67656e656974793c2f6c693e3c6c693e266e6273703b47656e6f6d696373266e6273703b3c2f6c693e3c6c693e47656e657469632070726f66696c65733c2f6c693e3c6c693e42524341206d75746174696f6e2063617272696572733c2f6c693e3c6c693e526164696f73656e736974697a6572733c2f6c693e3c6c693e5045542050534d412d4644472073746167696e67206574633c2f6c693e3c2f756c3e, 0x3c703e4865616c7468206361726520776f726b6572732c2073747564656e74732c204f6e636f6c6f6779207265736964656e747320616e64207370656369616c697374733c2f703e, 'p1NVEcC3P.png', 'Free', 'Expert', 0, 1, '0hrs 27mins', 1, '2023-09-12', '15:55:34'),
+(15, 'CID-1695907483', '126a70a800', 'VO614352-FQK', 'VMC: HSLHS Preparatory Media Training', 'vmc_hslhs_prep_media_training', 0x3c703e766d635f68736c68735f707265705f6d656469615f747261696e696e673c2f703e, '', '', '', 'PeC1Jk3Mm.jpg', 'Free', 'Beginner', 0, 0, '00hrs 14mins', 1, '2023-09-28', '14:24:43'),
+(16, 'CID-1695907676', 'f6ef05df6f', 'VO614352-FQK', 'VMC: Management of Retinal Disorder', 'vmc_management_of_retinal_disorder', 0x3c703e766d635f6d616e6167656d656e745f6f665f726574696e616c5f6469736f726465723c2f703e, '', '', '', 'mXFMVbthS.jpg', 'Free', 'Beginner', 0, 0, '00hrs 21mins', 1, '2023-09-28', '14:27:56'),
+(17, 'CID-1695907835', 'f6ef05df6f', 'VO614352-FQK', 'VMC: Prevention of Diabetes & Obesity', 'vmc_prevention_of_diabetes_and_obesity', 0x3c703e766d635f70726576656e74696f6e5f6f665f64696162657465735f616e645f6f6265736974793c2f703e, '', '', '', 'sb8UD1MCE.jpg', 'Free', 'Beginner', 0, 0, '00hrs 20mins', 1, '2023-09-28', '14:30:35'),
+(18, 'CID-1695909394', '8acbcc6ade', 'VO614352-FQK', 'VMC: Responding to Humanitarian Disaster', 'humanitarian_disaster', 0x3c703e68756d616e6974617269616e5f64697361737465723c2f703e, '', '', '', 'Fv5BzbEVU.jpg', 'Free', 'Beginner', 0, 0, '00hrs 21mins', 1, '2023-09-28', '14:56:34'),
+(19, 'CID-1695909960', '49e61db502', 'VO614352-FQK', 'VMC: Maintaining Spiritual, Mental & Physical Wellness As A Volunteer', 'maintaining_spiritual_mental_and_physical_wellness_as_a_volunteer', 0x3c703e6d61696e7461696e696e675f73706972697475616c5f6d656e74616c5f616e645f706879736963616c5f77656c6c6e6573735f61735f615f766f6c756e746565723c2f703e, '', '', '', 'fsPMurJ5Z.jpg', 'Free', 'Beginner', 0, 0, '00hrs 21mins', 1, '2023-09-28', '15:06:00'),
+(20, 'CID-1760706900', '49e61db502', 'VO614352-FQK', '10 Practical Steps to Plan for Your Next Medical Outreach or Crusade - PART 1', '10 PRACTICAL STEPS TO PLAN FOR YOUR NEXT MEDICAL OUTREACH OR CRUSADE - PART 1', 0x3c703e31302050524143544943414c20535445505320544f20504c414e20464f5220594f5552204e455854204d45444943414c204f55545245414348204f52266e6273703b435255534144452d266e6273703b50415254266e6273703b313c2f703e, 0x3c703e31302050524143544943414c20535445505320544f20504c414e20464f5220594f5552204e455854204d45444943414c204f55545245414348204f52266e6273703b435255534144452d266e6273703b50415254266e6273703b313c2f703e, '', 0x3c703e31302050524143544943414c20535445505320544f20504c414e20464f5220594f5552204e455854204d45444943414c204f55545245414348204f52266e6273703b435255534144452d266e6273703b50415254266e6273703b313c2f703e, 'NDP1kbtCG.jpg', 'Free', 'Beginner', 0, 0, '00hrs 24mins', 9, '2025-10-17', '14:15:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_events`
+--
+
+CREATE TABLE `tbl_events` (
+  `events_id` int(11) NOT NULL,
+  `events_eid` varchar(100) NOT NULL,
+  `events_title` varchar(100) NOT NULL,
+  `events_brief` mediumtext NOT NULL,
+  `events_desc` longblob NOT NULL,
+  `events_img` varchar(100) NOT NULL,
+  `events_video` varchar(100) NOT NULL,
+  `events_organizer` varchar(100) NOT NULL,
+  `events_email` varchar(100) NOT NULL,
+  `events_phone` varchar(100) NOT NULL,
+  `events_url` varchar(100) NOT NULL,
+  `events_venue` varchar(255) NOT NULL,
+  `events_stats` int(11) NOT NULL,
+  `events_startdate` datetime NOT NULL,
+  `events_enddate` datetime NOT NULL,
+  `events_date` date NOT NULL,
+  `events_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_instructors`
+--
+
+CREATE TABLE `tbl_instructors` (
+  `instructor_id` int(11) NOT NULL,
+  `instructor_iid` varchar(100) NOT NULL,
+  `instructor_fname` varchar(100) NOT NULL,
+  `instructor_lname` varchar(100) NOT NULL,
+  `instructor_email` varchar(100) NOT NULL,
+  `instructor_phone` varchar(100) NOT NULL,
+  `instructor_pwd` varchar(100) NOT NULL,
+  `instructor_bio` longtext NOT NULL,
+  `instructor_discipline` varchar(100) NOT NULL,
+  `instructor_qualification` varchar(100) NOT NULL,
+  `instructor_img` varchar(100) NOT NULL,
+  `instructor_country` varchar(100) NOT NULL,
+  `instructor_facebook` varchar(100) NOT NULL,
+  `instructor_twitter` varchar(100) NOT NULL,
+  `instructor_linkedin` varchar(100) NOT NULL,
+  `instructor_instagram` varchar(100) NOT NULL,
+  `instructor_newsletter` int(11) NOT NULL,
+  `instructor_stats` int(11) NOT NULL,
+  `instructor_date` date NOT NULL,
+  `instructor_time` varchar(8) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_instructors`
+--
+
+INSERT INTO `tbl_instructors` (`instructor_id`, `instructor_iid`, `instructor_fname`, `instructor_lname`, `instructor_email`, `instructor_phone`, `instructor_pwd`, `instructor_bio`, `instructor_discipline`, `instructor_qualification`, `instructor_img`, `instructor_country`, `instructor_facebook`, `instructor_twitter`, `instructor_linkedin`, `instructor_instagram`, `instructor_newsletter`, `instructor_stats`, `instructor_date`, `instructor_time`) VALUES
+(1, 'OA649172-BJU', 'Oluwasegun', 'Akinluwa', 'oluwasegunoghe@yahoo.com', '08144988585', 'f84e14291ccf15306488a289a8253aa17743643b', 'I am very passionate about imparting knowledge to others. It is a vital aspect of my daily routine.', 'Full Stack Developer (PHP)', 'B.Sc', 'RVUDEobZS.jpg', 'Nigeria', 'https://www.facebook.com/oluwasegun.akinluwa/', '', '', '', 1, 9, '2021-03-08', '16:56:41'),
+(2, 'VS378521-EWD', 'Victor ', 'Steven', 'dr.stevenvictor@gmail.com', '+2348036001849', '965fda6cb1acb184bf6cb3704c7d9be1e486f798', '', 'Dentistry/Dental Surgery', 'Bachelor of Dental Surgery ', 'default-avatar.jpg', 'Nigeria', '', '', '', '', 0, 1, '2021-04-10', '23:20:16'),
+(5, 'JB648573-JEC', 'Joshua', 'Bamidele', 'oluwasegunoghe@gmail.com', '08178442468', 'f84e14291ccf15306488a289a8253aa17743643b', '', 'IT Consultant', 'B.Sc', 'default-avatar.jpg', 'Nigeria', '', '', '', '', 0, 9, '2021-07-01', '12:15:16'),
+(7, 'VO614352-FQK', 'VMC', 'OFFICE', 'vmedcorps@gmail.com', '07089267186', 'f84e14291ccf15306488a289a8253aa17743643b', '', 'MEDICINE', 'EXPERT', 'default-avatar.jpg', 'Afghanistan', '', '', '', '', 0, 1, '2021-07-27', '14:23:10'),
+(8, 'MM341286-ABD', 'Masha', 'Maharaj ', 'drmasha@yahoo.co.uk', '0748509078', '42ecfb864089225a5692694a51d958691c11630e', '', 'Nuclear Physician ', 'MBBCh, MMED, FCNP, FENMB', 'default-avatar.jpg', 'South Africa', '', '', '', '', 0, 1, '2021-08-11', '15:23:49'),
+(9, 'DD351784-NHA', 'DR ', 'DANIELLE', 'kemta2@gmail.com', '08027069133', 'c83783fd638a85f5a6c97a0139c413a122cc1e07', '', 'Doctor', 'EXPERT', 'default-avatar.jpg', 'Afghanistan', '', '', '', '', 0, 9, '2021-08-12', '13:00:46'),
+(12, 'JA657349-YVT', 'Chidi', 'Edike', 'chidiedike@gmail.com', '09099988009', '413e5df156d5a66c5ea11f1806bfe6a28f9ea4f4', '', 'Full Stack Developer (PHP)', 'B.Sc', 'default-avatar.jpg', 'Nigeria', '', '', '', '', 1, 1, '2021-08-22', '16:35:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_lessons`
+--
+
+CREATE TABLE `tbl_lessons` (
+  `lesson_id` int(11) NOT NULL,
+  `lesson_lid` varchar(100) NOT NULL,
+  `lesson_cid` varchar(100) NOT NULL,
+  `lesson_iid` varchar(100) NOT NULL,
+  `lesson_title` varchar(100) NOT NULL,
+  `lesson_desc` mediumtext NOT NULL,
+  `lesson_type` varchar(100) NOT NULL,
+  `lesson_video` varchar(100) NOT NULL,
+  `lesson_duration` varchar(100) NOT NULL,
+  `lesson_free` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_lessons`
+--
+
+INSERT INTO `tbl_lessons` (`lesson_id`, `lesson_lid`, `lesson_cid`, `lesson_iid`, `lesson_title`, `lesson_desc`, `lesson_type`, `lesson_video`, `lesson_duration`, `lesson_free`) VALUES
+(2, 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'VMC Orientation Video 1', '', 'lesson', '1694527314_VID.mp4', '0:03', 0),
+(3, 'LES-1694772831', 'CID-1694530534', 'VO614352-FQK', 'Lessons on mCRPC', '<p>Advanced and Effective Cancer Therapy</p>', 'lesson', 'mcrpc.mp4', '57', 0),
+(4, 'LES-1695907556', 'CID-1695907483', 'VO614352-FQK', 'Lessons on Media', '<p>vmc_hslhs_prep_media_training</p>', 'lesson', 'vmc_hslhs_prep_media_training.mp4', '24', 0),
+(5, 'LES-1695907735', 'CID-1695907676', 'VO614352-FQK', 'Lessons on Retinal Disorder', '<p>vmc_management_of_retinal_disorder</p>', 'lesson', 'vmc_management_of_retinal_disorder.mp4', '21', 0),
+(6, 'LES-1695907914', 'CID-1695907835', 'VO614352-FQK', 'Lessons on Diabetes Prevention', '<p>vmc_prevention_of_diabetes_and_obesity</p>', 'lesson', 'vmc_prevention_of_diabetes_and_obesity.mp4', '20', 0),
+(7, 'LES-1695909439', 'CID-1695909394', 'VO614352-FQK', 'Lessons on Humanitarian Disaster', '<p>humanitarian_disaster</p>', 'lesson', 'humanitarian_disaster.mp4', '21', 0),
+(8, 'LES-1695910038', 'CID-1695909960', 'VO614352-FQK', 'Lessons on Wellness Maintenance', '<p>maintaining_spiritual_mental_and_physical_wellness_as_a_volunteer</p>', 'lesson', 'maintaining_spiritual_mental_and_physical_wellness_as_a_volunteer.mp4', '21', 0),
+(9, 'LES-1695910113', 'CID-1760706900', 'VO614352-FQK', '10 Practical Steps to Plan for Your Next Medical Outreach or Crusade - PART 1', '10 Practical Steps to Plan for Your Next Medical Outreach or Crusade - PART 1', 'lesson', '10steps.mp4', '24', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_lessons_stats`
+--
+
+CREATE TABLE `tbl_lessons_stats` (
+  `lesso_id` int(11) NOT NULL,
+  `lesso_llid` varchar(100) NOT NULL,
+  `lesso_lid` varchar(100) NOT NULL,
+  `lesso_cid` varchar(100) NOT NULL,
+  `lesso_iid` varchar(100) NOT NULL,
+  `lesso_uid` varchar(100) NOT NULL,
+  `lesso_stats` int(11) NOT NULL,
+  `lesso_date` date NOT NULL,
+  `lesso_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_lessons_stats`
+--
+
+INSERT INTO `tbl_lessons_stats` (`lesso_id`, `lesso_llid`, `lesso_lid`, `lesso_cid`, `lesso_iid`, `lesso_uid`, `lesso_stats`, `lesso_date`, `lesso_time`) VALUES
+(1, '1694530275-KGE', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'vo296183-QVW', 1, '2023-09-12', '15:51:15'),
+(2, '1694844869-DKV', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'rk894651-LVJ', 1, '2023-09-16', '07:14:29'),
+(3, '1694845437-ZRL', 'LES-1694772831', 'CID-1694530534', 'VO614352-FQK', 'rk894651-LVJ', 1, '2023-09-16', '07:23:57'),
+(4, '1695901721-NBR', 'LES-1694772831', 'CID-1694530534', 'VO614352-FQK', 'SA415983-DQF', 1, '2023-09-28', '12:48:41'),
+(5, '1698408347-VHW', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'ma972153-NDY', 1, '2023-10-27', '13:05:47'),
+(6, '1699492020-PUY', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'ea431865-QZG', 1, '2023-11-09', '02:07:00'),
+(7, '1699492241-VUN', 'LES-1694772831', 'CID-1694530534', 'VO614352-FQK', 'ea431865-QZG', 1, '2023-11-09', '02:10:41'),
+(8, '1700412717-ANZ', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'bo983761-YLU', 1, '2023-11-19', '17:51:57'),
+(9, '1708601581-BXK', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 're124876-VMZ', 1, '2024-02-22', '12:33:01'),
+(10, '1708601639-DRT', 'LES-1694772831', 'CID-1694530534', 'VO614352-FQK', 're124876-VMZ', 1, '2024-02-22', '12:33:59'),
+(11, '1715766817-MFW', 'LES-1695907556', 'CID-1695907483', 'VO614352-FQK', 're124876-VMZ', 1, '2024-05-15', '10:53:37'),
+(12, '1727241038-SKQ', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'kd924851-HJT', 1, '2024-09-25', '06:10:38'),
+(13, '1728712984-XJZ', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'ja124739-BMD', 1, '2024-10-12', '07:03:04'),
+(14, '1728713645-FAJ', 'LES-1695910038', 'CID-1695909960', 'VO614352-FQK', 'ja124739-BMD', 1, '2024-10-12', '07:14:05'),
+(15, '1738871283-NBH', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'co249185-SUH', 1, '2025-02-06', '20:48:03'),
+(16, '1739626630-FKL', 'LES-1695910038', 'CID-1695909960', 'VO614352-FQK', 'tm526147-QKL', 1, '2025-02-15', '14:37:10'),
+(17, '1740181823-HAS', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'ca261753-AYH', 1, '2025-02-22', '00:50:23'),
+(18, '1742362548-YAD', 'LES-1695909439', 'CID-1695909394', 'VO614352-FQK', 'je267953-SLD', 1, '2025-03-19', '06:35:48'),
+(19, '1745864392-JVU', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'lm375946-SQR', 1, '2025-04-28', '19:19:52'),
+(20, '1750765385-YQW', 'LES-1695910038', 'CID-1695909960', 'VO614352-FQK', 'ce964182-GBC', 1, '2025-06-24', '12:43:05'),
+(21, '1750954586-NWY', 'LES-1695909439', 'CID-1695909394', 'VO614352-FQK', 'nl697341-GFZ', 1, '2025-06-26', '17:16:26'),
+(22, '1754670031-FTS', 'LES-1695907914', 'CID-1695907835', 'VO614352-FQK', 'ha613789-AUC', 1, '2025-08-08', '17:20:31'),
+(23, '1754674345-BKM', 'LES-1694772831', 'CID-1694530534', 'VO614352-FQK', 'ha613789-AUC', 1, '2025-08-08', '18:32:25'),
+(24, '1756114979-ALR', 'LES-1695909439', 'CID-1695909394', 'VO614352-FQK', 'ro471589-HXC', 1, '2025-08-25', '10:42:59'),
+(25, '1760106161-NPV', 'LES-1695910038', 'CID-1695909960', 'VO614352-FQK', 'pe137925-LKA', 1, '2025-10-10', '15:22:41'),
+(26, '1770157674-HRL', 'LES-1695907914', 'CID-1695907835', 'VO614352-FQK', 'ai185236-NFM', 1, '2026-02-03', '23:27:54'),
+(27, '1775828262-NTY', 'LES-1694527314', 'CID-1632304771', 'VO614352-FQK', 'vi581927-YTB', 1, '2026-04-10', '14:37:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_media`
+--
+
+CREATE TABLE `tbl_media` (
+  `media_id` int(11) NOT NULL,
+  `media_mid` varchar(100) NOT NULL,
+  `media_title` varchar(100) NOT NULL,
+  `media_brief` mediumtext NOT NULL,
+  `media_desc` longblob NOT NULL,
+  `media_type` varchar(100) NOT NULL,
+  `media_img` varchar(100) NOT NULL,
+  `media_video` varchar(100) NOT NULL,
+  `media_audio` varchar(100) NOT NULL,
+  `media_stats` int(11) NOT NULL,
+  `media_date` date NOT NULL,
+  `media_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_mycourses`
+--
+
+CREATE TABLE `tbl_mycourses` (
+  `mycours_id` int(11) NOT NULL,
+  `mycours_mcid` varchar(100) NOT NULL,
+  `mycours_cid` varchar(100) NOT NULL,
+  `mycours_iid` varchar(100) NOT NULL,
+  `mycours_uid` varchar(100) NOT NULL,
+  `mycours_stats` int(11) NOT NULL,
+  `mycours_date` date NOT NULL,
+  `mycours_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_mycourses`
+--
+
+INSERT INTO `tbl_mycourses` (`mycours_id`, `mycours_mcid`, `mycours_cid`, `mycours_iid`, `mycours_uid`, `mycours_stats`, `mycours_date`, `mycours_time`) VALUES
+(1, '16945293061', 'CID-1632304771', 'VO614352-FQK', 'vo296183-QVW', 1, '2023-09-12', '15:35:06'),
+(2, '16945300821', 'CID-1632304771', 'VO614352-FQK', 'ae126784-FCP', 1, '2023-09-12', '15:48:02'),
+(3, '16948447551', 'CID-1632304771', 'VO614352-FQK', 'rk894651-LVJ', 1, '2023-09-16', '07:12:35'),
+(4, '16948453431', 'CID-1694530534', 'VO614352-FQK', 'rk894651-LVJ', 1, '2023-09-16', '07:22:23'),
+(5, '16959016541', 'CID-1694530534', 'VO614352-FQK', 'SA415983-DQF', 1, '2023-09-28', '12:47:34'),
+(6, '16977472341', 'CID-1632304771', 'VO614352-FQK', 'nl941376-WAV', 1, '2023-10-19', '21:27:14'),
+(7, '16984080441', 'CID-1632304771', 'VO614352-FQK', 'ma972153-NDY', 1, '2023-10-27', '13:00:44'),
+(8, '16984084331', 'CID-1694530534', 'VO614352-FQK', 'ma972153-NDY', 1, '2023-10-27', '13:07:13'),
+(9, '16994919171', 'CID-1632304771', 'VO614352-FQK', 'ea431865-QZG', 1, '2023-11-09', '02:05:17'),
+(10, '16994921521', 'CID-1694530534', 'VO614352-FQK', 'ea431865-QZG', 1, '2023-11-09', '02:09:12'),
+(11, '17004116151', 'CID-1632304771', 'VO614352-FQK', 'bo983761-YLU', 1, '2023-11-19', '17:33:35'),
+(12, '17006299181', 'CID-1694530534', 'VO614352-FQK', 'sc456318-LFV', 1, '2023-11-22', '06:11:58'),
+(13, '17029337271', 'CID-1694530534', 'VO614352-FQK', 'cb327954-QMN', 1, '2023-12-18', '22:08:47'),
+(14, '17029337991', 'CID-1632304771', 'VO614352-FQK', 'cb327954-QMN', 1, '2023-12-18', '22:09:59'),
+(15, '17071294041', 'CID-1694530534', 'VO614352-FQK', 're124876-VMZ', 1, '2024-02-05', '11:36:44'),
+(16, '17071307981', 'CID-1632304771', 'VO614352-FQK', 're124876-VMZ', 1, '2024-02-05', '11:59:58'),
+(17, '17074708751', 'CID-1632304771', 'VO614352-FQK', 'pa175842-XVE', 1, '2024-02-09', '10:27:55'),
+(18, '17074708752', 'CID-1694530534', 'VO614352-FQK', 'pa175842-XVE', 1, '2024-02-09', '10:27:55'),
+(19, '17086024621', 'CID-1695909960', 'VO614352-FQK', 're124876-VMZ', 1, '2024-02-22', '12:47:42'),
+(20, '17086026391', 'CID-1695907483', 'VO614352-FQK', 're124876-VMZ', 1, '2024-02-22', '12:50:39'),
+(21, '17093036101', 'CID-1695909394', 'VO614352-FQK', 'rk894651-LVJ', 1, '2024-03-01', '15:33:30'),
+(22, '17119971741', 'CID-1695909960', 'VO614352-FQK', 'fa763249-GBU', 1, '2024-04-01', '19:46:14'),
+(23, '17119971742', 'CID-1695907835', 'VO614352-FQK', 'fa763249-GBU', 1, '2024-04-01', '19:46:14'),
+(24, '17119971743', 'CID-1695907483', 'VO614352-FQK', 'fa763249-GBU', 1, '2024-04-01', '19:46:14'),
+(25, '17119971744', 'CID-1632304771', 'VO614352-FQK', 'fa763249-GBU', 1, '2024-04-01', '19:46:14'),
+(26, '17141283231', '', '', 'jt628157-AZF', 1, '2024-04-26', '11:45:23'),
+(27, '17141284781', '', '', 'jt628157-AZF', 1, '2024-04-26', '11:47:58'),
+(28, '17195038581', 'CID-1695909960', 'VO614352-FQK', 'es164873-LJD', 1, '2024-06-27', '16:57:38'),
+(29, '17218262771', 'CID-1695909394', 'VO614352-FQK', 'fo523967-PXN', 1, '2024-07-24', '14:04:37'),
+(30, '17265655121', 'CID-1695909394', 'VO614352-FQK', 're124876-VMZ', 1, '2024-09-17', '10:31:52'),
+(31, '17265656291', 'CID-1695907835', 'VO614352-FQK', 're124876-VMZ', 1, '2024-09-17', '10:33:49'),
+(32, '17272407471', 'CID-1632304771', 'VO614352-FQK', 'kd924851-HJT', 1, '2024-09-25', '06:05:47'),
+(33, '17272411181', 'CID-1695909394', 'VO614352-FQK', 'kd924851-HJT', 1, '2024-09-25', '06:11:58'),
+(34, '17272411981', 'CID-1695907835', 'VO614352-FQK', 'kd924851-HJT', 1, '2024-09-25', '06:13:18'),
+(35, '17272412531', 'CID-1695907676', 'VO614352-FQK', 'kd924851-HJT', 1, '2024-09-25', '06:14:13'),
+(36, '17272413091', 'CID-1695907483', 'VO614352-FQK', 'kd924851-HJT', 1, '2024-09-25', '06:15:09'),
+(37, '17272413641', 'CID-1694530534', 'VO614352-FQK', 'kd924851-HJT', 1, '2024-09-25', '06:16:04'),
+(38, '17272414121', 'CID-1695909960', 'VO614352-FQK', 'kd924851-HJT', 1, '2024-09-25', '06:16:52'),
+(39, '17287125651', 'CID-1632304771', 'VO614352-FQK', 'ja124739-BMD', 1, '2024-10-12', '06:56:05'),
+(40, '17287132441', 'CID-1695909960', 'VO614352-FQK', 'ja124739-BMD', 1, '2024-10-12', '07:07:24'),
+(41, '17290272901', 'CID-1695907835', 'VO614352-FQK', 'bg236497-GHF', 1, '2024-10-15', '22:21:30'),
+(42, '17301344181', 'CID-1632304771', 'VO614352-FQK', 'na418697-ZAV', 1, '2024-10-28', '17:53:38'),
+(43, '17350107991', 'CID-1695907835', 'VO614352-FQK', 'eo265713-EGZ', 1, '2024-12-24', '04:26:39'),
+(44, '17388708711', 'CID-1632304771', 'VO614352-FQK', 'co249185-SUH', 1, '2025-02-06', '20:41:11'),
+(45, '17396207131', 'CID-1695909960', 'VO614352-FQK', 'tm526147-QKL', 1, '2025-02-15', '12:58:33'),
+(46, '17401815391', 'CID-1632304771', 'VO614352-FQK', 'ca261753-AYH', 1, '2025-02-22', '00:45:39'),
+(47, '17401818931', 'CID-1695909960', 'VO614352-FQK', 'ca261753-AYH', 1, '2025-02-22', '00:51:33'),
+(48, '17404977751', 'CID-1695909960', 'VO614352-FQK', 'im138956-FTS', 1, '2025-02-25', '16:36:15'),
+(49, '17404978631', 'CID-1632304771', 'VO614352-FQK', 'im138956-FTS', 1, '2025-02-25', '16:37:43'),
+(50, '17423620881', 'CID-1695909394', 'VO614352-FQK', 'je267953-SLD', 1, '2025-03-19', '06:28:08'),
+(51, '17428779011', 'CID-1632304771', 'VO614352-FQK', 'lm659834-CUV', 1, '2025-03-25', '05:45:01'),
+(52, '17458623451', 'CID-1632304771', 'VO614352-FQK', 'lm375946-SQR', 1, '2025-04-28', '18:45:45'),
+(53, '17471624101', 'CID-1695907835', 'VO614352-FQK', 'si485967-VXM', 1, '2025-05-13', '19:53:30'),
+(54, '17507652971', 'CID-1695907835', 'VO614352-FQK', 'ce964182-GBC', 1, '2025-06-24', '12:41:37'),
+(55, '17507652972', 'CID-1695909960', 'VO614352-FQK', 'ce964182-GBC', 1, '2025-06-24', '12:41:37'),
+(56, '17509534031', 'CID-1695909394', 'VO614352-FQK', 'nl697341-GFZ', 1, '2025-06-26', '16:56:43'),
+(57, '17509686991', 'CID-1632304771', 'VO614352-FQK', 'le782495-NCK', 1, '2025-06-26', '21:11:39'),
+(58, '17509687631', 'CID-1695907483', 'VO614352-FQK', 'le782495-NCK', 1, '2025-06-26', '21:12:43'),
+(59, '17509689541', 'CID-1695909960', 'VO614352-FQK', 'le782495-NCK', 1, '2025-06-26', '21:15:54'),
+(60, '17509690051', 'CID-1695909394', 'VO614352-FQK', 'le782495-NCK', 1, '2025-06-26', '21:16:45'),
+(61, '17509690331', 'CID-1695907835', 'VO614352-FQK', 'le782495-NCK', 1, '2025-06-26', '21:17:13'),
+(62, '17509690761', 'CID-1695907676', 'VO614352-FQK', 'le782495-NCK', 1, '2025-06-26', '21:17:56'),
+(63, '17509691151', 'CID-1694530534', 'VO614352-FQK', 'le782495-NCK', 1, '2025-06-26', '21:18:35'),
+(64, '17526927941', 'CID-1694530534', 'VO614352-FQK', 'ie873261-WSK', 1, '2025-07-16', '20:06:34'),
+(65, '17546699181', 'CID-1695907835', 'VO614352-FQK', 'ha613789-AUC', 1, '2025-08-08', '17:18:38'),
+(66, '17546742771', 'CID-1694530534', 'VO614352-FQK', 'ha613789-AUC', 1, '2025-08-08', '18:31:17'),
+(67, '17549155341', 'CID-1695907835', 'VO614352-FQK', 'kk381527-DWV', 1, '2025-08-11', '13:32:14'),
+(68, '17561146511', 'CID-1695909394', 'VO614352-FQK', 'ro471589-HXC', 1, '2025-08-25', '10:37:31'),
+(69, '17584732471', 'CID-1632304771', 'VO614352-FQK', 'ka489136-BGD', 1, '2025-09-21', '17:47:27'),
+(70, '17584733511', 'CID-1695909394', 'VO614352-FQK', 'ka489136-BGD', 1, '2025-09-21', '17:49:11'),
+(71, '17601054411', 'CID-1695909960', 'VO614352-FQK', 'pe137925-LKA', 1, '2025-10-10', '15:10:41'),
+(72, '17607063921', 'CID-1695909960', 'VO614352-FQK', 'LS264198-SNL', 1, '2025-10-17', '14:06:32'),
+(73, '17609731621', 'CID-1760706900', 'JA657349-YVT', 'ce964182-GBC', 1, '2025-10-20', '16:12:42'),
+(74, '17618007981', 'CID-1695909960', 'VO614352-FQK', 'io845629-TCP', 1, '2025-10-30', '06:06:38'),
+(75, '17626039301', 'CID-1760706900', 'VO614352-FQK', 'mm176953-QPJ', 1, '2025-11-08', '13:12:10'),
+(76, '17628514831', 'CID-1760706900', 'VO614352-FQK', 'oa356129-JPM', 1, '2025-11-11', '09:58:03'),
+(77, '17657330721', 'CID-1632304771', 'VO614352-FQK', 'zo461378-ZWN', 1, '2025-12-14', '18:24:32'),
+(78, '17700418831', 'CID-1632304771', 'VO614352-FQK', 'go698174-HAT', 1, '2026-02-02', '15:18:03'),
+(79, '17701334561', 'CID-1632304771', 'VO614352-FQK', 'no524978-DCK', 1, '2026-02-03', '16:44:16'),
+(80, '17701335101', 'CID-1760706900', 'VO614352-FQK', 'no524978-DCK', 1, '2026-02-03', '16:45:10'),
+(81, '17701335541', 'CID-1695907483', 'VO614352-FQK', 'no524978-DCK', 1, '2026-02-03', '16:45:54'),
+(82, '17701336431', 'CID-1695909960', 'VO614352-FQK', 'no524978-DCK', 1, '2026-02-03', '16:47:23'),
+(83, '17701572131', '', '', 'ai185236-NFM', 1, '2026-02-03', '23:20:13'),
+(84, '17701573901', 'CID-1695907835', 'VO614352-FQK', 'ai185236-NFM', 1, '2026-02-03', '23:23:10'),
+(85, '17758276291', 'CID-1632304771', 'VO614352-FQK', 'vi581927-YTB', 1, '2026-04-10', '14:27:09'),
+(86, '17776619391', 'CID-1695907676', 'VO614352-FQK', 'bm167349-RNB', 1, '2026-05-01', '19:58:59'),
+(87, '17785500291', 'CID-1632304771', 'VO614352-FQK', 'ia597421-VMA', 1, '2026-05-12', '02:40:29'),
+(88, '17788389171', 'CID-1695909960', 'VO614352-FQK', 'ej248713-KSA', 1, '2026-05-15', '10:55:17'),
+(89, '17788390481', 'CID-1694530534', 'VO614352-FQK', 'ej248713-KSA', 1, '2026-05-15', '10:57:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_orders`
+--
+
+CREATE TABLE `tbl_orders` (
+  `orders_id` int(11) NOT NULL,
+  `orders_oid` varchar(100) NOT NULL,
+  `orders_payid` varchar(100) NOT NULL,
+  `orders_session_id` varchar(100) NOT NULL,
+  `orders_uid` varchar(100) NOT NULL,
+  `orders_fname` varchar(100) NOT NULL,
+  `orders_lname` varchar(100) NOT NULL,
+  `orders_email` varchar(100) NOT NULL,
+  `orders_phone` varchar(100) NOT NULL,
+  `orders_mode` varchar(100) NOT NULL,
+  `orders_address` varchar(255) NOT NULL,
+  `orders_amount` int(11) NOT NULL,
+  `orders_stats` int(11) NOT NULL,
+  `orders_date` date NOT NULL,
+  `orders_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_orders`
+--
+
+INSERT INTO `tbl_orders` (`orders_id`, `orders_oid`, `orders_payid`, `orders_session_id`, `orders_uid`, `orders_fname`, `orders_lname`, `orders_email`, `orders_phone`, `orders_mode`, `orders_address`, `orders_amount`, `orders_stats`, `orders_date`, `orders_time`) VALUES
+(1, 'OID-1694529304', 'DBCRQ1h8sXMP', 'CT1694529283', 'vo296183-QVW', 'vanessa', 'okpe', 'okpeonyekachi1@gmail.com', '08138503045', '', '', 0, 1, '2023-09-12', '15:35:04'),
+(2, 'OID-1694530081', 'ACRPk9EjxYCF', 'CT1694530057', 'ae126784-FCP', 'amaka', 'egejuru', 'amakaegejuru@gmail.com', '07087846205', '', '', 0, 1, '2023-09-12', '15:48:01'),
+(3, 'OID-1694844753', 'B8xDb3fnqLBY', 'CT1694844724', 'rk894651-LVJ', 'rodgers', 'kapasa', 'musondakapasa925@gmail.com', '0966501372', '', '', 0, 1, '2023-09-16', '07:12:33'),
+(4, 'OID-1694845342', 'HYnLdG1XWHKS', 'CT1694845325', 'rk894651-LVJ', 'rodgers', 'kapasa', 'musondakapasa925@gmail.com', '0966501372', '', '', 0, 1, '2023-09-16', '07:22:22'),
+(5, 'OID-1695901653', 'E7WM5uo63SMU', 'CT1695901638', 'SA415983-DQF', 'Oluwasegun', 'Akinluwa', 'oluwasegunoghe@yahoo.com', '08178442468', '', '18, Yisa Jinadu Street, Ajangbadi', 0, 1, '2023-09-28', '12:47:33'),
+(6, 'OID-1697747233', 'UY3byWBqRRNJ', 'CT1697747161', 'nl941376-WAV', 'ngomane', 'lesige', 'ngomanelesige2@gmail.com', '812349284', '', '', 0, 1, '2023-10-19', '21:27:13'),
+(7, 'OID-1698408043', 'nXTQkyWUtBVW', 'CT1698408021', 'ma972153-NDY', 'mistura', 'abioye', 'abioyemistura496@gmail.com', '08071470765', '', '', 0, 1, '2023-10-27', '13:00:43'),
+(8, 'OID-1698408432', '3F6CbymHBUAS', 'CT1698408416', 'ma972153-NDY', 'mistura', 'abioye', 'abioyemistura496@gmail.com', '08071470765', '', '', 0, 1, '2023-10-27', '13:07:12'),
+(9, 'OID-1699491916', '9bYRzmuAfYFD', 'CT1699491866', 'ea431865-QZG', 'ehiawaguan', 'abednego', 'festusuadiale@gmail.com', '08035247963', '', '', 0, 1, '2023-11-09', '02:05:16'),
+(10, 'OID-1699492152', 'CnutgTDavNVM', 'CT1699492143', 'ea431865-QZG', 'ehiawaguan', 'abednego', 'festusuadiale@gmail.com', '08035247963', '', '', 0, 1, '2023-11-09', '02:09:12'),
+(11, 'OID-1700411614', 'Fozc6N4gRCUX', 'CT1700411576', 'bo983761-YLU', 'bright', 'obobhase', 'bobohbase@gmail.com', '+447407200391', '', '', 0, 1, '2023-11-19', '17:33:34'),
+(12, 'OID-1700629917', 'ZdoLb9QuWGZA', 'CT1700629884', 'sc456318-LFV', 'sofia', 'cookeyrubby', 'cookeyrubbys@gmail.com', '08024195466', '', '', 0, 1, '2023-11-22', '06:11:57'),
+(13, 'OID-1702933726', 'Pc8bZBLv6VNR', 'CT1702933711', 'cb327954-QMN', 'Chloe', 'Botima', 'chloebotima@outlook.com', '0740696734', '', 'Cape Town/ Johannesburg ', 0, 1, '2023-12-18', '22:08:46'),
+(14, 'OID-1702933798', '2bRmpf3cjYNS', 'CT1702933788', 'cb327954-QMN', 'Chloe', 'Botima', 'chloebotima@outlook.com', '0740696734', '', 'Cape Town/ Johannesburg ', 0, 1, '2023-12-18', '22:09:58'),
+(15, 'OID-1707129404', 'p4u8YMFnyZVJ', 'CT1707129391', 're124876-VMZ', 'rupet', 'edike', 'chidiedike@gmail.com', '08061301819', '', '', 0, 1, '2024-02-05', '11:36:44'),
+(16, 'OID-1707130797', 'AMtEbSk51KMC', 'CT1707130727', 're124876-VMZ', 'rupet', 'edike', 'chidiedike@gmail.com', '08061301819', '', '', 0, 1, '2024-02-05', '11:59:57'),
+(17, 'OID-1707470874', 'XcxdQvW7PYMB', 'CT1707470815', 'pa175842-XVE', 'peace', 'amani', 'amanipeace427@gmail.com', '0710239413', '', '', 0, 1, '2024-02-09', '10:27:54'),
+(18, 'OID-1708602462', '6T9rZqWKBNQP', 'CT1708602441', 're124876-VMZ', 'rupet', 'edike', 'chidiedike@gmail.com', '08061301819', '', '', 0, 1, '2024-02-22', '12:47:42'),
+(19, 'OID-1708602639', 'QSFJ9euNcEQT', 'CT1708602629', 're124876-VMZ', 'rupet', 'edike', 'chidiedike@gmail.com', '08061301819', '', '', 0, 1, '2024-02-22', '12:50:39'),
+(20, 'OID-1709303608', 'ZLNjt9BfeNWK', 'CT1709303576', 'rk894651-LVJ', 'rodgers', 'kapasa', 'musondakapasa925@gmail.com', '0966501372', '', '', 0, 1, '2024-03-01', '15:33:28'),
+(21, 'OID-1711997174', 'q4jDwXYrpBND', 'CT1711997114', 'fa763249-GBU', 'francis', 'anyanwu', 'francysayo@yahoo.com', '07466777964', '', '', 0, 1, '2024-04-01', '19:46:14'),
+(22, 'OID-1714128319', 'xRSEPr716ZLU', 'CT1714128278', 'jt628157-AZF', 'james', 'tina', 'ifyjames001@gmail.com', '08149253392', '', '', 0, 1, '2024-04-26', '11:45:19'),
+(23, 'OID-1714128473', 'eL5nVWZ7TRBG', 'CT1714128452', 'jt628157-AZF', 'james', 'tina', 'ifyjames001@gmail.com', '08149253392', '', '', 0, 1, '2024-04-26', '11:47:53'),
+(24, 'OID-1719503857', 'X3KYrzu8eJEB', 'CT1719503833', 'es164873-LJD', 'ebubechukwu', 'samuel', 'es.izuogu@gmail.com', '08063841600', '', '', 0, 1, '2024-06-27', '16:57:37'),
+(25, 'OID-1721826276', '6UhaGP5pXUZJ', 'CT1721826124', 'fo523967-PXN', 'fateemah', 'oladipupo', 'oladipupocomfort2019@gmail.com', '07069516740', '', '', 0, 1, '2024-07-24', '14:04:36'),
+(26, 'OID-1726565510', 'zpmdPZUHaJZN', 'CT1726565464', 're124876-VMZ', 'rupet', 'edike', 'chidiedike@gmail.com', '08061301819', '', '', 0, 1, '2024-09-17', '10:31:50'),
+(27, 'OID-1726565628', 'o9mK63ewJZUR', 'CT1726565612', 're124876-VMZ', 'rupet', 'edike', 'chidiedike@gmail.com', '08061301819', '', '', 0, 1, '2024-09-17', '10:33:48'),
+(28, 'OID-1727240746', 'SeEmaH6k4YAE', 'CT1727240725', 'kd924851-HJT', 'kutlwano', 'duiker', 'kayduiker1@gmail.com', '0814983904', '', '', 0, 1, '2024-09-25', '06:05:46'),
+(29, 'OID-1727241116', '2eEmyJRSgMTC', 'CT1727241100', 'kd924851-HJT', 'kutlwano', 'duiker', 'kayduiker1@gmail.com', '0814983904', '', '', 0, 1, '2024-09-25', '06:11:56'),
+(30, 'OID-1727241196', 'oSgzRtcwFSRD', 'CT1727241181', 'kd924851-HJT', 'kutlwano', 'duiker', 'kayduiker1@gmail.com', '0814983904', '', '', 0, 1, '2024-09-25', '06:13:16'),
+(31, 'OID-1727241251', 'zuBX3vZtFZDU', 'CT1727241238', 'kd924851-HJT', 'kutlwano', 'duiker', 'kayduiker1@gmail.com', '0814983904', '', '', 0, 1, '2024-09-25', '06:14:11'),
+(32, 'OID-1727241308', 'Fc96SdYnQLDZ', 'CT1727241297', 'kd924851-HJT', 'kutlwano', 'duiker', 'kayduiker1@gmail.com', '0814983904', '', '', 0, 1, '2024-09-25', '06:15:08'),
+(33, 'OID-1727241363', 'zbyn5v6CeSKU', 'CT1727241350', 'kd924851-HJT', 'kutlwano', 'duiker', 'kayduiker1@gmail.com', '0814983904', '', '', 0, 1, '2024-09-25', '06:16:03'),
+(34, 'OID-1727241411', 'naXGRyLVrVFU', 'CT1727241400', 'kd924851-HJT', 'kutlwano', 'duiker', 'kayduiker1@gmail.com', '0814983904', '', '', 0, 1, '2024-09-25', '06:16:51'),
+(35, 'OID-1728712564', '5AG4yMKfQRDV', 'CT1728712504', 'ja124739-BMD', 'joseph', 'asongo', 'feliciakuleibo1@gmail.com', '+23407051272855', '', '', 0, 1, '2024-10-12', '06:56:04'),
+(36, 'OID-1728713242', 'mKSC9gfJsVRQ', 'CT1728713217', 'ja124739-BMD', 'joseph', 'asongo', 'feliciakuleibo1@gmail.com', '+23407051272855', '', '', 0, 1, '2024-10-12', '07:07:22'),
+(37, 'OID-1729027289', 'pUMFbw3CQCUP', 'CT1729027261', 'bg236497-GHF', 'blessing', 'gideon', 'gideonjennifer21@gmail.com', '07031351081', '', '', 0, 1, '2024-10-15', '22:21:29'),
+(38, 'OID-1730134417', 'zQW8p6dqnUVW', 'CT1730134404', 'na418697-ZAV', 'nissi', 'athia', 'nickitalucia0@gmail.com', '0817953886', '', '', 0, 1, '2024-10-28', '17:53:37'),
+(39, 'OID-1735010798', 'S1Yt2a6DzJCE', 'CT1735010772', 'eo265713-EGZ', 'emmanuella', 'okoronkwo', 'emmanuellachidinma14@gmail.com', '08023329012', '', '', 0, 1, '2024-12-24', '04:26:38'),
+(40, 'OID-1738870870', 'KqsWm9tJbJAZ', 'CT1738870853', 'co249185-SUH', 'chioma', 'okoye', 'chiomaokoye865@gmail.com', '09018108839', '', '', 0, 1, '2025-02-06', '20:41:10'),
+(41, 'OID-1739620712', 'A3tob1VjTYBV', 'CT1739620622', 'tm526147-QKL', 'tebogo', 'mautlane', 'untouchabletman@gmail.com', '0663173938', '', '', 0, 1, '2025-02-15', '12:58:32'),
+(42, 'OID-1740181539', 'Kb4otQs97SEA', 'CT1740181521', 'ca261753-AYH', 'chinelo', 'akhabhoa', 'cakhabhoa@yahoo.com', '6137005197', '', '', 0, 1, '2025-02-22', '00:45:39'),
+(43, 'OID-1740181892', 'F2f6bxaVHFTY', 'CT1740181885', 'ca261753-AYH', 'chinelo', 'akhabhoa', 'cakhabhoa@yahoo.com', '6137005197', '', '', 0, 1, '2025-02-22', '00:51:32'),
+(44, 'OID-1740497775', 'Df8cUYExgHER', 'CT1740497751', 'im138956-FTS', 'israel', 'majak', 'israelmajakyel@gmail.com', '0928998294', '', '', 0, 1, '2025-02-25', '16:36:15'),
+(45, 'OID-1740497862', '8r1sM25CKGVC', 'CT1740497854', 'im138956-FTS', 'israel', 'majak', 'israelmajakyel@gmail.com', '0928998294', '', '', 0, 1, '2025-02-25', '16:37:42'),
+(46, 'OID-1742362087', 'cdAeBELSDYQK', 'CT1742362042', 'je267953-SLD', 'joy', 'ekanem', 'serenejoy14@gmail.com', '08102702713', '', '', 0, 1, '2025-03-19', '06:28:07'),
+(47, 'OID-1742877900', 'cW9JRsV6SDYT', 'CT1742877859', 'lm659834-CUV', 'lisa', 'matanhike', 'matanhikaylisa@gmail.com', '+263713071229', '', '', 0, 1, '2025-03-25', '05:45:00'),
+(48, 'OID-1745862344', 'hS5sjZdJ2FHC', 'CT1745862319', 'lm375946-SQR', 'linda', 'moabelo', 'lindagumede5224@gmail.com', '0769979036', '', '', 0, 1, '2025-04-28', '18:45:44'),
+(49, 'OID-1747162409', '5GaR8htfrECT', 'CT1747162401', 'si485967-VXM', 'sonia', 'ike', 'chinenye_ike@yahoo.com', '4692628676', '', '', 0, 1, '2025-05-13', '19:53:29'),
+(50, 'OID-1750765297', 'QNfWasYcbZJK', 'CT1750764780', 'ce964182-GBC', 'chidi', 'edike', 'chidiedike@gmail.com', '08061301819', '', '', 0, 1, '2025-06-24', '12:41:37'),
+(51, 'OID-1750953402', 'hzpeQ6yDPJGA', 'CT1750953369', 'nl697341-GFZ', 'ndoko', 'laura', 'lauraamyn21@gmail.com', '+240555507707', '', '', 0, 1, '2025-06-26', '16:56:42'),
+(52, 'OID-1750968698', 'zk5EyjhLnYMZ', 'CT1750968691', 'le782495-NCK', 'lawrence', 'ekpe', 'leecium2002@gmail.com', '+16462384920', '', '', 0, 1, '2025-06-26', '21:11:38'),
+(53, 'OID-1750968762', 'aAJSjCFNyAGS', 'CT1750968758', 'le782495-NCK', 'lawrence', 'ekpe', 'leecium2002@gmail.com', '+16462384920', '', '', 0, 1, '2025-06-26', '21:12:42'),
+(54, 'OID-1750968954', '8wthGMoRWJKH', 'CT1750968949', 'le782495-NCK', 'lawrence', 'ekpe', 'leecium2002@gmail.com', '+16462384920', '', '', 0, 1, '2025-06-26', '21:15:54'),
+(55, 'OID-1750969004', 'nvRP5ogzBHVA', 'CT1750969000', 'le782495-NCK', 'lawrence', 'ekpe', 'leecium2002@gmail.com', '+16462384920', '', '', 0, 1, '2025-06-26', '21:16:44'),
+(56, 'OID-1750969033', 'xdYy1fuJNUYN', 'CT1750969029', 'le782495-NCK', 'lawrence', 'ekpe', 'leecium2002@gmail.com', '+16462384920', '', '', 0, 1, '2025-06-26', '21:17:13'),
+(57, 'OID-1750969076', 'j95ayVPLCPKU', 'CT1750969070', 'le782495-NCK', 'lawrence', 'ekpe', 'leecium2002@gmail.com', '+16462384920', '', '', 0, 1, '2025-06-26', '21:17:56'),
+(58, 'OID-1750969115', 'z4PTvdM3NUJE', 'CT1750969111', 'le782495-NCK', 'lawrence', 'ekpe', 'leecium2002@gmail.com', '+16462384920', '', '', 0, 1, '2025-06-26', '21:18:35'),
+(59, 'OID-1752692793', 'o9DqkcnMVGRQ', 'CT1752692775', 'ie873261-WSK', 'idara', 'etta', 'idyyetta373@gmail.com', '08022204093', '', '', 0, 1, '2025-07-16', '20:06:33'),
+(60, 'OID-1754669916', 'p9bHCyr4ALUM', 'CT1754669892', 'ha613789-AUC', 'heba', 'abuhussein', 'hibahabohosien@gmail.com', '+970567318444', '', '', 0, 1, '2025-08-08', '17:18:36'),
+(61, 'OID-1754674269', 'mGLzNaPtQCUN', 'CT1754674237', 'ha613789-AUC', 'heba', 'abuhussein', 'hibahabohosien@gmail.com', '+970567318444', '', '', 0, 1, '2025-08-08', '18:31:09'),
+(62, 'OID-1754915534', 'fPD2MmAquXQA', 'CT1754915516', 'kk381527-DWV', 'katie', 'kk', 'vmcregion3@gmail.com', '08057778616', '', '', 0, 1, '2025-08-11', '13:32:14'),
+(63, 'OID-1756114650', 'oJ5ca6jgxBFP', 'CT1756114630', 'ro471589-HXC', 'rukevwe', 'okonedo', 'okonedorukevwe@gmail.com', '08152150345', '', '', 0, 1, '2025-08-25', '10:37:30'),
+(64, 'OID-1758473243', 'U6fGy4B3hYEC', 'CT1758473226', 'ka489136-BGD', 'kanyinsola', 'adedeji', 'fredaadedeji@gmail.com', '07051564262', '', '', 0, 1, '2025-09-21', '17:47:23'),
+(65, 'OID-1758473350', 'hfswgdCG7GPL', 'CT1758473342', 'ka489136-BGD', 'kanyinsola', 'adedeji', 'fredaadedeji@gmail.com', '07051564262', '', '', 0, 1, '2025-09-21', '17:49:10'),
+(66, 'OID-1760105439', 'p5Ftb69mNFGJ', 'CT1760105405', 'pe137925-LKA', 'paul', 'eze', 'pauloyomaeze@gmail.com', '09157341171', '', '', 0, 1, '2025-10-10', '15:10:39'),
+(67, 'OID-1760706392', 'Rmt2SvhGwPTA', 'CT1760706215', 'LS264198-SNL', ' Chidi', ' Edikee', 'blazechidi@gmail.com', '', '', ' Lagos', 0, 1, '2025-10-17', '14:06:32'),
+(68, 'OID-1760973161', 'a6kwvK5MWKFW', 'CT1760973151', 'ce964182-GBC', 'chidi', 'edike', 'chidiedike@gmail.com', '08061301819', '', '', 0, 1, '2025-10-20', '16:12:41'),
+(69, 'OID-1761800798', 'kn4syLr3GSBR', 'CT1761800765', 'io845629-TCP', 'iretiola', 'odufuye', 'iretiolaodufuye@gmail.com', '08036963564', '', '', 0, 1, '2025-10-30', '06:06:38'),
+(70, 'OID-1762603929', 'tBEPR5vGVLBE', 'CT1762603907', 'mm176953-QPJ', 'Muhammad', 'Mansur Salihu', 'muhammadmansursalihu5@gmail.com', '07085647324', '', 'Gombe State, Akko LGA ', 0, 1, '2025-11-08', '13:12:09'),
+(71, 'OID-1762851482', 'FrdVJceS4MQS', 'CT1762851442', 'oa356129-JPM', 'oluwatobiloba', 'adebambo', 'ceze44633@gmail.com', '08087777721', '', '', 0, 1, '2025-11-11', '09:58:02'),
+(72, 'OID-1765733070', '5a7EQ6R1jQVT', 'CT1765733056', 'zo461378-ZWN', 'zaynab', 'odutolu', 'omopelolazaynab@gmail.com', '08022590778', '', '', 0, 1, '2025-12-14', '18:24:30'),
+(73, 'OID-1770041882', 'ZA9fe4gF6FSD', 'CT1770041863', 'go698174-HAT', 'grace', 'oluwayimika', 'oluwayimikagrace2018@gmail.com', '07018327125', '', '', 0, 1, '2026-02-02', '15:18:02'),
+(74, 'OID-1770133455', 'H2mAPDtwWWHS', 'CT1770133430', 'no524978-DCK', 'njideka', 'omenkah', 'njidekaomenkah7@gmail.com', '0846227770', '', '', 0, 1, '2026-02-03', '16:44:15'),
+(75, 'OID-1770133509', 'fJUD2gtZCEYB', 'CT1770133501', 'no524978-DCK', 'njideka', 'omenkah', 'njidekaomenkah7@gmail.com', '0846227770', '', '', 0, 1, '2026-02-03', '16:45:09'),
+(76, 'OID-1770133553', 'x8BFqkn96FXB', 'CT1770133545', 'no524978-DCK', 'njideka', 'omenkah', 'njidekaomenkah7@gmail.com', '0846227770', '', '', 0, 1, '2026-02-03', '16:45:53'),
+(77, 'OID-1770133642', 'm7Z4RzjsATVR', 'CT1770133633', 'no524978-DCK', 'njideka', 'omenkah', 'njidekaomenkah7@gmail.com', '0846227770', '', '', 0, 1, '2026-02-03', '16:47:22'),
+(78, 'OID-1770157177', 'S3HQ2zptYNKH', 'CT1770157153', 'ai185236-NFM', 'aliyu', 'idris', 'aliyuidris2580@gmail.com', '08084760596', '', '', 0, 1, '2026-02-03', '23:19:37'),
+(79, 'OID-1770157389', '178NLHz2yLFK', 'CT1770157345', 'ai185236-NFM', 'aliyu', 'idris', 'aliyuidris2580@gmail.com', '08084760596', '', '', 0, 1, '2026-02-03', '23:23:09'),
+(80, 'OID-1775827629', 'RvBfSQeobTDL', 'CT1775827601', 'vi581927-YTB', 'victory', 'ikhena', 'victoryikhena@gmail.com', '08131258883', '', '', 0, 1, '2026-04-10', '14:27:09'),
+(81, 'OID-1777661938', 'wME49R1qeCFZ', 'CT1777661902', 'bm167349-RNB', 'brighton', 'majonanga', 'brightonmajonanga@gmail.com', '0991922697', '', '', 0, 1, '2026-05-01', '19:58:58'),
+(82, 'OID-1778550028', 'x91UJ5s4kEYN', 'CT1778550019', 'ia597421-VMA', 'ifeoluwa', 'arogun', 'ife.arogun1@gmail.com', '+14045475250', '', '', 0, 1, '2026-05-12', '02:40:28'),
+(83, 'OID-1778838916', 'G5zs8HxJnNAZ', 'CT1778838893', 'ej248713-KSA', 'emulu', 'james', 'emulujames@gmail.com', '+256785375769', '', '', 0, 1, '2026-05-15', '10:55:16'),
+(84, 'OID-1778839047', 'Uxy6tdua4TGZ', 'CT1778839030', 'ej248713-KSA', 'emulu', 'james', 'emulujames@gmail.com', '+256785375769', '', '', 0, 1, '2026-05-15', '10:57:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_partners`
+--
+
+CREATE TABLE `tbl_partners` (
+  `partner_id` int(11) NOT NULL,
+  `partner_pid` varchar(100) NOT NULL,
+  `partner_cname` varchar(100) NOT NULL,
+  `partner_email` varchar(100) NOT NULL,
+  `partner_phone` varchar(100) NOT NULL,
+  `partner_logo` varchar(100) NOT NULL,
+  `partner_url` varchar(255) NOT NULL,
+  `partner_stats` int(11) NOT NULL,
+  `partner_date` date NOT NULL,
+  `partner_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_popquiz`
+--
+
+CREATE TABLE `tbl_popquiz` (
+  `popq_id` int(11) NOT NULL,
+  `popq_pid` varchar(100) NOT NULL,
+  `popq_cid` varchar(100) NOT NULL,
+  `popq_lid` varchar(100) NOT NULL,
+  `popq_iid` varchar(100) NOT NULL,
+  `popq_ques` mediumtext NOT NULL,
+  `popq_ans` varchar(100) NOT NULL,
+  `popq_option1` varchar(100) NOT NULL,
+  `popq_option2` varchar(100) NOT NULL,
+  `popq_option3` varchar(100) NOT NULL,
+  `popq_option4` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_quizzes`
+--
+
+CREATE TABLE `tbl_quizzes` (
+  `quiz_id` int(11) NOT NULL,
+  `quiz_qid` varchar(100) NOT NULL,
+  `quiz_cid` varchar(100) NOT NULL,
+  `quiz_lid` varchar(100) NOT NULL,
+  `quiz_pqid` varchar(100) NOT NULL,
+  `quiz_iid` varchar(100) NOT NULL,
+  `quiz_uid` varchar(100) NOT NULL,
+  `quiz_ans` varchar(100) NOT NULL,
+  `quiz_date` date NOT NULL,
+  `quiz_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_quiz_result`
+--
+
+CREATE TABLE `tbl_quiz_result` (
+  `qres_id` int(11) NOT NULL,
+  `qres_qid` varchar(100) NOT NULL,
+  `qres_cid` varchar(100) NOT NULL,
+  `qres_lid` varchar(100) NOT NULL,
+  `qres_iid` varchar(100) NOT NULL,
+  `qres_uid` varchar(100) NOT NULL,
+  `qres_scores` int(11) NOT NULL,
+  `qres_grade` varchar(100) NOT NULL,
+  `qres_starttime` datetime NOT NULL,
+  `qres_endtime` datetime NOT NULL,
+  `qres_stats` int(11) NOT NULL,
+  `qres_date` date NOT NULL,
+  `qres_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_reviews`
+--
+
+CREATE TABLE `tbl_reviews` (
+  `review_id` int(11) NOT NULL,
+  `review_rid` varchar(100) NOT NULL,
+  `review_cid` varchar(100) NOT NULL,
+  `review_uid` varchar(100) NOT NULL,
+  `review_rating` int(11) NOT NULL,
+  `review_title` varchar(255) NOT NULL,
+  `review_msg` mediumtext NOT NULL,
+  `review_date` date NOT NULL,
+  `review_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_testimonials`
+--
+
+CREATE TABLE `tbl_testimonials` (
+  `testi_id` int(11) NOT NULL,
+  `testi_tid` varchar(100) NOT NULL,
+  `testi_fname` varchar(100) NOT NULL,
+  `testi_lname` varchar(100) NOT NULL,
+  `testi_img` varchar(100) NOT NULL,
+  `testi_location` varchar(100) NOT NULL,
+  `testi_msg` mediumtext NOT NULL,
+  `testi_date` date NOT NULL,
+  `testi_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_tickets`
+--
+
+CREATE TABLE `tbl_tickets` (
+  `ticket_id` int(11) NOT NULL,
+  `ticket_tid` varchar(100) NOT NULL,
+  `ticket_uid` varchar(100) NOT NULL,
+  `ticket_aid` varchar(100) NOT NULL,
+  `ticket_title` varchar(255) NOT NULL,
+  `ticket_desc` longblob NOT NULL,
+  `ticket_stats` int(11) NOT NULL,
+  `ticket_date` date NOT NULL,
+  `ticket_time` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `social_links` longtext DEFAULT NULL,
+  `biography` longtext DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `date_added` int(11) DEFAULT NULL,
+  `last_modified` int(11) DEFAULT NULL,
+  `watch_history` longtext DEFAULT NULL,
+  `wishlist` longtext DEFAULT NULL,
+  `title` longtext DEFAULT NULL,
+  `paypal_keys` longtext DEFAULT NULL,
+  `stripe_keys` longtext DEFAULT NULL,
+  `verification_code` longtext DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `social_links`, `biography`, `role_id`, `date_added`, `last_modified`, `watch_history`, `wishlist`, `title`, `paypal_keys`, `stripe_keys`, `verification_code`, `status`) VALUES
+(1, 'VMC', 'Learning ', 'admin@volunteermedicalcorps.org', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '{\"facebook\":\"http:\\/\\/facebook.com\\/vmcorps\",\"twitter\":\"http:\\/\\/twitter.com\\/vmedcorps\",\"linkedin\":\"https:\\/\\/www.linkedin.com\\/in\\/volunteer-medical-corps-586542184\\/\"}', '<p>VMC</p>', 1, NULL, 1603846295, NULL, NULL, 'VMC', '[{\"production_client_id\":null,\"production_secret_key\":null}]', '[{\"public_live_key\":null,\"secret_live_key\":null}]', NULL, 1),
+(3, 'Chidi', 'Edike', 'chidiedike@gmail.com', '62094dd800f813de6a47ea4f5e137aced93c354d', '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', NULL, 2, 1592308744, NULL, '[]', '[]', NULL, '[{\"production_client_id\":\"\"}]', '[{\"public_live_key\":\"\",\"secret_live_key\":\"\"}]', '41fc99e9ad9bc553372b84ea11ca5dad', 1),
+(4, 'josh', 'bender', 'joshlita@hotmail.com', '1f82c942befda29b6ed487a51da199f78fce7f05', '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', NULL, 2, 1592308749, NULL, '[]', '[]', NULL, '[{\"production_client_id\":\"\"}]', '[{\"public_live_key\":\"\",\"secret_live_key\":\"\"}]', 'a7dc5ae4b4bd4ca3327cd5ac73aa3f22', 1),
+(5, 'kamesha', 'bender', 'pastoramakaodita.hsch@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '{\"facebook\":\"\",\"twitter\":\"\",\"linkedin\":\"\"}', NULL, 2, 1594224052, NULL, '[]', '[]', NULL, '[{\"production_client_id\":\"\"}]', '[{\"public_live_key\":\"\",\"secret_live_key\":\"\"}]', '18ef4588b2a17eff08467acb095d2dd7', 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  ADD PRIMARY KEY (`cart_id`);
+
+--
+-- Indexes for table `tbl_categories`
+--
+ALTER TABLE `tbl_categories`
+  ADD PRIMARY KEY (`cat_id`);
+
+--
+-- Indexes for table `tbl_certificates`
+--
+ALTER TABLE `tbl_certificates`
+  ADD PRIMARY KEY (`cert_id`);
+
+--
+-- Indexes for table `tbl_courses`
+--
+ALTER TABLE `tbl_courses`
+  ADD PRIMARY KEY (`cours_id`);
+
+--
+-- Indexes for table `tbl_events`
+--
+ALTER TABLE `tbl_events`
+  ADD PRIMARY KEY (`events_id`);
+
+--
+-- Indexes for table `tbl_instructors`
+--
+ALTER TABLE `tbl_instructors`
+  ADD PRIMARY KEY (`instructor_id`);
+
+--
+-- Indexes for table `tbl_lessons`
+--
+ALTER TABLE `tbl_lessons`
+  ADD PRIMARY KEY (`lesson_id`);
+
+--
+-- Indexes for table `tbl_lessons_stats`
+--
+ALTER TABLE `tbl_lessons_stats`
+  ADD PRIMARY KEY (`lesso_id`);
+
+--
+-- Indexes for table `tbl_media`
+--
+ALTER TABLE `tbl_media`
+  ADD PRIMARY KEY (`media_id`);
+
+--
+-- Indexes for table `tbl_mycourses`
+--
+ALTER TABLE `tbl_mycourses`
+  ADD PRIMARY KEY (`mycours_id`);
+
+--
+-- Indexes for table `tbl_orders`
+--
+ALTER TABLE `tbl_orders`
+  ADD PRIMARY KEY (`orders_id`);
+
+--
+-- Indexes for table `tbl_partners`
+--
+ALTER TABLE `tbl_partners`
+  ADD PRIMARY KEY (`partner_id`);
+
+--
+-- Indexes for table `tbl_popquiz`
+--
+ALTER TABLE `tbl_popquiz`
+  ADD PRIMARY KEY (`popq_id`);
+
+--
+-- Indexes for table `tbl_quizzes`
+--
+ALTER TABLE `tbl_quizzes`
+  ADD PRIMARY KEY (`quiz_id`);
+
+--
+-- Indexes for table `tbl_quiz_result`
+--
+ALTER TABLE `tbl_quiz_result`
+  ADD PRIMARY KEY (`qres_id`);
+
+--
+-- Indexes for table `tbl_reviews`
+--
+ALTER TABLE `tbl_reviews`
+  ADD PRIMARY KEY (`review_id`);
+
+--
+-- Indexes for table `tbl_testimonials`
+--
+ALTER TABLE `tbl_testimonials`
+  ADD PRIMARY KEY (`testi_id`);
+
+--
+-- Indexes for table `tbl_tickets`
+--
+ALTER TABLE `tbl_tickets`
+  ADD PRIMARY KEY (`ticket_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+
+--
+-- AUTO_INCREMENT for table `tbl_categories`
+--
+ALTER TABLE `tbl_categories`
+  MODIFY `cat_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_certificates`
+--
+ALTER TABLE `tbl_certificates`
+  MODIFY `cert_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_courses`
+--
+ALTER TABLE `tbl_courses`
+  MODIFY `cours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `tbl_events`
+--
+ALTER TABLE `tbl_events`
+  MODIFY `events_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_instructors`
+--
+ALTER TABLE `tbl_instructors`
+  MODIFY `instructor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `tbl_lessons`
+--
+ALTER TABLE `tbl_lessons`
+  MODIFY `lesson_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `tbl_lessons_stats`
+--
+ALTER TABLE `tbl_lessons_stats`
+  MODIFY `lesso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `tbl_media`
+--
+ALTER TABLE `tbl_media`
+  MODIFY `media_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_mycourses`
+--
+ALTER TABLE `tbl_mycourses`
+  MODIFY `mycours_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+
+--
+-- AUTO_INCREMENT for table `tbl_orders`
+--
+ALTER TABLE `tbl_orders`
+  MODIFY `orders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+
+--
+-- AUTO_INCREMENT for table `tbl_partners`
+--
+ALTER TABLE `tbl_partners`
+  MODIFY `partner_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_popquiz`
+--
+ALTER TABLE `tbl_popquiz`
+  MODIFY `popq_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_quizzes`
+--
+ALTER TABLE `tbl_quizzes`
+  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_quiz_result`
+--
+ALTER TABLE `tbl_quiz_result`
+  MODIFY `qres_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_reviews`
+--
+ALTER TABLE `tbl_reviews`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_testimonials`
+--
+ALTER TABLE `tbl_testimonials`
+  MODIFY `testi_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_tickets`
+--
+ALTER TABLE `tbl_tickets`
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

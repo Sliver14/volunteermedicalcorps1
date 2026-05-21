@@ -5,115 +5,148 @@ import {
   FaArrowRight, 
   FaGraduationCap, 
   FaHandsHelping, 
+  FaUsers,
+  FaDollarSign,
+  FaTasks,
+  FaCheckCircle,
+  FaHome
 } from "react-icons/fa";
 import Link from "next/link";
-
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function PortalDashboardClient({ session, stats }: any) {
   const isMobile = useIsMobile();
   
+  // Stats matching the provided HTML's logic
+  const dashboardStats = [
+    { label: "My Campaigns", value: "0", icon: FaUsers, gradient: "from-[#ff5e62] to-[#ff9966]" }, // Cherry
+    { label: "Donations", value: "$0", icon: FaDollarSign, gradient: "from-[#4facfe] to-[#00f2fe]" }, // Blue
+    { label: "Tasks Undertaken", value: "0", icon: FaTasks, gradient: "from-[#ff5e62] to-[#ff9966]" }, // Cherry
+    { label: "Tasks Completed", value: "0", icon: FaCheckCircle, gradient: "from-[#ff5e62] to-[#ff9966]" }, // Cherry
+  ];
+
   return (
-    <div className="space-y-8 bg-bg-base transition-colors duration-300">
-      {/* Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      {/* Breadcrumb Header matching the HTML structure */}
+      <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
-          <h2 className="text-xl md:text-2xl font-bold text-brand-primary dark:text-brand-secondary uppercase tracking-tight">Portal Dashboard</h2>
-          <p className="text-text-muted text-sm font-medium">Manage your volunteer profile and medical missions.</p>
+          <h4 className="text-2xl font-black text-[#002866] mb-4">Dashboard</h4>
+          <nav className="flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-slate-400">
+            <Link href="/portal" className="text-[#002866] hover:text-[#ff9f22] transition-colors flex items-center gap-2">
+              <FaHome size={14} /> Home
+            </Link>
+            <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
+            <span className="text-[#ff9f22]">Dashboard</span>
+          </nav>
         </div>
+        
         <Link 
-          href="/elearn" 
-          className="group relative overflow-hidden bg-brand-secondary text-brand-primary px-8 py-4 font-bold uppercase tracking-widest text-xs flex items-center gap-3 shadow-xl transition-all"
+          href="/elearn/dashboard" 
+          className="group relative overflow-hidden bg-[#ff9f22] text-[#002866] px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center gap-3 shadow-2xl shadow-orange-950/10 transition-all hover:bg-black hover:text-[#ff9f22]"
         >
-          <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-          <span className="relative z-10 flex items-center gap-3">
-            <FaGraduationCap className="text-lg" />
-            Go to VMC Academy
-          </span>
+          <FaGraduationCap className="text-xl group-hover:rotate-12 transition-transform" />
+          Go to VMC Academy
         </Link>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat: any, index: number) => (
+      {/* Stats Grid - Matching "card-statistic-3" style */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {dashboardStats.map((stat, index) => (
           <motion.div 
             key={index}
-            initial={isMobile ? { opacity: 0, y: 20 } : { opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-bg-surface p-6 shadow-sm border border-border-main"
+            className={`relative overflow-hidden bg-gradient-to-br ${stat.gradient} p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.1)] text-white group`}
           >
-            <div className={`w-12 h-12 ${stat.bg} flex items-center justify-center mb-4`}>
-              <stat.icon className={`text-xl ${stat.color}`} />
+            {/* Large Background Icon */}
+            <div className="absolute right-[-10%] bottom-[-10%] opacity-15 group-hover:scale-110 group-hover:rotate-6 transition-all duration-700">
+              <stat.icon size={150} />
             </div>
-            <p className="text-text-muted text-xs font-bold uppercase tracking-widest">{stat.label}</p>
-            <h3 className="text-2xl font-bold text-text-main mt-1">{stat.value}</h3>
+            
+            <div className="relative z-10">
+              <h5 className="text-white/80 text-[10px] font-black uppercase tracking-[0.3em] mb-6">{stat.label}</h5>
+              <div className="flex items-end justify-between mb-8">
+                <h2 className="text-5xl font-black tracking-tight">{stat.value}</h2>
+              </div>
+              
+              {/* Progress Bar matching the design */}
+              <div className="h-2 w-full bg-black/10 rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 + index * 0.1 }}
+                  className="h-full bg-cyan-300/60 shadow-[0_0_15px_rgba(103,232,249,0.5)]"
+                />
+              </div>
+            </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Content: Missions */}
-        <div className="lg:col-span-2 space-y-6">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold text-brand-primary dark:text-brand-secondary flex items-center">
-              <FaHandsHelping className="mr-2 text-brand-secondary" />
-              Active Missions
-            </h3>
-            <Link href="/portal/missions" className="text-sm font-bold text-brand-secondary hover:underline flex items-center transition-all">
-              View All <FaArrowRight className="ml-1 text-xs" />
-            </Link>
+      {/* Tables Section */}
+      <div className="grid grid-cols-1 gap-10">
+        {/* Most Recent Donations */}
+        <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
+          <div className="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/20">
+            <h3 className="font-black text-2xl text-[#002866] tracking-tight">Most Recent Donations</h3>
           </div>
-
-          <div className="bg-bg-surface border border-border-main p-8 text-center space-y-4 shadow-sm">
-            <div className="w-16 h-16 bg-bg-base flex items-center justify-center mx-auto text-text-muted/30">
-              <FaHandsHelping size={32} />
-            </div>
-            <h4 className="font-bold text-text-main">No active missions currently</h4>
-            <p className="text-sm text-text-muted max-w-xs mx-auto">Explore upcoming campaigns and join a team to start making an impact.</p>
-            <Link href="/campaigns" className="group relative overflow-hidden inline-block bg-brand-primary text-white px-8 py-3 font-bold text-sm uppercase tracking-wider transition-all shadow-md">
-              <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-              <span className="relative z-10 group-hover:text-brand-primary transition-colors">Explore Campaigns</span>
-            </Link>
+          <div className="p-0 overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-slate-50/50 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
+                  <th className="px-10 py-6 border-b border-slate-50">Donor</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Project</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Location</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Amount</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Date</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colSpan={6} className="px-10 py-32 text-center">
+                    <div className="max-w-md mx-auto">
+                      <div className="w-24 h-24 bg-slate-50 text-slate-200 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 shadow-inner">
+                        <FaDollarSign size={40} />
+                      </div>
+                      <h4 className="text-2xl font-black text-[#002866] uppercase tracking-tight mb-4">No Donations Available Yet!</h4>
+                      <p className="text-slate-400 font-medium text-lg leading-relaxed">The platform is currently void of donations. Start inviting people to this noble opportunity.</p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
-        {/* Sidebar Cards */}
-        <div className="space-y-8">
-          {/* Credits Card */}
-          <div className="bg-brand-primary p-6 text-white shadow-xl relative overflow-hidden group">
-            <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-white/5 group-hover:scale-150 transition-transform duration-400"></div>
-            <h3 className="text-lg font-bold mb-2">VMC Credits</h3>
-            <p className="text-white/70 text-xs mb-6 leading-relaxed">
-              Use your volunteer credits to unlock advanced medical certifications.
-            </p>
-            <div className="flex items-end gap-2 mb-6">
-              <span className="text-4xl font-bold">0</span>
-              <span className="text-xs text-brand-secondary font-bold mb-1 uppercase tracking-widest">Available</span>
-            </div>
-            <button className="group relative overflow-hidden w-full bg-brand-secondary text-brand-primary py-3 font-bold text-sm uppercase tracking-widest transition-all">
-              <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-              <span className="relative z-10">Go to Store</span>
-            </button>
+        {/* Tasks Directory */}
+        <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
+          <div className="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/20">
+            <h3 className="font-black text-2xl text-[#002866] tracking-tight">Tasks Undertaken Directory</h3>
           </div>
-
-          {/* Upcoming Mission */}
-          <div className="bg-bg-surface p-6 border border-border-main shadow-sm">
-            <h3 className="text-text-main font-bold mb-4 uppercase text-xs tracking-widest opacity-70">Upcoming Mission</h3>
-            <div className="flex gap-4">
-              <div className="w-12 h-12 bg-red-50 dark:bg-red-900/10 flex flex-col items-center justify-center shrink-0 border border-red-100 dark:border-red-900/20">
-                <span className="text-[10px] font-bold text-red-400 uppercase leading-none">JUN</span>
-                <span className="text-lg font-bold text-red-600 leading-none">23</span>
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-text-main leading-tight">Global Hospital Outreach</h4>
-                <p className="text-xs text-text-muted mt-1">Lagos, Nigeria</p>
-              </div>
-            </div>
-            <button className="group relative overflow-hidden w-full mt-6 border border-border-main text-text-muted py-2.5 text-xs font-bold uppercase tracking-widest transition-all">
-              <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-              <span className="relative z-10 group-hover:text-white transition-colors">View Mission Details</span>
-            </button>
+          <div className="p-0 overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-slate-50/50 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
+                  <th className="px-10 py-6 border-b border-slate-50">ID</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Title</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Details</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Date Started</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colSpan={5} className="px-10 py-24 text-center">
+                    <div className="flex flex-col items-center gap-6 opacity-30">
+                      <FaHandsHelping size={60} className="text-slate-300" />
+                      <span className="text-sm font-black uppercase tracking-widest text-slate-400">No active tasks recorded in directory</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

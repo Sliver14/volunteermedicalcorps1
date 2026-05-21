@@ -974,7 +974,7 @@ export default function HomeClient({
       </section>
 
       {/* Recent News & Updates Section */}
-      <section className="py-24 bg-slate-50 overflow-hidden transition-colors duration-300">
+      <section className="py-24 bg-bg-base overflow-hidden transition-colors duration-300">
       <div className="max-w-[1200px] mx-auto px-4">
         
         <motion.div 
@@ -984,7 +984,7 @@ export default function HomeClient({
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-brand-primary dark:text-text-main uppercase mb-2 leading-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-brand-primary dark:text-brand-secondary uppercase mb-2 leading-tight">
             Recent News & Updates
           </h2>
           <p className="text-text-muted text-base md:text-lg opacity-80">
@@ -992,7 +992,7 @@ export default function HomeClient({
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {initialNews.map((post: any, idx: number) => (
             <motion.div 
               key={post.id} 
@@ -1000,9 +1000,8 @@ export default function HomeClient({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.4, delay: idx * 0.2, ease: "easeOut" }}
-              className="flex flex-col bg-bg-surface shadow-lg overflow-hidden group text-center md:text-left border border-border-main"
-            >
-              
+              className="flex flex-col bg-bg-surface shadow-lg overflow-hidden group text-center md:text-left border border-border-main transition-all duration-300"
+            >              
               <div className="relative h-[250px] w-full overflow-hidden">
                 <Image
                   src={post.image || "https://volunteermedicalcorps.org/admin/images/gallery/798453-1.jpg"}
@@ -1125,3 +1124,4 @@ export default function HomeClient({
     </div>
   );
 }
+

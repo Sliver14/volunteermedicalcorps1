@@ -84,7 +84,7 @@ export default function Footer() {
               <input 
                 type="email" 
                 placeholder="Your email here..." 
-                className="w-full px-6 py-4 bg-white text-brand-primary outline-none border-none focus:ring-2 focus:ring-brand-secondary transition-all"
+                className="w-full px-6 py-4 bg-white dark:bg-bg-base text-brand-primary dark:text-text-main outline-none border-none focus:ring-2 focus:ring-brand-secondary transition-all"
               />
               <button className="group relative overflow-hidden w-full bg-brand-secondary text-brand-primary font-black uppercase py-4 tracking-widest transition-colors">
                 <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>

@@ -771,8 +771,8 @@ export default function HomeClient({
 
       {/* About VMC Section */}
       <section className="pt-40 lg:pt-56 pb-24 bg-bg-base relative overflow-hidden transition-colors duration-300">
-        {/* Decorative Background */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-bg-surface z-0 hidden lg:block border-l border-border-main"></div>
+        {/* Decorative Background - Changed bg-bg-surface to bg-bg-base and removed border to prevent overlap artifacts */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-bg-base z-0 hidden lg:block"></div>
         <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-brand-secondary/10 rounded-full blur-3xl z-0"></div>
         
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
@@ -824,7 +824,7 @@ export default function HomeClient({
               </h2>
               
               <div className="space-y-4 mb-10">
-                <p className="text-text-main text-base lg:text-lg leading-relaxed font-semibold italic border-l-4 border-brand-secondary pl-5 py-1 bg-bg-surface transition-colors duration-300">
+                <p className="text-text-main text-base lg:text-lg leading-relaxed font-semibold italic border-l-4 border-brand-secondary pl-5 py-1 bg-bg-base transition-colors duration-300">
                   "Providing medical care through outreaches, humanitarian assistance and sustainable health care solutions."
                 </p>
                 <p className="text-text-muted text-base leading-relaxed">
@@ -832,17 +832,17 @@ export default function HomeClient({
                 </p>
               </div>
               
-              <div className="flex flex-wrap gap-4">
-                <Link href="/about" className="group relative overflow-hidden inline-flex items-center bg-brand-primary text-white px-8 py-3.5 font-black uppercase tracking-widest text-[11px] transition-all shadow-xl">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+                <Link href="/about" className="group relative overflow-hidden inline-flex items-center justify-center bg-brand-primary text-white px-8 py-3.5 font-black uppercase tracking-widest text-[11px] transition-all shadow-xl w-full sm:w-auto">
                   <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
                   <span className="relative z-10 group-hover:text-brand-primary transition-colors flex items-center">
                     Learn More 
                     <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </Link>
-                <Link href="/video-gallery" className="group relative overflow-hidden inline-flex items-center border-2 border-brand-primary text-brand-primary px-8 py-3.5 font-black uppercase tracking-widest text-[11px] transition-all">
-                  <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                  <span className="relative z-10 group-hover:text-white transition-colors">Watch Gallery</span>
+                <Link href="/video-gallery" className="group relative overflow-hidden inline-flex items-center justify-center border-2 border-brand-primary dark:border-brand-secondary text-brand-primary dark:text-brand-secondary px-8 py-3.5 font-black uppercase tracking-widest text-[11px] transition-all w-full sm:w-auto">
+                  <span className="absolute inset-0 bg-brand-primary dark:bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                  <span className="relative z-10 group-hover:text-white dark:group-hover:text-brand-primary transition-colors">Watch Gallery</span>
                 </Link>
               </div>
             </motion.div>

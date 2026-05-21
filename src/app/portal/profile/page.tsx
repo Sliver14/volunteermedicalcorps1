@@ -16,10 +16,10 @@ import {
 export default function ProfilePage() {
   // Mock user data matching the persona in layout
   const user = {
-    name: "Dr. Sarah Johnson",
+    name: "Dr. Sylver Oyinaga",
     role: "Medical Volunteer",
-    email: "s.johnson@example.com",
-    phone: "+234 801 234 5678",
+    email: "silverchristopher12@gmail.com",
+    phone: "+234 813 597 1304",
     country: "Nigeria",
     category: "Medical Professional (Doctor)",
     memberSince: "August 2024",

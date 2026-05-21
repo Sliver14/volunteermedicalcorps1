@@ -13,9 +13,11 @@ import {
   FolderKanban, 
   Newspaper,
   Menu,
-  X
+  X,
+  Loader2
 } from "lucide-react";
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 const sidebarLinks = [
   { href: "/envmc/dashboard", label: "Overview", icon: LayoutDashboard },
@@ -29,13 +31,22 @@ const sidebarLinks = [
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const { data: session, status } = useSession();
 
-  // Authentication removed for mock data access
-  const mockUser = {
-    name: "Admin User",
-    role: "ADMIN"
-  };
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Loader2 className="w-10 h-10 animate-spin text-[#002866]" />
+      </div>
+    );
+  }
+
+  if (status === "unauthenticated" || session?.user?.role !== "ADMIN") {
+    router.push("/envmc");
+    return null;
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -49,7 +60,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
 
       {/* Sidebar */}
       <aside className={`w-64 bg-[#002866] text-white flex flex-col fixed inset-y-0 shadow-2xl z-50 transition-transform duration-300 lg:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
-        <div className="p-6 border-b border-white/10 flex justify-between items-center">
+        <div className="p-6 border-b border-white/10 flex justify-between items-center h-20">
           <Link href="/" className="flex flex-col">
             <span className="text-xl font-black tracking-tighter uppercase leading-none">VMC</span>
             <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">Admin Portal</span>
@@ -59,7 +70,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
           </button>
         </div>
 
-        <nav className="flex-grow p-4 space-y-2 mt-4">
+        <nav className="flex-grow p-4 space-y-2 mt-4 overflow-y-auto">
           {sidebarLinks.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
@@ -82,19 +93,19 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
         </nav>
 
         <div className="p-4 border-t border-white/10">
-          <Link
-            href="/"
+          <button
+            onClick={() => signOut({ callbackUrl: "/envmc" })}
             className="flex items-center gap-3 w-full px-4 py-3 text-white/70 hover:text-red-400 hover:bg-red-400/10 rounded-sm transition-all font-bold text-sm uppercase tracking-wider"
           >
             <LogOut size={18} />
-            Exit Dashboard
-          </Link>
+            Logout Admin
+          </button>
         </div>
       </aside>
 
       {/* Main Content */}
       <main className="flex-grow lg:ml-64 p-4 md:p-8 min-w-0">
-        <header className="flex justify-between items-center mb-10 bg-white p-6 rounded-sm shadow-sm border border-gray-100">
+        <header className="flex justify-between items-center mb-10 bg-white p-6 rounded-sm shadow-sm border border-gray-100 h-20">
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setSidebarOpen(true)}
@@ -106,16 +117,16 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
               <h1 className="text-xl md:text-2xl font-black text-[#002866] uppercase tracking-tight line-clamp-1">
                 {sidebarLinks.find(l => l.href === pathname)?.label || "Dashboard"}
               </h1>
-              <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase mt-1">Welcome back, {mockUser.name}</p>
+              <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase mt-1">Welcome back, {session?.user?.name}</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-bold text-[#002866] leading-none">{mockUser.name}</p>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">{mockUser.role}</p>
+              <p className="text-sm font-bold text-[#002866] leading-none">{session?.user?.name}</p>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">{session?.user?.role}</p>
             </div>
             <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-[#002866] font-black border-2 border-white shadow-sm shrink-0">
-              {mockUser.name?.[0]?.toUpperCase() || "A"}
+              {session?.user?.name?.[0]?.toUpperCase() || "A"}
             </div>
           </div>
         </header>

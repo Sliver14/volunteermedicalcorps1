@@ -22,6 +22,7 @@ model User {
   enrollments   Enrollment[]
   lessonStats   LessonStats[]
   resetTokens   PasswordResetToken[]
+  donations     Donation[]
 }
 
 model PasswordResetToken {
@@ -212,6 +213,7 @@ model Campaign {
   raised      Float?   @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  donations   Donation[]
 }
 
 model News {
@@ -289,5 +291,17 @@ model Message {
   text      String   @db.Text
   time      String
   createdAt DateTime @default(now())
+}
+
+model Donation {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  campaignId  String?
+  campaign    Campaign? @relation(fields: [campaignId], references: [id])
+  amount      Float
+  currency    String   @default("USD")
+  status      String   @default("Completed")
+  createdAt   DateTime @default(now())
 }
 

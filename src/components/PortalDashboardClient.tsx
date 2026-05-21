@@ -7,23 +7,40 @@ import {
   FaHandsHelping, 
   FaUsers,
   FaDollarSign,
-  FaTasks,
-  FaCheckCircle,
   FaHome
 } from "react-icons/fa";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-export default function PortalDashboardClient({ session, stats }: any) {
+export default function PortalDashboardClient({ 
+  stats = [], 
+  recentEnrollments = [], 
+  recentDonations = [] 
+}: any) {
+  
   const isMobile = useIsMobile();
   
-  // Stats matching the provided HTML's logic
-  const dashboardStats = [
-    { label: "My Campaigns", value: "0", icon: FaUsers, gradient: "from-[#ff5e62] to-[#ff9966]" }, // Cherry
-    { label: "Donations", value: "$0", icon: FaDollarSign, gradient: "from-[#4facfe] to-[#00f2fe]" }, // Blue
-    { label: "Tasks Undertaken", value: "0", icon: FaTasks, gradient: "from-[#ff5e62] to-[#ff9966]" }, // Cherry
-    { label: "Tasks Completed", value: "0", icon: FaCheckCircle, gradient: "from-[#ff5e62] to-[#ff9966]" }, // Cherry
-  ];
+  // Use the dynamic stats from props
+  const dashboardStats = stats.map((stat: any, index: number) => {
+    const gradients = [
+      "from-[#ff5e62] to-[#ff9966]", // Cherry
+      "from-[#4facfe] to-[#00f2fe]", // Blue
+      "from-[#667eea] to-[#764ba2]", // Purple
+      "from-[#2af598] to-[#009efd]", // Green-Blue
+    ];
+    return {
+      ...stat,
+      gradient: gradients[index % gradients.length]
+    };
+  });
+
+  const formatDate = (date: string | Date) => {
+    return new Date(date).toLocaleDateString(undefined, { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -51,7 +68,7 @@ export default function PortalDashboardClient({ session, stats }: any) {
 
       {/* Stats Grid - Matching "card-statistic-3" style */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {dashboardStats.map((stat, index) => (
+        {dashboardStats.map((stat: any, index: number) => (
           <motion.div 
             key={index}
             initial={{ opacity: 0, scale: 0.9 }}
@@ -95,26 +112,51 @@ export default function PortalDashboardClient({ session, stats }: any) {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-50/50 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
-                  <th className="px-10 py-6 border-b border-slate-50">Donor</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Project</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Location</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Campaign</th>
                   <th className="px-10 py-6 border-b border-slate-50">Amount</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Currency</th>
                   <th className="px-10 py-6 border-b border-slate-50">Date</th>
                   <th className="px-10 py-6 border-b border-slate-50">Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td colSpan={6} className="px-10 py-32 text-center">
-                    <div className="max-w-md mx-auto">
-                      <div className="w-24 h-24 bg-slate-50 text-slate-200 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 shadow-inner">
-                        <FaDollarSign size={40} />
+                {recentDonations && recentDonations.length > 0 ? (
+                  recentDonations.map((donation: any) => (
+                    <tr key={donation.id} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="px-10 py-6 border-b border-slate-50 font-bold text-[#002866]">
+                        {donation.campaign?.title || "General Donation"}
+                      </td>
+                      <td className="px-10 py-6 border-b border-slate-50 font-black text-[#ff9f22]">
+                        {donation.amount?.toLocaleString() || "0"}
+                      </td>
+                      <td className="px-10 py-6 border-b border-slate-50 text-slate-500 font-bold">
+                        {donation.currency || "USD"}
+                      </td>
+                      <td className="px-10 py-6 border-b border-slate-50 text-slate-400 font-medium">
+                        {formatDate(donation.createdAt)}
+                      </td>
+                      <td className="px-10 py-6 border-b border-slate-50">
+                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                          donation.status === 'Completed' ? 'bg-green-100 text-green-600' : 'bg-amber-100 text-amber-600'
+                        }`}>
+                          {donation.status || "Completed"}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={5} className="px-10 py-24 text-center">
+                      <div className="max-w-md mx-auto">
+                        <div className="w-20 h-20 bg-slate-50 text-slate-200 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-inner">
+                          <FaDollarSign size={30} />
+                        </div>
+                        <h4 className="text-xl font-black text-[#002866] uppercase tracking-tight mb-2">No Donations Yet</h4>
+                        <p className="text-slate-400 font-medium text-sm">You haven't made any donations yet. Start supporting our missions today!</p>
                       </div>
-                      <h4 className="text-2xl font-black text-[#002866] uppercase tracking-tight mb-4">No Donations Available Yet!</h4>
-                      <p className="text-slate-400 font-medium text-lg leading-relaxed">The platform is currently void of donations. Start inviting people to this noble opportunity.</p>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -123,28 +165,64 @@ export default function PortalDashboardClient({ session, stats }: any) {
         {/* Tasks Directory */}
         <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
           <div className="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/20">
-            <h3 className="font-black text-2xl text-[#002866] tracking-tight">Tasks Undertaken Directory</h3>
+            <h3 className="font-black text-2xl text-[#002866] tracking-tight">Recent Learning & Missions</h3>
           </div>
           <div className="p-0 overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-50/50 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
-                  <th className="px-10 py-6 border-b border-slate-50">ID</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Title</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Details</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Date Started</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Course / Task</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Category</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Progress</th>
+                  <th className="px-10 py-6 border-b border-slate-50">Enrolled At</th>
                   <th className="px-10 py-6 border-b border-slate-50">Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td colSpan={5} className="px-10 py-24 text-center">
-                    <div className="flex flex-col items-center gap-6 opacity-30">
-                      <FaHandsHelping size={60} className="text-slate-300" />
-                      <span className="text-sm font-black uppercase tracking-widest text-slate-400">No active tasks recorded in directory</span>
-                    </div>
-                  </td>
-                </tr>
+                {recentEnrollments && recentEnrollments.length > 0 ? (
+                  recentEnrollments.map((enrollment: any) => (
+                    <tr key={enrollment.id} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="px-10 py-6 border-b border-slate-50 font-bold text-[#002866]">
+                        {enrollment.course?.title || "Untitled Course"}
+                      </td>
+                      <td className="px-10 py-6 border-b border-slate-50 text-slate-500 font-bold">
+                        {enrollment.course?.category?.name || "General"}
+                      </td>
+                      <td className="px-10 py-6 border-b border-slate-50">
+                        <div className="flex items-center gap-3">
+                          <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden min-w-[60px]">
+                            <div 
+                              className="h-full bg-[#ff9f22]" 
+                              style={{ width: `${enrollment.progress || 65}%` }}
+                            />
+                          </div>
+                          <span className="text-[10px] font-black text-[#ff9f22]">
+                            {Math.round(enrollment.progress || 65)}%
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-10 py-6 border-b border-slate-50 text-slate-400 font-medium">
+                        {formatDate(enrollment.enrolledAt)}
+                      </td>
+                      <td className="px-10 py-6 border-b border-slate-50">
+                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                          enrollment.isCompleted ? 'bg-green-100 text-green-600' : 'bg-blue-100 text-blue-600'
+                        }`}>
+                          {enrollment.isCompleted ? 'Completed' : 'In Progress'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={5} className="px-10 py-24 text-center">
+                      <div className="flex flex-col items-center gap-6 opacity-30">
+                        <FaHandsHelping size={60} className="text-slate-300" />
+                        <span className="text-sm font-black uppercase tracking-widest text-slate-400">No active missions or courses recorded</span>
+                      </div>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

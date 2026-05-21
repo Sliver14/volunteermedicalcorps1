@@ -31,24 +31,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark');
-                  document.documentElement.setAttribute('data-theme', 'dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                  document.documentElement.setAttribute('data-theme', 'light');
-                }
-              } catch (_) {}
-            `,
-          }}
-        />
-      </head>
-      <body className={`${roboto.variable} ${poppins.variable} font-roboto antialiased min-h-screen flex flex-col transition-colors duration-300`}>
+      <head />
+      <body 
+        className={`${roboto.variable} ${poppins.variable} font-roboto antialiased min-h-screen flex flex-col transition-colors duration-300`}
+      >
         <ThemeProvider>
           <ClientLayout>
             {children}

@@ -3,6 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  FaBars, FaTimes, FaBell, FaGraduationCap, FaDesktop, FaUser,
+  FaBookOpen, FaHistory, FaLock, FaExpand, FaSearch, FaSignOutAlt,
+  FaSchool, FaShieldAlt, FaBriefcase, FaHome
+} from "react-icons/fa";
+
+// Content Components
+import ElearnProfileContent from "./ElearnProfileContent";
+import ElearnCoursesContent from "./ElearnCoursesContent";
+import ElearnMyCoursesContent from "./ElearnMyCoursesContent";
+import ElearnOrderHistoryContent from "./ElearnOrderHistoryContent";
 
 interface Props {
   session: any;
@@ -11,301 +23,320 @@ interface Props {
   recommended: any[];
 }
 
+type Tab = "overview" | "profile" | "all_courses" | "my_courses" | "order_history" | "security";
+
 export default function ElearnDashboardClient({
   session,
   stats,
   inProgress,
   recommended,
 }: Props) {
-  const [sidebarOpen, setSidebarOpen] = useState(false); // Default closed on mobile
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<Tab>("overview");
+
+  const navigation = [
+    { name: "Dashboard", key: "overview" as Tab, icon: FaDesktop, section: "main" },
+    { name: "All Courses", key: "all_courses" as Tab, icon: FaBookOpen, section: "learning" },
+    { name: "My Courses", key: "my_courses" as Tab, icon: FaSchool, section: "learning" },
+    { name: "Profile", key: "profile" as Tab, icon: FaUser, section: "account" },
+    { name: "Order History", key: "order_history" as Tab, icon: FaHistory, section: "account" },
+    { name: "Security", key: "security" as Tab, icon: FaLock, section: "account" },
+  ];
+
+  const handleNavClick = (key: Tab) => {
+    setActiveTab(key);
+    setIsSidebarOpen(false);
+  };
 
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden relative">
-      {/* Sidebar Overlay (Mobile only) */}
-      {sidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/60 z-40 lg:hidden backdrop-blur-sm transition-opacity"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+    <div className="flex h-screen bg-[#f8f9fa] overflow-hidden font-poppins text-slate-800">
+      {/* Mobile Overlay */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm" 
+            onClick={() => setIsSidebarOpen(false)} 
+          />
+        )}
+      </AnimatePresence>
 
       {/* Sidebar */}
-      <div
-        className={`fixed lg:relative inset-y-0 left-0 z-50 transition-all duration-300 transform 
-          ${sidebarOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0 w-0 lg:w-72"}
-          bg-gray-900 text-white flex-shrink-0 border-r border-gray-800 overflow-y-auto`}
-      >
-        <div className="p-6 border-b border-gray-800 flex items-center justify-between">
-          <Link href="/elearn" className="flex items-center gap-3">
-            <Image
-              src="https://volunteermedicalcorps.org/images/logo-wide.png"
-              alt="VMC Logo"
-              width={160}
-              height={55}
-              className="h-10 w-auto brightness-0 invert"
-            />
+      <aside className={`fixed inset-y-0 left-0 z-50 w-[280px] bg-white shadow-2xl lg:shadow-none transform transition-transform duration-300 lg:translate-x-0 lg:static flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+
+        {/* Logo Header - Centered & Compact */}
+        <div className="flex items-center justify-center h-20 px-6 border-b border-slate-50 relative">
+          <Link href="/" className="flex items-center">
+            <Image src="/logo.png" alt="Logo" width={130} height={40} className="object-contain" unoptimized />
           </Link>
-          <button 
-            onClick={() => setSidebarOpen(false)}
-            className="lg:hidden text-gray-400 hover:text-white"
-          >
-            <span className="material-icons">close</span>
+          <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden absolute right-6 text-slate-400">
+            <FaTimes size={18} />
           </button>
         </div>
 
-        <div className="p-6">
-          <div className="flex items-center gap-4 px-4 py-4 bg-gray-800/50 border border-white/5 rounded-2xl">
-            <div className="relative">
-              <Image
-                src={session.user.image}
-                alt={session.user.name}
-                width={48}
-                height={48}
-                className="rounded-full border-2 border-blue-500/30 p-0.5"
-              />
-              <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-gray-900 rounded-full"></div>
-            </div>
-            <div className="overflow-hidden">
-              <p className="font-bold truncate text-sm">{session.user.name}</p>
-              <p className="text-[10px] font-black uppercase tracking-widest text-blue-400">Student</p>
-            </div>
+        {/* Navigation */}
+        <nav className="flex-1 overflow-y-auto py-8 px-6 space-y-8 custom-scrollbar">
+          {/* Dashboard Group */}
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 opacity-50 px-4">MAIN MENU</p>
+            <ul className="space-y-1.5">
+              {navigation.filter(n => n.section === 'main').map((item) => (
+                <li key={item.key}>
+                  <button
+                    onClick={() => handleNavClick(item.key)}
+                    className={`flex items-center w-full px-5 py-4 rounded-2xl transition-all group ${activeTab === item.key ? "bg-blue-600 text-white shadow-xl shadow-blue-900/20" : "text-slate-500 hover:bg-slate-50"}`}
+                  >
+                    <item.icon className={`mr-4 text-lg ${activeTab === item.key ? "text-white" : "text-slate-400 group-hover:text-blue-600"}`} />
+                    <span className="text-[14px] font-bold">{item.name}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
 
-        <nav className="mt-4 px-4">
-          <ul className="space-y-2">
-            <li>
-              <Link
-                href="/elearn/students/dashboard"
-                className="flex items-center gap-3 px-5 py-4 bg-blue-600 text-white rounded-2xl shadow-lg shadow-blue-900/20 font-bold"
-              >
-                <span className="material-icons">dashboard</span>
-                <span>Dashboard</span>
-              </Link>
-            </li>
+          {/* Learning Group */}
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 opacity-50 px-4">VMC ACADEMY</p>
+            <ul className="space-y-1.5">
+              {navigation.filter(n => n.section === 'learning').map((item) => (
+                <li key={item.key}>
+                  <button
+                    onClick={() => handleNavClick(item.key)}
+                    className={`flex items-center w-full px-5 py-4 rounded-2xl transition-all group ${activeTab === item.key ? "bg-blue-600 text-white shadow-xl shadow-blue-900/20" : "text-slate-500 hover:bg-slate-50"}`}
+                  >
+                    <item.icon className={`mr-4 text-lg ${activeTab === item.key ? "text-white" : "text-slate-400 group-hover:text-blue-600"}`} />
+                    <span className="text-[14px] font-bold">{item.name}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <li className="mt-10 px-5 text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-4">
-              My Account
-            </li>
-            {[
-              { icon: "person", label: "Profile", href: "/elearn/students/profile" },
-              { icon: "lock", label: "Change Password", href: "/elearn/students/change-password" },
-              { icon: "history", label: "Order History", href: "/elearn/students/purchases" },
-            ].map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-3 px-5 py-4 text-gray-400 hover:text-white hover:bg-white/5 rounded-2xl transition-all group"
-                >
-                  <span className="material-icons text-gray-500 group-hover:text-blue-400 transition-colors">{item.icon}</span>
-                  <span className="font-semibold text-sm">{item.label}</span>
-                </Link>
-              </li>
-            ))}
-
-            <li className="mt-10 px-5 text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-4">
-              My Classes
-            </li>
-            {[
-              { icon: "menu_book", label: "All Courses", href: "/elearn/courses" },
-              { icon: "school", label: "My Courses", href: "/elearn/students/my-courses" },
-              { icon: "forum", label: "Discussions", href: "#" },
-            ].map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="flex items-center gap-3 px-5 py-4 text-gray-400 hover:text-white hover:bg-white/5 rounded-2xl transition-all group"
-                >
-                  <span className="material-icons text-gray-500 group-hover:text-blue-400 transition-colors">{item.icon}</span>
-                  <span className="font-semibold text-sm">{item.label}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {/* Account Group */}
+          <div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 opacity-50 px-4">MY ACCOUNT</p>
+            <ul className="space-y-1.5">
+              {navigation.filter(n => n.section === 'account').map((item) => (
+                <li key={item.key}>
+                  <button
+                    onClick={() => handleNavClick(item.key)}
+                    className={`flex items-center w-full px-5 py-4 rounded-2xl transition-all group ${activeTab === item.key ? "bg-blue-600 text-white shadow-xl shadow-blue-900/20" : "text-slate-500 hover:bg-slate-50"}`}
+                  >
+                    <item.icon className={`mr-4 text-lg ${activeTab === item.key ? "text-white" : "text-slate-400 group-hover:text-blue-600"}`} />
+                    <span className="text-[14px] font-bold">{item.name}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </nav>
 
-        <div className="mt-auto p-6 pt-10">
+        {/* Sidebar Footer */}
+        <div className="p-6 border-t border-slate-50">
           <Link
-            href="/account/logout"
-            className="flex items-center gap-3 px-5 py-4 text-red-400 bg-red-400/5 hover:bg-red-400 hover:text-white rounded-2xl transition-all font-bold"
+            href="/portal"
+            className="flex items-center justify-center w-full gap-3 px-4 py-5 bg-gray-900 text-white hover:bg-blue-600 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-gray-900/10"
           >
-            <span className="material-icons">logout</span>
-            <span>Logout</span>
+            <FaHome className="text-lg" />
+            BACK TO PORTAL
           </Link>
         </div>
-      </div>
+      </aside>
 
-      {/* Main Content */}
+      {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Navbar */}
-        <nav className="bg-white border-b h-20 flex items-center px-4 sm:px-8 justify-between z-30">
+        {/* Header */}
+        <header className="h-20 bg-white border-b border-slate-100 flex items-center justify-between px-6 lg:px-12 sticky top-0 z-30">
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="lg:hidden w-12 h-12 flex items-center justify-center bg-gray-50 text-gray-600 rounded-xl hover:bg-gray-100 transition-colors"
-            >
-              <span className="material-icons">menu</span>
+            <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-slate-600">
+              <FaBars size={22} />
             </button>
-            <h2 className="hidden sm:block text-xl font-black text-gray-900 tracking-tight">Dashboard</h2>
+            <h1 className="text-lg font-black text-slate-900 tracking-tight">
+              {activeTab === "overview" ? "Academy Dashboard" : activeTab.replace(/_/g, " ").toUpperCase()}
+            </h1>
           </div>
 
-          <div className="flex-1 max-w-md mx-4 sm:mx-8">
-            <div className="relative group">
-              <input
-                type="text"
-                placeholder="Search resources..."
-                className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-3 pl-12 pr-4 focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-inner"
-              />
-              <span className="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors">search</span>
+          <div className="flex items-center gap-6">
+            <div className="hidden md:flex items-center bg-slate-50 border border-slate-100 rounded-xl px-4 py-2 group focus-within:border-blue-500 transition-all">
+              <FaSearch className="text-slate-300 group-focus-within:text-blue-500 transition-colors" size={14} />
+              <input type="text" placeholder="Search courses..." className="bg-transparent border-none outline-none px-3 text-xs font-medium w-48" />
             </div>
-          </div>
-
-          <div className="flex items-center gap-2 sm:gap-6">
-            <button className="relative w-12 h-12 flex items-center justify-center bg-gray-50 text-gray-500 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-all">
-              <span className="material-icons">notifications</span>
-              <span className="absolute top-3 right-3 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full"></span>
+            
+            <button className="relative text-slate-400 hover:text-blue-600 transition-colors">
+              <FaBell size={20} />
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white" />
             </button>
-
-            <div className="hidden sm:flex items-center gap-4 pl-6 border-l border-gray-100">
-              <div className="text-right">
-                <p className="text-sm font-black text-gray-900 leading-none">{session.user.name}</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Student</p>
+            
+            <div className="flex items-center gap-4 pl-6 border-l border-slate-100">
+              <div className="text-right hidden sm:block">
+                <p className="text-[12px] font-black text-slate-900 leading-none">{session.user.name}</p>
+                <p className="text-[9px] font-bold text-blue-500 uppercase tracking-widest mt-1">Student</p>
               </div>
-              <Image
-                src={session.user.image}
-                alt={session.user.name}
-                width={44}
-                height={44}
-                className="rounded-xl border-2 border-gray-50 shadow-sm"
-              />
+              <button 
+                onClick={() => setActiveTab("profile")}
+                className="w-10 h-10 rounded-xl overflow-hidden border-2 border-slate-50 shadow-sm"
+              >
+                <Image src={session.user.image} alt="User" width={40} height={40} className="object-cover" unoptimized />
+              </button>
             </div>
           </div>
-        </nav>
+        </header>
 
         {/* Dashboard Content */}
-        <div className="flex-1 overflow-auto p-4 sm:p-8">
-          <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">Welcome back, {session.user.name.split(' ')[0]}! 👋</h1>
-              <p className="text-gray-500 font-medium mt-1">Here&apos;s what&apos;s happening with your learning progress.</p>
-            </div>
-          </div>
-
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div className="bg-white rounded-[2rem] border border-gray-100 shadow-sm p-8 group hover:border-blue-100 transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">Total Courses</p>
-                  <p className="text-5xl font-black mt-4 text-gray-900 group-hover:text-blue-600 transition-colors">{stats.totalCourses}</p>
-                </div>
-                <div className="w-14 h-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center">
-                  <span className="material-icons text-3xl">school</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-[2rem] border border-gray-100 shadow-sm p-8 group hover:border-blue-100 transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">Enrolled</p>
-                  <p className="text-5xl font-black mt-4 text-blue-600">{stats.myCourses}</p>
-                </div>
-                <div className="w-14 h-14 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center">
-                  <span className="material-icons text-3xl">menu_book</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-[2rem] border border-gray-100 shadow-sm p-8 group hover:border-blue-100 transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">Quizzes</p>
-                  <p className="text-5xl font-black mt-4 text-purple-600">{stats.myQuizzes}</p>
-                </div>
-                <div className="w-14 h-14 bg-purple-50 text-purple-500 rounded-2xl flex items-center justify-center">
-                  <span className="material-icons text-3xl">quiz</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
-            {/* In Progress */}
-            <div className="lg:col-span-8 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden flex flex-col">
-              <div className="p-8 border-b border-gray-50 flex justify-between items-center bg-gray-50/30">
-                <div>
-                  <h3 className="font-black text-xl text-gray-900 tracking-tight">In Progress</h3>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Continue where you left off</p>
-                </div>
-                <Link href="/elearn/students/my-courses" className="text-blue-600 hover:text-blue-700 font-black uppercase tracking-widest text-[10px] flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-xl transition-all">
-                  View All <span className="material-icons text-sm">arrow_forward</span>
-                </Link>
-              </div>
-
-              <div className="flex-1 min-h-[400px]">
-                {inProgress.length === 0 ? (
-                  <div className="h-full flex flex-col items-center justify-center p-12 text-center">
-                    <div className="w-24 h-24 bg-gray-50 text-gray-200 rounded-[2rem] flex items-center justify-center mb-6">
-                      <span className="material-icons text-6xl">school</span>
-                    </div>
-                    <p className="text-xl font-bold text-gray-400">No active courses yet!</p>
-                    <p className="text-gray-400 text-sm mt-2 max-w-xs">Start your learning journey by exploring our available courses.</p>
-                    <Link
-                      href="/elearn/courses"
-                      className="mt-8 bg-blue-600 text-white px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-blue-700 hover:scale-105 transition-all shadow-xl shadow-blue-900/10"
-                    >
-                      Start a Course
-                    </Link>
-                  </div>
-                ) : (
-                  <div className="divide-y divide-gray-50">
-                    {/* Map inProgress items here */}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Recommended */}
-            <div className="lg:col-span-4 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col">
-              <div className="p-8 border-b border-gray-50 bg-gray-50/30">
-                <h3 className="font-black text-xl text-gray-900 tracking-tight">Recommended</h3>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Curated for you</p>
-              </div>
-              <div className="p-8 space-y-6">
-                {recommended.map((course) => (
-                  <Link
-                    key={course.id}
-                    href={`/elearn/view-course/${course.id}`}
-                    className="flex gap-5 group"
-                  >
-                    <div className="w-24 h-20 relative rounded-2xl overflow-hidden shadow-sm flex-shrink-0">
-                      <Image
-                        src={course.image}
-                        alt={course.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight">
-                        {course.title}
-                      </p>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-blue-400 mt-2">{course.category}</p>
-                    </div>
-                  </Link>
-                ))}
-                
-                <Link 
-                  href="/elearn/courses"
-                  className="mt-8 w-full py-4 border-2 border-dashed border-gray-100 rounded-[1.5rem] flex items-center justify-center text-gray-400 font-bold hover:bg-gray-50 hover:border-blue-100 hover:text-blue-600 transition-all text-sm group"
+        <main className="flex-1 overflow-y-auto p-6 lg:p-12">
+          <div className="max-w-[1400px] mx-auto">
+            <AnimatePresence mode="wait">
+              {activeTab === "overview" && (
+                <motion.div
+                  key="overview"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="space-y-10"
                 >
-                  View More <span className="material-icons ml-2 group-hover:translate-x-1 transition-transform">east</span>
-                </Link>
-              </div>
-            </div>
+                  <div className="mb-12">
+                    <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">Welcome to VMC Academy, {session.user.name.split(' ')[0]}! 🎓</h2>
+                    <p className="text-slate-500 font-medium mt-2">Advance your clinical and leadership skills with specialized training.</p>
+                  </div>
+
+                  {/* Stats Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-10 group hover:shadow-2xl transition-all">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">Total Library</p>
+                          <p className="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition-colors">{stats.totalCourses}</p>
+                        </div>
+                        <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center shadow-inner">
+                          <FaBookOpen size={28} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-10 group hover:shadow-2xl transition-all">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">My Courses</p>
+                          <p className="text-5xl font-black text-slate-900 group-hover:text-amber-500 transition-colors">{stats.myCourses || 2}</p>
+                        </div>
+                        <div className="w-16 h-16 bg-amber-50 text-amber-500 rounded-3xl flex items-center justify-center shadow-inner">
+                          <FaSchool size={28} />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-10 group hover:shadow-2xl transition-all">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">Certifications</p>
+                          <p className="text-5xl font-black text-slate-900 group-hover:text-green-500 transition-colors">1</p>
+                        </div>
+                        <div className="w-16 h-16 bg-green-50 text-green-500 rounded-3xl flex items-center justify-center shadow-inner">
+                          <FaGraduationCap size={28} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Secondary Content */}
+                  <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
+                    <div className="xl:col-span-8 bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden flex flex-col min-h-[500px]">
+                      <div className="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/20">
+                        <div>
+                          <h3 className="font-black text-2xl text-slate-900 tracking-tight">Active Learning</h3>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Pick up where you left off</p>
+                        </div>
+                        <button onClick={() => setActiveTab("my_courses")} className="text-blue-600 font-black uppercase tracking-widest text-[10px] flex items-center gap-3 bg-blue-50 px-6 py-3 rounded-2xl hover:bg-blue-600 hover:text-white transition-all">
+                          View Dashboard
+                        </button>
+                      </div>
+                      
+                      <div className="flex-1 flex flex-col items-center justify-center p-20 text-center">
+                        <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center mb-8 text-slate-200 shadow-inner">
+                          <FaSchool size={40} />
+                        </div>
+                        <h4 className="text-2xl font-black text-slate-900 mb-4 tracking-tight uppercase">Ready to learn?</h4>
+                        <p className="text-slate-400 font-medium max-w-sm leading-relaxed mb-10 text-sm">
+                          You have 2 courses currently in progress. Start your next lesson to advance your certification.
+                        </p>
+                        <button onClick={() => setActiveTab("my_courses")} className="bg-gray-900 text-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:bg-blue-600 transition-all shadow-2xl shadow-blue-900/10">
+                          Resume Learning
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="xl:col-span-4 bg-white rounded-[3rem] border border-slate-100 shadow-sm flex flex-col">
+                      <div className="p-10 border-b border-slate-50 bg-slate-50/20">
+                        <h3 className="font-black text-2xl text-slate-900 tracking-tight">Recommended</h3>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Curated for your profile</p>
+                      </div>
+                      <div className="p-10 space-y-8">
+                        {recommended.map((course) => (
+                          <div key={course.id} className="flex gap-6 group cursor-pointer">
+                            <div className="w-24 h-20 relative rounded-2xl overflow-hidden shadow-sm shrink-0">
+                              <Image src={course.image} alt={course.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" unoptimized />
+                            </div>
+                            <div className="min-w-0">
+                              <p className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight text-sm">{course.title}</p>
+                              <p className="text-[9px] font-black uppercase tracking-widest text-blue-500 mt-2">{course.category}</p>
+                            </div>
+                          </div>
+                        ))}
+                        
+                        <button onClick={() => setActiveTab("all_courses")} className="w-full py-5 border-2 border-dashed border-slate-100 rounded-[2rem] text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:bg-slate-50 hover:border-blue-200 hover:text-blue-600 transition-all">
+                          Browse All Courses
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {activeTab === "profile" && (
+                <motion.div key="profile" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+                  <ElearnProfileContent user={session.user} />
+                </motion.div>
+              )}
+
+              {activeTab === "all_courses" && (
+                <motion.div key="all_courses" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+                  <ElearnCoursesContent courses={recommended} />
+                </motion.div>
+              )}
+
+              {activeTab === "my_courses" && (
+                <motion.div key="my_courses" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+                  <ElearnMyCoursesContent />
+                </motion.div>
+              )}
+
+              {activeTab === "order_history" && (
+                <motion.div key="order_history" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+                  <ElearnOrderHistoryContent />
+                </motion.div>
+              )}
+
+              {activeTab === "security" && (
+                <motion.div key="security" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.05 }} className="min-h-[500px] flex items-center justify-center">
+                   <div className="bg-white p-20 rounded-[4rem] text-center border border-slate-100 shadow-sm max-w-xl">
+                      <div className="w-24 h-24 bg-blue-50 text-blue-600 rounded-[2.5rem] flex items-center justify-center mx-auto mb-10 shadow-inner">
+                        <FaShieldAlt size={40} />
+                      </div>
+                      <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight uppercase">Security Settings</h3>
+                      <p className="text-slate-400 font-medium leading-relaxed mb-12">
+                        Manage your password, two-factor authentication, and account activity logs here.
+                      </p>
+                      <button className="bg-gray-900 text-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:bg-blue-600 transition-all">
+                        Update Password
+                      </button>
+                   </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );

@@ -3,8 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
-const ORIGINAL_DOMAIN = 'https://volunteermedicalcorps.org';
+const prisma = new PrismaClient({
+  datasourceUrl: process.env.DATABASE_URL,
+});
+const ORIGINAL_DOMAIN = 'https://medicalmissionsnetwork.org';
 
 function normalizeImagePath(imagePath: string | null | undefined): string {
   if (!imagePath || imagePath === '/logo.png' || imagePath === 'default-avatar.jpg') return '/logo.png';

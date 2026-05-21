@@ -4,52 +4,41 @@ import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
 
 async function main() {
-  const adminEmail = 'admin@vmc.org';
-  const adminPassword = 'adminpassword123'; // Change this for production
+  const adminEmail = 'admin@volunteermedicalcorps.org';
+  const newPassword = 'ChangeMe123!'; // Update this
 
-  console.log('--- Starting Admin Seeding ---');
+  console.log('--- Updating Admin Password ---');
 
   try {
-    const existingAdmin = await prisma.user.findFirst({
-      where: { 
-        OR: [
-          { email: adminEmail },
-          { role: Role.ADMIN }
-        ]
+    const admin = await prisma.user.findUnique({
+      where: {
+        email: adminEmail
       }
     });
 
-    if (existingAdmin) {
-      console.log(`Admin user already exists (${existingAdmin.email}). Skipping seed.`);
+    if (!admin) {
+      console.log(`❌ No admin user found with email: ${adminEmail}`);
       return;
     }
 
-    const hashedPassword = await bcrypt.hash(adminPassword, 12);
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
 
-    const admin = await prisma.user.create({
+    await prisma.user.update({
+      where: {
+        email: adminEmail
+      },
       data: {
-        email: adminEmail,
-        password: hashedPassword,
-        name: 'VMC Super Admin',
-        role: Role.ADMIN,
-        profile: {
-          create: {
-            firstName: 'VMC',
-            lastName: 'Admin',
-            status: 'Active',
-            bio: 'Lead System Administrator'
-          }
-        }
+        password: hashedPassword
       }
     });
 
-    console.log('✅ Admin user created successfully!');
+    console.log('✅ Admin password updated successfully!');
     console.log(`Email: ${adminEmail}`);
-    console.log(`Password: ${adminPassword}`);
-    console.log('--- Seeding Complete ---');
+    console.log(`New Password: ${newPassword}`);
+    console.log('--- Password Update Complete ---');
 
   } catch (error) {
-    console.error('❌ Error seeding admin:', error);
+    console.error('❌ Error updating admin password:', error);
     process.exit(1);
   } finally {
     await prisma.$disconnect();

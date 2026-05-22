@@ -168,7 +168,7 @@ export default function HomeClient({
     return html.replace(/<[^>]*>?/gm, '');
   };
 
-  const cleanLocation = (location: string | null) => {
+  const cleanLocation = (location: string | null | undefined) => {
     if (!location) return "";
     return location.split('|')[0].split('&nbsp;')[0].trim();
   };

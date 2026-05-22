@@ -5,7 +5,15 @@ export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token;
     const isAuth = !!token;
+    const isPortalPage = req.nextUrl.pathname.startsWith("/portal");
+    const isElearnDashboard = req.nextUrl.pathname.startsWith("/elearn/dashboard");
     const isAdminPage = req.nextUrl.pathname.startsWith("/envmc/dashboard");
+
+    if (isPortalPage || isElearnDashboard) {
+      if (!isAuth) {
+        return NextResponse.redirect(new URL("/login", req.url));
+      }
+    }
 
     if (isAdminPage) {
       if (!isAuth) {

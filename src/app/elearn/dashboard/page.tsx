@@ -3,14 +3,6 @@ import ElearnDashboardClient from "@/components/ElearnDashboardClient";
 
 export default async function ElearnDashboardPage() {
   // Mock data - Replace with real data from your database/API later
-  const mockSession = {
-    user: {
-      name: "Sylver Oyinaga",
-      image: "https://volunteermedicalcorps.org/elearn/students/images/users/default-avatar.jpg",
-      role: "STUDENT",
-    },
-  };
-
   const stats = {
     totalCourses: 7,
     myCourses: 0,
@@ -44,7 +36,6 @@ export default async function ElearnDashboardPage() {
 
   return (
     <ElearnDashboardClient
-      session={mockSession}
       stats={stats}
       inProgress={inProgress}
       recommended={recommended}

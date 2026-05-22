@@ -64,7 +64,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
       {/* Sidebar */}
       <aside className={`w-64 bg-[#002866] text-white flex flex-col fixed inset-y-0 shadow-2xl z-50 transition-transform duration-300 lg:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="p-6 border-b border-white/10 flex justify-between items-center h-20">
-          <Link href="/" className="flex flex-col">
+          <Link href="/envmc/dashboard" className="flex flex-col">
             <span className="text-xl font-black tracking-tighter uppercase leading-none">VMC</span>
             <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">Admin Portal</span>
           </Link>

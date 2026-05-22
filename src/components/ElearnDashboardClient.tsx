@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { signOut, useSession } from "next-auth/react";
 import { 
   FaBars, FaTimes, FaBell, FaGraduationCap, FaDesktop, FaUser,
   FaBookOpen, FaHistory, FaLock, FaExpand, FaSearch, FaSignOutAlt,
-  FaSchool, FaShieldAlt, FaBriefcase, FaHome
+  FaSchool, FaShieldAlt, FaBriefcase, FaHome, FaSpinner, FaKey,
+  FaCheckCircle, FaExclamationTriangle
 } from "react-icons/fa";
 
 // Content Components
@@ -17,7 +19,6 @@ import ElearnMyCoursesContent from "./ElearnMyCoursesContent";
 import ElearnOrderHistoryContent from "./ElearnOrderHistoryContent";
 
 interface Props {
-  session: any;
   stats: { totalCourses: number; myCourses: number; myQuizzes: number };
   inProgress: any[];
   recommended: any[];
@@ -26,13 +27,62 @@ interface Props {
 type Tab = "overview" | "profile" | "all_courses" | "my_courses" | "order_history" | "security";
 
 export default function ElearnDashboardClient({
-  session,
   stats,
   inProgress,
   recommended,
 }: Props) {
+  const { data: session } = useSession();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("overview");
+  
+  // Password change state
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState({ type: "", text: "" });
+
+  const handleNavClick = (key: Tab) => {
+    setActiveTab(key);
+    setIsSidebarOpen(false);
+  };
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage({ type: "", text: "" });
+
+    if (newPassword !== confirmPassword) {
+      setMessage({ type: "error", text: "New passwords do not match" });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/change-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage({ type: "success", text: "Password changed successfully" });
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+      } else {
+        setMessage({ type: "error", text: data.message || "Something went wrong" });
+      }
+    } catch (error) {
+      setMessage({ type: "error", text: "Failed to change password" });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (!session) return null;
 
   const navigation = [
     { name: "Dashboard", key: "overview" as Tab, icon: FaDesktop, section: "main" },
@@ -43,14 +93,9 @@ export default function ElearnDashboardClient({
     { name: "Security", key: "security" as Tab, icon: FaLock, section: "account" },
   ];
 
-  const handleNavClick = (key: Tab) => {
-    setActiveTab(key);
-    setIsSidebarOpen(false);
-  };
-
   return (
     <div className="flex h-screen bg-[#f8f9fa] overflow-hidden font-poppins text-slate-800">
-      {/* Mobile Overlay */}
+      {/* ... (Mobile Overlay unchanged) */}
       <AnimatePresence>
         {isSidebarOpen && (
           <motion.div 
@@ -68,7 +113,7 @@ export default function ElearnDashboardClient({
 
         {/* Logo Header - Centered & Compact */}
         <div className="flex items-center justify-center h-20 px-6 border-b border-slate-50 relative">
-          <Link href="/" className="flex items-center">
+          <Link href="/elearn/dashboard" className="flex items-center">
             <Image src="/logo.png" alt="Logo" width={130} height={40} className="object-contain" unoptimized />
           </Link>
           <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden absolute right-6 text-slate-400">
@@ -131,6 +176,17 @@ export default function ElearnDashboardClient({
               ))}
             </ul>
           </div>
+          
+          {/* Logout */}
+          <div className="pt-4">
+            <button
+              onClick={() => signOut({ callbackUrl: "/login" })}
+              className="flex items-center w-full px-5 py-4 rounded-2xl transition-all group text-red-500 hover:bg-red-50"
+            >
+              <FaSignOutAlt className="mr-4 text-lg" />
+              <span className="text-[14px] font-bold uppercase tracking-widest">Logout</span>
+            </button>
+          </div>
         </nav>
 
         {/* Sidebar Footer */}
@@ -171,14 +227,18 @@ export default function ElearnDashboardClient({
             
             <div className="flex items-center gap-4 pl-6 border-l border-slate-100">
               <div className="text-right hidden sm:block">
-                <p className="text-[12px] font-black text-slate-900 leading-none">{session.user.name}</p>
-                <p className="text-[9px] font-bold text-blue-500 uppercase tracking-widest mt-1">Student</p>
+                <p className="text-[12px] font-black text-slate-900 leading-none">{session.user?.name}</p>
+                <p className="text-[9px] font-bold text-blue-500 uppercase tracking-widest mt-1">{session.user?.role || 'Student'}</p>
               </div>
               <button 
                 onClick={() => setActiveTab("profile")}
-                className="w-10 h-10 rounded-xl overflow-hidden border-2 border-slate-50 shadow-sm"
+                className="w-10 h-10 rounded-xl overflow-hidden border-2 border-slate-50 shadow-sm bg-blue-100 flex items-center justify-center text-blue-600 font-bold"
               >
-                <Image src={session.user.image} alt="User" width={40} height={40} className="object-cover" unoptimized />
+                {session.user?.image ? (
+                  <Image src={session.user.image} alt="User" width={40} height={40} className="object-cover" unoptimized />
+                ) : (
+                  <span>{session.user?.name?.[0]?.toUpperCase()}</span>
+                )}
               </button>
             </div>
           </div>
@@ -197,9 +257,10 @@ export default function ElearnDashboardClient({
                   className="space-y-10"
                 >
                   <div className="mb-12">
-                    <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">Welcome to VMC Academy, {session.user.name.split(' ')[0]}! 🎓</h2>
+                    <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">Welcome to VMC Academy, {session.user?.name?.split(' ')[0]}! 🎓</h2>
                     <p className="text-slate-500 font-medium mt-2">Advance your clinical and leadership skills with specialized training.</p>
                   </div>
+                  {/* ... (Stats and Content unchanged) */}
 
                   {/* Stats Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -320,17 +381,70 @@ export default function ElearnDashboardClient({
 
               {activeTab === "security" && (
                 <motion.div key="security" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.05 }} className="min-h-[500px] flex items-center justify-center">
-                   <div className="bg-white p-20 rounded-[4rem] text-center border border-slate-100 shadow-sm max-w-xl">
+                   <div className="bg-white p-20 rounded-[4rem] text-center border border-slate-100 shadow-sm max-w-xl w-full">
                       <div className="w-24 h-24 bg-blue-50 text-blue-600 rounded-[2.5rem] flex items-center justify-center mx-auto mb-10 shadow-inner">
                         <FaShieldAlt size={40} />
                       </div>
                       <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight uppercase">Security Settings</h3>
                       <p className="text-slate-400 font-medium leading-relaxed mb-12">
-                        Manage your password, two-factor authentication, and account activity logs here.
+                        Manage your password and keep your account secure.
                       </p>
-                      <button className="bg-gray-900 text-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:bg-blue-600 transition-all">
-                        Update Password
-                      </button>
+                      
+                      <form onSubmit={handleChangePassword} className="space-y-6 max-w-md mx-auto">
+                        <div className="space-y-2 text-left">
+                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4">Current Password</label>
+                          <input
+                            type="password"
+                            value={currentPassword}
+                            onChange={(e) => setCurrentPassword(e.target.value)}
+                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all font-bold text-slate-900"
+                            placeholder="Enter current password"
+                            required
+                          />
+                        </div>
+
+                        <div className="space-y-2 text-left">
+                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4">New Password</label>
+                          <input
+                            type="password"
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all font-bold text-slate-900"
+                            placeholder="Enter new password"
+                            required
+                          />
+                        </div>
+
+                        <div className="space-y-2 text-left">
+                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4">Confirm New Password</label>
+                          <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all font-bold text-slate-900"
+                            placeholder="Confirm new password"
+                            required
+                          />
+                        </div>
+
+                        {message.text && (
+                          <div className={`p-4 rounded-xl flex items-center gap-3 ${
+                            message.type === "success" ? "bg-green-50 text-green-700 border border-green-100" : "bg-red-50 text-red-700 border border-red-100"
+                          }`}>
+                            {message.type === "success" ? <FaCheckCircle size={18} /> : <FaExclamationTriangle size={18} />}
+                            <p className="text-sm font-bold uppercase tracking-tight">{message.text}</p>
+                          </div>
+                        )}
+
+                        <button
+                          type="submit"
+                          disabled={isLoading}
+                          className="w-full bg-gray-900 text-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:bg-blue-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                        >
+                          {isLoading ? <FaSpinner className="animate-spin" /> : <FaKey />}
+                          {isLoading ? "Updating..." : "Update Password"}
+                        </button>
+                      </form>
                    </div>
                 </motion.div>
               )}

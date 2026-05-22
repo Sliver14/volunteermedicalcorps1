@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { 
   FaBars, FaTimes, FaBell, FaGraduationCap, FaDesktop, FaUserCheck,
   FaCopy, FaDollarSign, FaBookOpen, FaArchive, FaLock, FaExpand,
-  FaUser, FaSignOutAlt, FaChevronDown, FaHandsHelping, FaCheckCircle
+  FaUser, FaSignOutAlt, FaChevronDown, FaHandsHelping, FaCheckCircle,
+  FaSpinner
 } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -43,15 +44,24 @@ type Tab = "dashboard" | "profile" | "campaigns" | "donations" | "projects" | "b
            "badges_categories" | "badges_my";
 
 export default function PortalLayout() {
+  const { data: session, status } = useSession();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("dashboard");
 
+  if (status === "loading") {
+    return (
+      <div className="h-screen w-full flex items-center justify-center bg-white">
+        <FaSpinner className="animate-spin text-[#002866] text-4xl" />
+      </div>
+    );
+  }
+
   const user = {
-    name: "sylver oyinaga",
-    role: "Volunteer",
-    credits: 1250,
-    avatar: "https://volunteermedicalcorps.org/images/volunteers/default-avatar.jpg"
+    name: session?.user?.name || "User",
+    role: session?.user?.role || "Volunteer",
+    credits: 0,
+    avatar: (session?.user as any)?.image || "https://volunteermedicalcorps.org/images/volunteers/default-avatar.jpg"
   };
 
   const navigation = [

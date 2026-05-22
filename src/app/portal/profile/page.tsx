@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 import { 
   FaUser, 
   FaEnvelope, 
@@ -10,20 +12,64 @@ import {
   FaEdit, 
   FaCamera,
   FaShieldAlt,
-  FaBell
+  FaBell,
+  FaSpinner
 } from "react-icons/fa";
 
 export default function ProfilePage() {
-  // Mock user data matching the persona in layout
+  const { data: session } = useSession();
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState({ type: "", text: "" });
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+
   const user = {
-    name: "Dr. Sylver Oyinaga",
-    role: "Medical Volunteer",
-    email: "silverchristopher12@gmail.com",
-    phone: "+234 813 597 1304",
-    country: "Nigeria",
-    category: "Medical Professional (Doctor)",
-    memberSince: "August 2024",
-    avatar: "S"
+    name: session?.user?.name || "User",
+    role: session?.user?.role || "Volunteer",
+    email: session?.user?.email || "",
+    phone: (session?.user as any)?.phone || "N/A",
+    country: (session?.user as any)?.country || "N/A",
+    category: (session?.user as any)?.profession || "Volunteer",
+    memberSince: (session?.user as any)?.createdAt ? new Date((session?.user as any).createdAt).toLocaleDateString() : "N/A",
+    avatar: session?.user?.name?.[0]?.toUpperCase() || "U"
+  };
+
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage({ type: "", text: "" });
+
+    if (newPassword !== confirmPassword) {
+      setMessage({ type: "error", text: "New passwords do not match" });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/change-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage({ type: "success", text: "Password changed successfully" });
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+        setTimeout(() => setShowPasswordForm(false), 2000);
+      } else {
+        setMessage({ type: "error", text: data.message || "Something went wrong" });
+      }
+    } catch (error) {
+      setMessage({ type: "error", text: "Failed to change password" });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -66,7 +112,7 @@ export default function ProfilePage() {
               </div>
               <div className="text-center">
                 <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mb-1">Joined</p>
-                <p className="text-xs font-bold text-slate-700">Aug 2024</p>
+                <p className="text-xs font-bold text-slate-700">{user.memberSince}</p>
               </div>
             </div>
           </div>
@@ -76,10 +122,63 @@ export default function ProfilePage() {
               <FaShieldAlt className="mr-2 text-amber-500" /> Account Security
             </h4>
             <div className="space-y-4">
-              <button className="w-full text-left px-4 py-3 rounded-xl border border-slate-100 hover:bg-slate-50 transition-colors text-sm font-bold text-slate-600 flex items-center justify-between group">
-                Change Password
-                <span className="text-slate-300 group-hover:text-[#002866] transition-colors">→</span>
-              </button>
+              {!showPasswordForm ? (
+                <button 
+                  onClick={() => setShowPasswordForm(true)}
+                  className="w-full text-left px-4 py-3 rounded-xl border border-slate-100 hover:bg-slate-50 transition-colors text-sm font-bold text-slate-600 flex items-center justify-between group"
+                >
+                  Change Password
+                  <span className="text-slate-300 group-hover:text-[#002866] transition-colors">→</span>
+                </button>
+              ) : (
+                <form onSubmit={handleChangePassword} className="space-y-3">
+                  <input
+                    type="password"
+                    placeholder="Current Password"
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    className="w-full px-4 py-2 text-xs border rounded-lg focus:outline-none focus:border-[#ff9f22]"
+                    required
+                  />
+                  <input
+                    type="password"
+                    placeholder="New Password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    className="w-full px-4 py-2 text-xs border rounded-lg focus:outline-none focus:border-[#ff9f22]"
+                    required
+                  />
+                  <input
+                    type="password"
+                    placeholder="Confirm New Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="w-full px-4 py-2 text-xs border rounded-lg focus:outline-none focus:border-[#ff9f22]"
+                    required
+                  />
+                  {message.text && (
+                    <p className={`text-[10px] font-bold ${message.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+                      {message.text}
+                    </p>
+                  )}
+                  <div className="flex gap-2">
+                    <button 
+                      type="submit"
+                      disabled={isLoading}
+                      className="flex-1 bg-[#002866] text-white py-2 rounded-lg text-[10px] font-bold hover:bg-[#ff9f22] disabled:opacity-50"
+                    >
+                      {isLoading ? <FaSpinner className="animate-spin mx-auto" /> : "Update"}
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => setShowPasswordForm(false)}
+                      className="flex-1 bg-slate-100 text-slate-600 py-2 rounded-lg text-[10px] font-bold hover:bg-slate-200"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              )}
               <button className="w-full text-left px-4 py-3 rounded-xl border border-slate-100 hover:bg-slate-50 transition-colors text-sm font-bold text-slate-600 flex items-center justify-between group">
                 Two-Factor Auth
                 <span className="bg-slate-100 text-[10px] px-2 py-0.5 rounded text-slate-400">OFF</span>
@@ -150,10 +249,7 @@ export default function ProfilePage() {
                 <h5 className="text-xs font-black text-[#002866] uppercase mb-4">Certifications Verified</h5>
                 <div className="flex flex-wrap gap-3">
                   <span className="bg-white text-[#002866] text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-sm border border-blue-100 flex items-center">
-                    ✓ Medical License (2026)
-                  </span>
-                  <span className="bg-white text-[#002866] text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-sm border border-blue-100 flex items-center">
-                    ✓ Board Certified Surgeon
+                    ✓ VMC Registered Volunteer
                   </span>
                 </div>
               </div>

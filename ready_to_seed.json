@@ -445758,7 +445758,8 @@
       "region": "Global",
       "target": 100000,
       "raised": 0,
-      "isActive": true
+      "isActive": true,
+      "id": "CUR-139658"
     },
     {
       "title": "Sponsor Relief Missions",
@@ -445768,7 +445769,8 @@
       "region": "Global",
       "target": 100000,
       "raised": 0,
-      "isActive": true
+      "isActive": true,
+      "id": "CXK-145723"
     },
     {
       "title": "Sponsor VMC Free Surgeries",
@@ -445778,7 +445780,8 @@
       "region": "Global",
       "target": 100000,
       "raised": 0,
-      "isActive": true
+      "isActive": true,
+      "id": "EUB-254139"
     },
     {
       "title": "1 Million Smiles",
@@ -445788,7 +445791,8 @@
       "region": "Global",
       "target": 1000000,
       "raised": 0,
-      "isActive": true
+      "isActive": true,
+      "id": "EUT-254138"
     },
     {
       "title": "Mother & Baby Care Kits",
@@ -445798,7 +445802,8 @@
       "region": "Global",
       "target": 500000,
       "raised": 0,
-      "isActive": true
+      "isActive": true,
+      "id": "MBB-475564"
     },
     {
       "title": "Medical Kits/Hygiene Packs/Medical outreaches",
@@ -445808,7 +445813,8 @@
       "region": "Global",
       "target": 1000000,
       "raised": 0,
-      "isActive": true
+      "isActive": true,
+      "id": "MEO-192993"
     },
     {
       "title": "Mosquito Nets & Repellants",
@@ -445818,7 +445824,8 @@
       "region": "Global",
       "target": 200000,
       "raised": 0,
-      "isActive": true
+      "isActive": true,
+      "id": "MIR-092003"
     },
     {
       "title": "Adopt a Community Health Extension Worker",
@@ -445828,7 +445835,8 @@
       "region": "Global",
       "target": 100000,
       "raised": 0,
-      "isActive": true
+      "isActive": true,
+      "id": "PMJ-328791"
     },
     {
       "title": "Sponsor a Good Deeds Project Today!",
@@ -445838,7 +445846,8 @@
       "region": "Global",
       "target": 1000000,
       "raised": 0,
-      "isActive": true
+      "isActive": true,
+      "id": "RTS-837822"
     },
     {
       "title": "HEALING OUTREACHES",

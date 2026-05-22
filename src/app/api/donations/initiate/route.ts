@@ -113,10 +113,20 @@ export async function POST(req: Request) {
     }
 
     // 3. Create Pending Donation Record
+    let validCampaignId = null;
+    if (campaignId) {
+      const campaign = await prisma.campaign.findUnique({
+        where: { id: campaignId }
+      });
+      if (campaign) {
+        validCampaignId = campaignId;
+      }
+    }
+
     await prisma.donation.create({
       data: {
         userId: user.id,
-        campaignId: campaignId || null,
+        campaignId: validCampaignId,
         amount: finalAmount,
         currency: finalCurrency,
         status: 'PENDING',

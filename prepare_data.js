@@ -280,6 +280,23 @@ async function prepareData() {
     });
 
     console.log('Finalizing Data...');
+    const campaignIdMap = {
+      "1 Million Smiles": "EUT-254138",
+      "Mosquito Nets & Repellants": "MIR-092003",
+      "Mother & Baby Care Kits": "MBB-475564",
+      "Medical Kits/Hygiene Packs/Medical outreaches": "MEO-192993",
+      "Sponsor a Good Deeds Project Today!": "RTS-837822",
+      "Adopt a Community Health Extension Worker": "PMJ-328791",
+      "Sponsor Relief Missions": "CXK-145723",
+      "Adopt a Hospital/Community Clinic": "CUR-139658",
+      "Sponsor VMC Free Surgeries": "EUB-254139"
+    };
+
+    const processedCampaigns = extractedData.campaigns.map(c => {
+      const id = campaignIdMap[c.title];
+      return id ? { ...c, id } : c;
+    });
+
     const finalData = {
         users: Array.from(usersMap.values()),
         instructors,
@@ -287,7 +304,7 @@ async function prepareData() {
         courses,
         lessons,
         events: Array.from(eventsMap.values()),
-        campaigns: extractedData.campaigns,
+        campaigns: processedCampaigns,
         news: extractedData.news,
         blogs: extractedData.blogs,
         gallery: extractedData.gallery,

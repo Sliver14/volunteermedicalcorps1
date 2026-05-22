@@ -150,9 +150,6 @@ export default function LiveStreamPage() {
 
   const togglePlay = () => {
     if (videoRef.current) {
-      // Don't toggle play/pause when in full screen to prevent accidental clicks
-      if (isFullScreen) return;
-      
       if (isPlaying) videoRef.current.pause();
       else videoRef.current.play();
     }

@@ -228,9 +228,9 @@ export default function HomeClient({
                         {/* Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/10 to-transparent flex flex-col justify-end p-4 md:p-6 lg:p-8 text-white">
                           
-                          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase mb-2 leading-tight">
+                          {/* <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold uppercase mb-2 leading-tight">
                             {heroSlides[currentSlide].title}
-                          </h2>
+                          </h2> */}
 
                           <p className="text-sm md:text-base mb-4 max-w-sm opacity-90 hidden sm:block">
                             {heroSlides[currentSlide].sub}

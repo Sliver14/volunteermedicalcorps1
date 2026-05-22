@@ -8,6 +8,7 @@ import {
   Megaphone, 
   Heart, 
   Users, 
+  User,
   LogOut, 
   MessageSquare, 
   FolderKanban, 
@@ -18,9 +19,11 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const sidebarLinks = [
   { href: "/envmc/dashboard", label: "Overview", icon: LayoutDashboard },
+  { href: "/envmc/dashboard/profile", label: "Profile", icon: User },
   { href: "/envmc/dashboard/hero", label: "Hero Slides", icon: ImageIcon },
   { href: "/envmc/dashboard/confessions", label: "Confessions", icon: MessageSquare },
   { href: "/envmc/dashboard/marquee", label: "Marquee", icon: Megaphone },
@@ -131,10 +134,19 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
           </div>
         </header>
 
-        <div className="animate-in fade-in duration-300">
-          {children}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={pathname}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
       </main>
     </div>
   );
 }
+

@@ -14,7 +14,7 @@ export async function GET(req: Request) {
     }
 
     // Find the pending donation
-    const donation = await prisma.donation.findUnique({
+    const donation = await prisma.donation.findFirst({
       where: { reference },
       include: { user: true, campaign: true }
     });
@@ -60,7 +60,7 @@ export async function GET(req: Request) {
     if (isSuccess) {
       // Update Donation status
       await prisma.donation.update({
-        where: { reference },
+        where: { id: donation.id },
         data: {
           status: 'SUCCESS',
           metadata: {

@@ -28,9 +28,18 @@ export async function POST(req: Request) {
     if (event.event === 'charge.success') {
       const { reference, metadata } = event.data;
 
-      // Update Donation status
+      // Find the donation first to get the ID
+      const existingDonation = await prisma.donation.findFirst({
+        where: { reference }
+      });
+
+      if (!existingDonation) {
+        return NextResponse.json({ error: 'Donation not found' }, { status: 404 });
+      }
+
+      // Update Donation status using ID
       const donation = await prisma.donation.update({
-        where: { reference },
+        where: { id: existingDonation.id },
         data: {
           status: 'SUCCESS',
           metadata: {

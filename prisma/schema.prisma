@@ -37,6 +37,7 @@ enum DonationStatus {
   PENDING
   SUCCESS
   FAILED
+  Completed
 }
 
 model PasswordResetToken {
@@ -315,7 +316,7 @@ model Donation {
   campaign    Campaign? @relation(fields: [campaignId], references: [id])
   amount      Float
   currency    String   @default("USD")
-  status      DonationStatus @default(PENDING)
+  status      DonationStatus @default(Completed)
   reference   String?  @unique
   method      PaymentMethod @default(BANK)
   metadata    Json?

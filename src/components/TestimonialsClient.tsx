@@ -52,6 +52,12 @@ export default function TestimonialsClient({ allTestimonials }: TestimonialsClie
     return html.replace(/<[^>]*>?/gm, '');
   };
 
+  const cleanLocation = (location: string | null) => {
+    if (!location) return "";
+    // Remove everything after the first pipe or &nbsp;
+    return location.split('|')[0].split('&nbsp;')[0].trim();
+  };
+
   return (
     <div className="w-full bg-bg-base font-roboto transition-colors duration-300">
       <PageBanner title="Testimonials" parent={{ label: "Media", href: "/news" }} />
@@ -111,7 +117,7 @@ export default function TestimonialsClient({ allTestimonials }: TestimonialsClie
                 
                 <div className="w-full pt-6 border-t border-border-main">
                   <h4 className="text-brand-primary dark:text-brand-secondary font-bold text-sm uppercase tracking-widest">{testimonial.name}</h4>
-                  <p className="text-text-muted text-[10px] font-bold mt-1 uppercase tracking-wider">{testimonial.location || testimonial.role}</p>
+                  <p className="text-text-muted text-[10px] font-bold mt-1 uppercase tracking-wider">{cleanLocation(testimonial.location || testimonial.role)}</p>
                 </div>
               </motion.div>
             ))}

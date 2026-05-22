@@ -168,6 +168,11 @@ export default function HomeClient({
     return html.replace(/<[^>]*>?/gm, '');
   };
 
+  const cleanLocation = (location: string | null) => {
+    if (!location) return "";
+    return location.split('|')[0].split('&nbsp;')[0].trim();
+  };
+
   return (
     <div className="w-full font-roboto text-text-main">
       
@@ -958,7 +963,7 @@ export default function HomeClient({
                 
                 <div className="w-full pt-6 border-t border-border-main">
                   <h4 className="text-brand-primary dark:text-brand-secondary font-black text-sm uppercase tracking-widest">{testimonial.name}</h4>
-                  <p className="text-text-muted text-[10px] font-bold mt-1 uppercase tracking-wider">{testimonial.location || testimonial.role}</p>
+                  <p className="text-text-muted text-[10px] font-bold mt-1 uppercase tracking-wider">{cleanLocation(testimonial.location || testimonial.role)}</p>
                 </div>
               </motion.div>
             ))}

@@ -171,13 +171,22 @@ export default function Header() {
             {navigation.map((item) => (
               <div key={item.label} className="border-b border-border-main">
                 <div className="flex justify-between items-center pr-4">
-                  <Link 
-                    href={item.href} 
-                    className="block flex-1 px-6 py-5 text-text-main font-semibold text-lg tracking-wide"
-                    onClick={() => setIsMobileOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
+                  {item.subItems ? (
+                    <button 
+                      onClick={() => setOpenSubMenu(openSubMenu === item.label ? null : item.label)}
+                      className="block flex-1 px-6 py-5 text-left text-text-main font-semibold text-lg tracking-wide"
+                    >
+                      {item.label}
+                    </button>
+                  ) : (
+                    <Link 
+                      href={item.href} 
+                      className="block flex-1 px-6 py-5 text-text-main font-semibold text-lg tracking-wide"
+                      onClick={() => setIsMobileOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                   {item.subItems && (
                     <button 
                       onClick={() => setOpenSubMenu(openSubMenu === item.label ? null : item.label)}

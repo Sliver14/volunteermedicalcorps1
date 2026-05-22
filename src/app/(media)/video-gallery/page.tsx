@@ -5,11 +5,14 @@ import PageBanner from '@/components/PageBanner';
 import Image from 'next/image';
 import { FaShareAlt, FaFacebookF, FaTwitter, FaWhatsapp, FaLink, FaPlay, FaTimes } from 'react-icons/fa';
 import { motion, AnimatePresence } from "framer-motion";
+import Pagination from '@/components/Pagination';
 
 export default function VideoGalleryPage() {
   const [activeShareMenu, setActiveShareMenu] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
   
   const videos = [
     { title: "Simple ways to prevent cardiac arrest", image: "https://volunteermedicalcorps.org/admin/images/videos/513726-vlcsnap-2025-09-15-13h05m35s620.png", url: "https://cdnvideos.ceflix.org/processed/155112-1757938061446036692468.mp4" },
@@ -22,6 +25,16 @@ export default function VideoGalleryPage() {
     { title: "OUR TEAM IN PUNR INDIA", image: "https://volunteermedicalcorps.org/admin/images/gallery/835192-program1c.jpg", url: "https://cdnvideos.ceflix.org/processed/155112-1757938061446036692468.mp4" },
     { title: "HOW TO PLAN A MEDICAL OUTREACH", image: "https://volunteermedicalcorps.org/admin/images/gallery/673549-ot3.jpg", url: "https://cdnvideos.ceflix.org/processed/155112-1757938061446036692468.mp4" }
   ];
+
+  const totalPages = Math.ceil(videos.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentVideos = videos.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 400, behavior: 'smooth' });
+  };
 
   const handleShare = (index: number) => setActiveShareMenu(activeShareMenu === index ? null : index);
 
@@ -176,7 +189,7 @@ export default function VideoGalleryPage() {
             }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
           >
-            {videos.map((video, index) => (
+            {currentVideos.map((video, index) => (
               <motion.div 
                 key={index} 
                 variants={{
@@ -205,7 +218,7 @@ export default function VideoGalleryPage() {
                 
                 <div className="flex justify-between items-start gap-4 mt-2">
                   <div className="flex-1">
-                    <h3 onClick={() => openVideoModal("https://cdnvideos.ceflix.org/processed/155112-1757938061446036692468.mp4")} className="text-sm font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors leading-snug cursor-pointer uppercase pr-4">
+                    <h3 onClick={() => openVideoModal(video.url)} className="text-sm font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors leading-snug cursor-pointer uppercase pr-4">
                       {video.title}
                     </h3>
                   </div>
@@ -233,15 +246,11 @@ export default function VideoGalleryPage() {
             ))}
           </motion.div>
 
-          <div className="mt-16 text-center">
-            <nav>
-              <ul className="flex items-center gap-2 flex-wrap justify-center">
-                <li><span className="w-10 h-10 flex items-center justify-center bg-[#002866] text-white font-bold rounded-sm shadow-sm">1</span></li>
-                <li><button className="w-10 h-10 flex items-center justify-center bg-white text-gray-600 border border-gray-200 hover:border-[#002866] hover:text-[#002866] font-bold rounded-sm transition-colors">2</button></li>
-                <li><button className="w-10 h-10 flex items-center justify-center bg-white text-gray-600 border border-gray-200 hover:border-[#002866] hover:text-[#002866] font-bold rounded-sm transition-colors">3</button></li>
-              </ul>
-            </nav>
-          </div>
+          <Pagination 
+            currentPage={currentPage} 
+            totalPages={totalPages} 
+            onPageChange={handlePageChange} 
+          />
         </div>
       </section>
 

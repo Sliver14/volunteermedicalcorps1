@@ -114,9 +114,11 @@ export default function BoardOfTrustees() {
             </p>
 
             {member.extra && (
-              <p className="text-sm text-brand-primary dark:text-white font-bold leading-relaxed">
-                {member.extra}
-              </p>
+              <div className="pt-2 border-t border-brand-secondary/20 mt-2">
+                <p className="text-xs md:text-sm text-brand-primary dark:text-gray-300 font-medium leading-relaxed italic">
+                  {member.extra}
+                </p>
+              </div>
             )}
           </div>
         </motion.div>

@@ -39,20 +39,42 @@ export default function GivePage() {
   const displayAmount = amount === "others" ? 0 : Number(amount);
   const espeesAmount = displayAmount; // 1 USD = 1 Espees
 
-  const handleProceed = (e: React.FormEvent) => {
+  const handleProceed = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!paymentMode) {
       alert("Please select a payment mode");
       return;
     }
     
-    // Integration logic would go here
-    console.log("Proceeding with:", { activeProject, amount, frequency, paymentMode, formData });
-    
-    if (paymentMode === "KINGSPAY") {
-      window.open(`https://kingspay.online/pay?code=BLVMC&amount=${displayAmount}&currency=USD`, "_blank");
-    } else if (paymentMode === "ESPEES") {
-      window.open(`https://espees.org/pay?code=VMC&amount=${espeesAmount}`, "_blank");
+    if (paymentMode === "BANK") {
+      alert("Please use the bank details provided to make your transfer. Thank you!");
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/donations/initiate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          firstName: formData.fname,
+          lastName: formData.lname,
+          amount: displayAmount,
+          method: paymentMode,
+          campaignId: selectedProj,
+          frequency,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success && data.authorization_url) {
+        window.location.href = data.authorization_url;
+      } else {
+        alert(data.error || "Failed to initiate payment. Please try again.");
+      }
+    } catch (error) {
+      console.error("Payment initiation error:", error);
+      alert("An error occurred. Please try again.");
     }
   };
 
@@ -176,26 +198,26 @@ export default function GivePage() {
 
               <div className="border border-dashed border-border-main p-8 bg-bg-base/50">
                 <h4 className="text-center font-bold text-brand-primary dark:text-brand-secondary mb-8 uppercase text-xs tracking-widest">Select Payment Option</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <label className="flex flex-col items-center gap-2 cursor-pointer group">
-                    <input type="radio" name="paymode" value="KINGSPAY" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} required />
-                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'KINGSPAY' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
-                      <div className="text-[10px] font-bold text-center mb-3 text-text-main">KINGSPAY<br/><span className="text-brand-secondary">(Code: BLVMC)</span></div>
-                      <Image src="/give-images/kingspay.png" alt="Kingspay" width={80} height={30} className="object-contain dark:brightness-200" unoptimized />
+                    <input type="radio" name="paymode" value="PAYSTACK" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} required />
+                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'PAYSTACK' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
+                      <div className="text-[10px] font-bold text-center mb-3 text-text-main uppercase tracking-widest">Paystack<br/><span className="text-brand-secondary">(Card / Transfer / USSD)</span></div>
+                      <Image src="/give-images/paystack.png" alt="Paystack" width={80} height={30} className="object-contain" unoptimized />
                     </div>
                   </label>
                   <label className="flex flex-col items-center gap-2 cursor-pointer group">
                     <input type="radio" name="paymode" value="ESPEES" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} />
                     <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'ESPEES' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
-                      <div className="text-[10px] font-bold text-center mb-3 text-text-main">ESPEES<br/><span className="text-brand-secondary">(Code: VMC)</span></div>
+                      <div className="text-[10px] font-bold text-center mb-3 text-text-main uppercase tracking-widest">KingsPay / Espees<br/><span className="text-brand-secondary">(Code: VMC)</span></div>
                       <Image src="/give-images/espees.png" alt="Espees" width={80} height={30} className="object-contain dark:brightness-200" unoptimized />
                       {paymentMode === 'ESPEES' && <div className="text-[10px] text-brand-secondary font-bold mt-1">Total: {espeesAmount} ESP</div>}
                     </div>
                   </label>
-                  <label className="flex flex-col items-center gap-2 cursor-pointer group">
+                  <label className="flex flex-col items-center gap-2 cursor-pointer group sm:col-span-2">
                     <input type="radio" name="paymode" value="BANK" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} />
-                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'BANK' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
-                      <div className="text-[10px] font-bold text-center mb-3 text-text-main uppercase tracking-widest">BANK<br/>PAYMENT</div>
+                    <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[100px] justify-center bg-bg-surface ${paymentMode === 'BANK' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
+                      <div className="text-[10px] font-bold text-center mb-3 text-text-main uppercase tracking-widest">Direct Bank Transfer</div>
                       <Image src="/give-images/bank.png" alt="Bank" width={80} height={30} className="object-contain dark:brightness-200" unoptimized />
                     </div>
                   </label>

@@ -1080,9 +1080,11 @@ export default function HomeClient({
                   {formatDate(post.date)}
                 </div>
                 
-                <h3 className="text-[22px] font-bold text-text-main leading-[1.3] mb-6 hover:text-brand-secondary transition-colors cursor-pointer line-clamp-2">
-                  {post.title}
-                </h3>
+                <Link href={`/news/${post.id}`}>
+                  <h3 className="text-[22px] font-bold text-text-main leading-[1.3] mb-6 hover:text-brand-secondary transition-colors cursor-pointer line-clamp-2">
+                    {post.title}
+                  </h3>
+                </Link>
                 
                 <Link 
                   href={`/news/${post.id}`} 

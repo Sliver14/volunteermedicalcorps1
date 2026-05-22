@@ -5,12 +5,16 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Providers from "./Providers";
 import NextTopLoader from "nextjs-toploader";
-import { motion, AnimatePresence } from "framer-motion";
-
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const isDashboard = pathname?.startsWith('/envmc') || 
                       pathname?.startsWith('/portal') || 
                       pathname?.startsWith('/elearn') ||
@@ -18,8 +22,19 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   // Instant scroll to top on route change
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (mounted) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, mounted]);
+
+  // Prevent hydration mismatch flicker by ensuring consistent initial render
+  if (!mounted) {
+    return (
+      <div className="flex flex-col min-h-screen bg-bg-base">
+        <div className="flex-grow" />
+      </div>
+    );
+  }
 
   return (
     <Providers>
@@ -36,18 +51,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       />
       {!isDashboard && <Header />}
       <main className="flex-grow bg-bg-base flex flex-col transition-colors duration-300">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={pathname}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="flex-grow flex flex-col"
-          >
-            {children}
-          </motion.div>
-        </AnimatePresence>
+        {children}
       </main>
       {!isDashboard && <Footer />}
     </Providers>

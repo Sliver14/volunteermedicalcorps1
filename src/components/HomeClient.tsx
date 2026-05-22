@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { motion, animate, AnimatePresence } from "framer-motion";
 import { FaCalendarAlt, FaUser, FaComment, FaQuoteLeft, FaStar, FaHeart, FaChevronLeft, FaChevronRight, FaArrowRight } from "react-icons/fa";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import LoadingOverlay from "@/components/LoadingOverlay";
 
 function Counter({ value, suffix = "", prefix = "", decimal = false }: { value: number; suffix?: string, prefix?: string, decimal?: boolean }) {
   const [displayValue, setDisplayValue] = useState(0);
@@ -99,6 +100,7 @@ export default function HomeClient({
   const isMobile = useIsMobile();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedCampaignId, setSelectedCampaignId] = useState(1);
+  const [isSearching, setIsSearching] = useState(false);
 
   const selectedCampaign = useMemo(() => 
     campaignData.find((c: Campaign) => c.id === selectedCampaignId) || campaignData[0], 
@@ -110,7 +112,11 @@ export default function HomeClient({
     const val = e.target.value;
     setSelectedRegion(val);
     if (val) {
-      router.push(`/campaign-search?region=${encodeURIComponent(val)}`);
+      setIsSearching(true);
+      // Small delay to let the animation start smoothly
+      setTimeout(() => {
+        router.push(`/campaign-search?region=${encodeURIComponent(val)}`);
+      }, 500);
     }
   };
 
@@ -1185,6 +1191,8 @@ export default function HomeClient({
           </div>
         </div>
       </section>
+
+      <LoadingOverlay isVisible={isSearching} message={`Connecting to ${selectedRegion}...`} />
     </div>
   );
 }

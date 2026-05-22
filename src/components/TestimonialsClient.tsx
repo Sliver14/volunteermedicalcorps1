@@ -47,6 +47,11 @@ export default function TestimonialsClient({ allTestimonials }: TestimonialsClie
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const stripHtml = (html: string | null) => {
+    if (!html) return "";
+    return html.replace(/<[^>]*>?/gm, '');
+  };
+
   return (
     <div className="w-full bg-bg-base font-roboto transition-colors duration-300">
       <PageBanner title="Testimonials" parent={{ label: "Media", href: "/news" }} />
@@ -101,7 +106,7 @@ export default function TestimonialsClient({ allTestimonials }: TestimonialsClie
                 </div>
                 
                 <p className="text-text-muted italic mb-8 flex-grow leading-relaxed font-medium z-10 relative">
-                  &quot;{testimonial.content}&quot;
+                  &quot;{stripHtml(testimonial.content)}&quot;
                 </p>
                 
                 <div className="w-full pt-6 border-t border-border-main">

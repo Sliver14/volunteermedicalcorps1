@@ -17,12 +17,12 @@ export default function NewsClient({ allNews, recentBlogs, galleryImages }: any)
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  const stripHtml = (html: string) => {
+  const stripHtml = (html: string | null) => {
     if (!html) return "";
     return html.replace(/<[^>]*>?/gm, '');
   };
 
-  const getExcerpt = (content: string) => {
+  const getExcerpt = (content: string | null) => {
     if (!content) return "";
     const plainText = stripHtml(content);
     return plainText.substring(0, 150) + (plainText.length > 150 ? "..." : "");

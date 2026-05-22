@@ -27,6 +27,17 @@ export default function BlogClient({ allBlogs }: any) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const stripHtml = (html: string | null) => {
+    if (!html) return "";
+    return html.replace(/<[^>]*>?/gm, '');
+  };
+
+  const getExcerpt = (content: string | null) => {
+    if (!content) return "";
+    const plainText = stripHtml(content);
+    return plainText.substring(0, 100) + (plainText.length > 100 ? "..." : "");
+  };
+
   return (
     <div className="w-full bg-white font-roboto">
       <PageBanner title="OUR BLOG" parent={{ label: "Media", href: "#" }} />
@@ -58,9 +69,13 @@ export default function BlogClient({ allBlogs }: any) {
                     Blog
                   </span>
                   
-                  <h3 className="text-lg md:text-xl font-bold text-brand-primary group-hover:text-brand-secondary transition-colors mb-6 leading-snug">
+                  <h3 className="text-lg md:text-xl font-bold text-brand-primary group-hover:text-brand-secondary transition-colors mb-4 leading-snug">
                     <Link href={`/blog/${post.id}`}>{post.title}</Link>
                   </h3>
+
+                  <p className="text-gray-500 text-sm mb-6 line-clamp-3">
+                    {getExcerpt(post.content)}
+                  </p>
 
                   <ul className="flex items-center gap-6 pt-6 border-t border-gray-100 text-xs font-bold text-gray-500">
                     <li className="flex items-center gap-3">

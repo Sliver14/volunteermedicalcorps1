@@ -163,6 +163,11 @@ export default function HomeClient({
     return new Date(date).toLocaleDateString(undefined, options);
   };
 
+  const stripHtml = (html: string | null) => {
+    if (!html) return "";
+    return html.replace(/<[^>]*>?/gm, '');
+  };
+
   return (
     <div className="w-full font-roboto text-text-main">
       
@@ -255,6 +260,9 @@ export default function HomeClient({
                 <h3 className="text-brand-primary dark:text-brand-secondary text-lg md:text-sm font-semibold uppercase">
                   Campaigns & Events
                 </h3>
+                <Link href="/events" className="text-brand-secondary text-[10px] font-bold uppercase hover:text-brand-primary transition-colors">
+                  View All →
+                </Link>
               </div>
               
               <div className="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1 custom-scrollbar">
@@ -945,7 +953,7 @@ export default function HomeClient({
                 </div>
                 
                 <p className="text-text-muted italic mb-8 flex-grow leading-relaxed font-medium z-10 relative h-[140px] overflow-y-auto custom-scrollbar pr-2">
-                  &quot;{testimonial.content}&quot;
+                  &quot;{stripHtml(testimonial.content)}&quot;
                 </p>
                 
                 <div className="w-full pt-6 border-t border-border-main">

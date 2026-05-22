@@ -17,9 +17,15 @@ export default function EventsClient({ allEvents }: any) {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const stripHtml = (html: string | null) => {
+    if (!html) return "";
+    return html.replace(/<[^>]*>?/gm, '');
+  };
+
   const getExcerpt = (description: string | null) => {
     if (!description) return "";
-    return description.substring(0, 150) + (description.length > 150 ? "..." : "");
+    const plainText = stripHtml(description);
+    return plainText.substring(0, 150) + (plainText.length > 150 ? "..." : "");
   };
 
   const totalPages = Math.ceil(allEvents.length / itemsPerPage);

@@ -203,7 +203,7 @@ export default function GivePage() {
                     <input type="radio" name="paymode" value="PAYSTACK" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} required />
                     <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'PAYSTACK' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
                       <div className="text-[10px] font-bold text-center mb-3 text-text-main uppercase tracking-widest">Paystack<br/><span className="text-brand-secondary">(Card / Transfer / USSD)</span></div>
-                      <Image src="/give-images/paystack.png" alt="Paystack" width={80} height={30} className="object-contain" unoptimized />
+                      <Image src="/esp/paystack.png" alt="Paystack" width={80} height={30} className="object-contain" unoptimized />
                       {paymentMode === 'PAYSTACK' && <div className="text-[10px] text-brand-secondary font-bold mt-1">Total: ₦{(displayAmount * 1500).toLocaleString()}</div>}
                     </div>
                   </label>
@@ -211,7 +211,7 @@ export default function GivePage() {
                     <input type="radio" name="paymode" value="ESPEES" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} />
                     <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'ESPEES' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
                       <div className="text-[10px] font-bold text-center mb-3 text-text-main uppercase tracking-widest">KingsPay / Espees<br/><span className="text-brand-secondary">(Code: VMC)</span></div>
-                      <Image src="/give-images/espees.png" alt="Espees" width={80} height={30} className="object-contain dark:brightness-200" unoptimized />
+                      <Image src="/esp/espees.png" alt="Espees" width={80} height={30} className="object-contain" unoptimized />
                       {paymentMode === 'ESPEES' && <div className="text-[10px] text-brand-secondary font-bold mt-1">Total: {espeesAmount} ESP</div>}
                     </div>
                   </label>
@@ -219,7 +219,7 @@ export default function GivePage() {
                     <input type="radio" name="paymode" value="BANK" className="sr-only" onChange={(e) => setPaymentMode(e.target.value)} />
                     <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[100px] justify-center bg-bg-surface ${paymentMode === 'BANK' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
                       <div className="text-[10px] font-bold text-center mb-3 text-text-main uppercase tracking-widest">Direct Bank Transfer</div>
-                      <Image src="/give-images/bank.png" alt="Bank" width={80} height={30} className="object-contain dark:brightness-200" unoptimized />
+                      <Image src="/give-images/bank.png" alt="Bank" width={80} height={30} className="object-contain" unoptimized />
                     </div>
                   </label>
                 </div>

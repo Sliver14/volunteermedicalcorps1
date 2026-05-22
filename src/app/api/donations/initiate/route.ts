@@ -46,8 +46,14 @@ export async function POST(req: Request) {
     // 2. Initiate Payment with Provider
     let paymentData: any = null;
     let reference = `VMC-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    let finalAmount = parseFloat(amount);
+    let finalCurrency = currency || 'USD';
 
     if (method === 'PAYSTACK') {
+      const conversionRate = 1500;
+      finalAmount = finalAmount * conversionRate;
+      finalCurrency = 'NGN';
+
       const response = await fetch('https://api.paystack.co/transaction/initialize', {
         method: 'POST',
         headers: {
@@ -56,14 +62,16 @@ export async function POST(req: Request) {
         },
         body: JSON.stringify({
           email,
-          amount: Math.round(amount * 100), // Paystack expects amount in kobo/cents
-          currency: currency || 'USD',
+          amount: Math.round(finalAmount * 100), // Paystack expects amount in kobo
+          currency: 'NGN',
           reference,
           callback_url: `${process.env.NEXT_PUBLIC_BASE_URL}/give/verify`,
           metadata: {
             campaignId,
             userId: user.id,
             frequency,
+            original_amount: amount,
+            original_currency: currency || 'USD',
           }
         }),
       });
@@ -73,7 +81,7 @@ export async function POST(req: Request) {
         throw new Error(result.message || 'Paystack initialization failed');
       }
       paymentData = result.data;
-      reference = result.data.reference; // Use Paystack's reference if they provide one
+      reference = result.data.reference;
     } else if (method === 'ESPEES' || method === 'KINGSPAY') {
       const response = await fetch('https://api.espees.org/v2/payment/product', {
         method: 'POST',
@@ -109,14 +117,16 @@ export async function POST(req: Request) {
       data: {
         userId: user.id,
         campaignId: campaignId || null,
-        amount: parseFloat(amount),
-        currency: currency || 'USD',
+        amount: finalAmount,
+        currency: finalCurrency,
         status: 'PENDING',
         method: method,
         reference: reference,
         metadata: {
           frequency,
-          provider_data: paymentData
+          provider_data: paymentData,
+          original_amount: amount,
+          original_currency: currency || 'USD',
         }
       }
     });

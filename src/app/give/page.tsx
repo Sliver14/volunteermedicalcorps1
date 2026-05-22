@@ -204,6 +204,7 @@ export default function GivePage() {
                     <div className={`p-4 border-2 transition-all w-full flex flex-col items-center min-h-[140px] justify-center bg-bg-surface ${paymentMode === 'PAYSTACK' ? 'border-brand-secondary shadow-inner' : 'border-border-main group-hover:border-brand-secondary'}`}>
                       <div className="text-[10px] font-bold text-center mb-3 text-text-main uppercase tracking-widest">Paystack<br/><span className="text-brand-secondary">(Card / Transfer / USSD)</span></div>
                       <Image src="/give-images/paystack.png" alt="Paystack" width={80} height={30} className="object-contain" unoptimized />
+                      {paymentMode === 'PAYSTACK' && <div className="text-[10px] text-brand-secondary font-bold mt-1">Total: ₦{(displayAmount * 1500).toLocaleString()}</div>}
                     </div>
                   </label>
                   <label className="flex flex-col items-center gap-2 cursor-pointer group">

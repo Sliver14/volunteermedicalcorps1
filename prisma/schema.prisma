@@ -317,7 +317,7 @@ model Donation {
   amount      Float
   currency    String   @default("USD")
   status      DonationStatus @default(Completed)
-  reference   String?  @unique
+  reference   String?
   method      PaymentMethod @default(BANK)
   metadata    Json?
   createdAt   DateTime @default(now())

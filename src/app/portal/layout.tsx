@@ -191,6 +191,16 @@ export default function PortalLayout() {
               </div>
             );
           })}
+          {/* Logout */}
+          <div className="pt-4">
+            <button
+              onClick={() => signOut({ callbackUrl: "/login" })}
+              className="flex items-center w-full px-4 py-3.5 rounded-xl transition-all group text-red-500 hover:bg-red-50"
+            >
+              <FaSignOutAlt className="mr-4 text-lg" />
+              <span className="text-[14px] font-bold uppercase tracking-widest">Logout</span>
+            </button>
+          </div>
         </nav>
 
         {/* Academy Button */}

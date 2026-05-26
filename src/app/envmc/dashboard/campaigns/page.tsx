@@ -90,12 +90,12 @@ export default function CampaignsManager() {
     setUploading(false);
   };
 
-  if (loading) return <p className="text-[#002866] font-bold animate-pulse">Loading Campaigns...</p>;
+  if (loading) return <p className="text-brand-primary dark:text-brand-secondary font-bold animate-pulse">Loading Campaigns...</p>;
 
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-black text-[#002866] uppercase tracking-tight">Manage Campaigns</h2>
+        <h2 className="text-xl font-black text-text-main uppercase tracking-tight">Manage Campaigns</h2>
         <button 
           onClick={() => { 
             setIsEditing("new"); 
@@ -111,7 +111,7 @@ export default function CampaignsManager() {
               raised: 0
             }); 
           }}
-          className="bg-[#ff9f22] text-[#002866] px-6 py-2 rounded-sm font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-[#002866] hover:text-white transition-all shadow-md"
+          className="bg-brand-secondary text-brand-primary px-6 py-2 rounded-sm font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-brand-primary hover:text-white transition-all shadow-md"
         >
           <Plus size={16} /> New Campaign
         </button>
@@ -120,38 +120,38 @@ export default function CampaignsManager() {
       {/* Editor Modal */}
       {isEditing && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-4xl rounded-sm shadow-2xl overflow-hidden animate-in zoom-in duration-300 flex flex-col max-h-[90vh]">
-            <div className="bg-[#002866] p-6 flex justify-between items-center shrink-0">
+          <div className="bg-bg-surface w-full max-w-4xl rounded-sm shadow-2xl overflow-hidden animate-in zoom-in duration-300 flex flex-col max-h-[90vh] border border-border-main">
+            <div className="bg-brand-primary p-6 flex justify-between items-center shrink-0">
               <h3 className="text-white font-black uppercase tracking-widest">{isEditing === "new" ? "New Campaign" : "Edit Campaign"}</h3>
               <button onClick={() => setIsEditing(null)} className="text-white/60 hover:text-white"><X size={24} /></button>
             </div>
             <div className="p-8 space-y-6 overflow-y-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-400">Campaign Title</label>
+                  <label className="text-[10px] font-black uppercase text-text-muted">Campaign Title</label>
                   <input 
-                    className="w-full border border-gray-100 bg-gray-50 p-3 text-sm focus:outline-none focus:border-[#ff9f22]"
+                    className="w-full border border-border-main bg-bg-base p-3 text-sm text-text-main focus:outline-none focus:border-brand-secondary"
                     value={editForm.title || ""}
                     onChange={(e) => setEditData({ ...editForm, title: e.target.value })}
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-400">Category</label>
+                  <label className="text-[10px] font-black uppercase text-text-muted">Category</label>
                   <select 
-                    className="w-full border border-gray-100 bg-gray-50 p-3 text-sm focus:outline-none focus:border-[#ff9f22]"
+                    className="w-full border border-border-main bg-bg-base p-3 text-sm text-text-main focus:outline-none focus:border-brand-secondary"
                     value={editForm.category || ""}
                     onChange={(e) => setEditData({ ...editForm, category: e.target.value })}
                   >
-                    {categories.map(c => <option key={c} value={c}>{c}</option>)}
+                    {categories.map(c => <option key={c} value={c} className="bg-bg-surface">{c}</option>)}
                   </select>
                 </div>
               </div>
               
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase text-gray-400">Description</label>
+                <label className="text-[10px] font-black uppercase text-text-muted">Description</label>
                 <textarea 
                   rows={3}
-                  className="w-full border border-gray-100 bg-gray-50 p-3 text-sm focus:outline-none focus:border-[#ff9f22]"
+                  className="w-full border border-border-main bg-bg-base p-3 text-sm text-text-main focus:outline-none focus:border-brand-secondary"
                   value={editForm.description || ""}
                   onChange={(e) => setEditData({ ...editForm, description: e.target.value })}
                 />
@@ -159,59 +159,59 @@ export default function CampaignsManager() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-400">Region</label>
+                  <label className="text-[10px] font-black uppercase text-text-muted">Region</label>
                   <select 
-                    className="w-full border border-gray-100 bg-gray-50 p-3 text-sm focus:outline-none focus:border-[#ff9f22]"
+                    className="w-full border border-border-main bg-bg-base p-3 text-sm text-text-main focus:outline-none focus:border-brand-secondary"
                     value={editForm.region || ""}
                     onChange={(e) => setEditData({ ...editForm, region: e.target.value })}
                   >
-                    {regions.map(r => <option key={r} value={r}>{r}</option>)}
+                    {regions.map(r => <option key={r} value={r} className="bg-bg-surface">{r}</option>)}
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-400">Target Amount ($)</label>
+                  <label className="text-[10px] font-black uppercase text-text-muted">Target Amount ($)</label>
                   <input 
                     type="number"
-                    className="w-full border border-gray-100 bg-gray-50 p-3 text-sm focus:outline-none focus:border-[#ff9f22]"
+                    className="w-full border border-border-main bg-bg-base p-3 text-sm text-text-main focus:outline-none focus:border-brand-secondary"
                     value={editForm.target || 0}
                     onChange={(e) => setEditData({ ...editForm, target: parseFloat(e.target.value) })}
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-400">Raised Amount ($)</label>
+                  <label className="text-[10px] font-black uppercase text-text-muted">Raised Amount ($)</label>
                   <input 
                     type="number"
-                    className="w-full border border-gray-100 bg-gray-50 p-3 text-sm focus:outline-none focus:border-[#ff9f22]"
+                    className="w-full border border-border-main bg-bg-base p-3 text-sm text-text-main focus:outline-none focus:border-brand-secondary"
                     value={editForm.raised || 0}
                     onChange={(e) => setEditData({ ...editForm, raised: parseFloat(e.target.value) })}
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-gray-50">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-border-main">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-400">CTA Type</label>
+                  <label className="text-[10px] font-black uppercase text-text-muted">CTA Type</label>
                   <select 
-                    className="w-full border border-gray-100 bg-gray-50 p-3 text-sm focus:outline-none focus:border-[#ff9f22]"
+                    className="w-full border border-border-main bg-bg-base p-3 text-sm text-text-main focus:outline-none focus:border-brand-secondary"
                     value={editForm.ctaType || ""}
                     onChange={(e) => setEditData({ ...editForm, ctaType: e.target.value })}
                   >
-                    {ctaTypes.map(t => <option key={t} value={t}>{t}</option>)}
+                    {ctaTypes.map(t => <option key={t} value={t} className="bg-bg-surface">{t}</option>)}
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-400">CTA Button Text</label>
+                  <label className="text-[10px] font-black uppercase text-text-muted">CTA Button Text</label>
                   <input 
-                    className="w-full border border-gray-100 bg-gray-50 p-3 text-sm focus:outline-none focus:border-[#ff9f22]"
+                    className="w-full border border-border-main bg-bg-base p-3 text-sm text-text-main focus:outline-none focus:border-brand-secondary"
                     value={editForm.ctaText || ""}
                     onChange={(e) => setEditData({ ...editForm, ctaText: e.target.value })}
                     placeholder="e.g. Give Now"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase text-gray-400">CTA Link (External)</label>
+                  <label className="text-[10px] font-black uppercase text-text-muted">CTA Link (External)</label>
                   <input 
-                    className="w-full border border-gray-100 bg-gray-50 p-3 text-sm focus:outline-none focus:border-[#ff9f22]"
+                    className="w-full border border-border-main bg-bg-base p-3 text-sm text-text-main focus:outline-none focus:border-brand-secondary"
                     value={editForm.ctaLink || ""}
                     onChange={(e) => setEditData({ ...editForm, ctaLink: e.target.value })}
                     placeholder="https://..."
@@ -220,23 +220,23 @@ export default function CampaignsManager() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase text-gray-400">Campaign Image</label>
+                <label className="text-[10px] font-black uppercase text-text-muted">Campaign Image</label>
                 <div className="flex gap-4 items-center">
-                  <div className="relative w-32 h-20 bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center overflow-hidden">
+                  <div className="relative w-32 h-20 bg-bg-base border border-dashed border-border-main flex items-center justify-center overflow-hidden">
                     {editForm.image ? (
                       <Image src={editForm.image} alt="Preview" fill className="object-cover" unoptimized />
                     ) : (
-                      <Upload className="text-gray-300" />
+                      <Upload className="text-text-muted" />
                     )}
                   </div>
                   <div className="flex-1 space-y-2">
                     <input 
-                      className="w-full border border-gray-100 bg-gray-50 p-2 text-xs focus:outline-none focus:border-[#ff9f22]"
+                      className="w-full border border-border-main bg-bg-base p-2 text-xs text-text-main focus:outline-none focus:border-brand-secondary"
                       value={editForm.image || ""}
                       onChange={(e) => setEditData({ ...editForm, image: e.target.value })}
                       placeholder="Image URL or upload"
                     />
-                    <label className="inline-block bg-[#002866] text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest cursor-pointer hover:bg-[#ff9f22] hover:text-[#002866] transition-all">
+                    <label className="inline-block bg-brand-primary text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest cursor-pointer hover:bg-brand-secondary hover:text-brand-primary transition-all">
                       {uploading ? "Uploading..." : "Upload New Image"}
                       <input type="file" className="hidden" onChange={handleUpload} accept="image/*" disabled={uploading} />
                     </label>
@@ -244,9 +244,9 @@ export default function CampaignsManager() {
                 </div>
               </div>
             </div>
-            <div className="p-6 bg-gray-50 border-t border-gray-100 flex justify-end gap-3 shrink-0">
-              <button onClick={() => setIsEditing(null)} className="px-6 py-2 text-xs font-black uppercase text-gray-400 hover:text-gray-600">Cancel</button>
-              <button onClick={handleSave} className="bg-[#002866] text-white px-8 py-2 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-[#ff9f22] hover:text-[#002866] transition-all">Save Campaign</button>
+            <div className="p-6 bg-bg-base border-t border-border-main flex justify-end gap-3 shrink-0">
+              <button onClick={() => setIsEditing(null)} className="px-6 py-2 text-xs font-black uppercase text-text-muted hover:text-text-main">Cancel</button>
+              <button onClick={handleSave} className="bg-brand-primary text-white px-8 py-2 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-brand-secondary hover:text-brand-primary transition-all">Save Campaign</button>
             </div>
           </div>
         </div>
@@ -255,21 +255,21 @@ export default function CampaignsManager() {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {campaigns.map((camp) => (
-          <div key={camp.id} className="bg-white border border-gray-100 rounded-sm overflow-hidden shadow-sm flex flex-col group">
+          <div key={camp.id} className="bg-bg-surface border border-border-main rounded-sm overflow-hidden shadow-sm flex flex-col group">
             <div className="relative h-48">
               {camp.image && <Image src={camp.image} alt={camp.title} fill className="object-cover" unoptimized />}
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
-              <div className="absolute top-4 left-4 bg-[#ff9f22] text-[#002866] text-[9px] font-black uppercase px-2 py-1">
+              <div className="absolute top-4 left-4 bg-brand-secondary text-brand-primary text-[9px] font-black uppercase px-2 py-1">
                 {camp.category}
               </div>
               <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <button onClick={() => handleEdit(camp)} className="p-2 bg-white text-[#002866] rounded-full shadow-lg hover:bg-[#ff9f22] transition-colors"><Edit2 size={14} /></button>
-                <button onClick={() => handleDelete(camp.id)} className="p-2 bg-white text-red-600 rounded-full shadow-lg hover:bg-red-600 hover:text-white transition-colors"><Trash2 size={14} /></button>
+                <button onClick={() => handleEdit(camp)} className="p-2 bg-bg-surface text-brand-primary rounded-full shadow-lg hover:bg-brand-secondary transition-colors"><Edit2 size={14} /></button>
+                <button onClick={() => handleDelete(camp.id)} className="p-2 bg-bg-surface text-red-600 rounded-full shadow-lg hover:bg-red-600 hover:text-white transition-colors"><Trash2 size={14} /></button>
               </div>
               <div className="absolute bottom-4 left-4 right-4">
                 <div className="h-1.5 w-full bg-black/40 rounded-full overflow-hidden">
                   <div 
-                    className="h-full bg-[#ff9f22]" 
+                    className="h-full bg-brand-secondary" 
                     style={{ width: `${Math.min(100, (camp.raised / (camp.target || 1)) * 100)}%` }} 
                   />
                 </div>
@@ -280,15 +280,15 @@ export default function CampaignsManager() {
               </div>
             </div>
             <div className="p-6 flex-grow flex flex-col">
-              <h4 className="text-[#002866] font-bold uppercase text-sm mb-3 line-clamp-1">{camp.title}</h4>
-              <p className="text-gray-400 text-xs line-clamp-2 italic mb-4">&quot;{camp.description}&quot;</p>
+              <h4 className="text-brand-primary dark:text-brand-secondary font-bold uppercase text-sm mb-3 line-clamp-1">{camp.title}</h4>
+              <p className="text-text-muted text-xs line-clamp-2 italic mb-4">&quot;{camp.description}&quot;</p>
               
-              <div className="mt-auto space-y-2 border-t border-gray-50 pt-4">
+              <div className="mt-auto space-y-2 border-t border-border-main pt-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-                    <Globe size={12} className="text-[#ff9f22]" /> {camp.region}
+                  <div className="flex items-center gap-2 text-[10px] font-bold text-text-muted uppercase tracking-widest">
+                    <Globe size={12} className="text-brand-secondary" /> {camp.region}
                   </div>
-                  <div className="flex items-center gap-1 text-[10px] font-bold text-[#002866] uppercase tracking-widest bg-gray-50 px-2 py-1">
+                  <div className="flex items-center gap-1 text-[10px] font-bold text-brand-primary dark:text-brand-secondary uppercase tracking-widest bg-bg-base px-2 py-1">
                     <LinkIcon size={10} /> {camp.ctaType}
                   </div>
                 </div>

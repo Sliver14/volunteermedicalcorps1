@@ -55,7 +55,7 @@ export default function VideoGalleryPage() {
   };
 
   return (
-    <div className="w-full bg-white font-roboto">
+    <div className="w-full bg-bg-base font-roboto">
       <PageBanner title="VIDEO GALLERY" parent={{ label: "Media", href: "#" }} />
       
       {/* Featured Video Section (Matched to HTML Template) */}
@@ -79,7 +79,7 @@ export default function VideoGalleryPage() {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <button 
                     onClick={() => openVideoModal("https://cdnvideos.ceflix.org/processed/155112-1757938061446036692468.mp4")}
-                    className="w-20 h-20 md:w-24 md:h-24 bg-white/20 backdrop-blur-sm border-2 border-white rounded-full flex items-center justify-center text-white text-3xl hover:bg-[#ff9f22] hover:border-[#ff9f22] hover:text-[#002866] transition-all duration-300 transform hover:scale-110 shadow-2xl group"
+                    className="w-20 h-20 md:w-24 md:h-24 bg-white/20 backdrop-blur-sm border-2 border-white rounded-full flex items-center justify-center text-white text-3xl hover:bg-brand-secondary hover:border-brand-secondary hover:text-brand-primary transition-all duration-300 transform hover:scale-110 shadow-2xl group"
                   >
                     <FaPlay className="ml-2 group-hover:scale-110 transition-transform" />
                   </button>
@@ -87,7 +87,7 @@ export default function VideoGalleryPage() {
 
                 {/* Bottom Details Box */}
                 <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full max-w-2xl">
-                  <div className="bg-white rounded-sm shadow-xl p-4 md:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="bg-bg-surface rounded-sm shadow-xl p-4 md:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border border-border-main">
                     <div className="flex items-center gap-4">
                       <Image 
                         src="https://volunteermedicalcorps.org/images/default-avatar.jpg" 
@@ -96,13 +96,13 @@ export default function VideoGalleryPage() {
                         className="rounded-full"
                         unoptimized
                       />
-                      <h4 className="font-bold text-[#002866] text-sm md:text-base uppercase leading-snug pr-4 border-r border-gray-100">
+                      <h4 className="font-bold text-brand-primary dark:text-brand-secondary text-sm md:text-base uppercase leading-snug pr-4 border-r border-border-main">
                         Simple ways to prevent cardiac arrest
                       </h4>
                     </div>
                     <button 
                       onClick={() => openVideoModal("https://cdnvideos.ceflix.org/processed/155112-1757938061446036692468.mp4")}
-                      className="shrink-0 bg-[#ff9f22] text-[#002866] px-8 py-3 font-black uppercase tracking-widest text-xs hover:bg-[#002866] hover:text-white transition-all shadow-md rounded-sm"
+                      className="shrink-0 bg-brand-secondary text-brand-primary px-8 py-3 font-black uppercase tracking-widest text-xs hover:bg-brand-primary hover:text-white transition-all shadow-md rounded-sm"
                     >
                       WATCH
                     </button>
@@ -112,7 +112,7 @@ export default function VideoGalleryPage() {
             </div>
 
             {/* Right: Title and Meta Panel */}
-            <div className="lg:w-1/3 bg-[#002866] p-10 md:p-16 lg:p-20 flex flex-col justify-center relative">
+            <div className="lg:w-1/3 bg-brand-primary p-10 md:p-16 lg:p-20 flex flex-col justify-center relative">
               {/* Decorative Pattern overlay */}
               <div className="absolute inset-0 opacity-[0.03]">
                 <div className="absolute -bottom-24 -right-24 w-96 h-96 border-[40px] border-white rounded-full"></div>
@@ -125,7 +125,7 @@ export default function VideoGalleryPage() {
                 transition={{ duration: 0.4 }}
                 className="relative z-10"
               >
-                <h6 className="text-[#ff9f22] font-black uppercase tracking-widest text-xs mb-4">Featured Highlight</h6>
+                <h6 className="text-brand-secondary font-black uppercase tracking-widest text-xs mb-4">Featured Highlight</h6>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-poppins font-bold text-white mb-10 leading-tight">
                   Simple ways to prevent cardiac arrest
                 </h2>
@@ -135,13 +135,13 @@ export default function VideoGalleryPage() {
                   <div className="flex items-center gap-4 mt-6">
                     <button 
                       onClick={() => openVideoModal("https://cdnvideos.ceflix.org/processed/155112-1757938061446036692468.mp4")}
-                      className="bg-white text-[#002866] px-6 py-3 font-bold uppercase tracking-widest text-xs hover:bg-[#ff9f22] transition-colors rounded-sm"
+                      className="bg-white text-brand-primary px-6 py-3 font-bold uppercase tracking-widest text-xs hover:bg-brand-secondary transition-colors rounded-sm"
                     >
                       Play Video
                     </button>
                     <button 
                       onClick={() => handleShare(-1)}
-                      className="text-white hover:text-[#ff9f22] transition-colors p-3 border border-white/20 hover:border-white/50 rounded-sm"
+                      className="text-white hover:text-brand-secondary transition-colors p-3 border border-white/20 hover:border-white/50 rounded-sm"
                     >
                       <FaShareAlt />
                     </button>
@@ -149,7 +149,7 @@ export default function VideoGalleryPage() {
 
                   {/* Share Menu for Featured */}
                   {activeShareMenu === -1 && (
-                    <div className="mt-4 bg-white shadow-xl rounded-sm p-2 flex gap-2 animate-fadeIn border border-gray-100 max-w-fit">
+                    <div className="mt-4 bg-bg-surface shadow-xl rounded-sm p-2 flex gap-2 animate-fadeIn border border-border-main max-w-fit">
                       <button onClick={() => window.open(`https://facebook.com/sharer/sharer.php?u=vmc.org`, '_blank')} className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"><FaFacebookF /></button>
                       <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=Watch this!`, '_blank')} className="w-10 h-10 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors"><FaTwitter /></button>
                       <button onClick={() => window.open(`https://api.whatsapp.com/send?text=Watch this!`, '_blank')} className="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"><FaWhatsapp /></button>
@@ -166,7 +166,7 @@ export default function VideoGalleryPage() {
       </section>
 
       {/* Video Grid */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-bg-base">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -175,8 +175,8 @@ export default function VideoGalleryPage() {
             transition={{ duration: 0.4 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-poppins font-bold text-[#002866] uppercase">Latest Videos</h2>
-            <div className="w-24 h-1 bg-[#ff9f22] mx-auto mt-6"></div>
+            <h2 className="text-4xl font-poppins font-bold text-text-main uppercase">Latest Videos</h2>
+            <div className="w-24 h-1 bg-brand-secondary mx-auto mt-6"></div>
           </motion.div>
 
           <motion.div 
@@ -196,7 +196,7 @@ export default function VideoGalleryPage() {
                   hidden: { opacity: 0, y: 30 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
                 }}
-                className="group flex flex-col relative bg-white p-4 rounded-sm shadow-sm border border-gray-100"
+                className="group flex flex-col relative bg-bg-surface p-4 rounded-sm shadow-sm border border-border-main"
               >
                 <div 
                   onClick={() => openVideoModal(video.url)}
@@ -209,8 +209,8 @@ export default function VideoGalleryPage() {
                     className="object-cover group-hover:scale-110 transition-transform duration-300"
                     unoptimized
                   />
-                  <div className="absolute inset-0 bg-[#002866]/20 group-hover:bg-[#002866]/40 transition-colors flex items-center justify-center">
-                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-[#ff9f22] group-hover:text-[#002866] text-white transition-all shadow-lg transform group-hover:scale-110">
+                  <div className="absolute inset-0 bg-brand-primary/20 group-hover:bg-brand-primary/40 transition-colors flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-brand-secondary group-hover:text-brand-primary text-white transition-all shadow-lg transform group-hover:scale-110">
                       <FaPlay className="ml-1 text-xl" />
                     </div>
                   </div>
@@ -218,7 +218,7 @@ export default function VideoGalleryPage() {
                 
                 <div className="flex justify-between items-start gap-4 mt-2">
                   <div className="flex-1">
-                    <h3 onClick={() => openVideoModal(video.url)} className="text-sm font-bold text-[#002866] group-hover:text-[#ff9f22] transition-colors leading-snug cursor-pointer uppercase pr-4">
+                    <h3 onClick={() => openVideoModal(video.url)} className="text-sm font-bold text-text-main group-hover:text-brand-secondary transition-colors leading-snug cursor-pointer uppercase pr-4">
                       {video.title}
                     </h3>
                   </div>
@@ -226,14 +226,14 @@ export default function VideoGalleryPage() {
                   <div className="relative shrink-0">
                     <button 
                       onClick={(e) => { e.stopPropagation(); handleShare(index); }}
-                      className="p-2 text-gray-400 hover:text-[#002866] transition-colors rounded-full hover:bg-gray-100"
+                      className="p-2 text-text-muted hover:text-brand-primary dark:hover:text-brand-secondary transition-colors rounded-full hover:bg-bg-base"
                     >
                       <FaShareAlt />
                     </button>
                     
                     {/* Share Menu Dropdown */}
                     {activeShareMenu === index && (
-                      <div className="absolute right-0 top-10 z-20 bg-white shadow-xl rounded-sm p-3 flex gap-2 animate-fadeIn border border-gray-100">
+                      <div className="absolute right-0 top-10 z-20 bg-bg-surface shadow-xl rounded-sm p-3 flex gap-2 animate-fadeIn border border-border-main">
                         <button onClick={() => window.open(`https://facebook.com/sharer/sharer.php?u=vmc.org`, '_blank')} className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"><FaFacebookF size={12} /></button>
                         <button onClick={() => window.open(`https://twitter.com/intent/tweet?text=Watch: ${video.title}`, '_blank')} className="w-8 h-8 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600 transition-colors"><FaTwitter size={12} /></button>
                         <button onClick={() => window.open(`https://api.whatsapp.com/send?text=Watch: ${video.title}`, '_blank')} className="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-colors"><FaWhatsapp size={12} /></button>

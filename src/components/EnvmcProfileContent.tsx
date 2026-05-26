@@ -69,39 +69,39 @@ export default function EnvmcProfileContent() {
   return (
     <div className="max-w-4xl space-y-8">
       {/* User Details Card */}
-      <div className="bg-white rounded-sm shadow-sm border border-gray-100 overflow-hidden">
-        <div className="p-6 md:p-8 border-b border-gray-100 bg-gray-50/50">
-          <h2 className="text-xl font-black text-[#002866] uppercase tracking-tight flex items-center gap-3">
+      <div className="bg-bg-surface rounded-sm shadow-sm border border-border-main overflow-hidden">
+        <div className="p-6 md:p-8 border-b border-border-main bg-bg-base/50">
+          <h2 className="text-xl font-black text-brand-primary dark:text-brand-secondary uppercase tracking-tight flex items-center gap-3">
             <User className="text-[#ff9f22]" size={24} />
             Account Details
           </h2>
-          <p className="text-gray-400 text-xs font-bold uppercase mt-1">Basic information about your admin account</p>
+          <p className="text-text-muted text-xs font-bold uppercase mt-1">Basic information about your admin account</p>
         </div>
         
         <div className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-1">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+            <label className="text-[10px] font-black text-text-muted uppercase tracking-widest flex items-center gap-2">
               <User size={12} /> Full Name
             </label>
-            <div className="p-4 bg-gray-50 border border-gray-100 rounded-sm font-bold text-[#002866]">
+            <div className="p-4 bg-bg-base border border-border-main rounded-sm font-bold text-brand-primary dark:text-brand-secondary">
               {session?.user?.name}
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+            <label className="text-[10px] font-black text-text-muted uppercase tracking-widest flex items-center gap-2">
               <Mail size={12} /> Email Address
             </label>
-            <div className="p-4 bg-gray-50 border border-gray-100 rounded-sm font-bold text-[#002866]">
+            <div className="p-4 bg-bg-base border border-border-main rounded-sm font-bold text-brand-primary dark:text-brand-secondary">
               {session?.user?.email}
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+            <label className="text-[10px] font-black text-text-muted uppercase tracking-widest flex items-center gap-2">
               <Shield size={12} /> Account Role
             </label>
-            <div className="p-4 bg-gray-50 border border-gray-100 rounded-sm font-bold text-[#002866]">
+            <div className="p-4 bg-bg-base border border-border-main rounded-sm font-bold text-brand-primary dark:text-brand-secondary">
               {session?.user?.role}
             </div>
           </div>
@@ -109,19 +109,19 @@ export default function EnvmcProfileContent() {
       </div>
 
       {/* Change Password Card */}
-      <div className="bg-white rounded-sm shadow-sm border border-gray-100 overflow-hidden">
-        <div className="p-6 md:p-8 border-b border-gray-100 bg-gray-50/50">
-          <h2 className="text-xl font-black text-[#002866] uppercase tracking-tight flex items-center gap-3">
+      <div className="bg-bg-surface rounded-sm shadow-sm border border-border-main overflow-hidden">
+        <div className="p-6 md:p-8 border-b border-border-main bg-bg-base/50">
+          <h2 className="text-xl font-black text-brand-primary dark:text-brand-secondary uppercase tracking-tight flex items-center gap-3">
             <Lock className="text-[#ff9f22]" size={24} />
             Security Settings
           </h2>
-          <p className="text-gray-400 text-xs font-bold uppercase mt-1">Update your password to keep your account secure</p>
+          <p className="text-text-muted text-xs font-bold uppercase mt-1">Update your password to keep your account secure</p>
         </div>
 
         <form onSubmit={handleChangePassword} className="p-6 md:p-8 space-y-6">
           {message.text && (
             <div className={`p-4 rounded-sm flex items-center gap-3 ${
-              message.type === "success" ? "bg-green-50 text-green-700 border border-green-100" : "bg-red-50 text-red-700 border border-red-100"
+              message.type === "success" ? "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-100 dark:border-green-900/30" : "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 border border-red-100 dark:border-red-900/30"
             }`}>
               {message.type === "success" ? <CheckCircle2 size={18} /> : <AlertCircle size={18} />}
               <p className="text-sm font-bold uppercase tracking-tight">{message.text}</p>
@@ -130,20 +130,20 @@ export default function EnvmcProfileContent() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2 col-span-1 md:col-span-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Current Password</label>
+              <label className="text-[10px] font-black text-text-muted uppercase tracking-widest">Current Password</label>
               <div className="relative">
                 <input
                   type={showCurrent ? "text" : "password"}
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
-                  className="w-full px-4 py-4 bg-gray-50 border border-gray-100 rounded-sm focus:outline-none focus:border-[#ff9f22] transition-colors font-bold text-[#002866]"
+                  className="w-full px-4 py-4 bg-bg-base border border-border-main rounded-sm focus:outline-none focus:border-[#ff9f22] transition-colors font-bold text-brand-primary dark:text-brand-secondary"
                   placeholder="Enter current password"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowCurrent(!showCurrent)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#002866]"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-brand-primary dark:hover:text-brand-secondary"
                 >
                   {showCurrent ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -151,20 +151,20 @@ export default function EnvmcProfileContent() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">New Password</label>
+              <label className="text-[10px] font-black text-text-muted uppercase tracking-widest">New Password</label>
               <div className="relative">
                 <input
                   type={showNew ? "text" : "password"}
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full px-4 py-4 bg-gray-50 border border-gray-100 rounded-sm focus:outline-none focus:border-[#ff9f22] transition-colors font-bold text-[#002866]"
+                  className="w-full px-4 py-4 bg-bg-base border border-border-main rounded-sm focus:outline-none focus:border-[#ff9f22] transition-colors font-bold text-brand-primary dark:text-brand-secondary"
                   placeholder="Enter new password"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowNew(!showNew)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#002866]"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-brand-primary dark:hover:text-brand-secondary"
                 >
                   {showNew ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -172,20 +172,20 @@ export default function EnvmcProfileContent() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Confirm New Password</label>
+              <label className="text-[10px] font-black text-text-muted uppercase tracking-widest">Confirm New Password</label>
               <div className="relative">
                 <input
                   type={showConfirm ? "text" : "password"}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-4 bg-gray-50 border border-gray-100 rounded-sm focus:outline-none focus:border-[#ff9f22] transition-colors font-bold text-[#002866]"
+                  className="w-full px-4 py-4 bg-bg-base border border-border-main rounded-sm focus:outline-none focus:border-[#ff9f22] transition-colors font-bold text-brand-primary dark:text-brand-secondary"
                   placeholder="Confirm new password"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirm(!showConfirm)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#002866]"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-brand-primary dark:hover:text-brand-secondary"
                 >
                   {showConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>

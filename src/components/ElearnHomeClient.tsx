@@ -66,7 +66,7 @@ export default function ElearnHomeClient({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="elearn-wrapper font-sans text-slate-800 bg-white overflow-x-hidden antialiased">
+    <div className="elearn-wrapper font-sans text-text-main bg-bg-base overflow-x-hidden antialiased">
       {/* Top Header */}
       <div className="bg-[#001f4d] text-white/90 py-2.5 px-4 text-xs border-b border-white/5">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -84,7 +84,7 @@ export default function ElearnHomeClient({
       </div>
 
       {/* Navbar */}
-      <nav className="bg-white border-b border-slate-100 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+      <nav className="bg-bg-surface border-b border-border-main sticky top-0 z-50 backdrop-blur-md bg-bg-surface/95 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
           <Link href="/elearn" className="flex-shrink-0">
             <Image
@@ -92,34 +92,34 @@ export default function ElearnHomeClient({
               alt="VMC Logo"
               width={160}
               height={50}
-              className="h-10 w-auto object-contain"
+              className="h-10 w-auto object-contain dark:brightness-125 transition-all"
               priority
             />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            <Link href="/elearn" className="text-sm font-semibold text-[#002866] hover:text-[#00a3e0] transition-colors">Home</Link>
-            <Link href="/elearn/about" className="text-sm font-semibold text-slate-600 hover:text-[#00a3e0] transition-colors">About</Link>
+            <Link href="/elearn" className="text-sm font-semibold text-brand-primary dark:text-brand-secondary hover:text-[#00a3e0] transition-colors">Home</Link>
+            <Link href="/elearn/about" className="text-sm font-semibold text-text-muted hover:text-[#00a3e0] transition-colors">About</Link>
             <div className="group relative">
-              <Link href="/elearn/courses" className="text-sm font-semibold text-slate-600 hover:text-[#00a3e0] transition-colors flex items-center gap-1">
+              <Link href="/elearn/courses" className="text-sm font-semibold text-text-muted hover:text-[#00a3e0] transition-colors flex items-center gap-1">
                 Courses <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
               </Link>
-              <div className="absolute top-full left-0 w-60 bg-white shadow-xl rounded-b-xl border-t-2 border-[#00a3e0] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0">
+              <div className="absolute top-full left-0 w-64 bg-bg-surface shadow-xl rounded-b-xl border-t-2 border-[#00a3e0] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0">
                 {categories.map((cat) => (
-                  <Link key={cat.id} href={`/elearn/categories/${cat.id}`} className="block px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#00a3e0]">
+                  <Link key={cat.id} href={`/elearn/categories/${cat.id}`} className="block px-4 py-2 text-xs font-semibold text-text-main hover:bg-bg-base hover:text-[#00a3e0]">
                     {cat.name}
                   </Link>
                 ))}
               </div>
             </div>
-            <Link href="/elearn/instructors" className="text-sm font-semibold text-slate-600 hover:text-[#00a3e0] transition-colors">Instructors</Link>
-            <Link href="/elearn/students" className="text-sm font-semibold text-slate-600 hover:text-[#00a3e0] transition-colors">Students</Link>
-            <Link href="/elearn/contacts" className="text-sm font-semibold text-slate-600 hover:text-[#00a3e0] transition-colors">Contact</Link>
+            <Link href="/elearn/instructors" className="text-sm font-semibold text-text-muted hover:text-[#00a3e0] transition-colors">Instructors</Link>
+            <Link href="/elearn/students" className="text-sm font-semibold text-text-muted hover:text-[#00a3e0] transition-colors">Students</Link>
+            <Link href="/elearn/contacts" className="text-sm font-semibold text-text-muted hover:text-[#00a3e0] transition-colors">Contact</Link>
           </div>
 
           <div className="flex items-center gap-3">
-            <button onClick={() => setIsSearchOpen(true)} className="w-10 h-10 flex items-center justify-center text-slate-600 hover:text-[#00a3e0] hover:bg-slate-50 rounded-lg transition-colors">
+            <button onClick={() => setIsSearchOpen(true)} className="w-10 h-10 flex items-center justify-center text-text-muted hover:text-[#00a3e0] hover:bg-bg-base rounded-lg transition-colors">
               <Search className="w-5 h-5" />
             </button>
             <button onClick={() => setIsMenuOpen(true)} className="lg:hidden w-10 h-10 flex items-center justify-center bg-slate-900 text-white rounded-lg">
@@ -180,7 +180,7 @@ export default function ElearnHomeClient({
 
       {/* Feature Value Banner - Re-styled for Flush Alignment */}
       <section className="relative -mt-20 z-20 px-4">
-        <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden grid sm:grid-cols-2 lg:grid-cols-4">
+        <div className="max-w-7xl mx-auto bg-bg-surface rounded-3xl shadow-xl border border-border-main overflow-hidden grid sm:grid-cols-2 lg:grid-cols-4">
           {[
             { title: "Learn The Latest Skills", desc: "Medical, business, professional skills and more...", bg: "bg-[#002866]", text: "text-white", icon: BookOpen, accent: "text-[#00a3e0]" },
             { title: "Premium Online Courses", desc: "In high-demand fields like Medicine, IT and Management.", bg: "bg-[#003d99]", text: "text-white", icon: Video, accent: "text-white/80" },
@@ -204,14 +204,14 @@ export default function ElearnHomeClient({
       </section>
 
       {/* Trending Online Courses */}
-      <section className="py-20 bg-slate-50/50">
+      <section className="py-20 bg-bg-base transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
             <div>
               <span className="text-[#00a3e0] text-xs font-bold uppercase tracking-wider">Course Catalogue</span>
-              <h2 className="text-3xl font-extrabold text-[#002866] mt-2 tracking-tight">Trending Online Courses</h2>
+              <h2 className="text-3xl font-extrabold text-brand-primary dark:text-brand-secondary mt-2 tracking-tight">Trending Online Courses</h2>
             </div>
-            <Link href="/elearn/courses" className="bg-[#00a3e0] text-white px-5 py-2.5 rounded-lg text-xs font-bold hover:bg-[#0082b3] transition-colors">
+            <Link href="/elearn/courses" className="bg-[#00a3e0] text-white px-5 py-2.5 rounded-lg text-xs font-bold hover:bg-[#0082b3] transition-colors shadow-md">
               View All Courses
             </Link>
           </div>
@@ -230,33 +230,33 @@ export default function ElearnHomeClient({
           >
             {courses.map((course) => (
               <SwiperSlide key={course.id}>
-                <div className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition-all group flex flex-col h-full">
-                  <div className="relative aspect-video w-full bg-slate-100">
+                <div className="bg-bg-surface rounded-2xl overflow-hidden border border-border-main shadow-sm hover:shadow-md transition-all group flex flex-col h-full">
+                  <div className="relative aspect-video w-full bg-bg-base">
                     <Image
                       src={course.image}
                       alt={course.title}
                       fill
                       className="object-cover"
                     />
-                    <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[10px] font-bold px-3 py-1 rounded-md text-[#002866] shadow-xs">
+                    <span className="absolute top-3 left-3 bg-bg-surface/90 backdrop-blur-sm text-[10px] font-bold px-3 py-1 rounded-md text-brand-primary dark:text-brand-secondary shadow-xs">
                       {course.category.name}
                     </span>
                   </div>
 
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="w-6 h-6 rounded-full bg-slate-200 overflow-hidden relative">
+                      <div className="w-6 h-6 rounded-full bg-bg-base overflow-hidden relative border border-border-main">
                         <Image src="https://volunteermedicalcorps.org/elearn/instructors/images/users/default-avatar.jpg" fill alt="Avatar" />
                       </div>
-                      <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">VMC Academy</span>
+                      <span className="text-[11px] font-semibold text-text-muted uppercase tracking-wider">VMC Academy</span>
                     </div>
 
-                    <h3 className="font-bold text-base text-[#002866] group-hover:text-[#00a3e0] transition-colors line-clamp-2 mb-4">
+                    <h3 className="font-bold text-base text-brand-primary dark:text-text-main group-hover:text-[#00a3e0] transition-colors line-clamp-2 mb-4">
                       {course.title}
                     </h3>
 
-                    <div className="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
-                      <div className="flex items-center gap-3 text-xs font-medium text-slate-400">
+                    <div className="mt-auto pt-4 border-t border-border-main flex justify-between items-center">
+                      <div className="flex items-center gap-3 text-xs font-medium text-text-muted">
                         <span className="flex items-center gap-1"><Users className="w-3.5 h-3.5" /> {course.students || 0}</span>
                         <span className="flex items-center gap-1"><BookOpen className="w-3.5 h-3.5" /> {course.lessons || 0}</span>
                       </div>
@@ -273,17 +273,17 @@ export default function ElearnHomeClient({
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-bg-base transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5 space-y-6">
               <div>
                 <span className="text-[#00a3e0] text-xs font-bold uppercase tracking-wider">Discover Purpose</span>
-                <h2 className="text-3xl font-extrabold text-[#002866] mt-2 tracking-tight">Why choose to study with us</h2>
+                <h2 className="text-3xl font-extrabold text-brand-primary dark:text-brand-secondary mt-2 tracking-tight">Why choose to study with us</h2>
               </div>
               
-              <div className="space-y-4 text-slate-600">
-                <h3 className="text-xl font-bold text-slate-800">Learn without straining conditions</h3>
+              <div className="space-y-4 text-text-muted">
+                <h3 className="text-xl font-bold text-text-main">Learn without straining conditions</h3>
                 <p className="text-sm leading-relaxed">
                   Learning a new course doesn't have to be tedious or cumbersome. We believe in simplicity of courses and training modules, and that is why we have made it simple.
                 </p>
@@ -293,14 +293,14 @@ export default function ElearnHomeClient({
               </div>
 
               <div className="pt-2">
-                <Link href="/elearn/about" className="inline-flex items-center gap-2 bg-[#002866] text-white px-6 py-3 rounded-lg font-bold text-xs hover:bg-[#001f4d] transition-colors shadow-sm">
+                <Link href="/elearn/about" className="inline-flex items-center gap-2 bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-6 py-3 rounded-lg font-bold text-xs hover:bg-brand-primary/90 transition-colors shadow-sm">
                   Learn More <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
 
             <div className="lg:col-span-7 flex justify-end">
-              <div className="relative w-full max-w-xl aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-slate-100">
+              <div className="relative w-full max-w-xl aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-border-main">
                 <Image src="https://volunteermedicalcorps.org/elearn/assets/images/home-inner-banner.jpg" fill className="object-cover" alt="Mission workspace" />
               </div>
             </div>
@@ -309,14 +309,14 @@ export default function ElearnHomeClient({
       </section>
 
       {/* Browse Trending Categories */}
-      <section className="py-20 bg-slate-50/50 border-t border-slate-100">
+      <section className="py-20 bg-bg-base border-t border-border-main transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
             <div>
               <span className="text-[#00a3e0] text-xs font-bold uppercase tracking-wider">Knowledge Base</span>
-              <h2 className="text-3xl font-extrabold text-[#002866] mt-2 tracking-tight">Browse Trending Categories</h2>
+              <h2 className="text-3xl font-extrabold text-brand-primary dark:text-brand-secondary mt-2 tracking-tight">Browse Trending Categories</h2>
             </div>
-            <Link href="/elearn/courses" className="bg-white border border-slate-200 text-slate-700 px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-50 transition-colors">
+            <Link href="/elearn/courses" className="bg-bg-surface border border-border-main text-text-main px-4 py-2 rounded-lg text-xs font-bold hover:bg-bg-base transition-colors">
               View All Categories
             </Link>
           </div>
@@ -328,12 +328,12 @@ export default function ElearnHomeClient({
               { name: "Public Health", courses: "1 Courses", bg: "bg-[#14b8a6]", icon: Briefcase },
               { name: "Clinical Training", courses: "5 Courses", bg: "bg-[#3b82f6]", icon: GraduationCap },
             ].map((cat, idx) => (
-              <div key={idx} className="bg-white p-8 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md transition-all flex flex-col items-center text-center group">
+              <div key={idx} className="bg-bg-surface p-8 rounded-2xl border border-border-main shadow-xs hover:shadow-md transition-all flex flex-col items-center text-center group">
                 <div className={`w-16 h-16 ${cat.bg} text-white rounded-xl flex items-center justify-center text-2xl mb-6 shadow-sm`}>
                   <cat.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-base font-bold text-[#002866] mb-2 group-hover:text-[#00a3e0] transition-colors">{cat.name}</h3>
-                <span className="text-xs font-semibold text-slate-400">{cat.courses}</span>
+                <h3 className="text-base font-bold text-brand-primary dark:text-brand-secondary mb-2 group-hover:text-[#00a3e0] transition-colors">{cat.name}</h3>
+                <span className="text-xs font-semibold text-text-muted">{cat.courses}</span>
               </div>
             ))}
           </div>
@@ -341,9 +341,9 @@ export default function ElearnHomeClient({
       </section>
 
       {/* Global Partners */}
-      <section className="py-12 bg-white border-t border-b border-slate-100">
+      <section className="py-12 bg-bg-base border-t border-b border-border-main">
         <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">Our Global Partners</p>
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-text-muted mb-8">Our Global Partners</p>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center opacity-60">
             {["tcera.png", "healing_school.png", "premiercare.png", "lmms.png", "tcif.png", "vmc.png"].map((logo, idx) => (
               <div key={idx} className="h-12 w-full max-w-[120px] relative grayscale hover:grayscale-0 transition-all duration-300">
@@ -359,7 +359,7 @@ export default function ElearnHomeClient({
         <div className="max-w-3xl mx-auto text-center mb-16 space-y-4 px-4">
           <span className="text-[#00a3e0] text-xs font-bold uppercase tracking-wider">What We Offer</span>
           <h2 className="text-3xl font-extrabold tracking-tight">Acquire Skills & Scale Your Growth</h2>
-          <p className="text-sm text-slate-400 leading-relaxed font-medium">
+          <p className="text-sm text-text-muted leading-relaxed font-medium">
             Acquiring new skills and improving oneself in any chosen profession is key to career furtherance and development. We have created the right environment for you to achieve that.
           </p>
         </div>
@@ -375,18 +375,18 @@ export default function ElearnHomeClient({
                 <offer.icon className="w-6 h-6" />
               </div>
               <h3 className="text-base font-bold mb-3">{offer.title}</h3>
-              <p className="text-xs text-slate-400 leading-relaxed font-medium">{offer.desc}</p>
+              <p className="text-xs text-text-muted leading-relaxed font-medium">{offer.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Become Instructor */}
-      <section className="py-16 bg-white px-4">
+      <section className="py-16 bg-bg-base px-4">
         <div className="max-w-5xl mx-auto bg-slate-900 text-white rounded-3xl overflow-hidden grid md:grid-cols-12 items-center shadow-xl">
           <div className="p-8 md:p-12 md:col-span-7 space-y-6">
             <h2 className="text-3xl font-extrabold tracking-tight">Become an Instructor</h2>
-            <p className="text-sm text-slate-300 font-medium leading-relaxed">
+            <p className="text-sm text-text-muted font-medium leading-relaxed">
               Join a host of top professional instructors who are sharing their skills and knowledge to a yearning generation.
             </p>
             <Link href="/elearn/instructors" className="inline-flex items-center gap-2 bg-[#00a3e0] text-white px-5 py-2.5 rounded-lg font-bold text-xs hover:bg-[#0082b3] transition-colors">
@@ -401,17 +401,17 @@ export default function ElearnHomeClient({
 
       {/* Search Overlay Dynamic Modal */}
       {isSearchOpen && (
-        <div className="fixed inset-0 bg-slate-950/80 z- flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-white w-full max-w-xl rounded-2xl p-8 relative shadow-2xl">
-            <button onClick={() => setIsSearchOpen(false)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+        <div className="fixed inset-0 bg-slate-950/80 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-bg-surface w-full max-w-xl rounded-2xl p-8 relative shadow-2xl transition-colors duration-300">
+            <button onClick={() => setIsSearchOpen(false)} className="absolute top-4 right-4 text-text-muted hover:text-text-main">
               <X className="w-5 h-5" />
             </button>
-            <h3 className="text-lg font-bold text-[#002866] mb-4">Search Platform</h3>
+            <h3 className="text-lg font-bold text-brand-primary dark:text-brand-secondary mb-4">Search Platform</h3>
             <div className="relative">
               <input
                 type="text"
                 placeholder="What do you want to learn today?"
-                className="w-full border border-slate-200 rounded-xl py-3 pl-4 pr-12 text-sm font-medium focus:outline-none focus:border-[#00a3e0] transition-colors"
+                className="w-full bg-bg-base border border-border-main rounded-xl py-3 pl-4 pr-12 text-sm font-medium focus:outline-none focus:border-[#00a3e0] transition-colors text-text-main"
                 autoFocus
               />
               <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#00a3e0] text-white rounded-lg flex items-center justify-center hover:bg-[#0082b3] transition-colors">

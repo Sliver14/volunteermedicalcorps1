@@ -418,7 +418,7 @@ export default function HomeClient({
 
               <Link 
                 href="/about" 
-                className="group relative inline-block overflow-hidden bg-white text-brand-primary 
+                className="group relative inline-block overflow-hidden bg-bg-surface text-brand-primary 
                           px-10 py-4 font-bold uppercase text-xs tracking-[0.2em] 
                           shadow-xl hover:shadow-2xl transition-all duration-300
                           hover:text-white"
@@ -478,7 +478,7 @@ export default function HomeClient({
                   <select 
                     value={selectedRegion}
                     onChange={handleRegionChange}
-                    className="w-full bg-white border-2 border-brand-primary text-brand-primary px-4 py-3 font-bold uppercase text-xs tracking-widest focus:outline-none transition-all cursor-pointer appearance-none"
+                    className="w-full bg-bg-surface border-2 border-brand-primary text-text-main px-4 py-3 font-bold uppercase text-xs tracking-widest focus:outline-none transition-all cursor-pointer appearance-none"
                   >
                     <option value="">Search by Region</option>
                     {regions.map(r => (
@@ -673,8 +673,8 @@ export default function HomeClient({
                 href="/about" 
                 className="group relative overflow-hidden inline-block bg-brand-secondary text-brand-primary px-8 py-3 text-xs md:text-sm font-bold uppercase tracking-wider transition-all shadow-lg"
               >
-                <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
-                <span className="relative z-10">Learn Our Vision</span>
+                <span className="absolute inset-0 bg-brand-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                <span className="relative z-10 group-hover:text-white transition-colors">Learn Our Vision</span>
               </Link>
             </motion.div>
           </div>
@@ -705,7 +705,7 @@ export default function HomeClient({
                 href="/humanitarian-projects"
                 className="group relative overflow-hidden inline-block bg-brand-primary text-brand-secondary px-12 py-5 font-black uppercase text-[13px] tracking-[0.2em] transition-all shadow-xl"
               >
-                <span className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                <span className="absolute inset-0 bg-brand-secondary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
                 <span className="relative z-10 group-hover:text-brand-primary transition-colors">View All Projects</span>
               </Link>
             </motion.div>

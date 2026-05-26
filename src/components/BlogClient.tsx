@@ -39,10 +39,10 @@ export default function BlogClient({ allBlogs }: any) {
   };
 
   return (
-    <div className="w-full bg-white font-roboto">
+    <div className="w-full bg-bg-base font-roboto transition-colors duration-300">
       <PageBanner title="OUR BLOG" parent={{ label: "Media", href: "#" }} />
       
-      <section className="py-16 md:py-24 bg-gray-50">
+      <section className="py-16 md:py-24 bg-bg-base">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
@@ -53,7 +53,7 @@ export default function BlogClient({ allBlogs }: any) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.3 }}
-                className="group bg-white rounded-sm overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+                className="group bg-bg-surface rounded-sm overflow-hidden shadow-sm border border-border-main hover:shadow-xl transition-all duration-300"
               >
                 <div className="relative w-full h-[275px] overflow-hidden">
                   <Image 
@@ -65,19 +65,19 @@ export default function BlogClient({ allBlogs }: any) {
                   />
                 </div>
                 <div className="p-8">
-                  <span className="inline-block bg-blue-50 text-brand-primary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm mb-4 border border-blue-100">
+                  <span className="inline-block bg-brand-primary/10 text-brand-primary dark:text-brand-secondary text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm mb-4 border border-brand-primary/20">
                     Blog
                   </span>
                   
-                  <h3 className="text-lg md:text-xl font-bold text-brand-primary group-hover:text-brand-secondary transition-colors mb-4 leading-snug">
+                  <h3 className="text-lg md:text-xl font-bold text-brand-primary dark:text-brand-secondary group-hover:text-brand-secondary dark:group-hover:text-brand-tertiary transition-colors mb-4 leading-snug">
                     <Link href={`/blog/${post.id}`}>{post.title}</Link>
                   </h3>
 
-                  <p className="text-gray-500 text-sm mb-6 line-clamp-3">
+                  <p className="text-text-muted text-sm mb-6 line-clamp-3">
                     {getExcerpt(post.content)}
                   </p>
 
-                  <ul className="flex items-center gap-6 pt-6 border-t border-gray-100 text-xs font-bold text-gray-500">
+                  <ul className="flex items-center gap-6 pt-6 border-t border-border-main text-xs font-bold text-text-muted">
                     <li className="flex items-center gap-3">
                       <Image 
                         src="https://volunteermedicalcorps.org/admin/images/users/default-avatar.jpg" 
@@ -86,7 +86,7 @@ export default function BlogClient({ allBlogs }: any) {
                         className="rounded-full"
                         unoptimized
                       />
-                      <span className="text-brand-primary">{post.author || "Admin"}</span>
+                      <span className="text-text-main">{post.author || "Admin"}</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <FaCalendarAlt className="text-brand-secondary" /> {formatDate(post.date)}

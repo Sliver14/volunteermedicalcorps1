@@ -40,8 +40,8 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <Loader2 className="w-10 h-10 animate-spin text-[#002866]" />
+      <div className="min-h-screen flex items-center justify-center bg-bg-base">
+        <Loader2 className="w-10 h-10 animate-spin text-brand-primary dark:text-brand-secondary" />
       </div>
     );
   }
@@ -52,17 +52,17 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-bg-base transition-colors duration-300">
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div 
-          className="fixed inset-0 bg-[#002866]/40 z-40 lg:hidden backdrop-blur-sm"
+          className="fixed inset-0 bg-brand-primary/40 dark:bg-black/60 z-40 lg:hidden backdrop-blur-sm"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
-      <aside className={`w-64 bg-[#002866] text-white flex flex-col fixed inset-y-0 shadow-2xl z-50 transition-transform duration-300 lg:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      {/* Sidebar - Keeps Brand Colors but could be adjusted if needed */}
+      <aside className={`w-64 bg-brand-primary text-white flex flex-col fixed inset-y-0 shadow-2xl z-50 transition-transform duration-300 lg:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="p-6 border-b border-white/10 flex justify-between items-center h-20">
           <Link href="/envmc/dashboard" className="flex flex-col">
             <span className="text-xl font-black tracking-tighter uppercase leading-none">VMC</span>
@@ -73,7 +73,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
           </button>
         </div>
 
-        <nav className="flex-grow p-4 space-y-2 mt-4 overflow-y-auto">
+        <nav className="flex-grow p-4 space-y-2 mt-4 overflow-y-auto custom-scrollbar">
           {sidebarLinks.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
@@ -84,7 +84,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                 onClick={() => setSidebarOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-sm transition-all font-bold text-sm uppercase tracking-wider ${
                   isActive 
-                    ? "bg-[#ff9f22] text-[#002866] shadow-lg" 
+                    ? "bg-brand-secondary text-brand-primary shadow-lg" 
                     : "hover:bg-white/10 text-white/70 hover:text-white"
                 }`}
               >
@@ -108,27 +108,27 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
 
       {/* Main Content */}
       <main className="flex-grow lg:ml-64 p-4 md:p-8 min-w-0">
-        <header className="flex justify-between items-center mb-10 bg-white p-6 rounded-sm shadow-sm border border-gray-100 h-20">
+        <header className="flex justify-between items-center mb-10 bg-bg-surface p-6 rounded-sm shadow-sm border border-border-main h-20 transition-colors duration-300">
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden text-[#002866] p-2 hover:bg-gray-50 rounded-sm"
+              className="lg:hidden text-brand-primary dark:text-brand-secondary p-2 hover:bg-bg-base rounded-sm"
             >
               <Menu size={20} />
             </button>
             <div>
-              <h1 className="text-xl md:text-2xl font-black text-[#002866] uppercase tracking-tight line-clamp-1">
+              <h1 className="text-xl md:text-2xl font-black text-brand-primary dark:text-brand-secondary uppercase tracking-tight line-clamp-1">
                 {sidebarLinks.find(l => l.href === pathname)?.label || "Dashboard"}
               </h1>
-              <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase mt-1">Welcome back, {session?.user?.name}</p>
+              <p className="text-text-muted text-[10px] md:text-xs font-bold uppercase mt-1">Welcome back, {session?.user?.name}</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-bold text-[#002866] leading-none">{session?.user?.name}</p>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">{session?.user?.role}</p>
+              <p className="text-sm font-bold text-brand-primary dark:text-brand-secondary leading-none">{session?.user?.name}</p>
+              <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest mt-1">{session?.user?.role}</p>
             </div>
-            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-[#002866] font-black border-2 border-white shadow-sm shrink-0">
+            <div className="w-10 h-10 bg-bg-base rounded-full flex items-center justify-center text-brand-primary dark:text-brand-secondary font-black border-2 border-border-main shadow-sm shrink-0">
               {session?.user?.name?.[0]?.toUpperCase() || "A"}
             </div>
           </div>

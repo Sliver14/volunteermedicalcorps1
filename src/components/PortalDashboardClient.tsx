@@ -60,21 +60,21 @@ export default function PortalDashboardClient({
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Breadcrumb Header matching the HTML structure */}
-      <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+      <div className="bg-bg-surface p-8 rounded-3xl border border-border-main shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
-          <h4 className="text-2xl font-black text-[#002866] mb-4">Dashboard</h4>
-          <nav className="flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-slate-400">
-            <Link href="/portal" className="text-[#002866] hover:text-[#ff9f22] transition-colors flex items-center gap-2">
+          <h4 className="text-2xl font-black text-brand-primary dark:text-brand-secondary mb-4">Dashboard</h4>
+          <nav className="flex items-center gap-3 text-[11px] font-black uppercase tracking-widest text-text-muted">
+            <Link href="/portal" className="text-brand-primary dark:text-brand-secondary hover:text-brand-secondary transition-colors flex items-center gap-2">
               <FaHome size={14} /> Home
             </Link>
-            <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-            <span className="text-[#ff9f22]">Dashboard</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-border-main" />
+            <span className="text-brand-secondary">Dashboard</span>
           </nav>
         </div>
         
         <Link 
           href="/elearn/dashboard" 
-          className="group relative overflow-hidden bg-[#ff9f22] text-[#002866] px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center gap-3 shadow-2xl shadow-orange-950/10 transition-all hover:bg-black hover:text-[#ff9f22]"
+          className="group relative overflow-hidden bg-brand-secondary text-brand-primary px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center gap-3 shadow-2xl shadow-orange-950/10 transition-all hover:bg-brand-primary hover:text-brand-secondary"
         >
           <FaGraduationCap className="text-xl group-hover:rotate-12 transition-transform" />
           Go to VMC Academy
@@ -119,40 +119,40 @@ export default function PortalDashboardClient({
       {/* Tables Section */}
       <div className="grid grid-cols-1 gap-10">
         {/* Most Recent Donations */}
-        <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
-          <div className="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/20">
-            <h3 className="font-black text-2xl text-[#002866] tracking-tight">Most Recent Donations</h3>
+        <div className="bg-bg-surface rounded-[3rem] border border-border-main shadow-sm overflow-hidden">
+          <div className="p-10 border-b border-border-main flex justify-between items-center bg-bg-base/20">
+            <h3 className="font-black text-2xl text-brand-primary dark:text-brand-secondary tracking-tight">Most Recent Donations</h3>
           </div>
           <div className="p-0 overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50/50 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
-                  <th className="px-10 py-6 border-b border-slate-50">Campaign</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Amount</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Currency</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Date</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Status</th>
+                <tr className="bg-bg-base/50 text-[11px] font-black uppercase tracking-[0.2em] text-text-muted">
+                  <th className="px-10 py-6 border-b border-border-main">Campaign</th>
+                  <th className="px-10 py-6 border-b border-border-main">Amount</th>
+                  <th className="px-10 py-6 border-b border-border-main">Currency</th>
+                  <th className="px-10 py-6 border-b border-border-main">Date</th>
+                  <th className="px-10 py-6 border-b border-border-main">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {recentDonations && recentDonations.length > 0 ? (
                   recentDonations.map((donation: any) => (
-                    <tr key={donation.id} className="hover:bg-slate-50/50 transition-colors">
-                      <td className="px-10 py-6 border-b border-slate-50 font-bold text-[#002866]">
+                    <tr key={donation.id} className="hover:bg-bg-base/50 transition-colors">
+                      <td className="px-10 py-6 border-b border-border-main font-bold text-text-main">
                         {donation.campaign?.title || "General Donation"}
                       </td>
-                      <td className="px-10 py-6 border-b border-slate-50 font-black text-[#ff9f22]">
+                      <td className="px-10 py-6 border-b border-border-main font-black text-brand-secondary">
                         {donation.amount?.toLocaleString() || "0"}
                       </td>
-                      <td className="px-10 py-6 border-b border-slate-50 text-slate-500 font-bold">
+                      <td className="px-10 py-6 border-b border-border-main text-text-muted font-bold">
                         {donation.currency || "USD"}
                       </td>
-                      <td className="px-10 py-6 border-b border-slate-50 text-slate-400 font-medium">
+                      <td className="px-10 py-6 border-b border-border-main text-text-muted/60 font-medium">
                         {formatDate(donation.createdAt)}
                       </td>
-                      <td className="px-10 py-6 border-b border-slate-50">
+                      <td className="px-10 py-6 border-b border-border-main">
                         <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
-                          donation.status === 'Completed' ? 'bg-green-100 text-green-600' : 'bg-amber-100 text-amber-600'
+                          donation.status === 'Completed' ? 'bg-green-500/10 text-green-600' : 'bg-amber-500/10 text-amber-600'
                         }`}>
                           {donation.status || "Completed"}
                         </span>
@@ -163,11 +163,11 @@ export default function PortalDashboardClient({
                   <tr>
                     <td colSpan={5} className="px-10 py-24 text-center">
                       <div className="max-w-md mx-auto">
-                        <div className="w-20 h-20 bg-slate-50 text-slate-200 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-inner">
+                        <div className="w-20 h-20 bg-bg-base text-text-muted/20 rounded-[2rem] flex items-center justify-center mx-auto mb-6 shadow-inner">
                           <FaDollarSign size={30} />
                         </div>
-                        <h4 className="text-xl font-black text-[#002866] uppercase tracking-tight mb-2">No Donations Yet</h4>
-                        <p className="text-slate-400 font-medium text-sm">You haven't made any donations yet. Start supporting our missions today!</p>
+                        <h4 className="text-xl font-black text-text-main uppercase tracking-tight mb-2">No Donations Yet</h4>
+                        <p className="text-text-muted font-medium text-sm">You haven't made any donations yet. Start supporting our missions today!</p>
                       </div>
                     </td>
                   </tr>
@@ -178,50 +178,50 @@ export default function PortalDashboardClient({
         </div>
 
         {/* Tasks Directory */}
-        <div className="bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden">
-          <div className="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/20">
-            <h3 className="font-black text-2xl text-[#002866] tracking-tight">Recent Learning & Missions</h3>
+        <div className="bg-bg-surface rounded-[3rem] border border-border-main shadow-sm overflow-hidden">
+          <div className="p-10 border-b border-border-main flex justify-between items-center bg-bg-base/20">
+            <h3 className="font-black text-2xl text-brand-primary dark:text-brand-secondary tracking-tight">Recent Learning & Missions</h3>
           </div>
           <div className="p-0 overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50/50 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
-                  <th className="px-10 py-6 border-b border-slate-50">Course / Task</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Category</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Progress</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Enrolled At</th>
-                  <th className="px-10 py-6 border-b border-slate-50">Status</th>
+                <tr className="bg-bg-base/50 text-[11px] font-black uppercase tracking-[0.2em] text-text-muted">
+                  <th className="px-10 py-6 border-b border-border-main">Course / Task</th>
+                  <th className="px-10 py-6 border-b border-border-main">Category</th>
+                  <th className="px-10 py-6 border-b border-border-main">Progress</th>
+                  <th className="px-10 py-6 border-b border-border-main">Enrolled At</th>
+                  <th className="px-10 py-6 border-b border-border-main">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {recentEnrollments && recentEnrollments.length > 0 ? (
                   recentEnrollments.map((enrollment: any) => (
-                    <tr key={enrollment.id} className="hover:bg-slate-50/50 transition-colors">
-                      <td className="px-10 py-6 border-b border-slate-50 font-bold text-[#002866]">
+                    <tr key={enrollment.id} className="hover:bg-bg-base/50 transition-colors">
+                      <td className="px-10 py-6 border-b border-border-main font-bold text-text-main">
                         {enrollment.course?.title || "Untitled Course"}
                       </td>
-                      <td className="px-10 py-6 border-b border-slate-50 text-slate-500 font-bold">
+                      <td className="px-10 py-6 border-b border-border-main text-text-muted font-bold">
                         {enrollment.course?.category?.name || "General"}
                       </td>
-                      <td className="px-10 py-6 border-b border-slate-50">
+                      <td className="px-10 py-6 border-b border-border-main">
                         <div className="flex items-center gap-3">
-                          <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden min-w-[60px]">
+                          <div className="flex-1 h-1.5 bg-border-main rounded-full overflow-hidden min-w-[60px]">
                             <div 
-                              className="h-full bg-[#ff9f22]" 
+                              className="h-full bg-brand-secondary" 
                               style={{ width: `${enrollment.progress || 65}%` }}
                             />
                           </div>
-                          <span className="text-[10px] font-black text-[#ff9f22]">
+                          <span className="text-[10px] font-black text-brand-secondary">
                             {Math.round(enrollment.progress || 65)}%
                           </span>
                         </div>
                       </td>
-                      <td className="px-10 py-6 border-b border-slate-50 text-slate-400 font-medium">
+                      <td className="px-10 py-6 border-b border-border-main text-text-muted/60 font-medium">
                         {formatDate(enrollment.enrolledAt)}
                       </td>
-                      <td className="px-10 py-6 border-b border-slate-50">
+                      <td className="px-10 py-6 border-b border-border-main">
                         <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
-                          enrollment.isCompleted ? 'bg-green-100 text-green-600' : 'bg-blue-100 text-blue-600'
+                          enrollment.isCompleted ? 'bg-green-500/10 text-green-600' : 'bg-brand-primary/10 text-brand-primary dark:text-brand-secondary'
                         }`}>
                           {enrollment.isCompleted ? 'Completed' : 'In Progress'}
                         </span>
@@ -232,8 +232,8 @@ export default function PortalDashboardClient({
                   <tr>
                     <td colSpan={5} className="px-10 py-24 text-center">
                       <div className="flex flex-col items-center gap-6 opacity-30">
-                        <FaHandsHelping size={60} className="text-slate-300" />
-                        <span className="text-sm font-black uppercase tracking-widest text-slate-400">No active missions or courses recorded</span>
+                        <FaHandsHelping size={60} className="text-text-muted" />
+                        <span className="text-sm font-black uppercase tracking-widest text-text-muted">No active missions or courses recorded</span>
                       </div>
                     </td>
                   </tr>

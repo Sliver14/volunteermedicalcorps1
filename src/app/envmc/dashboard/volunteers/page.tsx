@@ -117,14 +117,14 @@ export default function AdminVolunteers() {
         <button
           onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
           disabled={currentPage === 1 || isLoading}
-          className="p-2 border border-gray-100 rounded-sm hover:bg-gray-50 disabled:opacity-30 transition-colors"
+          className="p-2 border border-border-main rounded-sm hover:bg-bg-base disabled:opacity-30 transition-colors"
         >
           <ChevronLeft size={18} />
         </button>
 
         {pageNumbers.map((page, index) => (
           page === '...' ? (
-            <span key={`dots-${index}`} className="px-3 py-2 text-gray-400 font-bold">...</span>
+            <span key={`dots-${index}`} className="px-3 py-2 text-text-muted font-bold">...</span>
           ) : (
             <button
               key={`page-${page}`}
@@ -133,7 +133,7 @@ export default function AdminVolunteers() {
               className={`min-w-[40px] h-10 px-3 rounded-sm font-bold text-xs uppercase tracking-wider transition-all border ${
                 currentPage === page
                   ? "bg-[#002866] text-white border-[#002866] shadow-lg"
-                  : "bg-white text-gray-400 border-gray-100 hover:border-[#ff9f22] hover:text-[#ff9f22]"
+                  : "bg-bg-surface text-text-muted border-border-main hover:border-[#ff9f22] hover:text-[#ff9f22]"
               }`}
             >
               {page}
@@ -144,7 +144,7 @@ export default function AdminVolunteers() {
         <button
           onClick={() => setCurrentPage(prev => Math.min(pages, prev + 1))}
           disabled={currentPage === pages || isLoading}
-          className="p-2 border border-gray-100 rounded-sm hover:bg-gray-50 disabled:opacity-30 transition-colors"
+          className="p-2 border border-border-main rounded-sm hover:bg-bg-base disabled:opacity-30 transition-colors"
         >
           <ChevronRight size={18} />
         </button>
@@ -160,14 +160,14 @@ export default function AdminVolunteers() {
       transition={{ duration: 0.3 }}
       className="space-y-6"
     >
-      <div className="bg-white p-6 md:p-8 rounded-sm shadow-sm border border-gray-100">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+      <div className="bg-bg-surface p-6 md:p-8 rounded-sm shadow-sm border border-border-main">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-6 border-b border-border-main">
           <div>
-            <h2 className="text-xl md:text-2xl font-black text-[#002866] uppercase tracking-tight flex items-center gap-3">
+            <h2 className="text-xl md:text-2xl font-black text-brand-primary dark:text-brand-secondary uppercase tracking-tight flex items-center gap-3">
               <Users className="text-[#ff9f22]" size={24} />
               Volunteer Registry
             </h2>
-            <p className="text-gray-400 text-[10px] md:text-xs font-bold uppercase mt-1">Total Volunteers: {total}</p>
+            <p className="text-text-muted text-[10px] md:text-xs font-bold uppercase mt-1">Total Volunteers: {total}</p>
           </div>
           <button 
             onClick={handleExportCSV}
@@ -182,27 +182,27 @@ export default function AdminVolunteers() {
         <div className="overflow-x-auto -mx-6 md:mx-0">
           <table className="w-full text-left border-collapse min-w-[800px]">
             <thead>
-              <tr className="bg-gray-50/50">
-                <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">User Details</th>
-                <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">Role</th>
-                <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">Joined Date</th>
-                <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100">Location</th>
-                <th className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 text-right">Actions</th>
+              <tr className="bg-bg-base/50">
+                <th className="px-6 py-4 text-[10px] font-black text-text-muted uppercase tracking-widest border-b border-border-main">User Details</th>
+                <th className="px-6 py-4 text-[10px] font-black text-text-muted uppercase tracking-widest border-b border-border-main">Role</th>
+                <th className="px-6 py-4 text-[10px] font-black text-text-muted uppercase tracking-widest border-b border-border-main">Joined Date</th>
+                <th className="px-6 py-4 text-[10px] font-black text-text-muted uppercase tracking-widest border-b border-border-main">Location</th>
+                <th className="px-6 py-4 text-[10px] font-black text-text-muted uppercase tracking-widest border-b border-border-main text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-50">
+            <tbody className="divide-y divide-border-main">
               <AnimatePresence mode="wait">
                 {isLoading ? (
                   Array.from({ length: 5 }).map((_, i) => (
                     <tr key={`skeleton-${i}`} className="animate-pulse">
                       <td colSpan={5} className="px-6 py-8">
-                        <div className="h-4 bg-gray-100 rounded w-full"></div>
+                        <div className="h-4 bg-bg-base rounded w-full"></div>
                       </td>
                     </tr>
                   ))
                 ) : users.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-gray-400">
+                    <td colSpan={5} className="px-6 py-12 text-center text-text-muted">
                       <p className="font-bold uppercase tracking-widest text-xs">No volunteers found</p>
                     </td>
                   </tr>
@@ -212,42 +212,42 @@ export default function AdminVolunteers() {
                       key={user.id}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="hover:bg-gray-50/50 transition-colors group"
+                      className="hover:bg-bg-base/50 transition-colors group"
                     >
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 bg-[#002866]/5 rounded-full flex items-center justify-center text-[#002866] font-black border border-[#002866]/10 shrink-0">
+                          <div className="w-10 h-10 bg-brand-primary/5 rounded-full flex items-center justify-center text-brand-primary dark:text-brand-secondary font-black border border-brand-primary/10 shrink-0">
                             {user.name?.[0]?.toUpperCase() || "V"}
                           </div>
                           <div>
-                            <p className="font-bold text-[#002866] text-sm leading-tight group-hover:text-[#ff9f22] transition-colors">{user.name}</p>
-                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight flex items-center gap-1 mt-1">
+                            <p className="font-bold text-brand-primary dark:text-brand-secondary text-sm leading-tight group-hover:text-[#ff9f22] transition-colors">{user.name}</p>
+                            <p className="text-[10px] font-bold text-text-muted uppercase tracking-tight flex items-center gap-1 mt-1">
                               <Mail size={10} /> {user.email}
                             </p>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-5">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-[#002866] rounded-full text-[9px] font-black uppercase tracking-widest border border-gray-200">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-bg-base text-brand-primary dark:text-brand-secondary rounded-full text-[9px] font-black uppercase tracking-widest border border-border-main">
                           <Shield size={10} className="text-[#ff9f22]" />
                           {user.role}
                         </span>
                       </td>
                       <td className="px-6 py-5">
                         <div className="flex flex-col">
-                          <span className="text-xs font-bold text-gray-600 flex items-center gap-1.5">
-                            <Calendar size={12} className="text-gray-400" />
+                          <span className="text-xs font-bold text-brand-primary dark:text-brand-secondary flex items-center gap-1.5">
+                            <Calendar size={12} className="text-text-muted" />
                             {new Date(user.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
                           </span>
                         </div>
                       </td>
                       <td className="px-6 py-5">
-                        <span className="text-xs font-bold text-gray-500 uppercase tracking-tight">
+                        <span className="text-xs font-bold text-text-muted uppercase tracking-tight">
                           {user.profile?.country || "N/A"}
                         </span>
                       </td>
                       <td className="px-6 py-5 text-right">
-                        <button className="p-2 text-gray-400 hover:text-[#002866] transition-colors">
+                        <button className="p-2 text-text-muted hover:text-brand-primary dark:hover:text-brand-secondary transition-colors">
                           <MoreHorizontal size={18} />
                         </button>
                       </td>

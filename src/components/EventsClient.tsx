@@ -41,17 +41,17 @@ export default function EventsClient({ allEvents }: any) {
   const isUpcoming = allEvents.some((e: any) => new Date(e.date) >= new Date());
 
   return (
-    <div className="w-full bg-white font-roboto">
+    <div className="w-full bg-bg-base font-roboto transition-colors duration-300">
       <PageBanner 
         title={isUpcoming ? "UPCOMING EVENTS" : "PAST EVENTS"} 
         parent={{ label: "Media", href: "#" }} 
       />
       
-      <section className="py-16 md:py-24 bg-gray-50">
+      <section className="py-16 md:py-24 bg-bg-base">
         <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
           
           {!isUpcoming && allEvents.length > 0 && (
-            <div className="mb-12 p-4 bg-blue-50 border-l-4 border-[#002866] text-[#002866] text-sm font-medium">
+            <div className="mb-12 p-4 bg-brand-primary/10 border-l-4 border-brand-primary text-brand-primary dark:text-brand-secondary text-sm font-medium transition-colors duration-300">
               Note: There are currently no upcoming events scheduled. Showing our most recent past events below.
             </div>
           )}
@@ -64,10 +64,10 @@ export default function EventsClient({ allEvents }: any) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4 }}
-                className="group bg-white rounded-sm overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+                className="group bg-bg-surface rounded-sm overflow-hidden shadow-sm border border-border-main hover:shadow-xl transition-all duration-300"
               >
                 {/* Event Image */}
-                <div className="relative w-full h-[250px] sm:h-[350px] md:h-[450px] overflow-hidden bg-gray-900">
+                <div className="relative w-full h-[250px] sm:h-[350px] md:h-[450px] overflow-hidden bg-bg-base transition-colors duration-300">
                   <Image 
                     src={event.image || "https://volunteermedicalcorps.org/admin/images/events/1774261927HYQzF6kpX.jpg"} 
                     alt={event.title} 
@@ -89,11 +89,11 @@ export default function EventsClient({ allEvents }: any) {
                       <FaCalendarAlt className="mr-2" /> {formatDate(event.date)}
                     </div>
                     
-                    <h3 className="text-xl md:text-2xl font-bold text-brand-primary leading-tight mb-3 group-hover:text-brand-secondary transition-colors">
+                    <h3 className="text-xl md:text-2xl font-bold text-brand-primary dark:text-brand-secondary leading-tight mb-3 group-hover:text-brand-secondary dark:group-hover:text-brand-tertiary transition-colors">
                       <Link href={`/events/${event.id}`}>{event.title}</Link>
                     </h3>
                     
-                    <p className="text-gray-500 text-sm md:text-base leading-relaxed">
+                    <p className="text-text-muted text-sm md:text-base leading-relaxed">
                       {getExcerpt(event.description)}
                     </p>
                   </div>

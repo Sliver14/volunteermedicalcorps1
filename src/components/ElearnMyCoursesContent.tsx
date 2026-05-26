@@ -33,8 +33,8 @@ export default function ElearnMyCoursesContent() {
     <div className="space-y-10 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h2 className="text-2xl font-black text-gray-900 tracking-tight">My Courses</h2>
-          <p className="text-gray-500 font-medium">Track your personal learning progress and certifications.</p>
+          <h2 className="text-2xl font-black text-text-main tracking-tight">My Courses</h2>
+          <p className="text-text-muted font-medium">Track your personal learning progress and certifications.</p>
         </div>
       </div>
 
@@ -45,7 +45,7 @@ export default function ElearnMyCoursesContent() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden p-8 flex flex-col sm:flex-row gap-8 group"
+            className="bg-bg-surface rounded-[2.5rem] border border-border-main shadow-sm overflow-hidden p-8 flex flex-col sm:flex-row gap-8 group transition-colors duration-300"
           >
             <div className="w-full sm:w-48 h-36 relative rounded-2xl overflow-hidden shadow-sm shrink-0">
               <Image 
@@ -62,34 +62,34 @@ export default function ElearnMyCoursesContent() {
 
             <div className="flex-1 flex flex-col">
               <div className="mb-6">
-                <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest block mb-2">{course.category}</span>
-                <h3 className="text-lg font-black text-gray-900 leading-tight group-hover:text-blue-600 transition-colors">
+                <span className="text-[9px] font-black text-brand-tertiary uppercase tracking-widest block mb-2">{course.category}</span>
+                <h3 className="text-lg font-black text-text-main leading-tight group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors">
                   {course.title}
                 </h3>
               </div>
 
               <div className="mt-auto space-y-4">
-                <div className="flex justify-between items-end text-[10px] font-black uppercase tracking-widest text-gray-400">
+                <div className="flex justify-between items-end text-[10px] font-black uppercase tracking-widest text-text-muted">
                   <span>Course Progress</span>
-                  <span className="text-blue-600">{course.progress}%</span>
+                  <span className="text-brand-primary dark:text-brand-secondary">{course.progress}%</span>
                 </div>
-                <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-bg-base rounded-full overflow-hidden transition-colors duration-300">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${course.progress}%` }}
                     transition={{ duration: 1.5, delay: 0.5 }}
-                    className={`h-full ${course.progress === 100 ? 'bg-green-500' : 'bg-blue-600'}`}
+                    className={`h-full ${course.progress === 100 ? 'bg-green-500' : 'bg-brand-primary dark:bg-brand-secondary'}`}
                   />
                 </div>
                 
                 <div className="flex items-center justify-between pt-2">
-                  <p className="text-[9px] font-bold text-gray-300 italic uppercase">Last Accessed: {course.lastAccessed}</p>
+                  <p className="text-[9px] font-bold text-text-muted italic uppercase">Last Accessed: {course.lastAccessed}</p>
                   {course.progress === 100 ? (
-                    <button className="flex items-center gap-2 text-green-600 text-[10px] font-black uppercase tracking-widest hover:text-green-700 transition-colors">
+                    <button className="flex items-center gap-2 text-green-600 dark:text-green-400 text-[10px] font-black uppercase tracking-widest hover:opacity-80 transition-colors">
                       <FaCertificate size={12} /> Download Cert
                     </button>
                   ) : (
-                    <button className="text-blue-600 text-[10px] font-black uppercase tracking-widest hover:text-gray-900 transition-colors">
+                    <button className="text-brand-primary dark:text-brand-secondary text-[10px] font-black uppercase tracking-widest hover:text-text-main transition-colors">
                       Resume Course
                     </button>
                   )}

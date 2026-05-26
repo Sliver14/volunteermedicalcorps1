@@ -41,6 +41,10 @@
   body {
     @apply bg-bg-base text-text-main transition-colors duration-300;
   }
+
+  html {
+    @apply bg-bg-base;
+  }
 }
 
 @layer utilities {

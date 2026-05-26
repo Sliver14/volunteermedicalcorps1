@@ -14,7 +14,7 @@ export default async function GalleryPage() {
   }
 
   return (
-    <div className="w-full bg-white font-roboto">
+    <div className="w-full bg-bg-base font-roboto transition-colors duration-300">
       <PageBanner title="PHOTO GALLERY" parent={{ label: "Media", href: "#" }} />
       <GalleryClient allGalleryItems={allGalleryItems} />
     </div>

@@ -94,7 +94,7 @@ export default function ElearnDashboardClient({
   ];
 
   return (
-    <div className="flex h-screen bg-[#f8f9fa] overflow-hidden font-poppins text-slate-800">
+    <div className="flex h-screen bg-bg-base overflow-hidden font-poppins text-text-main">
       {/* ... (Mobile Overlay unchanged) */}
       <AnimatePresence>
         {isSidebarOpen && (
@@ -109,14 +109,14 @@ export default function ElearnDashboardClient({
       </AnimatePresence>
 
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-[280px] bg-white shadow-2xl lg:shadow-none transform transition-transform duration-300 lg:translate-x-0 lg:static flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <aside className={`fixed inset-y-0 left-0 z-50 w-[280px] bg-bg-surface shadow-2xl lg:shadow-none transform transition-transform duration-300 lg:translate-x-0 lg:static flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
 
         {/* Logo Header - Centered & Compact */}
-        <div className="flex items-center justify-center h-20 px-6 border-b border-slate-50 relative">
+        <div className="flex items-center justify-center h-20 px-6 border-b border-border-main relative">
           <Link href="/elearn/dashboard" className="flex items-center">
-            <Image src="/logo.png" alt="Logo" width={130} height={40} className="object-contain" unoptimized />
+            <Image src="/logo.png" alt="Logo" width={130} height={40} className="object-contain dark:brightness-110" unoptimized />
           </Link>
-          <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden absolute right-6 text-slate-400">
+          <button onClick={() => setIsSidebarOpen(false)} className="lg:hidden absolute right-6 text-text-muted">
             <FaTimes size={18} />
           </button>
         </div>
@@ -125,15 +125,15 @@ export default function ElearnDashboardClient({
         <nav className="flex-1 overflow-y-auto py-8 px-6 space-y-8 custom-scrollbar">
           {/* Dashboard Group */}
           <div>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 opacity-50 px-4">MAIN MENU</p>
+            <p className="text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-4 opacity-50 px-4">MAIN MENU</p>
             <ul className="space-y-1.5">
               {navigation.filter(n => n.section === 'main').map((item) => (
                 <li key={item.key}>
                   <button
                     onClick={() => handleNavClick(item.key)}
-                    className={`flex items-center w-full px-5 py-4 rounded-2xl transition-all group ${activeTab === item.key ? "bg-blue-600 text-white shadow-xl shadow-blue-900/20" : "text-slate-500 hover:bg-slate-50"}`}
+                    className={`flex items-center w-full px-5 py-4 rounded-2xl transition-all group ${activeTab === item.key ? "bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary shadow-xl shadow-brand-primary/20" : "text-text-muted hover:bg-bg-base"}`}
                   >
-                    <item.icon className={`mr-4 text-lg ${activeTab === item.key ? "text-white" : "text-slate-400 group-hover:text-blue-600"}`} />
+                    <item.icon className={`mr-4 text-lg ${activeTab === item.key ? "text-white dark:text-brand-primary" : "text-text-muted group-hover:text-brand-primary dark:group-hover:text-brand-secondary"}`} />
                     <span className="text-[14px] font-bold">{item.name}</span>
                   </button>
                 </li>
@@ -143,15 +143,15 @@ export default function ElearnDashboardClient({
 
           {/* Learning Group */}
           <div>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 opacity-50 px-4">VMC ACADEMY</p>
+            <p className="text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-4 opacity-50 px-4">VMC ACADEMY</p>
             <ul className="space-y-1.5">
               {navigation.filter(n => n.section === 'learning').map((item) => (
                 <li key={item.key}>
                   <button
                     onClick={() => handleNavClick(item.key)}
-                    className={`flex items-center w-full px-5 py-4 rounded-2xl transition-all group ${activeTab === item.key ? "bg-blue-600 text-white shadow-xl shadow-blue-900/20" : "text-slate-500 hover:bg-slate-50"}`}
+                    className={`flex items-center w-full px-5 py-4 rounded-2xl transition-all group ${activeTab === item.key ? "bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary shadow-xl shadow-brand-primary/20" : "text-text-muted hover:bg-bg-base"}`}
                   >
-                    <item.icon className={`mr-4 text-lg ${activeTab === item.key ? "text-white" : "text-slate-400 group-hover:text-blue-600"}`} />
+                    <item.icon className={`mr-4 text-lg ${activeTab === item.key ? "text-white dark:text-brand-primary" : "text-text-muted group-hover:text-brand-primary dark:group-hover:text-brand-secondary"}`} />
                     <span className="text-[14px] font-bold">{item.name}</span>
                   </button>
                 </li>
@@ -161,15 +161,15 @@ export default function ElearnDashboardClient({
 
           {/* Account Group */}
           <div>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 opacity-50 px-4">MY ACCOUNT</p>
+            <p className="text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-4 opacity-50 px-4">MY ACCOUNT</p>
             <ul className="space-y-1.5">
               {navigation.filter(n => n.section === 'account').map((item) => (
                 <li key={item.key}>
                   <button
                     onClick={() => handleNavClick(item.key)}
-                    className={`flex items-center w-full px-5 py-4 rounded-2xl transition-all group ${activeTab === item.key ? "bg-blue-600 text-white shadow-xl shadow-blue-900/20" : "text-slate-500 hover:bg-slate-50"}`}
+                    className={`flex items-center w-full px-5 py-4 rounded-2xl transition-all group ${activeTab === item.key ? "bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary shadow-xl shadow-brand-primary/20" : "text-text-muted hover:bg-bg-base"}`}
                   >
-                    <item.icon className={`mr-4 text-lg ${activeTab === item.key ? "text-white" : "text-slate-400 group-hover:text-blue-600"}`} />
+                    <item.icon className={`mr-4 text-lg ${activeTab === item.key ? "text-white dark:text-brand-primary" : "text-text-muted group-hover:text-brand-primary dark:group-hover:text-brand-secondary"}`} />
                     <span className="text-[14px] font-bold">{item.name}</span>
                   </button>
                 </li>
@@ -181,7 +181,7 @@ export default function ElearnDashboardClient({
           <div className="pt-4">
             <button
               onClick={() => signOut({ callbackUrl: "/login" })}
-              className="flex items-center w-full px-5 py-4 rounded-2xl transition-all group text-red-500 hover:bg-red-50"
+              className="flex items-center w-full px-5 py-4 rounded-2xl transition-all group text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20"
             >
               <FaSignOutAlt className="mr-4 text-lg" />
               <span className="text-[14px] font-bold uppercase tracking-widest">Logout</span>
@@ -190,10 +190,10 @@ export default function ElearnDashboardClient({
         </nav>
 
         {/* Sidebar Footer */}
-        <div className="p-6 border-t border-slate-50">
+        <div className="p-6 border-t border-border-main">
           <Link
             href="/portal"
-            className="flex items-center justify-center w-full gap-3 px-4 py-5 bg-gray-900 text-white hover:bg-blue-600 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-gray-900/10"
+            className="flex items-center justify-center w-full gap-3 px-4 py-5 bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary hover:opacity-90 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg"
           >
             <FaHome className="text-lg" />
             BACK TO PORTAL
@@ -204,35 +204,35 @@ export default function ElearnDashboardClient({
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="h-20 bg-white border-b border-slate-100 flex items-center justify-between px-6 lg:px-12 sticky top-0 z-30">
+        <header className="h-20 bg-bg-surface border-b border-border-main flex items-center justify-between px-6 lg:px-12 sticky top-0 z-30">
           <div className="flex items-center gap-4">
-            <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-slate-600">
+            <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden text-text-main">
               <FaBars size={22} />
             </button>
-            <h1 className="text-lg font-black text-slate-900 tracking-tight">
+            <h1 className="text-lg font-black text-text-main tracking-tight">
               {activeTab === "overview" ? "Academy Dashboard" : activeTab.replace(/_/g, " ").toUpperCase()}
             </h1>
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="hidden md:flex items-center bg-slate-50 border border-slate-100 rounded-xl px-4 py-2 group focus-within:border-blue-500 transition-all">
-              <FaSearch className="text-slate-300 group-focus-within:text-blue-500 transition-colors" size={14} />
-              <input type="text" placeholder="Search courses..." className="bg-transparent border-none outline-none px-3 text-xs font-medium w-48" />
+            <div className="hidden md:flex items-center bg-bg-base border border-border-main rounded-xl px-4 py-2 group focus-within:border-brand-primary transition-all">
+              <FaSearch className="text-text-muted group-focus-within:text-brand-primary transition-colors" size={14} />
+              <input type="text" placeholder="Search courses..." className="bg-transparent border-none outline-none px-3 text-xs font-medium w-48 text-text-main" />
             </div>
             
-            <button className="relative text-slate-400 hover:text-blue-600 transition-colors">
+            <button className="relative text-text-muted hover:text-brand-primary transition-colors">
               <FaBell size={20} />
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-bg-surface" />
             </button>
             
-            <div className="flex items-center gap-4 pl-6 border-l border-slate-100">
+            <div className="flex items-center gap-4 pl-6 border-l border-border-main">
               <div className="text-right hidden sm:block">
-                <p className="text-[12px] font-black text-slate-900 leading-none">{session.user?.name}</p>
-                <p className="text-[9px] font-bold text-blue-500 uppercase tracking-widest mt-1">{session.user?.role || 'Student'}</p>
+                <p className="text-[12px] font-black text-text-main leading-none">{session.user?.name}</p>
+                <p className="text-[9px] font-bold text-brand-secondary uppercase tracking-widest mt-1">{session.user?.role || 'Student'}</p>
               </div>
               <button 
                 onClick={() => setActiveTab("profile")}
-                className="w-10 h-10 rounded-xl overflow-hidden border-2 border-slate-50 shadow-sm bg-blue-100 flex items-center justify-center text-blue-600 font-bold"
+                className="w-10 h-10 rounded-xl overflow-hidden border-2 border-border-main shadow-sm bg-brand-primary/10 flex items-center justify-center text-brand-primary dark:text-brand-secondary font-bold"
               >
                 {session.user?.image ? (
                   <Image src={session.user.image} alt="User" width={40} height={40} className="object-cover" unoptimized />
@@ -257,44 +257,43 @@ export default function ElearnDashboardClient({
                   className="space-y-10"
                 >
                   <div className="mb-12">
-                    <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">Welcome to VMC Academy, {session.user?.name?.split(' ')[0]}! 🎓</h2>
-                    <p className="text-slate-500 font-medium mt-2">Advance your clinical and leadership skills with specialized training.</p>
+                    <h2 className="text-3xl lg:text-4xl font-black text-text-main tracking-tight">Welcome to VMC Academy, {session.user?.name?.split(' ')[0]}! 🎓</h2>
+                    <p className="text-text-muted font-medium mt-2">Advance your clinical and leadership skills with specialized training.</p>
                   </div>
-                  {/* ... (Stats and Content unchanged) */}
 
                   {/* Stats Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-10 group hover:shadow-2xl transition-all">
+                    <div className="bg-bg-surface rounded-[2.5rem] border border-border-main shadow-sm p-10 group hover:shadow-2xl transition-all">
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">Total Library</p>
-                          <p className="text-5xl font-black text-slate-900 group-hover:text-blue-600 transition-colors">{stats.totalCourses}</p>
+                          <p className="text-text-muted text-[10px] font-black uppercase tracking-[0.2em] mb-4">Total Library</p>
+                          <p className="text-5xl font-black text-text-main group-hover:text-brand-primary transition-colors">{stats.totalCourses}</p>
                         </div>
-                        <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center shadow-inner">
+                        <div className="w-16 h-16 bg-brand-primary/10 text-brand-primary dark:text-brand-secondary rounded-3xl flex items-center justify-center shadow-inner">
                           <FaBookOpen size={28} />
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-10 group hover:shadow-2xl transition-all">
+                    <div className="bg-bg-surface rounded-[2.5rem] border border-border-main shadow-sm p-10 group hover:shadow-2xl transition-all">
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">My Courses</p>
-                          <p className="text-5xl font-black text-slate-900 group-hover:text-amber-500 transition-colors">{stats.myCourses || 2}</p>
+                          <p className="text-text-muted text-[10px] font-black uppercase tracking-[0.2em] mb-4">My Courses</p>
+                          <p className="text-5xl font-black text-text-main group-hover:text-brand-secondary transition-colors">{stats.myCourses || 2}</p>
                         </div>
-                        <div className="w-16 h-16 bg-amber-50 text-amber-500 rounded-3xl flex items-center justify-center shadow-inner">
+                        <div className="w-16 h-16 bg-brand-secondary/10 text-brand-secondary rounded-3xl flex items-center justify-center shadow-inner">
                           <FaSchool size={28} />
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-10 group hover:shadow-2xl transition-all">
+                    <div className="bg-bg-surface rounded-[2.5rem] border border-border-main shadow-sm p-10 group hover:shadow-2xl transition-all">
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mb-4">Certifications</p>
-                          <p className="text-5xl font-black text-slate-900 group-hover:text-green-500 transition-colors">1</p>
+                          <p className="text-text-muted text-[10px] font-black uppercase tracking-[0.2em] mb-4">Certifications</p>
+                          <p className="text-5xl font-black text-text-main group-hover:text-green-500 transition-colors">1</p>
                         </div>
-                        <div className="w-16 h-16 bg-green-50 text-green-500 rounded-3xl flex items-center justify-center shadow-inner">
+                        <div className="w-16 h-16 bg-green-500/10 text-green-500 rounded-3xl flex items-center justify-center shadow-inner">
                           <FaGraduationCap size={28} />
                         </div>
                       </div>
@@ -303,50 +302,50 @@ export default function ElearnDashboardClient({
 
                   {/* Secondary Content */}
                   <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
-                    <div className="xl:col-span-8 bg-white rounded-[3rem] border border-slate-100 shadow-sm overflow-hidden flex flex-col min-h-[500px]">
-                      <div className="p-10 border-b border-slate-50 flex justify-between items-center bg-slate-50/20">
+                    <div className="xl:col-span-8 bg-bg-surface rounded-[3rem] border border-border-main shadow-sm overflow-hidden flex flex-col min-h-[500px]">
+                      <div className="p-10 border-b border-border-main flex justify-between items-center bg-bg-base/20">
                         <div>
-                          <h3 className="font-black text-2xl text-slate-900 tracking-tight">Active Learning</h3>
-                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Pick up where you left off</p>
+                          <h3 className="font-black text-2xl text-text-main tracking-tight">Active Learning</h3>
+                          <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest mt-1">Pick up where you left off</p>
                         </div>
-                        <button onClick={() => setActiveTab("my_courses")} className="text-blue-600 font-black uppercase tracking-widest text-[10px] flex items-center gap-3 bg-blue-50 px-6 py-3 rounded-2xl hover:bg-blue-600 hover:text-white transition-all">
+                        <button onClick={() => setActiveTab("my_courses")} className="text-brand-primary dark:text-brand-secondary font-black uppercase tracking-widest text-[10px] flex items-center gap-3 bg-brand-primary/10 px-6 py-3 rounded-2xl hover:bg-brand-primary hover:text-white transition-all">
                           View Dashboard
                         </button>
                       </div>
                       
                       <div className="flex-1 flex flex-col items-center justify-center p-20 text-center">
-                        <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center mb-8 text-slate-200 shadow-inner">
+                        <div className="w-24 h-24 bg-bg-base rounded-[2rem] flex items-center justify-center mb-8 text-text-muted/30 shadow-inner">
                           <FaSchool size={40} />
                         </div>
-                        <h4 className="text-2xl font-black text-slate-900 mb-4 tracking-tight uppercase">Ready to learn?</h4>
-                        <p className="text-slate-400 font-medium max-w-sm leading-relaxed mb-10 text-sm">
+                        <h4 className="text-2xl font-black text-text-main mb-4 tracking-tight uppercase">Ready to learn?</h4>
+                        <p className="text-text-muted font-medium max-w-sm leading-relaxed mb-10 text-sm">
                           You have 2 courses currently in progress. Start your next lesson to advance your certification.
                         </p>
-                        <button onClick={() => setActiveTab("my_courses")} className="bg-gray-900 text-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:bg-blue-600 transition-all shadow-2xl shadow-blue-900/10">
+                        <button onClick={() => setActiveTab("my_courses")} className="bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:opacity-90 transition-all shadow-2xl">
                           Resume Learning
                         </button>
                       </div>
                     </div>
 
-                    <div className="xl:col-span-4 bg-white rounded-[3rem] border border-slate-100 shadow-sm flex flex-col">
-                      <div className="p-10 border-b border-slate-50 bg-slate-50/20">
-                        <h3 className="font-black text-2xl text-slate-900 tracking-tight">Recommended</h3>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Curated for your profile</p>
+                    <div className="xl:col-span-4 bg-bg-surface rounded-[3rem] border border-border-main shadow-sm flex flex-col">
+                      <div className="p-10 border-b border-border-main bg-bg-base/20">
+                        <h3 className="font-black text-2xl text-text-main tracking-tight">Recommended</h3>
+                        <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest mt-1">Curated for your profile</p>
                       </div>
                       <div className="p-10 space-y-8">
-                        {recommended.map((course) => (
+                        {recommended.map((course: any) => (
                           <div key={course.id} className="flex gap-6 group cursor-pointer">
                             <div className="w-24 h-20 relative rounded-2xl overflow-hidden shadow-sm shrink-0">
                               <Image src={course.image} alt={course.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" unoptimized />
                             </div>
                             <div className="min-w-0">
-                              <p className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight text-sm">{course.title}</p>
-                              <p className="text-[9px] font-black uppercase tracking-widest text-blue-500 mt-2">{course.category}</p>
+                              <p className="font-bold text-text-main group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors line-clamp-2 leading-tight text-sm">{course.title}</p>
+                              <p className="text-[9px] font-black uppercase tracking-widest text-brand-secondary mt-2">{course.category}</p>
                             </div>
                           </div>
                         ))}
                         
-                        <button onClick={() => setActiveTab("all_courses")} className="w-full py-5 border-2 border-dashed border-slate-100 rounded-[2rem] text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:bg-slate-50 hover:border-blue-200 hover:text-blue-600 transition-all">
+                        <button onClick={() => setActiveTab("all_courses")} className="w-full py-5 border-2 border-dashed border-border-main rounded-[2rem] text-[10px] font-black uppercase tracking-[0.2em] text-text-muted hover:bg-bg-base hover:border-brand-secondary/30 hover:text-brand-secondary transition-all">
                           Browse All Courses
                         </button>
                       </div>
@@ -381,47 +380,47 @@ export default function ElearnDashboardClient({
 
               {activeTab === "security" && (
                 <motion.div key="security" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.05 }} className="min-h-[500px] flex items-center justify-center">
-                   <div className="bg-white p-20 rounded-[4rem] text-center border border-slate-100 shadow-sm max-w-xl w-full">
-                      <div className="w-24 h-24 bg-blue-50 text-blue-600 rounded-[2.5rem] flex items-center justify-center mx-auto mb-10 shadow-inner">
+                   <div className="bg-bg-surface p-10 md:p-20 rounded-[4rem] text-center border border-border-main shadow-sm max-w-xl w-full">
+                      <div className="w-24 h-24 bg-brand-primary/10 text-brand-primary dark:text-brand-secondary rounded-[2.5rem] flex items-center justify-center mx-auto mb-10 shadow-inner">
                         <FaShieldAlt size={40} />
                       </div>
-                      <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight uppercase">Security Settings</h3>
-                      <p className="text-slate-400 font-medium leading-relaxed mb-12">
+                      <h3 className="text-3xl font-black text-text-main mb-4 tracking-tight uppercase">Security Settings</h3>
+                      <p className="text-text-muted font-medium leading-relaxed mb-12">
                         Manage your password and keep your account secure.
                       </p>
                       
                       <form onSubmit={handleChangePassword} className="space-y-6 max-w-md mx-auto">
                         <div className="space-y-2 text-left">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4">Current Password</label>
+                          <label className="text-[10px] font-black text-text-muted uppercase tracking-widest px-4">Current Password</label>
                           <input
                             type="password"
                             value={currentPassword}
                             onChange={(e) => setCurrentPassword(e.target.value)}
-                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all font-bold text-slate-900"
+                            className="w-full px-6 py-4 bg-bg-base border border-border-main rounded-2xl focus:outline-none focus:border-brand-primary transition-all font-bold text-text-main"
                             placeholder="Enter current password"
                             required
                           />
                         </div>
 
                         <div className="space-y-2 text-left">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4">New Password</label>
+                          <label className="text-[10px] font-black text-text-muted uppercase tracking-widest px-4">New Password</label>
                           <input
                             type="password"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
-                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all font-bold text-slate-900"
+                            className="w-full px-6 py-4 bg-bg-base border border-border-main rounded-2xl focus:outline-none focus:border-brand-primary transition-all font-bold text-text-main"
                             placeholder="Enter new password"
                             required
                           />
                         </div>
 
                         <div className="space-y-2 text-left">
-                          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4">Confirm New Password</label>
+                          <label className="text-[10px] font-black text-text-muted uppercase tracking-widest px-4">Confirm New Password</label>
                           <input
                             type="password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all font-bold text-slate-900"
+                            className="w-full px-6 py-4 bg-bg-base border border-border-main rounded-2xl focus:outline-none focus:border-brand-primary transition-all font-bold text-text-main"
                             placeholder="Confirm new password"
                             required
                           />
@@ -429,7 +428,7 @@ export default function ElearnDashboardClient({
 
                         {message.text && (
                           <div className={`p-4 rounded-xl flex items-center gap-3 ${
-                            message.type === "success" ? "bg-green-50 text-green-700 border border-green-100" : "bg-red-50 text-red-700 border border-red-100"
+                            message.type === "success" ? "bg-green-500/10 text-green-700 dark:text-green-400 border border-green-500/20" : "bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/20"
                           }`}>
                             {message.type === "success" ? <FaCheckCircle size={18} /> : <FaExclamationTriangle size={18} />}
                             <p className="text-sm font-bold uppercase tracking-tight">{message.text}</p>
@@ -439,7 +438,7 @@ export default function ElearnDashboardClient({
                         <button
                           type="submit"
                           disabled={isLoading}
-                          className="w-full bg-gray-900 text-white px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:bg-blue-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                          className="w-full bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:opacity-90 transition-all flex items-center justify-center gap-3 disabled:opacity-50 shadow-xl"
                         >
                           {isLoading ? <FaSpinner className="animate-spin" /> : <FaKey />}
                           {isLoading ? "Updating..." : "Update Password"}

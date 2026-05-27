@@ -46,9 +46,7 @@ export default function Footer() {
               {/* KingsChat */}
               <a href="https://web.kingsch.at/superusers/vmcorps" target="_blank" rel="noopener noreferrer" 
                  className="w-10 h-10 flex items-center justify-center rounded-full bg-brand-primary border border-white/10 text-white hover:scale-110 transition-transform shadow-lg" title="KingsChat">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12c0 2.97 1.3 5.64 3.36 7.44l-1.3 3.25c-.18.45.28.87.7.7l3.43-1.38C9.37 22.63 10.65 22.9 12 22.9c5.52 0 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2v-2h2v2zm0-4.5h-2c0-2.5 3-2.5 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 3.33-3 3.5-3 5z"/>
-                </svg>
+                <img src="https://res.cloudinary.com/dfi8bpolg/image/upload/v1779922223/ibszdnow3ji4mtgsgvoi.png" alt="KingsChat" width={30} height={30} />
               </a>
 
               {/* Facebook */}

@@ -231,17 +231,17 @@ export default function ElearnHomeClient({
             {courses.map((course) => (
               <SwiperSlide key={course.id}>
                 <div className="bg-bg-surface rounded-2xl overflow-hidden border border-border-main shadow-sm hover:shadow-md transition-all group flex flex-col h-full">
-                  <div className="relative aspect-video w-full bg-bg-base">
+                  <Link href={`/elearn/courses/${course.id}`} className="relative aspect-video w-full bg-bg-base overflow-hidden">
                     <Image
                       src={course.image}
                       alt={course.title}
                       fill
-                      className="object-cover"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <span className="absolute top-3 left-3 bg-bg-surface/90 backdrop-blur-sm text-[10px] font-bold px-3 py-1 rounded-md text-brand-primary dark:text-brand-secondary shadow-xs">
                       {course.category.name}
                     </span>
-                  </div>
+                  </Link>
 
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-2 mb-3">
@@ -251,9 +251,11 @@ export default function ElearnHomeClient({
                       <span className="text-[11px] font-semibold text-text-muted uppercase tracking-wider">VMC Academy</span>
                     </div>
 
-                    <h3 className="font-bold text-base text-brand-primary dark:text-text-main group-hover:text-[#00a3e0] transition-colors line-clamp-2 mb-4">
-                      {course.title}
-                    </h3>
+                    <Link href={`/elearn/courses/${course.id}`}>
+                      <h3 className="font-bold text-base text-brand-primary dark:text-text-main group-hover:text-[#00a3e0] transition-colors line-clamp-2 mb-4">
+                        {course.title}
+                      </h3>
+                    </Link>
 
                     <div className="mt-auto pt-4 border-t border-border-main flex justify-between items-center">
                       <div className="flex items-center gap-3 text-xs font-medium text-text-muted">

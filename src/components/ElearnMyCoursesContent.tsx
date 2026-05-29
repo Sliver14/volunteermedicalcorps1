@@ -33,7 +33,10 @@ export default function ElearnMyCoursesContent({ enrollments = [] }: Props) {
               transition={{ delay: index * 0.1 }}
               className="bg-bg-surface rounded-[2.5rem] border border-border-main shadow-sm overflow-hidden p-8 flex flex-col sm:flex-row gap-8 group transition-colors duration-300"
             >
-              <div className="w-full sm:w-48 h-36 relative rounded-2xl overflow-hidden shadow-sm shrink-0">
+              <Link 
+                href={`/elearn/learn/${enrollment.course?.id}`}
+                className="w-full sm:w-48 h-36 relative rounded-2xl overflow-hidden shadow-sm shrink-0"
+              >
                 <Image 
                   src={enrollment.course?.image || "/logo.png"} 
                   alt={enrollment.course?.title} 
@@ -44,14 +47,16 @@ export default function ElearnMyCoursesContent({ enrollments = [] }: Props) {
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                   <FaPlayCircle size={40} className="text-white/80 group-hover:scale-110 transition-transform" />
                 </div>
-              </div>
+              </Link>
 
               <div className="flex-1 flex flex-col">
                 <div className="mb-6">
                   <span className="text-[9px] font-black text-brand-tertiary uppercase tracking-widest block mb-2">{enrollment.course?.category?.name || "General"}</span>
-                  <h3 className="text-lg font-black text-text-main leading-tight group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors">
-                    {enrollment.course?.title}
-                  </h3>
+                  <Link href={`/elearn/learn/${enrollment.course?.id}`}>
+                    <h3 className="text-lg font-black text-text-main leading-tight group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors">
+                      {enrollment.course?.title}
+                    </h3>
+                  </Link>
                 </div>
 
                 <div className="mt-auto space-y-4">
@@ -75,9 +80,12 @@ export default function ElearnMyCoursesContent({ enrollments = [] }: Props) {
                         <FaCertificate size={12} /> Download Cert
                       </button>
                     ) : (
-                      <button className="text-brand-primary dark:text-brand-secondary text-[10px] font-black uppercase tracking-widest hover:text-text-main transition-colors">
+                      <Link 
+                        href={`/elearn/learn/${enrollment.course?.id}`}
+                        className="text-brand-primary dark:text-brand-secondary text-[10px] font-black uppercase tracking-widest hover:text-text-main transition-colors"
+                      >
                         Resume Course
-                      </button>
+                      </Link>
                     )}
                   </div>
                 </div>

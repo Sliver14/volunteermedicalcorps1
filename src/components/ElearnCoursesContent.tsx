@@ -1,21 +1,76 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   FaSearch, 
   FaFilter, 
   FaStar, 
   FaClock, 
   FaUserMd,
-  FaArrowRight
+  FaArrowRight,
+  FaSpinner,
+  FaCheckCircle
 } from "react-icons/fa";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function ElearnCoursesContent({ courses }: { courses: any[] }) {
+  const router = useRouter();
+  const [enrollingId, setEnrollingId] = useState<string | null>(null);
+  const [message, setMessage] = useState<{ type: string; text: string } | null>(null);
   const categories = ["All Courses", "Clinical Training", "Leadership & Management", "Disaster Response", "Public Health"];
 
+  const handleEnroll = async (course: any) => {
+    setEnrollingId(course.id);
+    setMessage(null);
+
+    try {
+      const res = await fetch("/api/elearn/enroll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ courseId: course.id }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage({ type: "success", text: `Successfully enrolled in ${course.title}!` });
+        // Redirect to course player after 1.5 seconds
+        setTimeout(() => {
+          router.push(`/elearn/learn/${course.id}`);
+        }, 1500);
+      } else {
+        setMessage({ type: "error", text: data.message || "Enrollment failed" });
+        setEnrollingId(null);
+      }
+    } catch (error) {
+      setMessage({ type: "error", text: "Something went wrong" });
+      setEnrollingId(null);
+    }
+  };
+
   return (
-    <div className="space-y-10 pb-20">
+    <div className="space-y-10 pb-20 relative">
+      {/* Global Message Overlay */}
+      <AnimatePresence>
+        {message && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className={`fixed top-24 right-6 z-[100] p-6 rounded-2xl shadow-2xl flex items-center gap-4 border ${
+              message.type === "success" 
+                ? "bg-green-500 text-white border-green-600" 
+                : "bg-red-500 text-white border-red-600"
+            }`}
+          >
+            {message.type === "success" ? <FaCheckCircle size={24} /> : <FaArrowRight size={24} />}
+            <p className="font-black uppercase tracking-tight text-sm">{message.text}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Search & Filter Header */}
       <div className="bg-bg-surface rounded-[2.5rem] border border-border-main shadow-sm p-10 flex flex-col lg:flex-row gap-8 items-center justify-between transition-colors duration-300">
         <div className="w-full lg:max-w-md relative group">
@@ -54,7 +109,7 @@ export default function ElearnCoursesContent({ courses }: { courses: any[] }) {
               transition={{ delay: index * 0.1 }}
               className="bg-bg-surface rounded-[2.5rem] border border-border-main shadow-sm overflow-hidden hover:shadow-2xl transition-all group flex flex-col"
             >
-              <div className="relative h-56 overflow-hidden">
+              <Link href={`/elearn/courses/${course.id}`} className="relative h-56 overflow-hidden">
                 <Image 
                   src={course.image} 
                   alt={course.title} 
@@ -67,7 +122,7 @@ export default function ElearnCoursesContent({ courses }: { courses: any[] }) {
                     {course.category}
                   </span>
                 </div>
-              </div>
+              </Link>
 
               <div className="p-8 flex-1 flex flex-col">
                 <div className="flex items-center gap-2 mb-4">
@@ -77,9 +132,11 @@ export default function ElearnCoursesContent({ courses }: { courses: any[] }) {
                   <span className="text-[10px] font-bold text-text-muted">(4.8)</span>
                 </div>
 
-                <h3 className="text-xl font-black text-text-main leading-tight mb-4 group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors line-clamp-2 min-h-[3.5rem]">
-                  {course.title}
-                </h3>
+                <Link href={`/elearn/courses/${course.id}`}>
+                  <h3 className="text-xl font-black text-text-main leading-tight mb-4 group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors line-clamp-2 min-h-[3.5rem]">
+                    {course.title}
+                  </h3>
+                </Link>
 
                 <div className="flex items-center gap-6 mb-8 mt-auto">
                   <div className="flex items-center gap-2 text-text-muted">
@@ -96,8 +153,13 @@ export default function ElearnCoursesContent({ courses }: { courses: any[] }) {
                   <span className="text-2xl font-black text-text-main">
                     {course.price === 0 ? "FREE" : `$${course.price}`}
                   </span>
-                  <button className="bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-8 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all flex items-center gap-3">
-                    Enroll Now <FaArrowRight />
+                  <button 
+                    onClick={() => handleEnroll(course)}
+                    disabled={enrollingId === course.id}
+                    className="bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-8 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all flex items-center gap-3 disabled:opacity-50"
+                  >
+                    {enrollingId === course.id ? <FaSpinner className="animate-spin" /> : "Enroll Now"} 
+                    {enrollingId !== course.id && <FaArrowRight />}
                   </button>
                 </div>
               </div>

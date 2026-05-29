@@ -380,7 +380,7 @@ export default function ElearnDashboardClient({
                       </div>
                       <div className="p-10 space-y-8">
                         {recommended.map((course: any) => (
-                          <div key={course.id} className="flex gap-6 group cursor-pointer">
+                          <Link key={course.id} href={`/elearn/courses/${course.id}`} className="flex gap-6 group cursor-pointer">
                             <div className="w-24 h-20 relative rounded-2xl overflow-hidden shadow-sm shrink-0">
                               <Image src={course.image} alt={course.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" unoptimized />
                             </div>
@@ -388,7 +388,7 @@ export default function ElearnDashboardClient({
                               <p className="font-bold text-text-main group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors line-clamp-2 leading-tight text-sm">{course.title}</p>
                               <p className="text-[9px] font-black uppercase tracking-widest text-brand-secondary mt-2">{course.category}</p>
                             </div>
-                          </div>
+                          </Link>
                         ))}
                         
                         <button onClick={() => setActiveTab("all_courses")} className="w-full py-5 border-2 border-dashed border-border-main rounded-[2rem] text-[10px] font-black uppercase tracking-[0.2em] text-text-muted hover:bg-bg-base hover:border-brand-secondary/30 hover:text-brand-secondary transition-all">

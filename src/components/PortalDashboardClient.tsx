@@ -13,13 +13,10 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { useRouter } from "next/navigation";
 
 const IconMap: any = {
-  FaCheckCircle: FaCheckCircle,
-  FaClock: FaClock,
-  FaHandsHelping: FaHandsHelping,
-  FaUsers: FaUsers,
-  FaDollarSign: FaDollarSign
+// ...
 };
 
 export default function PortalDashboardClient({ 
@@ -29,6 +26,7 @@ export default function PortalDashboardClient({
 }: any) {
   
   const isMobile = useIsMobile();
+  const router = useRouter();
   
   // Use the dynamic stats from props
   const dashboardStats = stats.map((stat: any, index: number) => {
@@ -196,8 +194,12 @@ export default function PortalDashboardClient({
               <tbody>
                 {recentEnrollments && recentEnrollments.length > 0 ? (
                   recentEnrollments.map((enrollment: any) => (
-                    <tr key={enrollment.id} className="hover:bg-bg-base/50 transition-colors">
-                      <td className="px-10 py-6 border-b border-border-main font-bold text-text-main">
+                    <tr 
+                      key={enrollment.id} 
+                      onClick={() => router.push(`/elearn/learn/${enrollment.course?.id}`)}
+                      className="hover:bg-bg-base/50 transition-colors cursor-pointer group"
+                    >
+                      <td className="px-10 py-6 border-b border-border-main font-bold text-text-main group-hover:text-brand-primary transition-colors">
                         {enrollment.course?.title || "Untitled Course"}
                       </td>
                       <td className="px-10 py-6 border-b border-border-main text-text-muted font-bold">

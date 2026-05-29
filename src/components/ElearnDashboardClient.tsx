@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { signOut, useSession } from "next-auth/react";
 import { 
@@ -27,13 +27,44 @@ interface Props {
 type Tab = "overview" | "profile" | "all_courses" | "my_courses" | "order_history" | "security";
 
 export default function ElearnDashboardClient({
-  stats,
+  stats: initialStats,
   inProgress,
   recommended,
 }: Props) {
   const { data: session } = useSession();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("overview");
+  
+  // Dynamic Data State
+  const [stats, setStats] = useState(initialStats);
+  const [enrollments, setEnrollments] = useState<any[]>([]);
+  const [donations, setDonations] = useState<any[]>([]);
+  const [isDataLoading, setIsDataLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const res = await fetch("/api/elearn/dashboard");
+        if (res.ok) {
+          const data = await res.json();
+          setEnrollments(data.enrollments || []);
+          setDonations(data.donations || []);
+          setStats({
+            ...initialStats,
+            myCourses: data.stats.totalEnrolled,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch dashboard data:", error);
+      } finally {
+        setIsDataLoading(false);
+      }
+    };
+
+    if (session) {
+      fetchDashboardData();
+    }
+  }, [session, initialStats]);
   
   // Password change state
   const [currentPassword, setCurrentPassword] = useState("");
@@ -368,13 +399,13 @@ export default function ElearnDashboardClient({
 
               {activeTab === "my_courses" && (
                 <motion.div key="my_courses" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                  <ElearnMyCoursesContent />
+                  <ElearnMyCoursesContent enrollments={enrollments} />
                 </motion.div>
               )}
 
               {activeTab === "order_history" && (
                 <motion.div key="order_history" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                  <ElearnOrderHistoryContent />
+                  <ElearnOrderHistoryContent donations={donations} />
                 </motion.div>
               )}
 

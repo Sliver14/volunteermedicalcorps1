@@ -29,6 +29,15 @@ export async function GET() {
     const completedCourses = enrollments.filter(e => e.isCompleted).length;
     const inProgressCourses = enrollments.filter(e => !e.isCompleted).length;
 
+    // Fetch user donations (Order History)
+    const donations = await prisma.donation.findMany({
+      where: { userId: session.user.id },
+      include: {
+        campaign: { select: { title: true } }
+      },
+      orderBy: { createdAt: "desc" }
+    });
+
     // Recent activity (e.g., latest lesson stats)
     const recentActivity = await prisma.lessonStats.findMany({
       where: { userId: session.user.id },
@@ -43,6 +52,7 @@ export async function GET() {
 
     return NextResponse.json({
       enrollments,
+      donations,
       stats: {
         totalEnrolled: enrollments.length,
         completedCourses,

@@ -6,37 +6,15 @@ import {
   FaFileInvoice, 
   FaDownload,
   FaCheckCircle,
-  FaShoppingBag
+  FaShoppingBag,
+  FaExclamationTriangle
 } from "react-icons/fa";
 
-export default function ElearnOrderHistoryContent() {
-  const orders = [
-    {
-      id: "ORD-2026-9921",
-      course: "Introduction to the Volunteer Medical Corps",
-      date: "Oct 15, 2026",
-      amount: "FREE",
-      status: "Successful",
-      method: "Grant Activation"
-    },
-    {
-      id: "ORD-2026-8842",
-      course: "Emergency First Aid & Trauma Care",
-      date: "Sep 10, 2026",
-      amount: "FREE",
-      status: "Successful",
-      method: "Scholarship"
-    },
-    {
-      id: "ORD-2026-7715",
-      course: "VMC Induction Certification",
-      date: "Aug 01, 2026",
-      amount: "$0.00",
-      status: "Successful",
-      method: "Admin Override"
-    }
-  ];
+interface Props {
+  donations?: any[];
+}
 
+export default function ElearnOrderHistoryContent({ donations = [] }: Props) {
   return (
     <div className="space-y-10 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -56,52 +34,64 @@ export default function ElearnOrderHistoryContent() {
           </h3>
         </div>
         <div className="p-0 overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-bg-base text-[10px] font-black uppercase tracking-[0.2em] text-text-muted transition-colors duration-300">
-                <th className="px-10 py-6 border-b border-border-main">Course Title</th>
-                <th className="px-10 py-6 border-b border-border-main">Order ID</th>
-                <th className="px-10 py-6 border-b border-border-main">Date</th>
-                <th className="px-10 py-6 border-b border-border-main">Amount</th>
-                <th className="px-10 py-6 border-b border-border-main text-right">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order, index) => (
-                <motion.tr 
-                  key={order.id}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="hover:bg-bg-base transition-colors group"
-                >
-                  <td className="px-10 py-6 border-b border-border-main">
-                    <p className="font-bold text-text-main line-clamp-1">{order.course}</p>
-                    <p className="text-[9px] font-bold text-brand-tertiary uppercase mt-0.5">{order.method}</p>
-                  </td>
-                  <td className="px-10 py-6 border-b border-border-main text-[11px] font-black text-text-muted tracking-wider">
-                    {order.id}
-                  </td>
-                  <td className="px-10 py-6 border-b border-border-main text-text-muted text-sm font-medium">
-                    {order.date}
-                  </td>
-                  <td className="px-10 py-6 border-b border-border-main font-black text-text-main text-lg">
-                    {order.amount}
-                  </td>
-                  <td className="px-10 py-6 border-b border-border-main text-right">
-                    <div className="flex items-center justify-end gap-3">
-                      <span className="bg-green-100/50 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[9px] font-black px-3 py-1 rounded-lg uppercase tracking-widest border border-green-100 dark:border-green-800">
-                        {order.status}
-                      </span>
-                      <button className="p-2 text-text-muted hover:text-brand-primary transition-colors">
-                        <FaDownload size={14} />
-                      </button>
-                    </div>
-                  </td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
+          {donations.length > 0 ? (
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-bg-base text-[10px] font-black uppercase tracking-[0.2em] text-text-muted transition-colors duration-300">
+                  <th className="px-10 py-6 border-b border-border-main">Campaign / Course</th>
+                  <th className="px-10 py-6 border-b border-border-main">Reference</th>
+                  <th className="px-10 py-6 border-b border-border-main">Date</th>
+                  <th className="px-10 py-6 border-b border-border-main">Amount</th>
+                  <th className="px-10 py-6 border-b border-border-main text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {donations.map((donation, index) => (
+                  <motion.tr 
+                    key={donation.id}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="hover:bg-bg-base transition-colors group"
+                  >
+                    <td className="px-10 py-6 border-b border-border-main">
+                      <p className="font-bold text-text-main line-clamp-1">{donation.campaign?.title || "General Mission Support"}</p>
+                      <p className="text-[9px] font-bold text-brand-tertiary uppercase mt-0.5">{donation.method}</p>
+                    </td>
+                    <td className="px-10 py-6 border-b border-border-main text-[11px] font-black text-text-muted tracking-wider">
+                      {donation.reference}
+                    </td>
+                    <td className="px-10 py-6 border-b border-border-main text-text-muted text-sm font-medium">
+                      {new Date(donation.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-10 py-6 border-b border-border-main font-black text-text-main text-lg">
+                      {donation.amount === 0 ? "FREE" : `${donation.currency} ${donation.amount.toLocaleString()}`}
+                    </td>
+                    <td className="px-10 py-6 border-b border-border-main text-right">
+                      <div className="flex items-center justify-end gap-3">
+                        <span className={`text-[9px] font-black px-3 py-1 rounded-lg uppercase tracking-widest border ${
+                          donation.status === 'SUCCESS' 
+                          ? 'bg-green-100/50 dark:bg-green-900/30 text-green-600 dark:text-green-400 border-green-100 dark:border-green-800'
+                          : 'bg-amber-100/50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-800'
+                        }`}>
+                          {donation.status}
+                        </span>
+                        <button className="p-2 text-text-muted hover:text-brand-primary transition-colors">
+                          <FaDownload size={14} />
+                        </button>
+                      </div>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="py-24 text-center">
+              <FaHistory size={40} className="mx-auto text-text-muted/20 mb-6" />
+              <h4 className="text-xl font-black text-text-main uppercase tracking-tight">No Order History</h4>
+              <p className="text-text-muted font-medium text-sm mt-2">You haven't made any enrollments or donations yet.</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

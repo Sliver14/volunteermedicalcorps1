@@ -25,7 +25,7 @@ export default function PageBanner({ title, parent }: PageBannerProps) {
           initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
-          className="text-xl md:text-2xl font-bold uppercase tracking-tight leading-none"
+          className="text-md md:text-lg font-bold uppercase tracking-tight leading-none"
         >
           {title}
         </motion.h1>

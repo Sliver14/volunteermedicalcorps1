@@ -105,9 +105,12 @@ async function prepareData() {
     const sqlLessons = parseSqlInsert(learningDbSql, 'tbl_lessons');
     const sqlInstructors = parseSqlInsert(learningDbSql, 'tbl_instructors');
     const sqlMyCourses = parseSqlInsert(learningDbSql, 'tbl_mycourses');
+    const sqlLessonStats = parseSqlInsert(learningDbSql, 'tbl_lessons_stats');
+    const sqlOrders = parseSqlInsert(learningDbSql, 'tbl_orders');
 
     console.log('Processing Users and Volunteers...');
     const usersMap = new Map();
+    const oldUidToEmail = new Map();
 
     // 1. Add users from SQL
     sqlUsers.forEach(u => {
@@ -126,6 +129,9 @@ async function prepareData() {
                 status: u.status === 1 ? 'Active' : 'Pending'
             }
         });
+        if (u.id) oldUidToEmail.set(String(u.id), email);
+        // Sometimes uid is a string like 'vo296183-QVW' in tbl_mycourses but 'id' is int in users table.
+        // We need to handle both if possible, or assume email is the key.
     });
 
     // 2. Add volunteers from JSON and merge
@@ -169,7 +175,34 @@ async function prepareData() {
                 profile: profileData
             });
         }
+        if (v.vid) oldUidToEmail.set(v.vid, email);
     });
+
+    console.log('Processing Academy Progress...');
+    const enrollments = sqlMyCourses.map(mc => ({
+        userEmail: oldUidToEmail.get(mc.mycours_uid),
+        courseCid: mc.mycours_cid,
+        enrolledAt: mc.mycours_date ? new Date(`${mc.mycours_date} ${mc.mycours_time || '00:00:00'}`) : new Date(),
+        status: mc.mycours_stats
+    })).filter(e => e.userEmail);
+
+    const lessonStats = sqlLessonStats.map(ls => ({
+        userEmail: oldUidToEmail.get(ls.lesso_uid),
+        lessonLid: ls.lesso_lid,
+        courseCid: ls.lesso_cid,
+        status: ls.lesso_stats,
+        updatedAt: ls.lesso_date ? new Date(`${ls.lesso_date} ${ls.lesso_time || '00:00:00'}`) : new Date()
+    })).filter(ls => ls.userEmail);
+
+    console.log('Processing Orders (Donations)...');
+    const orders = sqlOrders.map(o => ({
+        userEmail: oldUidToEmail.get(o.orders_uid) || o.orders_email?.toLowerCase().trim(),
+        amount: parseFloat(o.orders_amount) || 0,
+        reference: o.orders_payid || o.orders_oid,
+        status: o.orders_stats === 1 ? 'SUCCESS' : 'PENDING',
+        createdAt: o.orders_date ? new Date(`${o.orders_date} ${o.orders_time || '00:00:00'}`) : new Date(),
+        method: 'BANK' // Default from schema
+    })).filter(o => o.userEmail);
 
     console.log('Processing Instructors...');
     const instructors = sqlInstructors.map(i => ({
@@ -303,6 +336,9 @@ async function prepareData() {
         categories,
         courses,
         lessons,
+        enrollments,
+        lessonStats,
+        donations: orders,
         events: Array.from(eventsMap.values()),
         campaigns: processedCampaigns,
         news: extractedData.news,

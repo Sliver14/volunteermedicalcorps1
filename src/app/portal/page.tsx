@@ -5,27 +5,41 @@ import {
   FaHandsHelping 
 } from "react-icons/fa";
 import PortalDashboardClient from "@/components/PortalDashboardClient";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 export default async function PortalDashboard() {
-  
-  // Optional: Try to get session but don't block rendering
-  let profile = null;
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user) {
+    redirect("/login");
+  }
+
   let enrollmentCount = 0;
   let completedEnrollments = 0;
   let recentEnrollments: any[] = [];
   let recentDonations: any[] = [];
+  let profileStats = 0;
 
   try {
-    // Fetch real data if possible (won't break if no user)
-    const profileData = await prisma.profile.findFirst(); // or findUnique if you prefer
-    profile = profileData;
+    const userId = session.user.id;
 
-    enrollmentCount = await prisma.enrollment.count();
+    const userProfile = await prisma.profile.findUnique({
+      where: { userId }
+    });
+    profileStats = userProfile?.stats || 0;
+
+    enrollmentCount = await prisma.enrollment.count({
+      where: { userId }
+    });
+
     completedEnrollments = await prisma.enrollment.count({
-      where: { isCompleted: true }
+      where: { userId, isCompleted: true }
     });
 
     recentEnrollments = await prisma.enrollment.findMany({
+      where: { userId },
       include: {
         course: { include: { category: true } }
       },
@@ -34,12 +48,13 @@ export default async function PortalDashboard() {
     });
 
     recentDonations = await prisma.donation.findMany({
+      where: { userId },
       include: { campaign: true },
       orderBy: { createdAt: 'desc' },
       take: 5
     });
   } catch (error) {
-    console.log("Database fetch skipped or failed (dev mode)", error);
+    console.error("Database fetch failed in PortalDashboard:", error);
   }
 
   const stats = [
@@ -59,7 +74,7 @@ export default async function PortalDashboard() {
     },
     { 
       label: "Tasks Undertaken", 
-      value: profile?.stats?.toString() || "27", 
+      value: profileStats.toString(), 
       icon: "FaHandsHelping", 
       color: "text-amber-600", 
       bg: "bg-amber-50" 

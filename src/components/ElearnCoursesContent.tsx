@@ -45,61 +45,69 @@ export default function ElearnCoursesContent({ courses }: { courses: any[] }) {
 
       {/* Courses Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-        {courses.map((course, index) => (
-          <motion.div
-            key={course.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-bg-surface rounded-[2.5rem] border border-border-main shadow-sm overflow-hidden hover:shadow-2xl transition-all group flex flex-col"
-          >
-            <div className="relative h-56 overflow-hidden">
-              <Image 
-                src={course.image} 
-                alt={course.title} 
-                fill 
-                className="object-cover group-hover:scale-110 transition-transform duration-700"
-                unoptimized
-              />
-              <div className="absolute top-6 left-6">
-                <span className="bg-bg-surface/90 backdrop-blur-md text-brand-primary dark:text-brand-secondary text-[9px] font-black px-4 py-2 rounded-lg uppercase tracking-widest shadow-lg">
-                  {course.category}
-                </span>
-              </div>
-            </div>
-
-            <div className="p-8 flex-1 flex flex-col">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex text-brand-secondary">
-                  {[1, 2, 3, 4, 5].map((s) => <FaStar key={s} size={10} />)}
-                </div>
-                <span className="text-[10px] font-bold text-text-muted">(4.8)</span>
-              </div>
-
-              <h3 className="text-xl font-black text-text-main leading-tight mb-4 group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors">
-                {course.title}
-              </h3>
-
-              <div className="flex items-center gap-6 mb-8 mt-auto">
-                <div className="flex items-center gap-2 text-text-muted">
-                  <FaClock size={12} />
-                  <span className="text-[10px] font-bold uppercase tracking-widest">4.5 Hours</span>
-                </div>
-                <div className="flex items-center gap-2 text-text-muted">
-                  <FaUserMd size={12} />
-                  <span className="text-[10px] font-bold uppercase tracking-widest">Advanced</span>
+        {courses.length > 0 ? (
+          courses.map((course, index) => (
+            <motion.div
+              key={course.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-bg-surface rounded-[2.5rem] border border-border-main shadow-sm overflow-hidden hover:shadow-2xl transition-all group flex flex-col"
+            >
+              <div className="relative h-56 overflow-hidden">
+                <Image 
+                  src={course.image} 
+                  alt={course.title} 
+                  fill 
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  unoptimized
+                />
+                <div className="absolute top-6 left-6">
+                  <span className="bg-bg-surface/90 backdrop-blur-md text-brand-primary dark:text-brand-secondary text-[9px] font-black px-4 py-2 rounded-lg uppercase tracking-widest shadow-lg">
+                    {course.category}
+                  </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-6 border-t border-border-main">
-                <span className="text-2xl font-black text-text-main">FREE</span>
-                <button className="bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-8 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all flex items-center gap-3">
-                  Enroll Now <FaArrowRight />
-                </button>
+              <div className="p-8 flex-1 flex flex-col">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex text-brand-secondary">
+                    {[1, 2, 3, 4, 5].map((s) => <FaStar key={s} size={10} />)}
+                  </div>
+                  <span className="text-[10px] font-bold text-text-muted">(4.8)</span>
+                </div>
+
+                <h3 className="text-xl font-black text-text-main leading-tight mb-4 group-hover:text-brand-primary dark:group-hover:text-brand-secondary transition-colors line-clamp-2 min-h-[3.5rem]">
+                  {course.title}
+                </h3>
+
+                <div className="flex items-center gap-6 mb-8 mt-auto">
+                  <div className="flex items-center gap-2 text-text-muted">
+                    <FaClock size={12} />
+                    <span className="text-[10px] font-bold uppercase tracking-widest">{course.duration || 'Flexible'}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-text-muted">
+                    <FaUserMd size={12} />
+                    <span className="text-[10px] font-bold uppercase tracking-widest">{course.level || 'General'}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-6 border-t border-border-main">
+                  <span className="text-2xl font-black text-text-main">
+                    {course.price === 0 ? "FREE" : `$${course.price}`}
+                  </span>
+                  <button className="bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-8 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-all flex items-center gap-3">
+                    Enroll Now <FaArrowRight />
+                  </button>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))
+        ) : (
+          <div className="col-span-full py-20 text-center bg-bg-surface rounded-[2.5rem] border border-border-main">
+             <p className="text-text-muted font-bold uppercase tracking-widest">No courses found matching your criteria.</p>
+          </div>
+        )}
       </div>
     </div>
   );

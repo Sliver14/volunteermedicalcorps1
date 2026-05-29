@@ -38,15 +38,20 @@ export default function ElearnDashboardClient({
   // Dynamic Data State
   const [stats, setStats] = useState(initialStats);
   const [enrollments, setEnrollments] = useState<any[]>([]);
+  const [allCourses, setAllCourses] = useState<any[]>([]);
   const [donations, setDonations] = useState<any[]>([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const res = await fetch("/api/elearn/dashboard");
-        if (res.ok) {
-          const data = await res.json();
+        const [dashboardRes, coursesRes] = await Promise.all([
+          fetch("/api/elearn/dashboard"),
+          fetch("/api/elearn/courses")
+        ]);
+
+        if (dashboardRes.ok) {
+          const data = await dashboardRes.json();
           setEnrollments(data.enrollments || []);
           setDonations(data.donations || []);
           setStats({
@@ -54,8 +59,13 @@ export default function ElearnDashboardClient({
             myCourses: data.stats.totalEnrolled,
           });
         }
+
+        if (coursesRes.ok) {
+          const courses = await coursesRes.json();
+          setAllCourses(courses);
+        }
       } catch (error) {
-        console.error("Failed to fetch dashboard data:", error);
+        console.error("Failed to fetch academy data:", error);
       } finally {
         setIsDataLoading(false);
       }
@@ -313,7 +323,7 @@ export default function ElearnDashboardClient({
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="text-text-muted text-[10px] font-black uppercase tracking-[0.2em] mb-4">My Courses</p>
-                          <p className="text-5xl font-black text-text-main group-hover:text-brand-secondary transition-colors">{stats.myCourses || 2}</p>
+                          <p className="text-5xl font-black text-text-main group-hover:text-brand-secondary transition-colors">{stats.myCourses}</p>
                         </div>
                         <div className="w-16 h-16 bg-brand-secondary/10 text-brand-secondary rounded-3xl flex items-center justify-center shadow-inner">
                           <FaSchool size={28} />
@@ -398,7 +408,7 @@ export default function ElearnDashboardClient({
 
               {activeTab === "all_courses" && (
                 <motion.div key="all_courses" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-                  <ElearnCoursesContent courses={recommended} />
+                  <ElearnCoursesContent courses={allCourses} />
                 </motion.div>
               )}
 

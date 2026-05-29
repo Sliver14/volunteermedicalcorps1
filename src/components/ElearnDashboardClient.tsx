@@ -124,6 +124,9 @@ export default function ElearnDashboardClient({
     { name: "Security", key: "security" as Tab, icon: FaLock, section: "account" },
   ];
 
+  const completedCoursesCount = enrollments.filter(e => e.isCompleted).length;
+  const inProgressCoursesCount = enrollments.filter(e => !e.isCompleted).length;
+
   return (
     <div className="flex h-screen bg-bg-base overflow-hidden font-poppins text-text-main">
       {/* ... (Mobile Overlay unchanged) */}
@@ -322,7 +325,7 @@ export default function ElearnDashboardClient({
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="text-text-muted text-[10px] font-black uppercase tracking-[0.2em] mb-4">Certifications</p>
-                          <p className="text-5xl font-black text-text-main group-hover:text-green-500 transition-colors">1</p>
+                          <p className="text-5xl font-black text-text-main group-hover:text-green-500 transition-colors">{completedCoursesCount}</p>
                         </div>
                         <div className="w-16 h-16 bg-green-500/10 text-green-500 rounded-3xl flex items-center justify-center shadow-inner">
                           <FaGraduationCap size={28} />
@@ -350,10 +353,12 @@ export default function ElearnDashboardClient({
                         </div>
                         <h4 className="text-2xl font-black text-text-main mb-4 tracking-tight uppercase">Ready to learn?</h4>
                         <p className="text-text-muted font-medium max-w-sm leading-relaxed mb-10 text-sm">
-                          You have 2 courses currently in progress. Start your next lesson to advance your certification.
+                          {inProgressCoursesCount > 0 
+                            ? `You have ${inProgressCoursesCount} course${inProgressCoursesCount > 1 ? 's' : ''} currently in progress. Start your next lesson to advance your certification.`
+                            : "Explore our course library and start your learning journey today."}
                         </p>
-                        <button onClick={() => setActiveTab("my_courses")} className="bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:opacity-90 transition-all shadow-2xl">
-                          Resume Learning
+                        <button onClick={() => setActiveTab(inProgressCoursesCount > 0 ? "my_courses" : "all_courses")} className="bg-brand-primary dark:bg-brand-secondary text-white dark:text-brand-primary px-10 py-5 rounded-[2rem] font-black uppercase tracking-[0.2em] text-[10px] hover:opacity-90 transition-all shadow-2xl">
+                          {inProgressCoursesCount > 0 ? "Resume Learning" : "Explore Courses"}
                         </button>
                       </div>
                     </div>

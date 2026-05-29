@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
@@ -48,6 +48,38 @@ export default function PortalLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("dashboard");
+
+  // Dashboard Data State
+  const [dashboardData, setDashboardData] = useState<{
+    stats: any[];
+    recentEnrollments: any[];
+    recentDonations: any[];
+  }>({
+    stats: [],
+    recentEnrollments: [],
+    recentDonations: []
+  });
+  const [isDataLoading, setIsDataLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const res = await fetch("/api/portal/dashboard");
+        if (res.ok) {
+          const data = await res.json();
+          setDashboardData(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch portal dashboard data:", error);
+      } finally {
+        setIsDataLoading(false);
+      }
+    };
+
+    if (session) {
+      fetchDashboardData();
+    }
+  }, [session]);
 
   if (status === "loading") {
     return (
@@ -250,20 +282,14 @@ export default function PortalLayout() {
               {activeTab === "dashboard" && (
                 <DashboardOverview 
                   key="dashboard"
-                  stats={[
-                    { label: "My Campaigns", value: "3", icon: FaDesktop, color: "text-green-600", bg: "bg-green-50" },
-                    { label: "Donations", value: "$4,250", icon: FaDollarSign, color: "text-blue-600", bg: "bg-blue-50" },
-                    { label: "Tasks Undertaken", value: "27", icon: FaHandsHelping, color: "text-amber-600", bg: "bg-amber-50" },
-                    { label: "Tasks Completed", value: "24", icon: FaCheckCircle, color: "text-purple-600", bg: "bg-purple-50" },
+                  stats={dashboardData.stats.length > 0 ? dashboardData.stats : [
+                    { label: "My Campaigns", value: "0", icon: "FaDesktop" },
+                    { label: "Donations", value: "0", icon: "FaDollarSign" },
+                    { label: "Tasks Undertaken", value: "0", icon: "FaHandsHelping" },
+                    { label: "Tasks Completed", value: "0", icon: "FaCheckCircle" },
                   ]}
-                  recentEnrollments={[
-                    { id: 1, course: { title: "VMC Induction Course", category: { name: "Education" } }, progress: 100, enrolledAt: new Date(), isCompleted: true },
-                    { id: 2, course: { title: "Basic First Aid", category: { name: "Medical" } }, progress: 45, enrolledAt: new Date(), isCompleted: false },
-                  ]}
-                  recentDonations={[
-                    { id: "d1", campaign: { title: "1 Million Smiles" }, amount: 500, currency: "USD", createdAt: new Date(), status: "Completed" },
-                    { id: "d2", campaign: { title: "Emergency Relief" }, amount: 250, currency: "USD", createdAt: new Date(), status: "Completed" },
-                  ]}
+                  recentEnrollments={dashboardData.recentEnrollments}
+                  recentDonations={dashboardData.recentDonations}
                 />
               )}
               {activeTab === "profile" && <ProfilePage key="profile" />}

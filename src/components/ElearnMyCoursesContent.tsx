@@ -8,6 +8,7 @@ import {
   FaCheckCircle
 } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   enrollments?: any[];

@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function ElearnCoursesContent({ courses }: { courses: any[] }) {
   const router = useRouter();

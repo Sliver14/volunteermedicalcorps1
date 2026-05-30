@@ -184,21 +184,36 @@ export default function CoursePlayer({ course, initialProgress = [] }: { course:
             {/* Video Section */}
             <div className="aspect-video bg-black rounded-[2.5rem] overflow-hidden shadow-2xl relative group border-4 border-bg-surface">
               {currentLesson.videoUrl ? (
-                <iframe
-                  src={currentLesson.videoUrl.includes('youtube.com') 
-                    ? currentLesson.videoUrl.replace('watch?v=', 'embed/') 
-                    : currentLesson.videoUrl}
-                  className="w-full h-full"
-                  allowFullScreen
-                  onLoad={() => {
-                    // Auto mark as complete after delay or when video ends (if we had control)
-                    // For now, let user mark it.
-                  }}
-                />
+                <>
+                  {currentLesson.videoUrl.includes('youtube.com') || currentLesson.videoUrl.includes('youtu.be') ? (
+                    <iframe
+                      src={currentLesson.videoUrl.includes('youtube.com') 
+                        ? currentLesson.videoUrl.replace('watch?v=', 'embed/') 
+                        : currentLesson.videoUrl.replace('youtu.be/', 'youtube.com/embed/')}
+                      className="w-full h-full"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <video
+                      key={currentLesson.id}
+                      src={currentLesson.videoUrl.startsWith('http') 
+                        ? currentLesson.videoUrl 
+                        : `https://volunteermedicalcorps.org/elearn/instructors/videos/${currentLesson.videoUrl}`}
+                      controls
+                      className="w-full h-full object-contain"
+                      poster={course.lessons[currentLessonIndex].videoUrl?.startsWith('http') ? undefined : "/logo.png"}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
+                </>
               ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center text-text-muted/20">
-                  <FaVideo size={80} />
-                  <p className="text-sm font-black uppercase mt-4 tracking-[0.2em]">No Video Content</p>
+                <div className="w-full h-full flex flex-col items-center justify-center text-text-muted/20 bg-slate-900/50">
+                  <div className="w-20 h-20 rounded-full border-2 border-dashed border-text-muted/20 flex items-center justify-center mb-4">
+                    <FaVideo size={40} />
+                  </div>
+                  <p className="text-sm font-black uppercase tracking-[0.2em] text-text-muted/40">No Video Available</p>
+                  <p className="text-[10px] font-bold text-text-muted/30 mt-2 max-w-xs text-center">This lesson might contain only text content or the video is currently being processed.</p>
                 </div>
               )}
             </div>

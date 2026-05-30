@@ -34,9 +34,11 @@ export default async function ElearnDashboardPage() {
   };
 
   const recommended = latestCourses.map(course => ({
-    id: course.cid,
+    id: course.id,
     title: course.title,
-    image: course.image || "/logo.png",
+    image: course.image?.startsWith('http') 
+      ? course.image 
+      : `https://volunteermedicalcorps.org/elearn/instructors/images/courses/${course.image || 'default.jpg'}`,
     category: course.category?.name || "General",
   }));
 

@@ -16,9 +16,12 @@ export async function GET() {
     });
 
     const formattedCourses = courses.map(course => ({
-      id: course.cid,
+      id: course.id,
+      cid: course.cid,
       title: course.title,
-      image: course.image || "/logo.png",
+      image: course.image?.startsWith('http') 
+        ? course.image 
+        : `https://volunteermedicalcorps.org/elearn/instructors/images/courses/${course.image || 'default.jpg'}`,
       category: course.category?.name || "General",
       instructor: course.instructor ? `${course.instructor.firstName} ${course.instructor.lastName}` : "VMC Instructor",
       lessonCount: course._count.lessons,

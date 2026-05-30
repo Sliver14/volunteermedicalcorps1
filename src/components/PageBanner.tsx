@@ -6,14 +6,15 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface PageBannerProps {
   title: string;
+  subtitle?: string;
   parent?: { label: string; href: string };
 }
 
-export default function PageBanner({ title, parent }: PageBannerProps) {
+export default function PageBanner({ title, subtitle, parent }: PageBannerProps) {
   const isMobile = useIsMobile();
 
   return (
-    <section className="relative bg-brand-primary py-4 md:py-5 text-white overflow-hidden border-b border-border-main transition-colors duration-300">
+    <section className="relative bg-brand-primary py-4 md:py-8 text-white overflow-hidden border-b border-border-main transition-colors duration-300">
       {/* Background patterns */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute -top-10 -right-10 w-32 h-32 border-[10px] border-white"></div>
@@ -21,14 +22,25 @@ export default function PageBanner({ title, parent }: PageBannerProps) {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-between gap-4">
-        <motion.h1 
-          initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
-          className="text-md md:text-lg font-bold uppercase tracking-tight leading-none"
-        >
-          {title}
-        </motion.h1>
+        <div className="flex flex-col gap-1">
+          <motion.h1 
+            initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: isMobile ? 0.35 : 0.6, ease: "easeOut" }}
+            className="text-md md:text-xl font-bold uppercase tracking-tight leading-none"
+          >
+            {title}
+          </motion.h1>
+          {subtitle && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.6 }}
+              className="text-[10px] md:text-xs font-medium uppercase tracking-[0.15em]"
+            >
+              {subtitle}
+            </motion.p>
+          )}
+        </div>
         
         <motion.div 
           initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, scale: 1.05 }}
